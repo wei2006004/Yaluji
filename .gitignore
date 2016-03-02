@@ -17,6 +17,7 @@ out/
 .gradle/
 build/
 gradle/
+testapp/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -49,3 +50,5 @@ Thumbs.db
 ant.properties
 build.xml
 map.txt
+testapp
+xutils_sample

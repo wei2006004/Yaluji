@@ -1,1 +1,1 @@
-include ':app', ':xutils', ':xutils_sample', ':yljapp'
+include ':app', ':xutils', ':xutils_sample', ':yljapp', ':testapp'
