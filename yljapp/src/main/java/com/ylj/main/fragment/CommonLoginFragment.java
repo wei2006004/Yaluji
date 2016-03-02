@@ -1,14 +1,11 @@
 package com.ylj.main.fragment;
 
 import android.app.Activity;
-import android.net.Uri;
-import android.os.Bundle;
-import android.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ylj.R;
@@ -24,11 +21,8 @@ public class CommonLoginFragment extends BaseFragment {
     @ViewInject(R.id.tv_switch_admin_login)
     private TextView mSwitchAdminLoginView;
 
-    @ViewInject(R.id.et_user)
-    private EditText mUserText;
-
-    @ViewInject(R.id.et_passwd)
-    private EditText mPasswdText;
+    @ViewInject(R.id.lv_user)
+    private ListView mUserListView;
 
     @ViewInject(R.id.bt_login)
     private Button mLoginButton;
@@ -43,17 +37,17 @@ public class CommonLoginFragment extends BaseFragment {
     }
 
     @Event(R.id.bt_login)
-    private void onLoginButtonClick(View view){
+    private void onLoginButtonClick(View view) {
 
     }
 
     @Event(R.id.bt_annoy_login)
-    private void onAnnoyLoginButtonClick(View view){
+    private void onAnnoyLoginButtonClick(View view) {
 
     }
 
     @Event(R.id.tv_switch_admin_login)
-    private void onSwitchAdminLogin(View view) {
+    private void onSwitchAdminLoginClick(View view) {
         if (mListener != null) {
             mListener.onSwitchToAdminLogin();
         }
@@ -77,7 +71,6 @@ public class CommonLoginFragment extends BaseFragment {
     }
 
     public interface OnSwitchToAdminLoginListener {
-        // TODO: Update argument type and name
         public void onSwitchToAdminLogin();
     }
 
