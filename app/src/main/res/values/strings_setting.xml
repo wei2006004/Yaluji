@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_roll_width">pref_roll_width</string>
+    <string name="pref_roll_diameter">pref_roll_diameter</string>
+    <string name="pref_road_width">pref_road_width</string>
+    <string name="pref_road_length">pref_road_length</string>
+    <string name="pref_origin">pref_origin</string>
+    <string name="pref_huoer_num">pref_huoer_num</string>
+    <string name="pref_debug">pref_debug</string>
+    <string name="pref_ip">pref_ip</string>
+    <string name="pref_port">pref_port</string>
+    <string name="pref_user">pref_user</string>
+    <string name="pref_password">pref_password</string>
+    <string name="pref_vcv">pref_vcv</string>
+    
+    <string name="rt_group_roll">转轮设置</string>
+    <string name="rt_group_road">公路设置</string>
+    <string name="rt_group_ftp">主站设置</string>
+    <string name="rt_group_other">其他设置</string>
+    
+    <string name="rt_title_roll_width">转轮宽度</string>
+    <string name="rt_title_roll_diameter">转轮直径</string>
+    <string name="rt_title_road_width">公路宽</string>
+    <string name="rt_title_road_length">公路长</string>
+    <string name="rt_title_origin">车头方向</string>
+    <string name="rt_title_huoer_num">霍尔传感器</string>
+    <string name="rt_title_debug">调试模式</string>
+    <string name="rt_title_bt">蓝牙连接</string>
+    <string name="rt_title_ip">主站IP</string>
+    <string name="rt_title_port">端口</string>
+    <string name="rt_title_user">用户</string>
+    <string name="rt_title_password">密码</string>
+
+    <string name="rt_title_clockwise">顺时针</string>
+    <string name="rt_title_anti_clockwise">逆时针</string>
+    
+    <string name="rt_def_ip">192.168.1.121</string>
+    <string name="rt_def_port">21</string>
+    <string name="rt_def_user">user</string>
+    <string name="rt_def_password">123</string>
+    
+    <string-array name="rt_heading_text">
+        <item>顺时针</item>
+        <item>逆时针</item>
+    </string-array>
+
+</resources>

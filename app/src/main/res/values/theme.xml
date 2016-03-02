@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="theme_white">#fafeff</color>
+    <color name="theme_light">#72c0f1</color>
+    <color name="theme_blue">#0080c8</color>
+    <color name="theme_dark">#071d28</color>
+    <color name="theme_grep">#f0f0f0</color>
+    <color name="theme_black">#000407</color>
+    <color name="theme_item_list">@color/theme_blue</color>
+    <color name="theme_font_black">#1f1f1f</color>
+    <color name="color_ad_button_font">#1f1f1f</color>
+    <color name="color_ad_result_black">#1f1f1f</color>
+    <color name="color_ad_button_font_grep">#808080</color>
+    <color name="color_item">#27408B</color>
+    
+    <dimen name="font_title">16sp</dimen>
+    <dimen name="font_size">18sp</dimen>
+    <dimen name="font_list">18sp</dimen>
+    <dimen name="font_summary">14sp</dimen>
+    <dimen name="font_item">20sp</dimen>
+    <dimen name="font_color_item">20sp</dimen>
+    <dimen name="font_draw_title">22sp</dimen>
+    <dimen name="font_hisdata_title">22sp</dimen>
+    <dimen name="font_fullscreen_title">26sp</dimen>
+    <dimen name="font_adjust_item">20sp</dimen>
+    <dimen name="font_adjust_title">20sp</dimen>
+    <dimen name="font_button">18sp</dimen>
+    
+    <dimen name="font_ad_result_font">23sp</dimen>
+    
+</resources>

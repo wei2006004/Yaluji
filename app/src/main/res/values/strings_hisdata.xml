@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hd_device_id">设备ID：</string>
+    <string name="hd_unqualified">不合格块数：</string>
+    <string name="hd_near_qualified">接近合格块数：</string>
+    <string name="hd_qualified">合格块数：</string>
+    <string name="hd_fine">良好块数：</string>
+    <string name="hd_distance">路程：</string>
+    <string name="hd_road_length">公路长：</string>
+    <string name="hd_road_width">公路宽：</string>
+    <string name="hd_time">时间：</string>
+    
+    
+    <string name="hd_trace">运行轨迹</string>
+    <string name="hd_color">色块图</string>
+    <string name="hd_plot_speed">速度曲线</string>
+    <string name="hd_plot_temp">温度曲线</string>
+    <string name="hd_plot_quake">振动曲线</string>
+</resources>

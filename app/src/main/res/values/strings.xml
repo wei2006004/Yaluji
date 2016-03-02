@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">压路机数据采集系统</string>
+    <string name="action_settings">设置</string>
+    <string name="action_fullscreen">全屏</string>
+    <string name="action_run">运行</string>
+    <string name="action_stop">停止</string>
+    <string name="action_pause">暂停</string>
+    <string name="action_return">返回</string>
+    <string name="pref_name">grouplist_pref</string>
+    <string name="com_connected">已连接设备</string>
+    <string name="com_connecting">正在连接设备</string>
+    <string name="com_fail">连接失败</string>
+    <string name="com_lost">断开连接</string>
+    <string name="com_no_wifi_promt">请连接wifi</string>
+    <string name="com_no_connect_promt">没有可用网络连接</string>
+
+    <!-- MainActivity -->
+    <string name="list_tcp">网络连接</string>
+    <string name="list_connect">蓝牙连接</string>
+    <string name="list_runtime">测试设置</string>
+    <string name="list_test">进入测试</string>
+    <string name="list_hisdata">历史数据</string>
+    <string name="list_adjust">相关校验</string>
+    <string name="main_info_bt">请切换到蓝牙模式</string>
+    <string name="main_info_tcp">请切换到网络模式</string>
+    <string name="main_info_device">请连接设备</string>
+
+    <!-- BtFragment -->
+    <string name="bt_open">打开蓝牙</string>
+    <string name="bt_close">关闭蓝牙</string>
+    <string name="bt_disabled">蓝牙已关闭</string>
+    <string name="bt_unabled">蓝牙不可用</string>
+    <string name="bt_please_enable">请打开蓝牙</string>
+    <string name="bt_run">蓝牙已打开</string>
+    <string name="bt_fail">蓝牙打开失败</string>
+    <string name="scan_devices">查找设备</string>
+    <string name="device_disconnect">断开设备</string>
+    <string name="device_no_connect">未连接设备</string>
+    <string name="device_info_title">设备信息</string>
+    <string name="device_state_title">传感器状态</string>
+    <string name="device_state_ok">运行正常</string>
+    <string name="device_state_error">运行异常</string>
+
+    <!-- TcpFragment -->
+    <string name="tcp_open">打开端口</string>
+    <string name="tcp_close">关闭端口</string>
+
+    <string-array name="array_device_info">
+        <item>设备号</item>
+        <item>硬件版本</item>
+        <item>软件版本</item>
+    </string-array>
+    <string-array name="array_device_state">
+        <item>温度</item>
+        <item>加速度</item>
+        <item>电子罗盘</item>
+        <item>霍尔传感器</item>
+    </string-array>
+
+    <!-- DeviceListActivity -->
+    <!--
+    <string name="scanning">scanning for devices...</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+    -->
+
+    <string name="scanning">正在扫描设备...</string>
+    <string name="select_device">选择连接设备</string>
+    <string name="none_paired">没有匹配设备</string>
+    <string name="none_found">没有发现任何设备</string>
+    <string name="title_paired_devices">匹配设备</string>
+    <string name="title_other_devices">其他可用设备</string>
+    <string name="button_scan">扫描设备</string>
+    <string name="title_activity_test">测试监控</string>
+
+    <!-- HisdataFragment -->
+    <string name="hisdata_title_device">设备号</string>
+    <string name="hisdata_title_time">测试时间</string>
+    <string name="hisdata_progress_title">上传文件</string>
+    <string name="hisdata_delete">成功删除文件</string>
+    <string name="hisdata_ftp_connect">正在连接服务器...</string>
+    <string name="hisdata_ftp_connect_fail">连接服务器失败！</string>
+    <string name="hisdata_upload_down">成功上传文件！</string>
+    <string name="hisdata_upload_fail">上传失败！</string>
+
+    <string-array name="hisdata_list">
+        <item>查看</item>
+        <item>删除</item>
+        <item>上传</item>
+    </string-array>
+
+    <string name="title_activity_hisdata">历史数据</string>
+    <string name="title_activity_trace">运行轨迹图</string>
+    <string name="title_activity_color">色块图</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_color_view">色块图</string>
+    <string name="title_activity_temp_plot">温度曲线</string>
+    <string name="title_activity_quake_plot">振动曲线</string>
+    <string name="title_activity_color_run">色块图</string>
+    <string name="title_activity_speed_plot">速度曲线</string>
+    <string name="title_activity_adjust_light">AdjustLightActivity</string>
+    <string name="title_activity_adjust_middle">AdjustMiddleActivity</string>
+    <string name="title_activity_adjust_heavy">AdjustHeavyActivity</string>
+    <string name="title_activity_adjust_result">AdjustResultActivity</string>
+
+</resources>

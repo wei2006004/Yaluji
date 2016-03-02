@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="ylj.hisdata.HisdataActivity" >
+
+    <item 
+        android:id="@+id/action_upload"
+        android:title="upload"
+        android:icon="@drawable/upload"
+        android:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_fullscreen"
+        android:title="@string/action_fullscreen"
+        android:icon="@drawable/fullscreen"
+        android:showAsAction="ifRoom"/>
+
+</menu>

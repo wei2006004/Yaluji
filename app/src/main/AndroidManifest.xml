@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ylj"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/launcher"
+        android:label="@string/app_name" >
+        <activity
+            android:name="ylj.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ylj.connect.DeviceListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/select_device"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Holo.Dialog" />
+        <activity
+            android:name="ylj.sample.TestActivity"
+            android:label="@string/title_activity_test"
+            android:parentActivityName="ylj.MainActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.MainActivity" />
+        </activity>
+        <activity
+            android:name=".test.TestActivity"
+            android:label="@string/title_activity_test"
+            android:parentActivityName="ylj.MainActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.MainActivity" />
+        </activity>
+        <activity
+            android:name="ylj.hisdata.HisdataActivity"
+            android:label="@string/title_activity_hisdata"
+            android:parentActivityName="ylj.MainActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.MainActivity" />
+        </activity>
+        <activity
+            android:name="ylj.sample.TraceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_trace"
+            android:parentActivityName="ylj.sample.TestActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.sample.TestActivity" />
+        </activity>
+        <activity
+            android:name=".test.TraceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_trace"
+            android:parentActivityName=".test.TestActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ylj.test.TestActivity" />
+        </activity>
+        <activity
+            android:name="ylj.sample.ColorActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_color"
+            android:parentActivityName="ylj.hisdata.HisdataActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.hisdata.HisdataActivity" />
+        </activity>
+        <activity
+            android:name="ylj.sample.TempPlotActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_temp_plot"
+            android:parentActivityName="ylj.sample.TestActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.sample.TestActivity" />
+        </activity>
+        <activity
+            android:name="ylj.sample.QuakePlotActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_quake_plot"
+            android:parentActivityName="ylj.sample.TestActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.sample.TestActivity" />
+        </activity>
+        <activity
+            android:name="ylj.sample.ColorRunActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_color_run"
+            android:parentActivityName="ylj.sample.TestActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.sample.TestActivity" />
+        </activity>
+        <activity
+            android:name="ylj.sample.SpeedPlotActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_speed_plot"
+            android:parentActivityName="ylj.sample.TestActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.sample.TestActivity" />
+        </activity>
+        <activity
+            android:name="ylj.adjust.AdjustLightActivity"
+            android:label="@string/title_activity_adjust_light"
+            android:parentActivityName="ylj.MainActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.MainActivity" />
+        </activity>
+        <activity
+            android:name="ylj.adjust.AdjustMiddleActivity"
+            android:label="@string/title_activity_adjust_middle"
+            android:parentActivityName="ylj.MainActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.MainActivity" />
+        </activity>
+        <activity
+            android:name="ylj.adjust.AdjustHeavyActivity"
+            android:label="@string/title_activity_adjust_heavy"
+            android:parentActivityName="ylj.MainActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.MainActivity" />
+        </activity>
+        <activity
+            android:name="ylj.adjust.AdjustResultActivity"
+            android:label="@string/title_activity_adjust_result"
+            android:parentActivityName="ylj.MainActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ylj.MainActivity" />
+        </activity>
+    </application>
+
+</manifest>

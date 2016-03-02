@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DeviceInfo -->
+    <string name="xml_deviceInfo">DeviceInfo</string>
+    <string name="xml_deviceId">deviceId</string>
+    <string name="xml_version">version</string>
+    <string name="xml_softVersion">softVersion</string>
+    <string name="xml_productDate">productDate</string>
+    <string name="xml_huoerState">huoerState</string>
+    <string name="xml_dirState">dirState</string>
+    <string name="xml_tempState">tempState</string>
+    <string name="xml_quakeState">quakeState</string>   
+    
+    <string name="xml_state_normal">normal</string>
+    <string name="xml_state_error">error</string>
+    
+    <!-- DeviceData -->
+    <string name="xml_deviceData">DeviceData</string>
+    <string name="xml_pulse">pulse</string>
+    <string name="xml_speed">speed</string>
+    <string name="xml_temp">temp</string>
+    <string name="xml_quake">quake</string>
+    <string name="xml_compassHeading">compassHeading</string>
+    <string name="xml_compassPitch">compassPitch</string>
+    <string name="xml_compassRoll">compassRoll</string>
+    <string name="xml_state">state</string>
+    
+    <string name="xml_state_back">back</string>
+    <string name="xml_state_stop">stop</string>
+    <string name="xml_state_head">head</string>
+
+</resources>

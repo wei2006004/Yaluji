@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"  >
+ <item
+        android:id="@+id/action_run"
+        android:title="run"
+        android:icon="@drawable/test_play"
+        android:showAsAction="always|withText"/>
+    <item
+        android:id="@+id/action_stop"
+        android:title="stop"
+        android:icon="@drawable/test_stop"
+        android:showAsAction="always"/>  
+    <item
+        android:id="@+id/action_fullscreen"
+        android:title="return"
+        android:icon="@drawable/return_fullscreen"
+        android:showAsAction="always"/>
+
+</menu>

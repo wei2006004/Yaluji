@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+            android:paddingLeft="20dp" 
+    	android:paddingRight="20dp"
+    android:orientation="vertical" >
+    
+    <RelativeLayout 
+    android:paddingLeft="20dp" 
+    android:paddingTop="20dp"
+    android:paddingRight="50dp"
+    android:paddingBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >    
+    <TextView 
+        android:textSize="@dimen/font_item"
+        android:textColor="@color/theme_font_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/rt_title_debug"/>
+    <Switch 
+        android:id="@+id/switch_debug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>
+
+    <RelativeLayout 
+    android:paddingLeft="20dp" 
+    android:paddingTop="5dp"
+    android:paddingRight="50dp"
+    android:paddingBottom="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >    
+    <TextView 
+        android:textSize="@dimen/font_item"
+        android:textColor="@color/theme_font_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/rt_title_bt"/>
+    <Switch 
+        android:id="@+id/switch_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>
+        <RelativeLayout 
+    android:paddingLeft="10dp" 
+    android:paddingTop="0dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="0dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >    
+         <View 
+        android:id="@+id/line_view"
+        android:layout_width="wrap_content" 
+		android:layout_height="1dp"
+		android:background="@color/theme_light"/>
+         </RelativeLayout>
+    <ListView 
+    	android:paddingTop="15dp"
+   		android:paddingBottom="10dp"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
