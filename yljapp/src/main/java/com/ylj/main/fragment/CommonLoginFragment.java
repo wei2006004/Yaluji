@@ -1,6 +1,7 @@
 package com.ylj.main.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,10 +11,12 @@ import android.widget.TextView;
 
 import com.ylj.R;
 import com.ylj.common.BaseFragment;
+import com.ylj.main.MenuActivity;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 @ContentView(R.layout.fragment_common_login)
 public class CommonLoginFragment extends BaseFragment {
@@ -43,7 +46,8 @@ public class CommonLoginFragment extends BaseFragment {
 
     @Event(R.id.bt_annoy_login)
     private void onAnnoyLoginButtonClick(View view) {
-
+        Intent intent = new Intent(x.app(), MenuActivity.class);
+        startActivity(intent);
     }
 
     @Event(R.id.tv_switch_admin_login)
