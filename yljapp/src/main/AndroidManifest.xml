@@ -34,6 +34,52 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ylj.main.MenuActivity" />
         </activity>
+        <activity
+            android:name=".task.NewTaskActivity"
+            android:label="@string/title_activity_new_task"
+            android:parentActivityName=".main.MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ylj.main.MenuActivity" />
+        </activity>
+
+        <activity
+            android:name=".adjust.AdjustLightActivity"
+            android:label="@string/title_activity_adjust_heavy"
+            android:parentActivityName=".task.NewTaskActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".task.NewTaskActivity" />
+        </activity>
+        <activity
+            android:name=".adjust.AdjustMiddleActivity"
+            android:label="@string/title_activity_adjust_heavy"
+            android:parentActivityName=".task.NewTaskActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".task.NewTaskActivity" />
+        </activity>
+        <activity
+            android:name=".adjust.AdjustHeavyActivity"
+            android:label="@string/title_activity_adjust_heavy"
+            android:parentActivityName=".task.NewTaskActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".task.NewTaskActivity" />
+        </activity>
+        <activity
+            android:name=".adjust.AdjustResultActivity"
+            android:label="@string/title_activity_adjust_heavy"
+            android:parentActivityName=".task.NewTaskActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".task.NewTaskActivity" />
+        </activity>
     </application>
 
 </manifest>

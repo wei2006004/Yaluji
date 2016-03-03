@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ad_start">运行</string>
+    <string name="ad_pause">暂停</string>
+    <string name="ad_next">下一步</string>
+    <string name="ad_auto">自动填充</string>
+    <string name="ad_exit">退出</string>
+    
+    <string name="ad_position">位置</string>
+    <string name="ad_compaction">压实度</string>
+
+    <string name="ad_title_light">轻度碾压压实曲线</string>
+    <string name="ad_title_middle">中度碾压压实曲线</string>
+    <string name="ad_title_heavy">重度碾压压实曲线</string>
+    <string name="ad_title_result">相关性校验回归计算</string>
+    
+    <string name="ad_dialog_title">提示</string>
+    <string name="ad_dialog_text">退出将停止校验，是否继续？</string>
+    <string name="ad_dialog_exit">操作将放弃校验结果，是否继续？</string>
+    <string name="ad_ok">确定</string>
+    <string name="ad_cancel">取消</string>
+    
+    <string name="ad_msg_outrange">位置必须在1-100内</string>
+    <string name="ad_msg_null">校验数据不能为空</string>
+    <string name="ad_msg_x_null">质量验收指标不能为空</string>
+    <string name="ad_msg_x_notformat">请输入合法的质量验收指标</string>
+    
+    <string name="ad_promt_pass">相关性校验通过。</string>
+    <string name="ad_promt_fail">相关性系数小于0.7，请重新进行校验！</string>
+    
+    <string name="ad_result_r">相关系数r=</string>
+    <string name="ad_result_a">a=</string>
+    <string name="ad_result_b">b=</string>
+    <string name="ad_result_equation">VCV=a+bx</string>
+    <string name="ad_result_promt">请输入质量验收指标：</string>
+    <string name="ad_result_x">X=</string>
+    <string name="ad_result_vcv">VCV=</string>
+
+    <string name="title_activity_adjust_light">AdjustLightActivity</string>
+    <string name="title_activity_adjust_middle">AdjustMiddleActivity</string>
+    <string name="title_activity_adjust_heavy">AdjustHeavyActivity</string>
+    <string name="title_activity_adjust_result">AdjustResultActivity</string>
+    
+</resources>
