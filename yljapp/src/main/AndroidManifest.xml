@@ -21,9 +21,18 @@
         </activity>
         <activity
             android:name=".main.MenuActivity"
-            android:screenOrientation="landscape"
             android:label="@string/title_activity_menu"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".connect.ConnectActivity"
+            android:label="@string/title_activity_connect"
+            android:parentActivityName=".main.MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ylj.main.MenuActivity" />
         </activity>
     </application>
 

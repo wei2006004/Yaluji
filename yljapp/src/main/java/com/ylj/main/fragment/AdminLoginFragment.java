@@ -79,7 +79,7 @@ public class AdminLoginFragment extends BaseFragment {
             mListener = (OnSwitchToCommonLoginListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnWifiConnectListener");
         }
     }
 
