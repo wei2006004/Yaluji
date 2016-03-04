@@ -42,8 +42,8 @@ public class MenuActivity extends BaseActivity {
 
     @Event(R.id.fbt_setting)
     private void onSettingButtonClick(View view){
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        Intent intent=new Intent(x.app(),SettingActivity.class);
+        startActivity(intent);
     }
 
     @Event(R.id.rl_connect)
