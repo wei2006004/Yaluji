@@ -9,4 +9,5 @@
     <string name="title_activity_connect">ConnectActivity</string>
     <string name="title_activity_new_task">NewTaskActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_staff_modify">StaffModifyActivity</string>
 </resources>

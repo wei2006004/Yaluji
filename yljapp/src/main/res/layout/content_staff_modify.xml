@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_staff_modify" tools:context="com.ylj.staff.StaffModifyActivity">
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/layout_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="staff name"/>
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="david"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="company"/>
+            <EditText
+                android:id="@+id/et_company"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cm"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="group"/>
+            <EditText
+                android:id="@+id/et_group"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="group 1"/>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

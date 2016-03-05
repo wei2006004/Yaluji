@@ -88,6 +88,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ylj.main.MenuActivity" />
         </activity>
+        <activity
+            android:name=".staff.StaffModifyActivity"
+            android:label="@string/title_activity_staff_modify"
+            android:parentActivityName=".main.MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ylj.main.MenuActivity" />
+        </activity>
     </application>
 
 </manifest>

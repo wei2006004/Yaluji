@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import com.ylj.R;
 import com.ylj.common.BaseActivity;
 import com.ylj.connect.ConnectActivity;
+import com.ylj.staff.StaffModifyActivity;
 import com.ylj.task.NewTaskActivity;
 
 import org.xutils.view.annotation.ContentView;
@@ -54,7 +55,8 @@ public class MenuActivity extends BaseActivity {
 
     @Event(R.id.rl_manager)
     private void onManagerLayoutClick(View view){
-
+        Intent intent=new Intent(x.app(), StaffModifyActivity.class);
+        startActivity(intent);
     }
 
     @Event(R.id.rl_task)
