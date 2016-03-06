@@ -10,4 +10,6 @@
     <string name="title_activity_new_task">NewTaskActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
     <string name="title_activity_staff_modify">StaffModifyActivity</string>
+    <string name="title_activity_staff_manager">StaffManagerActivity</string>
+    <string name="title_activity_admin_modify">AdminModifyActivity</string>
 </resources>

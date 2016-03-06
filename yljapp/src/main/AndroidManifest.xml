@@ -97,6 +97,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ylj.main.MenuActivity" />
         </activity>
+        <activity
+            android:name=".staff.StaffManagerActivity"
+            android:label="@string/title_activity_staff_manager"
+            android:parentActivityName=".main.MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ylj.main.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".staff.AdminModifyActivity"
+            android:label="@string/title_activity_admin_modify"
+            android:parentActivityName=".staff.StaffManagerActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ylj.staff.StaffManagerActivity" />
+        </activity>
     </application>
 
 </manifest>
