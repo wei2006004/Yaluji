@@ -8,7 +8,8 @@ import com.ylj.common.bean.Task;
 public class AppStatus {
     boolean isLogin = false;
     boolean isAdmin = false;
-    String loginName = "";
+    long loginId;
+    String loginName = ""; //姓名
 
     public static final int CONNECT_MODE_NONE = 0;
     public static final int CONNECT_MODE_BLUETOOTH = 1;
@@ -26,6 +27,14 @@ public class AppStatus {
 
     public static AppStatus instance() {
         return mInstance;
+    }
+
+    public long getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(long loginId) {
+        this.loginId = loginId;
     }
 
     public boolean isLogin() {
