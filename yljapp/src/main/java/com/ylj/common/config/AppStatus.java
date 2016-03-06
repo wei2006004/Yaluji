@@ -1,5 +1,7 @@
 package com.ylj.common.config;
 
+import com.ylj.common.bean.Admin;
+import com.ylj.common.bean.Staff;
 import com.ylj.common.bean.Task;
 
 /**
@@ -8,8 +10,9 @@ import com.ylj.common.bean.Task;
 public class AppStatus {
     boolean isLogin = false;
     boolean isAdmin = false;
-    long loginId;
-    String loginName = ""; //姓名
+
+    Admin currentAdmin;
+    Staff currentStaff;
 
     public static final int CONNECT_MODE_NONE = 0;
     public static final int CONNECT_MODE_BLUETOOTH = 1;
@@ -29,12 +32,32 @@ public class AppStatus {
         return mInstance;
     }
 
-    public long getLoginId() {
-        return loginId;
+    public Admin getCurrentAdmin() {
+        if(!isLogin){
+            return new Admin();
+        }
+        if(!isAdmin){
+            return new Admin();
+        }
+        return currentAdmin;
     }
 
-    public void setLoginId(long loginId) {
-        this.loginId = loginId;
+    public void setCurrentAdmin(Admin currentAdmin) {
+        this.currentAdmin = currentAdmin;
+    }
+
+    public Staff getCurrentStaff() {
+        if(!isLogin){
+            return new Staff();
+        }
+        if(isAdmin){
+            return new Staff();
+        }
+        return currentStaff;
+    }
+
+    public void setCurrentStaff(Staff currentStaff) {
+        this.currentStaff = currentStaff;
     }
 
     public boolean isLogin() {
@@ -51,14 +74,6 @@ public class AppStatus {
 
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
-    }
-
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
     }
 
     public boolean isConnect() {

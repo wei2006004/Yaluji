@@ -1,4 +1,4 @@
-package com.ylj.db;
+package com.ylj.db.manager;
 
 import org.xutils.x;
 

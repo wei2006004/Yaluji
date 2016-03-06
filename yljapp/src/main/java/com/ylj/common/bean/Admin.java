@@ -8,6 +8,8 @@ import org.xutils.db.annotation.Table;
  */
 @Table(name="admin")
 public class Admin {
+    public static final String ACCOUNT_NAME_TAG = "account_name";
+
     @Column(name = "id", isId = true)
     private int id;
 

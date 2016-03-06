@@ -10,8 +10,11 @@ import android.widget.EditText;
 
 import com.ylj.R;
 import com.ylj.common.BaseActivity;
+import com.ylj.common.bean.Staff;
+import com.ylj.db.AccountLet;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_staff_modify)
@@ -26,20 +29,21 @@ public class StaffModifyActivity extends BaseActivity {
     @ViewInject(R.id.et_group)
     EditText mGroup;
 
+    @Event(R.id.fab)
+    private void onFabClick(View view){
+        Staff staff=new Staff();
+        staff.setStaffName(mNameText.getText().toString());
+        staff.setCompany(mCompany.getText().toString());
+        staff.setGroup(mGroup.getText().toString());
+        AccountLet.addStaff(staff);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

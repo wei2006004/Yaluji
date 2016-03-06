@@ -10,21 +10,21 @@ import java.util.List;
  * Created by Administrator on 2016/3/6 0006.
  */
 public interface IAccountManager {
-    public interface OnLoginListener{
-        void onLoginSuccess(final boolean isAdmin,final long loginId,final String loginName);
-        void onLoginFail(final int error);
-    }
 
-    void doStaffLogin(final long staff_id,final OnLoginListener listener);
+    void doStaffLogin(final long staff_id,final IRequestListener<Staff> listener);
 
-    void doAdminLogin(final String account_name,final String passwd,final OnLoginListener listener);
+    void doAdminLogin(final String account_name,final String passwd,final IRequestListener<Admin> listener);
 
-    void getAdmin(final long admin_id,final IRequestListener<Admin> listener);
-
-    void getStaff(final long staff_id,final IRequestListener<Staff> listener);
+//    void getAdmin(final long admin_id,final IRequestListener<Admin> listener);
+//
+//    void getStaff(final long staff_id,final IRequestListener<Staff> listener);
 
     void getAdminList(final IRequestListener<List<Admin>> listener);
 
     void getStaffList(final IRequestListener<List<Staff>> listener);
+
+    void addStaff(Staff staff);
+
+    void addAdmin(Admin admin);
 
 }
