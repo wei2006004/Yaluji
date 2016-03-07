@@ -1,9 +1,6 @@
 package com.ylj.staff;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -11,7 +8,7 @@ import android.widget.EditText;
 import com.ylj.R;
 import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Staff;
-import com.ylj.db.AccountLet;
+import com.ylj.db.DbLet;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -35,7 +32,8 @@ public class StaffModifyActivity extends BaseActivity {
         staff.setStaffName(mNameText.getText().toString());
         staff.setCompany(mCompany.getText().toString());
         staff.setGroup(mGroup.getText().toString());
-        AccountLet.addStaff(staff);
+        DbLet.addStaff(staff);
+        finish();
     }
 
     @Override

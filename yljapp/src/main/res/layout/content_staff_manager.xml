@@ -69,6 +69,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginLeft="50dp"
             android:layout_toRightOf="@id/layout_admin"
             android:layout_width="400dp"
             android:layout_height="match_parent"
@@ -80,6 +81,7 @@
                 android:text="admin list:"/>
             <ListView
                 android:id="@+id/lv_admin"
+                android:choiceMode="singleChoice"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"/>
 
@@ -96,10 +98,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="add"/>
+                <Button
+                    android:layout_toLeftOf="@id/btn_add_staff"
+                    android:id="@+id/btn_delete_staff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="delete"/>
             </RelativeLayout>
 
             <ListView
                 android:id="@+id/lv_staff"
+                android:choiceMode="singleChoice"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>

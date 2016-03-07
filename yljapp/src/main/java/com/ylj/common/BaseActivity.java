@@ -15,4 +15,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
     }
+
+    protected void post(){
+
+    }
 }

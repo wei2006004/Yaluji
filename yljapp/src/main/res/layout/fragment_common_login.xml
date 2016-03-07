@@ -3,7 +3,7 @@
     android:layout_height="match_parent" tools:context="com.ylj.main.fragment.CommonLoginFragment">
 
     <RelativeLayout
-        android:paddingTop="40dp"
+        android:paddingTop="0dp"
         android:layout_gravity="center"
         android:layout_width="420dp"
         android:layout_height="400dp">
@@ -14,8 +14,9 @@
 
             <ListView
                 android:id="@+id/lv_user"
+                android:choiceMode="singleChoice"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="250dp">
 
             </ListView>
 

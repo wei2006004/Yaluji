@@ -1,4 +1,4 @@
-package com.ylj.db.manager;
+package com.ylj.db;
 
 import org.xutils.DbManager;
 import org.xutils.x;
@@ -6,7 +6,7 @@ import org.xutils.x;
 /**
  * Created by Administrator on 2016/3/6 0006.
  */
-public abstract class AbstractDbManager extends AbstractManager {
+public abstract class AbstractDbManager{
     private DbManager.DaoConfig daoConfig;
     protected DbManager db;
 

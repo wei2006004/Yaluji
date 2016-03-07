@@ -3,8 +3,7 @@ package com.ylj.db.account;
 import com.ylj.common.bean.Admin;
 import com.ylj.common.bean.Staff;
 import com.ylj.db.config.Constant;
-import com.ylj.db.manager.AbstractDbManager;
-import com.ylj.db.IRequestListener;
+import com.ylj.db.AbstractDbManager;
 
 import org.xutils.ex.DbException;
 
@@ -13,67 +12,18 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/3/6 0006.
  */
-public class AccountManager extends AbstractDbManager implements IAccountManager {
+public class AccountManager extends AbstractDbManager {
 
     public AccountManager(String dbName) {
         super(dbName);
     }
 
-    @Override
-    public void doStaffLogin(final long staff_id, final IRequestListener<Staff> listener) {
-        runInBackground(new Runnable() {
-            @Override
-            public void run() {
-                final Staff staff = findStaffById(staff_id);
-                postToUi(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (staff == null) {
-                            listener.onRequestFail(LoginError.LOGIN_ERROR_NO_ACCOUNT);
-                        } else {
-                            listener.onRequestSuccess(staff);
-                        }
-                    }
-                });
-
-            }
-        });
-    }
-
-    @Override
-    public void doAdminLogin(final String account_name, final String passwd, final IRequestListener<Admin> listener) {
-        runInBackground(new Runnable() {
-            @Override
-            public void run() {
-                final Admin admin = findAdminByAccountName(account_name);
-                postToUi(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (admin == null) {
-                            listener.onRequestFail(LoginError.LOGIN_ERROR_NO_ACCOUNT);
-                        } else {
-                            if (admin.getPasswd().equals(passwd)) {
-                                listener.onRequestSuccess(admin);
-                            } else {
-                                listener.onRequestFail(LoginError.LOGIN_ERROR_WRONG_PASSWD);
-                            }
-                        }
-                    }
-                });
-            }
-        });
-    }
-
-    private Admin findAdminByAccountName(String accountName) {
-        Admin admin = null;
-        try {
-            admin = db.selector(Admin.class).
-                    where(Admin.ACCOUNT_NAME_TAG, Constant.SQL_OP_EQUAL, accountName).
-                    findFirst();
-        } catch (DbException e) {
-            e.printStackTrace();
+    public int doStaffLogin(final long staff_id) {
+        Staff staff = findStaffById(staff_id);
+        if (staff == null) {
+            return LoginResult.LOGIN_ERROR_NO_ACCOUNT;
         }
-        return admin;
+        return LoginResult.LOGIN_SUCCESS;
     }
 
     private Staff findStaffById(long staff_id) {
@@ -86,49 +36,49 @@ public class AccountManager extends AbstractDbManager implements IAccountManager
         return staff;
     }
 
-    @Override
-    public void getAdminList(final IRequestListener<List<Admin>> listener) {
-        runInBackground(new Runnable() {
-            @Override
-            public void run() {
-                final List<Admin> list= getAllAdminFromDb();
-                postToUi(new Runnable() {
-                    @Override
-                    public void run() {
-                        listener.onRequestSuccess(list);
-                    }
-                });
-            }
-        });
+    public int doAdminLogin(String account_name, String passwd) {
+        Admin admin = findAdminByAccountName(account_name);
+        if (admin == null) {
+            return LoginResult.LOGIN_ERROR_NO_ACCOUNT;
+        }
+        if (admin.getPasswd().equals(passwd)) {
+            return LoginResult.LOGIN_ERROR_WRONG_PASSWD;
+        }
+        return LoginResult.LOGIN_SUCCESS;
     }
 
-    private List<Admin> getAllAdminFromDb(){
-        List<Admin> list=null;
+    private Admin findAdminByAccountName(String accountName) {
+        Admin admin = null;
         try {
-            list=db.findAll(Admin.class);
+            admin = db.selector(Admin.class).
+                    where(Admin.TAG_ACCOUNT_NAME, Constant.SQL_OP_EQUAL, accountName).
+                    findFirst();
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return admin;
+    }
+
+    public List<Admin> getAllAdminFromDb() {
+        List<Admin> list = null;
+        try {
+            list = db.findAll(Admin.class);
         } catch (DbException e) {
             e.printStackTrace();
         }
         return list;
     }
 
-    @Override
-    public void getStaffList(final IRequestListener<List<Staff>> listener) {
-        runInBackground(new Runnable() {
-            @Override
-            public void run() {
-                final List<Staff> list= getAllStaffFromDb();
-                postToUi(new Runnable() {
-                    @Override
-                    public void run() {
-                        listener.onRequestSuccess(list);
-                    }
-                });
-            }
-        });
+    public List<Staff> getAllStaffFromDb() {
+        List<Staff> list = null;
+        try {
+            list = db.findAll(Staff.class);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
-    @Override
     public void addStaff(Staff staff) {
         try {
             db.save(staff);
@@ -137,7 +87,6 @@ public class AccountManager extends AbstractDbManager implements IAccountManager
         }
     }
 
-    @Override
     public void addAdmin(Admin admin) {
         try {
             db.save(admin);
@@ -146,13 +95,4 @@ public class AccountManager extends AbstractDbManager implements IAccountManager
         }
     }
 
-    private List<Staff> getAllStaffFromDb(){
-        List<Staff> list=null;
-        try {
-            list=db.findAll(Staff.class);
-        } catch (DbException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
 }
