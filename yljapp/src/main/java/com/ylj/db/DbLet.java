@@ -47,4 +47,14 @@ public class DbLet {
         AccountManager accountManager=ManagerFactory.getAccountManager();
         return accountManager.getAllStaffFromDb();
     }
+
+    public static void deleteAdmin(Admin admin) {
+        AccountManager accountManager=ManagerFactory.getAccountManager();
+        accountManager.deleteAdmin(admin);
+    }
+
+    public static void deleteStaff(Staff staff) {
+        AccountManager accountManager=ManagerFactory.getAccountManager();
+        accountManager.deleteStaff(staff);
+    }
 }

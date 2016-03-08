@@ -74,8 +74,10 @@ public class Staff implements Parcelable, IMapable {
         return map;
     }
 
-    public Staff createByMap(Map<String, Object> map) {
+    public static Staff createByMap(Map<String, Object> map) {
         Staff staff = new Staff();
+        if (map == null)
+            return staff;
         staff.id = Integer.parseInt(map.get(TAG_ID).toString());
         staff.staffName = map.get(TAG_STAFF_NAME).toString();
         staff.group = map.get(TAG_GROUP).toString();

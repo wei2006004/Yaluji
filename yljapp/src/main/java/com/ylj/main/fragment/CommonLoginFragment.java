@@ -85,7 +85,7 @@ public class CommonLoginFragment extends BaseFragment {
                 mStaffs = DbLet.getStaffList();
                 if (mStaffs == null)
                     return;
-                List<Map<String, String>> maps = BeanUtils.convertStaffs2Maps(mStaffs);
+                List<Map<String, Object>> maps = BeanUtils.convertStaffs2Maps(mStaffs);
                 mStaffAdapter = new SimpleAdapter(x.app(), maps,
                         R.layout.listview_login_staff,
                         new String[]{Staff.TAG_STAFF_NAME, Staff.TAG_COMPANY, Staff.TAG_GROUP},

@@ -95,4 +95,19 @@ public class AccountManager extends AbstractDbManager {
         }
     }
 
+    public void deleteAdmin(Admin admin) {
+        try {
+            db.delete(admin);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteStaff(Staff staff) {
+        try {
+            db.delete(staff);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
 }

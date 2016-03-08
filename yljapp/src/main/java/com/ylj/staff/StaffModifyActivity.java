@@ -1,5 +1,7 @@
 package com.ylj.staff;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,6 +18,21 @@ import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_staff_modify)
 public class StaffModifyActivity extends BaseActivity {
+
+    public static void startAsNewStaffActivity(Context context){
+        Intent intent = new Intent(context, StaffModifyActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startAsModifyStaffActivity(Context context,Staff staff){
+        Intent intent = new Intent(context, StaffModifyActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startAsShowStaffActivity(Context context,Staff staff){
+        Intent intent = new Intent(context, StaffModifyActivity.class);
+        context.startActivity(intent);
+    }
 
     @ViewInject(R.id.et_name)
     EditText mNameText;

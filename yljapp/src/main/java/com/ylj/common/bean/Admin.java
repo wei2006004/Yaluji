@@ -52,8 +52,10 @@ public class Admin implements Parcelable, IMapable {
         return map;
     }
 
-    public Admin createByMap(Map<String, Object> map) {
+    public static Admin createByMap(Map<String, Object> map) {
         Admin admin = new Admin();
+        if (map == null)
+            return admin;
         admin.id = Integer.parseInt(map.get(TAG_ID).toString());
         admin.adminName = map.get(TAG_ADMIN_NAME).toString();
         admin.group = map.get(TAG_GROUP).toString();
