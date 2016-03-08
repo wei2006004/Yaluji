@@ -91,11 +91,12 @@
         <activity
             android:name=".staff.StaffModifyActivity"
             android:label="@string/title_activity_staff_modify"
-            android:parentActivityName=".main.MenuActivity"
+            android:parentActivityName=".staff.StaffManagerActivity"
+            android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ylj.main.MenuActivity" />
+                android:value="com.ylj.staff.StaffManagerActivity" />
         </activity>
         <activity
             android:name=".staff.StaffManagerActivity"
@@ -110,6 +111,7 @@
             android:name=".staff.AdminModifyActivity"
             android:label="@string/title_activity_admin_modify"
             android:parentActivityName=".staff.StaffManagerActivity"
+            android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -110,4 +110,12 @@ public class AccountManager extends AbstractDbManager {
             e.printStackTrace();
         }
     }
+
+    public void updateStaff(Staff staff) {
+        try {
+            db.update(staff);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
 }

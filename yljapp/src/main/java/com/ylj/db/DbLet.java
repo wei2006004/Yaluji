@@ -57,4 +57,9 @@ public class DbLet {
         AccountManager accountManager=ManagerFactory.getAccountManager();
         accountManager.deleteStaff(staff);
     }
+
+    public static void updateStaff(Staff staff) {
+        AccountManager accountManager=ManagerFactory.getAccountManager();
+        accountManager.updateStaff(staff);
+    }
 }

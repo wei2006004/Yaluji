@@ -19,11 +19,17 @@
             android:orientation="vertical"
             android:layout_width="250dp"
             android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/image_admin"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@mipmap/ic_launcher"/>
+            <RelativeLayout
+                android:id="@+id/rl_admin_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:id="@+id/image_admin"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@mipmap/ic_launcher"/>
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/layout_name"
                 android:layout_width="match_parent"
@@ -66,6 +72,18 @@
                     android:layout_height="wrap_content"
                     android:text="edit"/>
             </RelativeLayout>
+            <Button
+                android:layout_alignParentRight="true"
+                android:id="@+id/btn_edit_passwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="edit passwd"/>
+            <Button
+                android:layout_alignParentRight="true"
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="logout"/>
         </LinearLayout>
 
         <LinearLayout

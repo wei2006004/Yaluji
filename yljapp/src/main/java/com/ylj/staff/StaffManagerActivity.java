@@ -45,6 +45,21 @@ public class StaffManagerActivity extends BaseActivity {
     @ViewInject(R.id.lv_staff)
     ListView mStaffListView;
 
+    @Event(R.id.rl_admin_info)
+    private void onAdminInfoLayoutClick(View view){
+
+    }
+
+    @Event(R.id.btn_edit_passwd)
+    private void onAdminPasswdEditClick(View view) {
+
+    }
+
+    @Event(R.id.btn_logout)
+    private void onLogoutClick(View view) {
+
+    }
+
     @Event(R.id.btn_admin_edit)
     private void onAdminEditClick(View view) {
         Intent intent = new Intent(x.app(), AdminModifyActivity.class);
