@@ -67,4 +67,10 @@ public class DbLet {
         AccountManager accountManager=ManagerFactory.getAccountManager();
         accountManager.updateAdmin(admin);
     }
+
+    public static void saveOrUpdate(Admin admin) {
+        AccountManager accountManager=ManagerFactory.getAccountManager();
+        accountManager.saveOrUpdate
+                (admin);
+    }
 }

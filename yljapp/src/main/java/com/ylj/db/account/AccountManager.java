@@ -126,4 +126,12 @@ public class AccountManager extends AbstractDbManager {
             e.printStackTrace();
         }
     }
+
+    public void saveOrUpdate(Admin admin) {
+        try {
+            db.saveOrUpdate(admin);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
 }

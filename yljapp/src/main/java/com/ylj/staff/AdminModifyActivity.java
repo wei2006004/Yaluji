@@ -111,8 +111,7 @@ public class AdminModifyActivity extends BaseActivity {
     private void turnToSetPasswd() {
         //// TODO: 2016/3/8 0008 名字是否为空
         fillAdminByEdit();
-        Intent intent=new Intent(this,PasswdModifyActivity.class);
-        startActivity(intent);
+        PasswdModifyActivity.startAsNewPasswdActivity(this,mCurrentAdmin);
     }
 
     private void fillAdminByEdit() {
