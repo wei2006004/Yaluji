@@ -83,16 +83,18 @@ public class StaffModifyActivity extends BaseActivity {
         switch (mMode) {
             case MODE_SHOW_INFO:
                 showModifyView();
+                mMode = MODE_MODIFY_STAFF;
                 break;
             case MODE_MODIFY_STAFF:
                 updateStaff();
+                finish();
                 break;
             case MODE_NEW_STAFF:
                 saveNewStaff();
+                finish();
             default:
                 break;
         }
-        finish();
     }
 
     private void updateStaff() {
@@ -162,12 +164,12 @@ public class StaffModifyActivity extends BaseActivity {
         mGroupText.setText(mCurrentStaff.getGroup());
     }
 
-    private void setEditLayout(){
+    private void setEditLayout() {
         mInfoLayout.setVisibility(View.GONE);
         mEditLayout.setVisibility(View.VISIBLE);
     }
 
-    private void setInfoLayout(){
+    private void setInfoLayout() {
         mEditLayout.setVisibility(View.GONE);
         mInfoLayout.setVisibility(View.VISIBLE);
     }

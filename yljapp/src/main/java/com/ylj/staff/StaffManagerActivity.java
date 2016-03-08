@@ -66,6 +66,11 @@ public class StaffManagerActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    @Event(R.id.btn_add_admin)
+    private void onSAdminAddClick(View view) {
+        AdminModifyActivity.startAsNewAdminActivity(this);
+    }
+
     @Event(R.id.btn_add_staff)
     private void onStaffAddClick(View view) {
         StaffModifyActivity.startAsNewStaffActivity(this);
@@ -121,7 +126,7 @@ public class StaffManagerActivity extends BaseActivity {
 
     private void onStaffItemClick(int position) {
         Staff staff = getStaffByPosition(position);
-        StaffModifyActivity.startAsShowStaffActivity(this,staff);
+        StaffModifyActivity.startAsShowStaffActivity(this, staff);
     }
 
     private void deleteStaff(int position) {
@@ -137,10 +142,57 @@ public class StaffManagerActivity extends BaseActivity {
 
     private void initAdminListView() {
         mAdminAdapter = new SimpleAdapter(x.app(), mAdminMaps,
-                R.layout.listview_login_staff,
-                new String[]{Admin.TAG_ADMIN_NAME, Admin.TAG_COMPANY, Admin.TAG_GROUP},
-                new int[]{R.id.tv_name, R.id.tv_company, R.id.tv_group});
+                R.layout.listview_manager_admin,
+                new String[]{Admin.TAG_ADMIN_NAME,Admin.TAG_ACCOUNT_NAME, Admin.TAG_COMPANY, Admin.TAG_GROUP},
+                new int[]{R.id.tv_name,R.id.tv_account_name, R.id.tv_company, R.id.tv_group}){
+            @Override
+            public View getView(final int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                Button deleteBtn = (Button) view.findViewById(R.id.btn_detele);
+                deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteAdmin(position);
+                    }
+                });
+                Button editBtn = (Button) view.findViewById(R.id.btn_edit);
+                editBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editAdmin(position);
+                    }
+                });
+                return view;
+            }
+        };
         mAdminListView.setAdapter(mAdminAdapter);
+        mAdminListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                onAdminItemClick(position);
+            }
+        });
+    }
+
+    private void editAdmin(int position) {
+        Admin admin = getAdminByPosition(position);
+        AdminModifyActivity.startAsModifyAdminActivity(this, admin);
+    }
+
+    private void deleteAdmin(int position) {
+        Admin admin = getAdminByPosition(position);
+        DbLet.deleteAdmin(admin);
+        refreshAdminData();
+    }
+
+    private void onAdminItemClick(int position) {
+        Admin admin = getAdminByPosition(position);
+        AdminModifyActivity.startAsShowAdminActivity(this, admin);
+    }
+
+    private Admin getAdminByPosition(int position) {
+        Map<String, Object> map = mAdminMaps.get(position);
+        return Admin.createByMap(map);
     }
 
     @Override
@@ -161,7 +213,6 @@ public class StaffManagerActivity extends BaseActivity {
                     @Override
                     public void run() {
                         mAdminAdapter.notifyDataSetChanged();
-                        mAdminListView.setSelection(0);
                     }
                 });
             }

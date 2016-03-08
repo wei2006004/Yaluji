@@ -12,4 +12,5 @@
     <string name="title_activity_staff_modify">StaffModifyActivity</string>
     <string name="title_activity_staff_manager">StaffManagerActivity</string>
     <string name="title_activity_admin_modify">AdminModifyActivity</string>
+    <string name="title_activity_passwd_modify">PasswdModifyActivity</string>
 </resources>

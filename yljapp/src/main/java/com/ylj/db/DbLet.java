@@ -62,4 +62,9 @@ public class DbLet {
         AccountManager accountManager=ManagerFactory.getAccountManager();
         accountManager.updateStaff(staff);
     }
+
+    public static void updateAdmin(Admin admin) {
+        AccountManager accountManager=ManagerFactory.getAccountManager();
+        accountManager.updateAdmin(admin);
+    }
 }
