@@ -22,6 +22,7 @@
         <activity
             android:name=".main.MenuActivity"
             android:label="@string/title_activity_menu"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

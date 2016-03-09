@@ -11,7 +11,7 @@ import org.xutils.x;
 /**
  * Created by wyouflf on 15/11/4.
  */
-public class BaseFragment extends Fragment {
+public class BaseFragment extends Fragment implements IAlertable{
 
     private boolean injected = false;
 
@@ -27,5 +27,30 @@ public class BaseFragment extends Fragment {
         if (!injected) {
             x.view().inject(this, this.getView());
         }
+    }
+
+    @Override
+    public void showToast(String message) {
+
+    }
+
+    @Override
+    public void showLongToast(String message) {
+
+    }
+
+    @Override
+    public void showAlert(String Title, String message) {
+
+    }
+
+    @Override
+    public void showAlert(String Title, String message, View.OnClickListener okButtonListener) {
+
+    }
+
+    @Override
+    public void showAlert(String Title, String message, View.OnClickListener okButtonListener, View.OnClickListener cancelButtonListener) {
+
     }
 }

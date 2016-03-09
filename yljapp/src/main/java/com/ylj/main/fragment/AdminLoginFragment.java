@@ -2,6 +2,7 @@ package com.ylj.main.fragment;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,10 +10,13 @@ import android.widget.TextView;
 
 import com.ylj.R;
 import com.ylj.common.BaseFragment;
+import com.ylj.db.LoginLet;
+import com.ylj.main.MenuActivity;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 @ContentView(R.layout.fragment_admin_login)
 public class AdminLoginFragment extends BaseFragment {
@@ -54,7 +58,24 @@ public class AdminLoginFragment extends BaseFragment {
     }
 
     private void doAdminLogin(String user, String passwd) {
+        int result= LoginLet.doAdminLogin(user, passwd);
+        switch (result){
+            case LoginLet.LOGIN_SUCCESS:
+                turnToMenuActivity();
+                return;
+            case LoginLet.LOGIN_ERROR_WRONG_PASSWD:
+                showMessage("wrong passwd!");
+                return;
+            case LoginLet.LOGIN_ERROR_NO_ACCOUNT:
+                showMessage("no account!");
+                return;
+        }
+    }
 
+    private void turnToMenuActivity() {
+        Intent intent = new Intent(x.app(), MenuActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void showMessage(int resid) {

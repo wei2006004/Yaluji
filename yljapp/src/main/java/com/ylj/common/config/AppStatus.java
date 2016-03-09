@@ -32,14 +32,36 @@ public class AppStatus {
         return mInstance;
     }
 
+    public void setStaffLogin(Staff staff) {
+        isLogin = true;
+        isAdmin = false;
+        currentStaff = staff;
+    }
+
+    public void setAdminLogin(Admin admin) {
+        isLogin = true;
+        isAdmin = true;
+        currentAdmin = admin;
+    }
+
+    public void setAnonymousLogin() {
+        isLogin = false;
+        isAdmin = false;
+    }
+
     public Admin getCurrentAdmin() {
-        if(!isLogin){
+        if (!isLogin) {
             return new Admin();
         }
-        if(!isAdmin){
+        if (!isAdmin) {
             return new Admin();
         }
         return currentAdmin;
+    }
+
+    public void setLogout(){
+        isLogin = false;
+        isAdmin = false;
     }
 
     public void setCurrentAdmin(Admin currentAdmin) {
@@ -47,10 +69,10 @@ public class AppStatus {
     }
 
     public Staff getCurrentStaff() {
-        if(!isLogin){
+        if (!isLogin) {
             return new Staff();
         }
-        if(isAdmin){
+        if (isAdmin) {
             return new Staff();
         }
         return currentStaff;

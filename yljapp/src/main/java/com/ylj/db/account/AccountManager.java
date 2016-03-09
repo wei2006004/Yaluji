@@ -14,16 +14,14 @@ import java.util.List;
  */
 public class AccountManager extends AbstractDbManager {
 
+    public static final int VERIFY_SUCCESS = 0;
+
+    public static final int VERIFY_ERROR_NO_ACCOUNT = 1;
+    public static final int VERIFY_ERROR_WRONG_PASSWD = 2;
+    public static final int VERIFY_ERROR_UNKNOW = 3;
+
     public AccountManager(String dbName) {
         super(dbName);
-    }
-
-    public int doStaffLogin(final long staff_id) {
-        Staff staff = findStaffById(staff_id);
-        if (staff == null) {
-            return LoginResult.LOGIN_ERROR_NO_ACCOUNT;
-        }
-        return LoginResult.LOGIN_SUCCESS;
     }
 
     private Staff findStaffById(long staff_id) {
@@ -36,18 +34,18 @@ public class AccountManager extends AbstractDbManager {
         return staff;
     }
 
-    public int doAdminLogin(String account_name, String passwd) {
-        Admin admin = findAdminByAccountName(account_name);
+    public int verifyAdmin(String account_name, String passwd) {
+        Admin admin = getAdminByAccountName(account_name);
         if (admin == null) {
-            return LoginResult.LOGIN_ERROR_NO_ACCOUNT;
+            return VERIFY_ERROR_NO_ACCOUNT;
         }
         if (admin.getPasswd().equals(passwd)) {
-            return LoginResult.LOGIN_ERROR_WRONG_PASSWD;
+            return VERIFY_ERROR_WRONG_PASSWD;
         }
-        return LoginResult.LOGIN_SUCCESS;
+        return VERIFY_SUCCESS;
     }
 
-    private Admin findAdminByAccountName(String accountName) {
+    public Admin getAdminByAccountName(String accountName) {
         Admin admin = null;
         try {
             admin = db.selector(Admin.class).
@@ -134,4 +132,16 @@ public class AccountManager extends AbstractDbManager {
             e.printStackTrace();
         }
     }
+
+    public boolean hasStaff(Staff staff) {
+        Staff newStaff = findStaffById(staff.getId());
+        if (newStaff == null) {
+            return false;
+        }
+        if(!staff.getStaffName().equals(newStaff.getStaffName())){
+            return false;
+        }
+        return true;
+    }
+
 }
