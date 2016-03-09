@@ -1,5 +1,6 @@
 package com.ylj.staff;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +52,20 @@ public class StaffModifyActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    public static void startAsModifyStaffActivityForResult(Activity context, Staff staff, int requestCode) {
+        Intent intent = new Intent(context, StaffModifyActivity.class);
+        intent.putExtra(EXTRA_MODE, MODE_MODIFY_STAFF);
+        intent.putExtra(EXTRA_STAFF, staff);
+        context.startActivityForResult(intent, requestCode);
+    }
+
+    public static void startAsShowStaffActivityForResult(Activity context, Staff staff, int requestCode) {
+        Intent intent = new Intent(context, StaffModifyActivity.class);
+        intent.putExtra(EXTRA_MODE, MODE_SHOW_INFO);
+        intent.putExtra(EXTRA_STAFF, staff);
+        context.startActivityForResult(intent, requestCode);
+    }
+
     @ViewInject(R.id.et_name)
     EditText mNameEdit;
 
@@ -87,7 +102,7 @@ public class StaffModifyActivity extends BaseActivity {
                 break;
             case MODE_MODIFY_STAFF:
                 updateStaff();
-                finish();
+                setResultAndFinish();
                 break;
             case MODE_NEW_STAFF:
                 saveNewStaff();
@@ -95,6 +110,13 @@ public class StaffModifyActivity extends BaseActivity {
             default:
                 break;
         }
+    }
+
+    private void setResultAndFinish() {
+        Intent intent =new Intent();
+        intent.putExtra(EXTRA_STAFF,mCurrentStaff);
+        setResult(Activity.RESULT_OK,intent);
+        finish();
     }
 
     private void updateStaff() {
@@ -188,6 +210,12 @@ public class StaffModifyActivity extends BaseActivity {
                 break;
         }
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StaffModifyActivity.this.finish();
+            }
+        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

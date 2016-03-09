@@ -2,16 +2,15 @@ package com.ylj.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.ylj.R;
 import com.ylj.common.BaseActivity;
 import com.ylj.connect.ConnectActivity;
+import com.ylj.setting.SettingActivity;
+import com.ylj.setting.UserActivity;
 import com.ylj.staff.StaffManagerActivity;
-import com.ylj.staff.StaffModifyActivity;
 import com.ylj.task.NewTaskActivity;
 
 import org.xutils.view.annotation.ContentView;
@@ -34,8 +33,6 @@ public class MenuActivity extends BaseActivity {
     @ViewInject(R.id.rl_manager)
     private RelativeLayout mManagerLayout;
 
-    @ViewInject(R.id.fbt_setting)
-    private FloatingActionButton mSettingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,7 @@ public class MenuActivity extends BaseActivity {
 
     @Event(R.id.fbt_setting)
     private void onSettingButtonClick(View view){
-        Intent intent=new Intent(x.app(),SettingActivity.class);
+        Intent intent=new Intent(this,UserActivity.class);
         startActivity(intent);
     }
 

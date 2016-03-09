@@ -30,6 +30,7 @@
             android:name=".connect.ConnectActivity"
             android:label="@string/title_activity_connect"
             android:parentActivityName=".main.MenuActivity"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -81,28 +82,25 @@
                 android:value=".task.NewTaskActivity" />
         </activity>
         <activity
-            android:name=".main.SettingActivity"
+            android:name=".setting.SettingActivity"
             android:label="@string/title_activity_setting"
-            android:parentActivityName=".main.MenuActivity"
+            android:parentActivityName=".setting.UserActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ylj.main.MenuActivity" />
+                android:value="com.ylj.setting.UserActivity" />
         </activity>
         <activity
             android:name=".staff.StaffModifyActivity"
             android:label="@string/title_activity_staff_modify"
-            android:parentActivityName=".staff.StaffManagerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ylj.staff.StaffManagerActivity" />
         </activity>
         <activity
             android:name=".staff.StaffManagerActivity"
             android:label="@string/title_activity_staff_manager"
             android:parentActivityName=".main.MenuActivity"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -111,22 +109,24 @@
         <activity
             android:name=".staff.AdminModifyActivity"
             android:label="@string/title_activity_admin_modify"
-            android:parentActivityName=".staff.StaffManagerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ylj.staff.StaffManagerActivity" />
         </activity>
         <activity
             android:name=".staff.PasswdModifyActivity"
             android:label="@string/title_activity_passwd_modify"
-            android:parentActivityName=".staff.StaffManagerActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".setting.UserActivity"
+            android:label="@string/title_activity_user"
+            android:launchMode="singleTop"
+            android:parentActivityName=".main.MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ylj.staff.StaffManagerActivity" />
+                android:value="com.ylj.main.MenuActivity" />
         </activity>
     </application>
 

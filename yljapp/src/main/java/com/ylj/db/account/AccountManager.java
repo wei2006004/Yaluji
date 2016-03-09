@@ -40,9 +40,9 @@ public class AccountManager extends AbstractDbManager {
             return VERIFY_ERROR_NO_ACCOUNT;
         }
         if (admin.getPasswd().equals(passwd)) {
-            return VERIFY_ERROR_WRONG_PASSWD;
+            return VERIFY_SUCCESS;
         }
-        return VERIFY_SUCCESS;
+        return VERIFY_ERROR_WRONG_PASSWD;
     }
 
     public Admin getAdminByAccountName(String accountName) {

@@ -114,6 +114,12 @@ public class PasswdModifyActivity extends BaseActivity {
                 break;
         }
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PasswdModifyActivity.this.finish();
+            }
+        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

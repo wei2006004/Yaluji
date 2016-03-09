@@ -1,5 +1,6 @@
 package com.ylj.staff;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +52,20 @@ public class AdminModifyActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    public static void startAsModifyAdminActivityForResult(Activity context, Admin admin, int requestCode) {
+        Intent intent = new Intent(context, AdminModifyActivity.class);
+        intent.putExtra(EXTRA_MODE, MODE_MODIFY_ADMIN);
+        intent.putExtra(EXTRA_ADMIN, admin);
+        context.startActivityForResult(intent, requestCode);
+    }
+
+    public static void startAsShowAdminActivityForResult(Activity context, Admin admin, int requestCode) {
+        Intent intent = new Intent(context, AdminModifyActivity.class);
+        intent.putExtra(EXTRA_MODE, MODE_SHOW_INFO);
+        intent.putExtra(EXTRA_ADMIN, admin);
+        context.startActivityForResult(intent, requestCode);
+    }
+
     @ViewInject(R.id.et_name)
     EditText mNameEdit;
 
@@ -93,14 +108,20 @@ public class AdminModifyActivity extends BaseActivity {
                 break;
             case MODE_MODIFY_ADMIN:
                 updateAdmin();
-                finish();
+                setResultAndFinish();
                 break;
             case MODE_NEW_ADMIN:
                 turnToSetPasswd();
-                finish();
             default:
                 break;
         }
+    }
+
+    private void setResultAndFinish() {
+        Intent intent =new Intent();
+        intent.putExtra(EXTRA_ADMIN,mCurrentAdmin);
+        setResult(Activity.RESULT_OK,intent);
+        finish();
     }
 
     private void updateAdmin() {
@@ -196,7 +217,14 @@ public class AdminModifyActivity extends BaseActivity {
             default:
                 break;
         }
+
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AdminModifyActivity.this.finish();
+            }
+        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

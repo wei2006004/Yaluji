@@ -8,6 +8,21 @@ import com.ylj.common.bean.Task;
  * Created by Administrator on 2016/3/4 0004.
  */
 public class AppStatus {
+
+    public static final int MODE_ANONYMOUS_LOGIN=0;
+    public static final int MODE_STAFF_LOGIN=1;
+    public static final int MODE_ADMIN_LOGIN=2;
+
+    public int getLoginMode(){
+        if(!isLogin)
+            return MODE_ANONYMOUS_LOGIN;
+        if(isAdmin){
+            return MODE_ADMIN_LOGIN;
+        }else {
+            return MODE_STAFF_LOGIN;
+        }
+    }
+
     boolean isLogin = false;
     boolean isAdmin = false;
 
@@ -19,6 +34,8 @@ public class AppStatus {
     public static final int CONNECT_MODE_WIFI = 2;
 
     boolean isConnect = false;
+    String currentDevice;
+    boolean isDeviceNormal;
     int connectMode = CONNECT_MODE_NONE;
 
     Task currentTask = null;
@@ -62,6 +79,22 @@ public class AppStatus {
     public void setLogout(){
         isLogin = false;
         isAdmin = false;
+    }
+
+    public String getCurrentDevice() {
+        return currentDevice;
+    }
+
+    public void setCurrentDevice(String currentDevice) {
+        this.currentDevice = currentDevice;
+    }
+
+    public boolean isDeviceNormal() {
+        return isDeviceNormal;
+    }
+
+    public void setIsDeviceNormal(boolean isDeviceNormal) {
+        this.isDeviceNormal = isDeviceNormal;
     }
 
     public void setCurrentAdmin(Admin currentAdmin) {
