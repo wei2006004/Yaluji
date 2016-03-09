@@ -51,6 +51,9 @@ public class UserActivity extends BaseActivity {
     @ViewInject(R.id.tv_name)
     TextView mNameText;
 
+    @ViewInject(R.id.tv_admin_info)
+    TextView mAdminInfoText;
+
     @ViewInject(R.id.tv_company)
     TextView mCompanyText;
 
@@ -196,9 +199,11 @@ public class UserActivity extends BaseActivity {
         if (mMode == MODE_ANONYMOUS_LOGIN) {
             mAnonymousLayout.setVisibility(View.VISIBLE);
             mUserInfoLayout.setVisibility(View.GONE);
+            mAdminInfoText.setVisibility(View.GONE);
         } else {
             mUserInfoLayout.setVisibility(View.VISIBLE);
             mAnonymousLayout.setVisibility(View.GONE);
+            mAdminInfoText.setVisibility(View.VISIBLE);
         }
         if (mIsConnect) {
             mConnectedLayout.setVisibility(View.VISIBLE);

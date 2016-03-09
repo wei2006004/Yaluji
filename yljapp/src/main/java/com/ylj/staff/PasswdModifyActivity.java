@@ -1,5 +1,6 @@
 package com.ylj.staff;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,6 +45,13 @@ public class PasswdModifyActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    public static void startAsModifyPasswdActivityForResult(Activity context, Admin admin, int requestCode) {
+        Intent intent = new Intent(context, PasswdModifyActivity.class);
+        intent.putExtra(EXTRA_MODE, MODE_MODIFY_PASSWD);
+        intent.putExtra(EXTRA_ADMIN, admin);
+        context.startActivityForResult(intent, requestCode);
+    }
+
     @ViewInject(R.id.et_old_passwd)
     EditText mOldEdit;
 
@@ -64,8 +72,8 @@ public class PasswdModifyActivity extends BaseActivity {
 
     @Event(R.id.btn_save_passwd)
     private void onSaveButtonClick(View view) {
-        String passwd = mOldEdit.getText().toString();
         if (mMode == MODE_MODIFY_PASSWD) {
+            String passwd = mOldEdit.getText().toString();
             if (passwd.isEmpty()) {
                 showMessage("please input passwd");
                 return;
@@ -87,6 +95,24 @@ public class PasswdModifyActivity extends BaseActivity {
         }
         mCurrentAdmin.setPasswd(newPasswd);
         DbLet.saveOrUpdate(mCurrentAdmin);
+
+        if (mMode == MODE_MODIFY_PASSWD) {
+            setResultAndFinish();
+        }
+        if (mMode == MODE_NEW_PASSWD) {
+            backToStaffManagerActivity();
+        }
+    }
+
+    private void backToStaffManagerActivity() {
+        Intent intent = new Intent(this, StaffManagerActivity.class);
+        startActivity(intent);
+    }
+
+    private void setResultAndFinish() {
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_ADMIN, mCurrentAdmin);
+        setResult(RESULT_OK, intent);
         finish();
     }
 

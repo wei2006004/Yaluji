@@ -1,14 +1,13 @@
 package com.ylj.main;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.ylj.R;
 import com.ylj.common.BaseActivity;
+import com.ylj.common.config.AppStatus;
 import com.ylj.connect.ConnectActivity;
-import com.ylj.setting.SettingActivity;
 import com.ylj.setting.UserActivity;
 import com.ylj.staff.StaffManagerActivity;
 import com.ylj.task.NewTaskActivity;
@@ -33,10 +32,19 @@ public class MenuActivity extends BaseActivity {
     @ViewInject(R.id.rl_manager)
     private RelativeLayout mManagerLayout;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onResume(){
+        super.onResume();
+        adjustLayout();
+    }
+
+    private void adjustLayout() {
+        AppStatus appStatus=AppStatus.instance();
+        if(appStatus.isAdmin()){
+            mManagerLayout.setVisibility(View.VISIBLE);
+        }else {
+            mManagerLayout.setVisibility(View.GONE);
+        }
     }
 
     @Event(R.id.fbt_setting)

@@ -12,13 +12,17 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.ylj.R;
 import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Admin;
 import com.ylj.common.bean.Staff;
+import com.ylj.common.config.AppStatus;
 import com.ylj.common.utils.BeanUtils;
 import com.ylj.db.DbLet;
+import com.ylj.db.LoginLet;
+import com.ylj.main.LoginActivity;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -33,11 +37,24 @@ import java.util.Objects;
 @ContentView(R.layout.activity_staff_manager)
 public class StaffManagerActivity extends BaseActivity {
 
+    public static final int ACTIVITY_REQUEST_ADMIN = 1;
+    public static final int ACTIVITY_REQUEST_MODIFY_PASSWD = 2;
+
+    public static final String EXTRA_ADMIN = "EXTRA_ADMIN";
+
+    Admin mAdmin;
+
     SimpleAdapter mAdminAdapter;
     SimpleAdapter mStaffAdapter;
 
     List<Map<String, Object>> mAdminMaps = new ArrayList<>();
     List<Map<String, Object>> mStaffMaps = new ArrayList<>();
+
+    @ViewInject(R.id.tv_admin_name)
+    TextView mNameText;
+
+    @ViewInject(R.id.tv_admin_company)
+    TextView mCompanyText;
 
     @ViewInject(R.id.lv_admin)
     ListView mAdminListView;
@@ -46,28 +63,30 @@ public class StaffManagerActivity extends BaseActivity {
     ListView mStaffListView;
 
     @Event(R.id.rl_admin_info)
-    private void onAdminInfoLayoutClick(View view){
-
+    private void onAdminInfoLayoutClick(View view) {
+        AdminModifyActivity.startAsShowAdminActivityForResult(this, mAdmin, ACTIVITY_REQUEST_ADMIN);
     }
 
     @Event(R.id.btn_edit_passwd)
     private void onAdminPasswdEditClick(View view) {
-
+        PasswdModifyActivity.startAsModifyPasswdActivityForResult(this, mAdmin, ACTIVITY_REQUEST_MODIFY_PASSWD);
     }
 
     @Event(R.id.btn_logout)
     private void onLogoutClick(View view) {
-
+        LoginLet.doLogout();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Event(R.id.btn_admin_edit)
     private void onAdminEditClick(View view) {
-        Intent intent = new Intent(x.app(), AdminModifyActivity.class);
-        startActivity(intent);
+        AdminModifyActivity.startAsModifyAdminActivityForResult(this, mAdmin, ACTIVITY_REQUEST_ADMIN);
     }
 
     @Event(R.id.btn_add_admin)
-    private void onSAdminAddClick(View view) {
+    private void onAdminAddClick(View view) {
         AdminModifyActivity.startAsNewAdminActivity(this);
     }
 
@@ -77,12 +96,44 @@ public class StaffManagerActivity extends BaseActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK)
+            return;
+        switch (requestCode) {
+            case ACTIVITY_REQUEST_ADMIN:
+                mAdmin = data.getParcelableExtra(EXTRA_ADMIN);
+                AppStatus.instance().setCurrentAdmin(mAdmin);
+                refreshInfoLayout();
+                break;
+            case ACTIVITY_REQUEST_MODIFY_PASSWD:
+                mAdmin = data.getParcelableExtra(EXTRA_ADMIN);
+                AppStatus.instance().setCurrentAdmin(mAdmin);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         initToobar();
         initStaffListView();
         initAdminListView();
+
+        initInfoData();
+        refreshInfoLayout();
+    }
+
+    private void refreshInfoLayout() {
+        mNameText.setText(mAdmin.getAdminName());
+        mCompanyText.setText(mAdmin.getCompany());
+    }
+
+    private void initInfoData() {
+        AppStatus appStatus = AppStatus.instance();
+        mAdmin = appStatus.getCurrentAdmin();
     }
 
     private void initStaffListView() {
@@ -143,25 +194,36 @@ public class StaffManagerActivity extends BaseActivity {
     private void initAdminListView() {
         mAdminAdapter = new SimpleAdapter(x.app(), mAdminMaps,
                 R.layout.listview_manager_admin,
-                new String[]{Admin.TAG_ADMIN_NAME,Admin.TAG_ACCOUNT_NAME, Admin.TAG_COMPANY, Admin.TAG_GROUP},
-                new int[]{R.id.tv_name,R.id.tv_account_name, R.id.tv_company, R.id.tv_group}){
+                new String[]{Admin.TAG_ADMIN_NAME, Admin.TAG_ACCOUNT_NAME, Admin.TAG_COMPANY, Admin.TAG_GROUP},
+                new int[]{R.id.tv_name, R.id.tv_account_name, R.id.tv_company, R.id.tv_group}) {
             @Override
             public View getView(final int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
+
                 Button deleteBtn = (Button) view.findViewById(R.id.btn_detele);
-                deleteBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        deleteAdmin(position);
-                    }
-                });
                 Button editBtn = (Button) view.findViewById(R.id.btn_edit);
-                editBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        editAdmin(position);
-                    }
-                });
+                if (isCurrentAdminPosition(position)) {
+                    deleteBtn.setVisibility(View.GONE);
+                    editBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            editAdminForResult(position);
+                        }
+                    });
+                } else {
+                    deleteBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            deleteAdmin(position);
+                        }
+                    });
+                    editBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            editAdmin(position);
+                        }
+                    });
+                }
                 return view;
             }
         };
@@ -172,6 +234,23 @@ public class StaffManagerActivity extends BaseActivity {
                 onAdminItemClick(position);
             }
         });
+    }
+
+    private void editAdminForResult(int position) {
+        Admin admin = getAdminByPosition(position);
+        AdminModifyActivity.startAsModifyAdminActivityForResult(this, admin, ACTIVITY_REQUEST_ADMIN);
+    }
+
+    private boolean isCurrentAdminPosition(int position) {
+        Admin admin = getAdminByPosition(position);
+        String accountName = admin.getAccountName();
+        String name = admin.getAdminName();
+        if (accountName.equals(mAdmin.getAccountName())) {
+            if (name.equals(mAdmin.getAdminName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void editAdmin(int position) {
@@ -187,7 +266,11 @@ public class StaffManagerActivity extends BaseActivity {
 
     private void onAdminItemClick(int position) {
         Admin admin = getAdminByPosition(position);
-        AdminModifyActivity.startAsShowAdminActivity(this, admin);
+        if (isCurrentAdminPosition(position)) {
+            AdminModifyActivity.startAsShowAdminActivityForResult(this, admin, ACTIVITY_REQUEST_ADMIN);
+        } else {
+            AdminModifyActivity.startAsShowAdminActivity(this, admin);
+        }
     }
 
     private Admin getAdminByPosition(int position) {
