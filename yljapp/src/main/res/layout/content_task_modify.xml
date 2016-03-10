@@ -34,6 +34,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="save"/>
+                <Button
                     android:id="@+id/btn_save_and_adjust"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

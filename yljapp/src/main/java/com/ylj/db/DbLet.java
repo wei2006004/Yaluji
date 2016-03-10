@@ -2,7 +2,9 @@ package com.ylj.db;
 
 import com.ylj.common.bean.Admin;
 import com.ylj.common.bean.Staff;
+import com.ylj.common.bean.Task;
 import com.ylj.db.account.AccountManager;
+import com.ylj.db.task.TaskManager;
 
 import java.util.List;
 
@@ -50,9 +52,14 @@ public class DbLet {
         accountManager.updateAdmin(admin);
     }
 
-    public static void saveOrUpdate(Admin admin) {
+    public static void saveOrUpdateAdmin(Admin admin) {
         AccountManager accountManager = ManagerFactory.getAccountManager();
         accountManager.saveOrUpdate
                 (admin);
+    }
+
+    public static void saveOrUpdateTask(Task task) {
+        TaskManager taskManager=ManagerFactory.getTaskManager();
+        taskManager.saveOrUpadate(task);
     }
 }

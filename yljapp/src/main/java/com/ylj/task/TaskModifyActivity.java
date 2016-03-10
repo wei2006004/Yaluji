@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ylj.R;
 import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Task;
+import com.ylj.db.DbLet;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -169,6 +170,18 @@ public class TaskModifyActivity extends BaseActivity {
     private void mHuoerNumLayoutClick(View view){
 
     }
+
+    @Event(R.id.btn_save)
+    private void onSaveButtonClick(){
+        updateTask();
+    }
+
+    @Event(R.id.btn_save_and_adjust)
+    private void onAdjustButtonClick(){
+        updateTask();
+        //// TODO: 2016/3/10 0010 跳转
+        finish();
+    }
     
     @Event(R.id.fab)
     private void onFabClick(View view) {
@@ -195,7 +208,9 @@ public class TaskModifyActivity extends BaseActivity {
     }
 
     private void updateTask() {
-
+        mTask.setTaskName(mTaskNameEdit.getText().toString());
+        mTask.setRoadName(mRoadNameEdit.getText().toString());
+        DbLet.saveOrUpdateTask(mTask);
     }
 
     @Override

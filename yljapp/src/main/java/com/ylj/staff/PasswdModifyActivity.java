@@ -94,7 +94,7 @@ public class PasswdModifyActivity extends BaseActivity {
             return;
         }
         mCurrentAdmin.setPasswd(newPasswd);
-        DbLet.saveOrUpdate(mCurrentAdmin);
+        DbLet.saveOrUpdateAdmin(mCurrentAdmin);
 
         if (mMode == MODE_MODIFY_PASSWD) {
             setResultAndFinish();

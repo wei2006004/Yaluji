@@ -15,4 +15,5 @@
     <string name="title_activity_passwd_modify">PasswdModifyActivity</string>
     <string name="title_activity_user">UserActivity</string>
     <string name="title_activity_task_modify">TaskModifyActivity</string>
+    <string name="title_activity_task_manager">TaskManagerActivity</string>
 </resources>

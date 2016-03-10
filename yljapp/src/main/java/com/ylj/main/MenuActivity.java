@@ -12,6 +12,7 @@ import com.ylj.connect.ConnectActivity;
 import com.ylj.setting.UserActivity;
 import com.ylj.staff.StaffManagerActivity;
 import com.ylj.task.NewTaskActivity;
+import com.ylj.task.TaskManagerActivity;
 import com.ylj.task.TaskModifyActivity;
 
 import org.xutils.view.annotation.ContentView;
@@ -74,7 +75,8 @@ public class MenuActivity extends BaseActivity {
 
     @Event(R.id.rl_hisdata)
     private void onHisdataLayoutClick(View view){
-
+        Intent intent=new Intent(this, TaskManagerActivity.class);
+        startActivity(intent);
     }
 
 }
