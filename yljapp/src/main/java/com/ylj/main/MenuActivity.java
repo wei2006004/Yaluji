@@ -6,11 +6,13 @@ import android.widget.RelativeLayout;
 
 import com.ylj.R;
 import com.ylj.common.BaseActivity;
+import com.ylj.common.bean.Task;
 import com.ylj.common.config.AppStatus;
 import com.ylj.connect.ConnectActivity;
 import com.ylj.setting.UserActivity;
 import com.ylj.staff.StaffManagerActivity;
 import com.ylj.task.NewTaskActivity;
+import com.ylj.task.TaskModifyActivity;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -55,20 +57,19 @@ public class MenuActivity extends BaseActivity {
 
     @Event(R.id.rl_connect)
     private void onConnectLayoutClick(View view){
-        Intent intent=new Intent(x.app(), ConnectActivity.class);
+        Intent intent=new Intent(this, ConnectActivity.class);
         startActivity(intent);
     }
 
     @Event(R.id.rl_manager)
     private void onManagerLayoutClick(View view){
-        Intent intent=new Intent(x.app(), StaffManagerActivity.class);
+        Intent intent=new Intent(this, StaffManagerActivity.class);
         startActivity(intent);
     }
 
     @Event(R.id.rl_task)
     private void onTaskLayoutClick(View view){
-        Intent intent=new Intent(x.app(), NewTaskActivity.class);
-        startActivity(intent);
+        TaskModifyActivity.startAsShowTaskActivity(this,new Task());
     }
 
     @Event(R.id.rl_hisdata)

@@ -7,6 +7,8 @@ package com.ylj.common.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.ylj.common.bean.def.TaskDefault;
+
 import org.xutils.db.annotation.Column;
 import org.xutils.db.annotation.Table;
 
@@ -26,39 +28,55 @@ public class Task implements Parcelable, IMapable {
     public static final String TAG_ROLLER_DIAMETER = "roller_diameter";
     public static final String TAG_HUOER_NUM = "huoer_num";
     public static final String TAG_VCV = "vcv";
+    public static final String TAG_IS_ADJUST = "is_adjust";
+    public static final String TAG_IS_FINISH = "is_finish";
+    public static final String TAG_IS_CREATE_RESULT = "is_create_result";
+    public static final String TAG_RESULT_ID = "result_id";
 
     @Column(name = "id", isId = true)
     private int id;
 
     @Column(name = "task_name")
-    private String taskName = "";
+    private String taskName = TaskDefault.DEFAULT_TASK_NAME;
 
     @Column(name = "road_name")
-    private String roadName = "";
+    private String roadName = TaskDefault.DEFAULT_ROAD_NAME;
 
     public final static int ORIGIN_CLOCKWISE = 0;
     public final static int ORIGIN_ANTICLOCKWISE = 1;
 
     @Column(name = "origin")
-    private int origin = ORIGIN_ANTICLOCKWISE;
+    private int origin = TaskDefault.DEFAULT_ORIGIN;
 
     @Column(name = "road_width")
-    private double roadWidth;
+    private double roadWidth = TaskDefault.DEFAULT_ROAD_WIDTH;
 
     @Column(name = "road_length")
-    private double roadLength;
+    private double roadLength = TaskDefault.DEFAULT_ROAD_LENGTH;
 
     @Column(name = "roller_width")
-    private double rollerWidth;
+    private double rollerWidth = TaskDefault.DEFAULT_ROLLER_WIDTH;
 
     @Column(name = "roller_diameter")
-    private double rollerDiameter;
+    private double rollerDiameter = TaskDefault.DEFAULT_ROLLER_DIAMETER;
 
     @Column(name = "huoer_num")
-    private int huoerNum;
+    private int huoerNum = TaskDefault.DEFAULT_HUOER_NUM;
 
     @Column(name = "vcv")
     private double VCV;
+
+    @Column(name = "is_adjust")
+    private boolean isAdjust = false;
+
+    @Column(name = "is_finish")
+    private boolean isFinish = false;
+
+    @Column(name = "is_create_result")
+    private boolean isCreateResult = false;
+
+    @Column(name = "result_id")
+    private int resultId;
 
     @Override
     public int describeContents() {
@@ -78,6 +96,10 @@ public class Task implements Parcelable, IMapable {
         map.put(TAG_ROLLER_DIAMETER, rollerDiameter);
         map.put(TAG_HUOER_NUM, huoerNum);
         map.put(TAG_VCV, VCV);
+        map.put(TAG_IS_ADJUST, isAdjust);
+        map.put(TAG_IS_FINISH, isFinish);
+        map.put(TAG_IS_CREATE_RESULT, isCreateResult);
+        map.put(TAG_RESULT_ID, resultId);
         return map;
     }
 
@@ -93,6 +115,10 @@ public class Task implements Parcelable, IMapable {
         task.rollerDiameter = Double.parseDouble(map.get(TAG_ROLLER_DIAMETER).toString());
         task.huoerNum = Integer.parseInt(map.get(TAG_HUOER_NUM).toString());
         task.VCV = Double.parseDouble(map.get(TAG_VCV).toString());
+        task.isAdjust = Boolean.parseBoolean(map.get(TAG_IS_ADJUST).toString());
+        task.isFinish = Boolean.parseBoolean(map.get(TAG_IS_FINISH).toString());
+        task.isCreateResult = Boolean.parseBoolean(map.get(TAG_IS_CREATE_RESULT).toString());
+        task.resultId = Integer.parseInt(map.get(TAG_RESULT_ID).toString());
         return task;
     }
 
@@ -108,6 +134,8 @@ public class Task implements Parcelable, IMapable {
         dest.writeDouble(rollerDiameter);
         dest.writeInt(huoerNum);
         dest.writeDouble(VCV);
+        dest.writeBooleanArray(new boolean[]{isAdjust, isFinish, isCreateResult});
+        dest.writeInt(resultId);
     }
 
     public static final Parcelable.Creator<Task> CREATOR = new Creator<Task>() {
@@ -125,6 +153,12 @@ public class Task implements Parcelable, IMapable {
             task.rollerDiameter = source.readDouble();
             task.huoerNum = source.readInt();
             task.VCV = source.readDouble();
+            boolean flags[] = new boolean[3];
+            source.readBooleanArray(flags);
+            task.isAdjust = flags[0];
+            task.isFinish = flags[1];
+            task.isCreateResult = flags[2];
+            task.resultId = source.readInt();
             return task;
         }
 
@@ -212,5 +246,37 @@ public class Task implements Parcelable, IMapable {
 
     public void setVCV(double VCV) {
         this.VCV = VCV;
+    }
+
+    public boolean isFinish() {
+        return isFinish;
+    }
+
+    public void setIsFinish(boolean isFinish) {
+        this.isFinish = isFinish;
+    }
+
+    public boolean isCreateResult() {
+        return isCreateResult;
+    }
+
+    public void setIsCreateResult(boolean isCreateResult) {
+        this.isCreateResult = isCreateResult;
+    }
+
+    public int getResultId() {
+        return resultId;
+    }
+
+    public void setResultId(int resultId) {
+        this.resultId = resultId;
+    }
+
+    public boolean isAdjust() {
+        return isAdjust;
+    }
+
+    public void setIsAdjust(boolean isAdjust) {
+        this.isAdjust = isAdjust;
     }
 }

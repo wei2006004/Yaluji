@@ -118,9 +118,9 @@ public class AdminModifyActivity extends BaseActivity {
     }
 
     private void setResultAndFinish() {
-        Intent intent =new Intent();
-        intent.putExtra(EXTRA_ADMIN,mCurrentAdmin);
-        setResult(Activity.RESULT_OK,intent);
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_ADMIN, mCurrentAdmin);
+        setResult(Activity.RESULT_OK, intent);
         finish();
     }
 
@@ -132,7 +132,7 @@ public class AdminModifyActivity extends BaseActivity {
     private void turnToSetPasswd() {
         //// TODO: 2016/3/8 0008 名字是否为空
         fillAdminByEdit();
-        PasswdModifyActivity.startAsNewPasswdActivity(this,mCurrentAdmin);
+        PasswdModifyActivity.startAsNewPasswdActivity(this, mCurrentAdmin);
     }
 
     private void fillAdminByEdit() {

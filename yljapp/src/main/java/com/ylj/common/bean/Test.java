@@ -15,10 +15,10 @@ public class Test {
     private int id;
 
     @Column(name = "task_id")
-    private long taskId;
+    private int taskId;
 
     @Column(name = "staff_id")
-    private long staffId;
+    private int staffId;
 
     @Column(name = "start_time")
     private Date startTime;
@@ -54,19 +54,19 @@ public class Test {
         this.recordFile = recordFile;
     }
 
-    public long getTaskId() {
+    public int getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(long taskId) {
+    public void setTaskId(int taskId) {
         this.taskId = taskId;
     }
 
-    public long getStaffId() {
+    public int getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(long staffId) {
+    public void setStaffId(int staffId) {
         this.staffId = staffId;
     }
 
