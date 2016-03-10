@@ -1,5 +1,6 @@
 package com.ylj.staff;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -180,10 +181,23 @@ public class StaffManagerActivity extends BaseActivity {
         StaffModifyActivity.startAsShowStaffActivity(this, staff);
     }
 
-    private void deleteStaff(int position) {
-        Staff staff = getStaffByPosition(position);
-        DbLet.deleteStaff(staff);
-        refreshStaffData();
+    private void deleteStaff(final int position) {
+        showAlert("Warning", "Do you want to delete this staff?",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Staff staff = getStaffByPosition(position);
+                        DbLet.deleteStaff(staff);
+                        refreshStaffData();
+                        dialog.dismiss();
+                    }
+                },
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     private Staff getStaffByPosition(int position) {
@@ -258,10 +272,23 @@ public class StaffManagerActivity extends BaseActivity {
         AdminModifyActivity.startAsModifyAdminActivity(this, admin);
     }
 
-    private void deleteAdmin(int position) {
-        Admin admin = getAdminByPosition(position);
-        DbLet.deleteAdmin(admin);
-        refreshAdminData();
+    private void deleteAdmin(final int position) {
+        showAlert("Warning", "Do you want to delete this admin?",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Admin admin = getAdminByPosition(position);
+                        DbLet.deleteAdmin(admin);
+                        refreshAdminData();
+                        dialog.dismiss();
+                    }
+                },
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     private void onAdminItemClick(int position) {

@@ -1,5 +1,6 @@
 package com.ylj.task.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,7 @@ public class NotFinishTaskFragment extends BaseFragment {
             @Override
             public void run() {
                 mTaskMaps.clear();
-                List<Task> list=DbLet.getNotFinishTaskList();
+                List<Task> list = DbLet.getNotFinishTaskList();
                 mTaskMaps.addAll(BeanUtils.convertTasks2Maps(list));
                 x.task().post(new Runnable() {
                     @Override
@@ -89,13 +90,6 @@ public class NotFinishTaskFragment extends BaseFragment {
                         deleteTask(position);
                     }
                 });
-                Button editBtn = (Button) view.findViewById(R.id.btn_edit);
-                editBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        editTask(position);
-                    }
-                });
                 return view;
             }
         };
@@ -124,15 +118,23 @@ public class NotFinishTaskFragment extends BaseFragment {
         return task;
     }
 
-    private void editTask(int position) {
-        Task task = getTaskByPosition(position);
-        TaskModifyActivity.startAsModifyTaskActivity(getActivity(), task);
-    }
-
-    private void deleteTask(int position) {
-        Task task = getTaskByPosition(position);
-        DbLet.deleteTask(task);
-        refreshTaskData();
+    private void deleteTask(final int position) {
+        showAlert("Warning", "Do you want to delete this task?",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Task task = getTaskByPosition(position);
+                        DbLet.deleteTask(task);
+                        refreshTaskData();
+                        dialog.dismiss();
+                    }
+                },
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
 }

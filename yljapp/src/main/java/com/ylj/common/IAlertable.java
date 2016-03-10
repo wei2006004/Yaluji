@@ -1,5 +1,6 @@
 package com.ylj.common;
 
+import android.content.DialogInterface;
 import android.view.View;
 
 /**
@@ -12,7 +13,7 @@ public interface IAlertable {
 
     void showAlert(String Title,String message);
 
-    void showAlert(String Title,String message,View.OnClickListener okButtonListener);
+    void showAlert(String Title,String message,DialogInterface.OnClickListener okButtonListener);
 
-    void showAlert(String Title,String message,View.OnClickListener okButtonListener,View.OnClickListener cancelButtonListener);
+    void showAlert(String Title,String message,DialogInterface.OnClickListener okButtonListener,DialogInterface.OnClickListener cancelButtonListener);
 }
