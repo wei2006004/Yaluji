@@ -7,6 +7,7 @@ import com.ylj.db.account.AccountManager;
 import com.ylj.db.task.TaskManager;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/3/7 0007.
@@ -61,5 +62,15 @@ public class DbLet {
     public static void saveOrUpdateTask(Task task) {
         TaskManager taskManager=ManagerFactory.getTaskManager();
         taskManager.saveOrUpadate(task);
+    }
+
+    public static void deleteTask(Task task) {
+        TaskManager taskManager=ManagerFactory.getTaskManager();
+        taskManager.delete(task);
+    }
+
+    public static List<Task> getNotFinishTaskList() {
+        TaskManager taskManager=ManagerFactory.getTaskManager();
+        return taskManager.getNotFinishTaskList();
     }
 }

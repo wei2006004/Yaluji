@@ -172,12 +172,12 @@ public class TaskModifyActivity extends BaseActivity {
     }
 
     @Event(R.id.btn_save)
-    private void onSaveButtonClick(){
+    private void onSaveButtonClick(View view){
         updateTask();
     }
 
     @Event(R.id.btn_save_and_adjust)
-    private void onAdjustButtonClick(){
+    private void onAdjustButtonClick(View view){
         updateTask();
         //// TODO: 2016/3/10 0010 跳转
         finish();

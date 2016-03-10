@@ -9,7 +9,10 @@ public class Constant {
     public static final String ACCOUNT_DB_NAME = Global.SYSTEM_DB_NAME;
     public static final String TASK_DB_NAME = Global.SYSTEM_DB_NAME;
 
-    public static final String SQL_OP_EQUAL="=";
-    public static final String SQL_OP_LT="<";
-    public static final String SQL_OP_GT=">";
+    public static final String SQL_OP_EQUAL = "=";
+    public static final String SQL_OP_LT = "<";
+    public static final String SQL_OP_GT = ">";
+
+    public static final String SQL_TRUE = "1";
+    public static final String SQL_FALSE = "0";
 }
