@@ -1,6 +1,8 @@
 package com.ylj.common;
 
 import android.content.DialogInterface;
+import android.text.method.KeyListener;
+
 
 /**
  * Created by Administrator on 2016/3/11 0011.
@@ -17,6 +19,7 @@ public interface IDialogEditable {
     void showIntEditDialog(String title, int defValue, final OnButtonClick<Integer> onButtonClick);
 
     void showStringEditDialog(String title, String defValue, final OnButtonClick<String> onButtonClick);
+    void showStringEditDialog(String title, String defValue, final OnButtonClick<String> onButtonClick, KeyListener inputKeyListener);
 
     void showSingleChoiceDialog(String title, String[] list, int defItem, DialogInterface.OnClickListener onItemClick);
 }

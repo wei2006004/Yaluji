@@ -9,24 +9,19 @@ import org.xutils.x;
  * Created by Administrator on 2016/3/4 0004.
  */
 public class Config {
-    public static final String PREF_NAME = "PREF_NAME_GLOBEL";
+    public static final String PREF_NAME_GLOBEL = "PREF_NAME_GLOBEL";
 
-    public static final String PREF_TAG_DEBGU = "PREF_TAG_DEBGU";
+    private String mPrefName = PREF_NAME_GLOBEL;
 
-    public static final String PREF_TAG_FTP_IP = "PREF_TAG_FTP_IP";
-    public static final String PREF_TAG_FTP_PORT = "PREF_TAG_FTP_PORT";
-    public static final String PREF_TAG_FTP_USER = "PREF_TAG_FTP_USER";
-    public static final String PREF_TAG_FTP_PASSWD = "PREF_TAG_FTP_PASSWD";
-
-    public static final String PREF_TAG_WIFI_IP = "PREF_TAG_WIFI_IP";
-    public static final String PREF_TAG_WIFI_PORT = "PREF_TAG_WIFI_PORT";
-
-    private Config() {
+    public Config(String prefName) {
+        mPrefName = prefName;
     }
 
-    private static Config mInstance = new Config();
+    private static Config mInstance;
 
-    public static Config instance() {
+    public static Config appInstance() {
+        if (mInstance == null)
+            mInstance = new Config(PREF_NAME_GLOBEL);
         return mInstance;
     }
 
@@ -35,19 +30,33 @@ public class Config {
     }
 
     public String getConfig(String pref_tag, String default_value) {
-        SharedPreferences sharedPreferences = getAppPreferences();
+        SharedPreferences sharedPreferences = getPreferences();
         return sharedPreferences.getString(pref_tag, default_value);
     }
 
+    public boolean getBoolConfig(String pref_tag) {
+        return getBoolConfig(pref_tag, false);
+    }
+
+    public boolean getBoolConfig(String pref_tag, boolean default_value) {
+        SharedPreferences sharedPreferences = getPreferences();
+        return sharedPreferences.getBoolean(pref_tag, default_value);
+    }
+
+    public void setBoolConfig(String pref_tag, boolean value) {
+        SharedPreferences sharedPreferences = getPreferences();
+        sharedPreferences.edit().putBoolean(pref_tag, value).apply();
+    }
+
     public void setConfig(String pref_tag, String value) {
-        SharedPreferences sharedPreferences = getAppPreferences();
+        SharedPreferences sharedPreferences = getPreferences();
         sharedPreferences.edit().putString(pref_tag, value).apply();
     }
 
-    private static SharedPreferences getAppPreferences() {
+    private SharedPreferences getPreferences() {
         return x.app().getApplicationContext().
                 getSharedPreferences(
-                        PREF_NAME,
+                        mPrefName,
                         Context.MODE_PRIVATE);
     }
 

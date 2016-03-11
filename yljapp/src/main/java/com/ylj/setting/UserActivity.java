@@ -2,6 +2,7 @@ package com.ylj.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -77,6 +78,9 @@ public class UserActivity extends BaseActivity {
 
     @ViewInject(R.id.layout_user_info)
     LinearLayout mUserInfoLayout;
+
+    @ViewInject(R.id.fab)
+    FloatingActionButton mFabButtion;
 
     @Event(R.id.fab)
     private void onFabClick(View view) {
@@ -196,14 +200,19 @@ public class UserActivity extends BaseActivity {
     }
 
     private void adjustLayout() {
+        if (mMode == MODE_ADMIN_LOGIN) {
+            mFabButtion.setVisibility(View.VISIBLE);
+            mAdminInfoText.setVisibility(View.VISIBLE);
+        } else {
+            mAdminInfoText.setVisibility(View.GONE);
+            mFabButtion.setVisibility(View.GONE);
+        }
         if (mMode == MODE_ANONYMOUS_LOGIN) {
             mAnonymousLayout.setVisibility(View.VISIBLE);
             mUserInfoLayout.setVisibility(View.GONE);
-            mAdminInfoText.setVisibility(View.GONE);
         } else {
             mUserInfoLayout.setVisibility(View.VISIBLE);
             mAnonymousLayout.setVisibility(View.GONE);
-            mAdminInfoText.setVisibility(View.VISIBLE);
         }
         if (mIsConnect) {
             mConnectedLayout.setVisibility(View.VISIBLE);

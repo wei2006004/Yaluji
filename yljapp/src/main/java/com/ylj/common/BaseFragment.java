@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
+import android.text.method.KeyListener;
 import android.text.method.NumberKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -155,10 +156,18 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
 
     @Override
     public void showStringEditDialog(String title, String defValue,final OnButtonClick<String> onButtonClick) {
+        showStringEditDialog(title, defValue, onButtonClick, null);
+    }
+
+    @Override
+    public void showStringEditDialog(String title, String defValue,final OnButtonClick<String> onButtonClick, KeyListener inputKeyListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title);
         final EditText editText = new EditText(getActivity());
         editText.setText(defValue);
+        if(inputKeyListener!=null){
+            editText.setKeyListener(inputKeyListener);
+        }
         builder.setView(editText);
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
