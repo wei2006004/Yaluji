@@ -2,6 +2,7 @@ package com.ylj.task;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -102,6 +103,9 @@ public class TaskModifyActivity extends BaseActivity {
     @ViewInject(R.id.tv_origin)
     TextView mOriginText;
 
+    @ViewInject(R.id.tv_origin_edit)
+    TextView mOriginEditText;
+
     @ViewInject(R.id.tv_huoer_num)
     TextView mHuoerNumText;
 
@@ -142,33 +146,117 @@ public class TaskModifyActivity extends BaseActivity {
     LinearLayout mHuoerNumLayout;
 
     @Event(R.id.layout_edit_origin)
-    private void mOriginLayoutClick(View view){
+    private void onOriginLayoutClick(View view){
+        showSingleChoiceDialog("origin setting",
+                new String[]{"CLOCKWISE", "ANTICLOCKWISE"},
+                mTask.getOrigin(),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mTask.setOrigin(which);
+                        switch (which){
+                            case Task.ORIGIN_ANTICLOCKWISE:
+                                mOriginEditText.setText("ANTICLOCKWISE");
+                                mOriginText.setText("ANTICLOCKWISE");
+                                break;
+                            case Task.ORIGIN_CLOCKWISE:
+                                mOriginEditText.setText("CLOCKWISE");
+                                mOriginText.setText("CLOCKWISE");
+                                break;
+                        }
+                        dialog.dismiss();
+                    }
+                });
     }
 
     @Event(R.id.layout_road_width)
-    private void mRoadWidthLayoutClick(View view){
-        mTask.setRoadWidth(4);
-        mRoadWidthText.setText("4");
+    private void onRoadWidthLayoutClick(View view){
+        showDoubleEditDialog("road width setting", mTask.getRoadWidth(),
+                new OnButtonClick<Double>() {
+                    @Override
+                    public void onConfirm(DialogInterface dialog, Double result) {
+                        mTask.setRoadWidth(result);
+                        mRoadWidthText.setText(String.valueOf(result));
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     @Event(R.id.layout_road_length)
-    private void mRoadLengthLayoutClick(View view){
+    private void onRoadLengthLayoutClick(View view){
+        showDoubleEditDialog("road length setting", mTask.getRoadLength(),
+                new OnButtonClick<Double>() {
+                    @Override
+                    public void onConfirm(DialogInterface dialog, Double result) {
+                        mTask.setRoadLength(result);
+                        mRoadLengthText.setText(String.valueOf(result));
+                        dialog.dismiss();
+                    }
 
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     @Event(R.id.layout_roller_width)
-    private void mRollerWidthLayoutClick(View view){
+    private void onRollerWidthLayoutClick(View view){
+        showDoubleEditDialog("roller width setting", mTask.getRollerWidth(),
+                new OnButtonClick<Double>() {
+                    @Override
+                    public void onConfirm(DialogInterface dialog, Double result) {
+                        mTask.setRollerWidth(result);
+                        mRollerWidthText.setText(String.valueOf(result));
+                        dialog.dismiss();
+                    }
 
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     @Event(R.id.layout_roller_diameter)
-    private void mRollerDiameterLayoutClick(View view){
+    private void onRollerDiameterLayoutClick(View view){
+        showDoubleEditDialog("roller diameter setting", mTask.getRollerDiameter(),
+                new OnButtonClick<Double>() {
+                    @Override
+                    public void onConfirm(DialogInterface dialog, Double result) {
+                        mTask.setRoadWidth(result);
+                        mRollerDiameterText.setText(String.valueOf(result));
+                        dialog.dismiss();
+                    }
 
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     @Event(R.id.layout_huoer_num)
-    private void mHuoerNumLayoutClick(View view){
+    private void onHuoerNumLayoutClick(View view){
+        showIntEditDialog("huoer num setting", mTask.getHuoerNum(),
+                new OnButtonClick<Integer>() {
+                    @Override
+                    public void onConfirm(DialogInterface dialog, Integer result) {
+                        mTask.setHuoerNum(result);
+                        mHuoerNumText.setText(String.valueOf(result));
+                        dialog.dismiss();
+                    }
 
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     @Event(R.id.btn_save)
@@ -262,9 +350,11 @@ public class TaskModifyActivity extends BaseActivity {
         mRoadNameEdit.setText(mTask.getRoadName());
         switch (mTask.getOrigin()){
             case Task.ORIGIN_ANTICLOCKWISE:
+                mOriginEditText.setText("ANTICLOCKWISE");
                 mOriginText.setText("ANTICLOCKWISE");
                 break;
             case Task.ORIGIN_CLOCKWISE:
+                mOriginEditText.setText("CLOCKWISE");
                 mOriginText.setText("CLOCKWISE");
                 break;
         }
@@ -272,7 +362,7 @@ public class TaskModifyActivity extends BaseActivity {
         mRoadLengthText.setText(String.valueOf(mTask.getRoadLength()));
         mRollerWidthText.setText(String.valueOf(mTask.getRollerWidth()));
         mRollerDiameterText.setText(String.valueOf(mTask.getRollerDiameter()));
-        mOriginText.setText(String.valueOf(mTask.getOrigin()));
+        mHuoerNumText.setText(String.valueOf(mTask.getHuoerNum()));
     }
 
     private void showModifyView() {

@@ -65,7 +65,7 @@
                     android:text="origin" />
 
                 <TextView
-                    android:id="@+id/et_origin"
+                    android:id="@+id/tv_origin_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
