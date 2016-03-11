@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
+import android.text.method.DigitsKeyListener;
+import android.text.method.NumberKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,7 +95,17 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
         builder.setTitle(title);
         final EditText editText = new EditText(getActivity());
         editText.setText(String.valueOf(defValue));
-        editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        editText.setKeyListener(new NumberKeyListener() {
+            @Override
+            protected char[] getAcceptedChars() {
+                return new char[]{'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
+            }
+
+            @Override
+            public int getInputType() {
+                return InputType.TYPE_CLASS_PHONE;
+            }
+        });
         builder.setView(editText);
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
@@ -120,7 +132,7 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
         builder.setTitle(title);
         final EditText editText = new EditText(getActivity());
         editText.setText(String.valueOf(defValue));
-        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        editText.setKeyListener(new DigitsKeyListener());
         builder.setView(editText);
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
