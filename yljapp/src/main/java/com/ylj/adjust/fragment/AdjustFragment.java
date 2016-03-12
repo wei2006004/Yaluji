@@ -90,8 +90,9 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
     @Event(R.id.btn_auto)
     private void onAutoClick(View view) {
         Random random = new Random();
+        int level=random.nextInt(13);
         for (int i = 0; i < ADJUST_LENGTH; i++) {
-            quakeDatas.add(random.nextDouble() * 2 + 7);
+            quakeDatas.add(random.nextDouble()  + level);
         }
         PlotView.DrawEdit edit = plotView.getEdit();
         edit.clear();
@@ -103,7 +104,7 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
 
         for (int i = 0; i < ADJUST_RESULT_POINT_NUM; i++) {
             int pos = random.nextInt(ADJUST_LENGTH);
-            double compact = quakeDatas.get(pos) - random.nextDouble();
+            double compact = quakeDatas.get(pos) - random.nextDouble()/2;
             mPosTextArray[i].setText(String.valueOf(pos));
             mComTextArray[i].setText(String.format("%.1f", compact));
         }

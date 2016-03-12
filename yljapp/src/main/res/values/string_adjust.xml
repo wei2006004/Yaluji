@@ -36,9 +36,5 @@
     <string name="ad_result_x">X=</string>
     <string name="ad_result_vcv">VCV=</string>
 
-    <string name="title_activity_adjust_light">AdjustLightActivity</string>
-    <string name="title_activity_adjust_middle">AdjustMiddleActivity</string>
-    <string name="title_activity_adjust_heavy">AdjustHeavyActivity</string>
-    <string name="title_activity_adjust_result">AdjustResultActivity</string>
     
 </resources>

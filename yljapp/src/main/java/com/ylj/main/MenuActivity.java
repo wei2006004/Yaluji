@@ -11,7 +11,6 @@ import com.ylj.common.config.AppStatus;
 import com.ylj.connect.ConnectActivity;
 import com.ylj.setting.UserActivity;
 import com.ylj.staff.StaffManagerActivity;
-import com.ylj.task.NewTaskActivity;
 import com.ylj.task.TaskManagerActivity;
 import com.ylj.task.TaskModifyActivity;
 
