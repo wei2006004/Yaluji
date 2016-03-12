@@ -143,6 +143,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ylj.main.MenuActivity" />
         </activity>
+        <activity
+            android:name=".adjust.AdjustActivity"
+            android:label="@string/title_activity_adjust"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

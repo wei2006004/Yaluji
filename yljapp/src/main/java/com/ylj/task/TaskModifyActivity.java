@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ylj.R;
+import com.ylj.adjust.AdjustActivity;
 import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Task;
 import com.ylj.db.DbLet;
@@ -122,7 +123,10 @@ public class TaskModifyActivity extends BaseActivity {
     LinearLayout mCommonLayout;
 
     @ViewInject(R.id.layout_save_and_adjust)
-    LinearLayout mAdjustLayout;
+    LinearLayout mSaveAdjustLayout;
+
+    @ViewInject(R.id.layout_enter_adjust)
+    LinearLayout mEnterAdjustLayout;
 
     @ViewInject(R.id.fab)
     FloatingActionButton mFabButtion;
@@ -154,7 +158,7 @@ public class TaskModifyActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mTask.setOrigin(which);
-                        switch (which){
+                        switch (which) {
                             case Task.ORIGIN_ANTICLOCKWISE:
                                 mOriginEditText.setText("ANTICLOCKWISE");
                                 mOriginText.setText("ANTICLOCKWISE");
@@ -261,16 +265,29 @@ public class TaskModifyActivity extends BaseActivity {
 
     @Event(R.id.btn_save)
     private void onSaveButtonClick(View view){
-        updateTask();
+        updateTaskByView();
+        saveTask();
+    }
+
+    @Event(R.id.btn_enter_adjust)
+    private void onEnterAdjustButtonClick(View view){
+        updateTaskByView();
+        switchToAdjustActivity();
+        finish();
     }
 
     @Event(R.id.btn_save_and_adjust)
     private void onAdjustButtonClick(View view){
-        updateTask();
-        //// TODO: 2016/3/10 0010 跳转
+        updateTaskByView();
+        saveTask();
+        switchToAdjustActivity();
         finish();
     }
-    
+
+    private void switchToAdjustActivity() {
+        AdjustActivity.startNewActivity(this,mTask);
+    }
+
     @Event(R.id.fab)
     private void onFabClick(View view) {
         switch (mMode) {
@@ -280,7 +297,8 @@ public class TaskModifyActivity extends BaseActivity {
                 mMode = MODE_MODIFY_TASK;
                 break;
             case MODE_MODIFY_TASK:
-                updateTask();
+                updateTaskByView();
+                saveTask();
                 setResultAndFinish();
                 break;
             default:
@@ -295,10 +313,14 @@ public class TaskModifyActivity extends BaseActivity {
         finish();
     }
 
-    private void updateTask() {
+    private void saveTask() {
+        DbLet.saveOrUpdateTask(mTask);
+        showToast("task saved");
+    }
+
+    private void updateTaskByView() {
         mTask.setTaskName(mTaskNameEdit.getText().toString());
         mTask.setRoadName(mRoadNameEdit.getText().toString());
-        DbLet.saveOrUpdateTask(mTask);
     }
 
     @Override
@@ -378,20 +400,27 @@ public class TaskModifyActivity extends BaseActivity {
     private void setNewLayout() {
         mEditLayout.setVisibility(View.VISIBLE);
         mInfoLayout.setVisibility(View.GONE);
-        mAdjustLayout.setVisibility(View.VISIBLE);
+        mSaveAdjustLayout.setVisibility(View.VISIBLE);
         mFabButtion.setVisibility(View.GONE);
+        mEnterAdjustLayout.setVisibility(View.GONE);
     }
 
     private void setModifyLayout() {
         mEditLayout.setVisibility(View.VISIBLE);
         mInfoLayout.setVisibility(View.GONE);
-        mAdjustLayout.setVisibility(View.GONE);
+        mEnterAdjustLayout.setVisibility(View.GONE);
+        if(!mTask.isAdjust()){
+            mSaveAdjustLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setInfoLayout() {
         mInfoLayout.setVisibility(View.VISIBLE);
         mEditLayout.setVisibility(View.GONE);
-        mAdjustLayout.setVisibility(View.GONE);
+        mSaveAdjustLayout.setVisibility(View.GONE);
+        if(!mTask.isAdjust()){
+            mEnterAdjustLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initToolbar() {

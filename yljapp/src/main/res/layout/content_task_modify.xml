@@ -45,6 +45,18 @@
                     android:text="save and inter adjust"/>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/layout_enter_adjust"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/btn_enter_adjust"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="inter adjust"/>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

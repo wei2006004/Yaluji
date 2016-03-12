@@ -21,8 +21,16 @@ import com.ylj.common.widget.PlotView;
 
 import java.util.Random;
 
-public class AdjustMiddleActivity extends Activity implements IAdjustCtrl.OnRefreshLister{
+public class AdjustMiddleActivity extends Activity implements IAdjustCtrl.OnCtrlLister {
+	@Override
+	public void onAdjustStart(){
 
+	}
+
+	@Override
+	public void onAdjustStop(){
+
+	}
 	public final static int MAX_QUAKE=15;
 	public final static int MIN_QUAKE=-5;
 	public final static int ADJUST_LENGTH=100;

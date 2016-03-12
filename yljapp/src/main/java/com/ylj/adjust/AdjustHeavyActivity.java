@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,8 +20,16 @@ import com.ylj.common.widget.PlotView;
 import java.util.Random;
 
 
-public class AdjustHeavyActivity extends Activity implements IAdjustCtrl.OnRefreshLister{
+public class AdjustHeavyActivity extends Activity implements IAdjustCtrl.OnCtrlLister {
+	@Override
+	public void onAdjustStart(){
 
+	}
+
+	@Override
+	public void onAdjustStop(){
+
+	}
 	public final static int MAX_QUAKE=15;
 	public final static int MIN_QUAKE=-5;
 	public final static int ADJUST_LENGTH=100;

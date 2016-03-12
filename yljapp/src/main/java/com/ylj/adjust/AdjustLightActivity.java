@@ -1,6 +1,5 @@
 package com.ylj.adjust;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -20,8 +19,16 @@ import com.ylj.common.widget.PlotView;
 
 import java.util.Random;
 
-public class AdjustLightActivity extends AppCompatActivity implements IAdjustCtrl.OnRefreshLister{
+public class AdjustLightActivity extends AppCompatActivity implements IAdjustCtrl.OnCtrlLister {
+	@Override
+	public void onAdjustStart(){
 
+	}
+
+	@Override
+	public void onAdjustStop(){
+
+	}
 	public final static int MAX_QUAKE=15;
 	public final static int MIN_QUAKE=-5;
 	public final static int ADJUST_LENGTH=100;
