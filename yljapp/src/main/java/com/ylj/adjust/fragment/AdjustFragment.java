@@ -111,6 +111,7 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
         if (mListener != null) {
             mListener.onAdjustFinish();
         }
+        setStatus("finished");
     }
 
     @Event(R.id.btn_run)
@@ -133,13 +134,19 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
         plotView.getEdit().clear().commit();
     }
 
+    private void setStatus(String text){
+        mStatusText.setText(text);
+    }
+
     private void doPause() {
         mAdjustCtrl.stopAdjust();
+        setStatus("pause");
     }
 
     private void doRun() {
         mAdjustCtrl.addOnRefreshListener(this);
         mAdjustCtrl.startAdjust();
+        setStatus("running");
     }
 
     EditText[] mPosTextArray = new EditText[ADJUST_RESULT_POINT_NUM];
@@ -165,6 +172,7 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
         } else {
             mAutoButton.setVisibility(View.GONE);
         }
+        setStatus("wait");
     }
 
     public AdjustResult requestAdjustResult() {
@@ -216,6 +224,19 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
         mListener = null;
     }
 
+    public void refreshPlot() {
+        PointF pointF;
+        double data;
+        PlotView.DrawEdit edit = plotView.getEdit();
+        edit.clear();
+        for (int i = 0; i < quakeDatas.size(); i++) {
+            data = quakeDatas.get(i);
+            pointF = new PointF(i, (float) data);
+            edit.addPoint(pointF);
+        }
+        edit.commit();
+    }
+
     @Override
     public void refresh(double data) {
         if (quakeDatas.size() >= ADJUST_LENGTH) {
@@ -224,6 +245,7 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
             if (mListener != null) {
                 mListener.onAdjustFinish();
             }
+            setStatus("finished");
             return;
         }
         quakeDatas.add(data);

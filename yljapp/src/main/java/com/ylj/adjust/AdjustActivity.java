@@ -34,6 +34,9 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
     public static final int ADJUST_TIME = 3;
 
     public static final String EXTRA_TASK = "EXTRA_TASK";
+    public static final String EXTRA_LIGHT_ADJUST = "EXTRA_LIGHT_ADJUST";
+    public static final String EXTRA_MIDDLE_ADJUST = "EXTRA_MIDDLE_ADJUST";
+    public static final String EXTRA_HEAVY_ADJUST = "EXTRA_HEAVY_ADJUST";
 
     public static void startNewActivity(Context context, Task task) {
         Intent intent = new Intent(context, AdjustActivity.class);
@@ -46,6 +49,8 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
     public static final int MODE_HEAVY_ADJUST = 2;
 
     int mMode = MODE_LIGHT_ADJUST;
+
+    Task mTask;
 
     SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -100,7 +105,12 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
     }
 
     private void switchToAdjustResultActivity() {
-
+        Intent intent = new Intent(this, AdjustResultActivity.class);
+        intent.putExtra(EXTRA_TASK, mTask);
+        intent.putExtra(EXTRA_LIGHT_ADJUST, mResults[0]);
+        intent.putExtra(EXTRA_MIDDLE_ADJUST, mResults[1]);
+        intent.putExtra(EXTRA_HEAVY_ADJUST, mResults[2]);
+        startActivity(intent);
     }
 
     @Override
@@ -108,6 +118,7 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
         super.onCreate(savedInstanceState);
 
         initData();
+        initExtraData();
         initToolbar();
         initViewPager();
         initTabs();
@@ -135,6 +146,27 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mFragments.get(position).refreshPlot();
+                    }
+                });
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void initToolbar() {
@@ -158,6 +190,11 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void initExtraData() {
+        Intent intent = getIntent();
+        mTask = intent.getParcelableExtra(EXTRA_TASK);
     }
 
     @Override
