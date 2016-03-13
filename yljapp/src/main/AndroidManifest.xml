@@ -30,8 +30,8 @@
             android:name=".connect.ConnectActivity"
             android:label="@string/title_activity_connect"
             android:launchMode="singleTop"
-            android:screenOrientation="landscape"
             android:parentActivityName=".main.MenuActivity"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -40,8 +40,8 @@
         <activity
             android:name=".setting.SettingActivity"
             android:label="@string/title_activity_setting"
-            android:screenOrientation="landscape"
             android:parentActivityName=".setting.UserActivity"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -58,8 +58,8 @@
             android:name=".staff.StaffManagerActivity"
             android:label="@string/title_activity_staff_manager"
             android:launchMode="singleTop"
-            android:screenOrientation="landscape"
             android:parentActivityName=".main.MenuActivity"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -83,8 +83,8 @@
             android:name=".setting.UserActivity"
             android:label="@string/title_activity_user"
             android:launchMode="singleTop"
-            android:screenOrientation="landscape"
             android:parentActivityName=".main.MenuActivity"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -100,8 +100,8 @@
         <activity
             android:name=".task.TaskManagerActivity"
             android:label="@string/title_activity_task_manager"
-            android:screenOrientation="landscape"
             android:parentActivityName=".main.MenuActivity"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -118,7 +118,12 @@
             android:label="@string/title_activity_adjust_result"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".task.TaskActivity"
+            android:label="@string/title_activity_task"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 

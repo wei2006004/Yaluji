@@ -18,4 +18,5 @@
     <string name="title_activity_task_manager">TaskManagerActivity</string>
     <string name="title_activity_adjust">AdjustActivity</string>
     <string name="title_activity_adjust_result">AdjustResultActivity</string>
+    <string name="title_activity_task">TaskActivity</string>
 </resources>

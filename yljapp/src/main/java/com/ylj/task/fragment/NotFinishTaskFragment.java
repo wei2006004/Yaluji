@@ -14,6 +14,7 @@ import com.ylj.common.BaseFragment;
 import com.ylj.common.bean.Task;
 import com.ylj.common.utils.BeanUtils;
 import com.ylj.db.DbLet;
+import com.ylj.task.TaskActivity;
 import com.ylj.task.TaskModifyActivity;
 
 import org.xutils.view.annotation.ContentView;
@@ -104,7 +105,7 @@ public class NotFinishTaskFragment extends BaseFragment {
 
     private void onTaskItemClick(int position) {
         Task task = getTaskByPosition(position);
-        TaskModifyActivity.startAsShowTaskActivity(getActivity(),task);
+        TaskActivity.startNewActivity(getActivity(), task);
     }
 
     private boolean isTaskAdjust(int position) {
@@ -113,7 +114,7 @@ public class NotFinishTaskFragment extends BaseFragment {
     }
 
     private Task getTaskByPosition(int position) {
-        Map<String,Object> map=mTaskMaps.get(position);
+        Map<String, Object> map = mTaskMaps.get(position);
         Task task = Task.createByMap(map);
         return task;
     }
