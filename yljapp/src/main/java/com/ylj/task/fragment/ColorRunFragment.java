@@ -1,16 +1,17 @@
 package com.ylj.task.fragment;
 
-
 import com.ylj.R;
 import com.ylj.task.bean.Record;
 
 import org.xutils.view.annotation.ContentView;
 
-@ContentView(R.layout.fragment_trace)
-public class TraceFragment extends AbstractTestFragment {
+@ContentView(R.layout.fragment_color_run)
+public class ColorRunFragment extends AbstractTestFragment {
 
-    public TraceFragment() {
+
+    public ColorRunFragment() {
     }
+
 
     @Override
     public void showWaitPage() {
