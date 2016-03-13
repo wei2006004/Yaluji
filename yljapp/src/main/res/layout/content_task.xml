@@ -196,18 +196,23 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/layout_enter_test"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="200dp">
-
+                android:layout_height="wrap_content">
                 <Button
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/btn_finish_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="finish task" />
+                <Button
+                    android:layout_toLeftOf="@id/btn_finish_task"
                     android:id="@+id/btn_enter_test"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="enter test" />
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
 

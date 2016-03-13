@@ -126,6 +126,15 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".task.TestActivity"
+            android:label="@string/title_activity_test"
+            android:parentActivityName=".task.TaskActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ylj.task.TaskActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -225,6 +225,15 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
         mListener = null;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mIsRun){
+            mAdjustCtrl.stopAdjust();
+            mAdjustCtrl.deleteOnRefreshListener(this);
+        }
+    }
+
     public void refreshPlot() {
         PointF pointF;
         double data;

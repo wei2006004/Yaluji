@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,6 +19,7 @@ import com.ylj.R;
 import com.ylj.adjust.AdjustActivity;
 import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Task;
+import com.ylj.db.DbLet;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -58,6 +60,9 @@ public class TaskActivity extends BaseActivity {
     @ViewInject(R.id.lv_test)
     ListView mTestListView;
 
+    @ViewInject(R.id.btn_finish_task)
+    Button mFinishButton;
+
     @ViewInject(R.id.layout_task_edit)
     RelativeLayout mEditLayout;
 
@@ -68,7 +73,7 @@ public class TaskActivity extends BaseActivity {
     LinearLayout mTestLayout;
 
     @ViewInject(R.id.layout_enter_test)
-    LinearLayout mEnterTestLayout;
+    RelativeLayout mEnterTestLayout;
 
     @Event(R.id.btn_task_edit)
     private void onTaskEditClick(View view) {
@@ -91,7 +96,14 @@ public class TaskActivity extends BaseActivity {
 
     @Event(R.id.btn_enter_test)
     private void onEnterTestButtonClick(View view) {
+        TestActivity.startAsTaskTestActivity(this, mTask);
+    }
 
+    @Event(R.id.btn_finish_task)
+    private void onFinishTaskButtonClick(View view) {
+        mTask.setIsFinish(true);
+        DbLet.saveOrUpdateTask(mTask);
+        TestActivity.startAsShowResultActivity(this, mTask);
     }
 
     @Override
@@ -152,6 +164,7 @@ public class TaskActivity extends BaseActivity {
             mEnterTestLayout.setVisibility(View.GONE);
             mEditLayout.setVisibility(View.GONE);
         }
+        mFinishButton.setEnabled(false);
     }
 
     private void initToolbar() {
