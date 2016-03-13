@@ -133,8 +133,10 @@ public class MenuActivity extends BaseActivity {
             public View getView(final int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 if (isTaskAdjust(position)) {
+                    view.findViewById(R.id.tv_no_finish).setVisibility(View.VISIBLE);
                     view.findViewById(R.id.tv_no_adjust).setVisibility(View.GONE);
                 } else {
+                    view.findViewById(R.id.tv_no_adjust).setVisibility(View.VISIBLE);
                     view.findViewById(R.id.tv_no_finish).setVisibility(View.GONE);
                 }
                 return view;
