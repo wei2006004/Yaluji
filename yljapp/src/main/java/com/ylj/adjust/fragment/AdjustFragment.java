@@ -2,7 +2,6 @@ package com.ylj.adjust.fragment;
 
 import android.app.Activity;
 import android.graphics.PointF;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,11 +9,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ylj.R;
-import com.ylj.adjust.AdjustCtrlImpl;
 import com.ylj.adjust.IAdjustCtrl;
 import com.ylj.adjust.bean.AdjustResult;
 import com.ylj.common.BaseFragment;
-import com.ylj.common.config.Config;
 import com.ylj.common.config.ConfigLet;
 import com.ylj.common.widget.PlotView;
 
@@ -40,7 +37,7 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
     boolean mIsRun = false;
     boolean mIsFinish = false;
 
-    IAdjustCtrl mAdjustCtrl = AdjustCtrlImpl.instance();
+    IAdjustCtrl mAdjustCtrl = null;
 
     @ViewInject(R.id.plotview)
     PlotView plotView;
@@ -130,6 +127,10 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
         }
     }
 
+    public void setAdjustCtrl(IAdjustCtrl ctrl){
+        mAdjustCtrl = ctrl;
+    }
+
     private void initStutas() {
         quakeDatas.clear();
         plotView.getEdit().clear().commit();
@@ -140,14 +141,18 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
     }
 
     private void doPause() {
-        mAdjustCtrl.stopAdjust();
-        setStatus("pause");
+        if(mAdjustCtrl != null){
+            mAdjustCtrl.stopAdjust();
+            setStatus("pause");
+        }
     }
 
     private void doRun() {
-        mAdjustCtrl.addOnRefreshListener(this);
-        mAdjustCtrl.startAdjust();
-        setStatus("running");
+        if(mAdjustCtrl != null){
+            mAdjustCtrl.addAdjustCtrlListener(this);
+            mAdjustCtrl.startAdjust();
+            setStatus("running");
+        }
     }
 
     EditText[] mPosTextArray = new EditText[ADJUST_RESULT_POINT_NUM];
@@ -229,8 +234,10 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
     public void onDestroy() {
         super.onDestroy();
         if(mIsRun){
-            mAdjustCtrl.stopAdjust();
-            mAdjustCtrl.deleteOnRefreshListener(this);
+            if(mAdjustCtrl != null){
+                mAdjustCtrl.stopAdjust();
+                mAdjustCtrl.deleteAdjustCtrlListener(this);
+            }
         }
     }
 
@@ -250,7 +257,9 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
     @Override
     public void refresh(double data) {
         if (quakeDatas.size() >= ADJUST_LENGTH) {
-            mAdjustCtrl.stopAdjust();
+            if(mAdjustCtrl != null){
+                mAdjustCtrl.stopAdjust();
+            }
             mIsFinish = true;
             if (mListener != null) {
                 mListener.onAdjustFinish();
@@ -272,7 +281,9 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
 
     @Override
     public void onAdjustStop() {
-        mAdjustCtrl.deleteOnRefreshListener(this);
+        if(mAdjustCtrl != null){
+            mAdjustCtrl.deleteAdjustCtrlListener(this);
+        }
     }
 
     public interface OnAdjustFinishListener {

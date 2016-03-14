@@ -135,6 +135,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ylj.task.TaskActivity" />
         </activity>
+
+        <service
+            android:name=".daemon.YljService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>
