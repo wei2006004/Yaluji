@@ -1,6 +1,6 @@
 package com.ylj.task;
 
-import com.ylj.task.bean.Record;
+import com.ylj.task.bean.DeviceData;
 
 /**
  * Created by Administrator on 2016/3/14 0014.
@@ -16,6 +16,6 @@ public interface ITestCtrl {
     interface OnCtrlLister {
         void onTestStart();
         void onTestStop();
-        void onTestRefresh(Record data);
+        void onTestRefresh(DeviceData data);
     }
 }

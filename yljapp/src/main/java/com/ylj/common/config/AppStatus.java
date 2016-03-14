@@ -3,6 +3,7 @@ package com.ylj.common.config;
 import com.ylj.common.bean.Admin;
 import com.ylj.common.bean.Staff;
 import com.ylj.common.bean.Task;
+import com.ylj.connect.bean.DeviceInfo;
 
 /**
  * Created by Administrator on 2016/3/4 0004.
@@ -34,7 +35,7 @@ public class AppStatus {
     public static final int CONNECT_MODE_WIFI = 2;
 
     boolean isConnect = false;
-    String currentDevice;
+    DeviceInfo currentDevice;
     boolean isDeviceNormal;
     int connectMode = CONNECT_MODE_NONE;
 
@@ -81,11 +82,11 @@ public class AppStatus {
         isAdmin = false;
     }
 
-    public String getCurrentDevice() {
+    public DeviceInfo getCurrentDevice() {
         return currentDevice;
     }
 
-    public void setCurrentDevice(String currentDevice) {
+    public void setCurrentDevice(DeviceInfo currentDevice) {
         this.currentDevice = currentDevice;
     }
 

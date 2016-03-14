@@ -1,5 +1,7 @@
 package com.ylj.task.fragment;
 
+import android.app.Activity;
+
 import com.ylj.R;
 import com.ylj.task.bean.Record;
 
@@ -41,5 +43,28 @@ public class ColorRunFragment extends AbstractTestFragment {
     @Override
     public void addDataAndRefresh(Record data) {
 
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnColorDataLoadListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnColorDataLoadListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    private OnColorDataLoadListener mListener;
+
+    public interface OnColorDataLoadListener {
+        public void onColorDataLoadFinish();
     }
 }

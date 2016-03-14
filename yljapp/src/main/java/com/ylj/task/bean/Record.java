@@ -3,16 +3,40 @@ package com.ylj.task.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.xutils.db.annotation.Column;
+import org.xutils.db.annotation.Table;
+
+@Table(name = "record")
 public class Record implements Parcelable
 {
+    @Column(name = "id", isId = true)
+    private int id;
+
+    @Column(name = "distance")
 	private double distance;
+
+    @Column(name = "speed")
 	private double speed;
+
+    @Column(name = "state")
 	private int state;
+
+    @Column(name = "direction")
 	private double direction;
+
+    @Column(name = "temp")
 	private double temp;
+
+    @Column(name = "quake")
 	private double quake;
+
+    @Column(name = "positionX")
 	private double positionX;
+
+    @Column(name = "positionY")
     private double positionY;
+
+    public Record(){}
 
     protected Record(Parcel in) {
         distance = in.readDouble();
@@ -53,6 +77,8 @@ public class Record implements Parcelable
 	{
 		set(record.distance,record.speed,record.direction,record.state,record.temp,record.quake,record.positionX,record.positionY);
 	}
+
+
 	
 	@Override
 	public String toString()
@@ -60,7 +86,15 @@ public class Record implements Parcelable
 		return "dist:"+distance+" dir:"+direction+" temp:"+temp+" quake:"+quake;
 	}
 
-	public double getDistance()
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getDistance()
 	{
 		return distance;
 	}

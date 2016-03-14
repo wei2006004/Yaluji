@@ -3,7 +3,9 @@ package com.ylj.db;
 import com.ylj.common.bean.Admin;
 import com.ylj.common.bean.Staff;
 import com.ylj.common.bean.Task;
+import com.ylj.common.utils.TaskDbFileUitl;
 import com.ylj.db.account.AccountManager;
+import com.ylj.db.task.RecordManager;
 import com.ylj.db.task.TaskManager;
 
 import java.util.List;
@@ -60,17 +62,22 @@ public class DbLet {
     }
 
     public static void saveOrUpdateTask(Task task) {
-        TaskManager taskManager=ManagerFactory.getTaskManager();
+        TaskManager taskManager = ManagerFactory.getTaskManager();
         taskManager.saveOrUpadate(task);
     }
 
     public static void deleteTask(Task task) {
-        TaskManager taskManager=ManagerFactory.getTaskManager();
+        TaskManager taskManager = ManagerFactory.getTaskManager();
         taskManager.delete(task);
     }
 
     public static List<Task> getNotFinishTaskList() {
-        TaskManager taskManager=ManagerFactory.getTaskManager();
+        TaskManager taskManager = ManagerFactory.getTaskManager();
         return taskManager.getNotFinishTaskList();
+    }
+
+    public static RecordManager getRecordManager(Task task) {
+        String fileName = TaskDbFileUitl.getTaskDbFileName(task);
+        return new RecordManager(fileName);
     }
 }

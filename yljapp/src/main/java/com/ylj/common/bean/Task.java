@@ -29,6 +29,7 @@ public class Task implements Parcelable, IMapable {
     public static final String TAG_HUOER_NUM = "huoer_num";
     public static final String TAG_VCV = "vcv";
     public static final String TAG_IS_ADJUST = "is_adjust";
+    public static final String TAG_IS_TEST = "is_test";
     public static final String TAG_IS_FINISH = "is_finish";
     public static final String TAG_IS_CREATE_RESULT = "is_create_result";
     public static final String TAG_RESULT_ID = "result_id";
@@ -72,6 +73,9 @@ public class Task implements Parcelable, IMapable {
     @Column(name = "is_finish")
     private boolean isFinish = false;
 
+    @Column(name = "is_test")
+    private boolean isTest = false;
+
     @Column(name = "is_create_result")
     private boolean isCreateResult = false;
 
@@ -97,6 +101,7 @@ public class Task implements Parcelable, IMapable {
         map.put(TAG_HUOER_NUM, huoerNum);
         map.put(TAG_VCV, VCV);
         map.put(TAG_IS_ADJUST, isAdjust);
+        map.put(TAG_IS_TEST, isTest);
         map.put(TAG_IS_FINISH, isFinish);
         map.put(TAG_IS_CREATE_RESULT, isCreateResult);
         map.put(TAG_RESULT_ID, resultId);
@@ -116,6 +121,7 @@ public class Task implements Parcelable, IMapable {
         task.huoerNum = Integer.parseInt(map.get(TAG_HUOER_NUM).toString());
         task.VCV = Double.parseDouble(map.get(TAG_VCV).toString());
         task.isAdjust = Boolean.parseBoolean(map.get(TAG_IS_ADJUST).toString());
+        task.isTest = Boolean.parseBoolean(map.get(TAG_IS_TEST).toString());
         task.isFinish = Boolean.parseBoolean(map.get(TAG_IS_FINISH).toString());
         task.isCreateResult = Boolean.parseBoolean(map.get(TAG_IS_CREATE_RESULT).toString());
         task.resultId = Integer.parseInt(map.get(TAG_RESULT_ID).toString());
@@ -134,7 +140,7 @@ public class Task implements Parcelable, IMapable {
         dest.writeDouble(rollerDiameter);
         dest.writeInt(huoerNum);
         dest.writeDouble(VCV);
-        dest.writeBooleanArray(new boolean[]{isAdjust, isFinish, isCreateResult});
+        dest.writeBooleanArray(new boolean[]{isAdjust, isTest, isFinish, isCreateResult});
         dest.writeInt(resultId);
     }
 
@@ -153,11 +159,12 @@ public class Task implements Parcelable, IMapable {
             task.rollerDiameter = source.readDouble();
             task.huoerNum = source.readInt();
             task.VCV = source.readDouble();
-            boolean flags[] = new boolean[3];
+            boolean flags[] = new boolean[4];
             source.readBooleanArray(flags);
             task.isAdjust = flags[0];
-            task.isFinish = flags[1];
-            task.isCreateResult = flags[2];
+            task.isTest = flags[1];
+            task.isFinish = flags[2];
+            task.isCreateResult = flags[3];
             task.resultId = source.readInt();
             return task;
         }
@@ -278,5 +285,13 @@ public class Task implements Parcelable, IMapable {
 
     public void setIsAdjust(boolean isAdjust) {
         this.isAdjust = isAdjust;
+    }
+
+    public boolean isTest() {
+        return isTest;
+    }
+
+    public void setIsTest(boolean isTest) {
+        this.isTest = isTest;
     }
 }
