@@ -21,6 +21,8 @@ import com.ylj.R;
 import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Task;
 import com.ylj.task.fragment.AbstractTestFragment;
+import com.ylj.task.fragment.ColorRunFragment;
+import com.ylj.task.fragment.PlotFragment;
 import com.ylj.task.fragment.TraceFragment;
 
 import org.xutils.view.annotation.ContentView;
@@ -128,10 +130,10 @@ public class TestActivity extends BaseActivity {
     private void initData() {
         mFragments.clear();
         mFragments.add(new TraceFragment());
-        mFragments.add(new TraceFragment());
+        mFragments.add(new ColorRunFragment());
         if (mMode == MODE_TASK_TEST) {
-            mFragments.add(new TraceFragment());
-            mFragments.add(new TraceFragment());
+            mFragments.add(PlotFragment.newQuakePlotFragment());
+            mFragments.add(PlotFragment.newTempPlotFragment());
         }
     }
 

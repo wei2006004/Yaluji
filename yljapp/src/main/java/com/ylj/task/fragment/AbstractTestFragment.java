@@ -8,12 +8,32 @@ import com.ylj.task.bean.Record;
  */
 public abstract class AbstractTestFragment extends BaseFragment {
 
-    public abstract void showWaitPage();
-    public abstract void showTestPage();
+    public static final int MODE_WAIT_PAGE = 0;
+    public static final int MODE_TEST_PAGE = 1;
 
-    public abstract void redrawPlot();
+    private int mPageMode = MODE_WAIT_PAGE;
+
+    public void showWaitPage() {
+        mPageMode = MODE_WAIT_PAGE;
+    }
+
+    public void showTestPage() {
+        mPageMode = MODE_TEST_PAGE;
+    }
+
+    public boolean isWaitPage() {
+        return mPageMode == MODE_WAIT_PAGE;
+    }
+
+    public boolean isTestPage() {
+        return mPageMode == MODE_WAIT_PAGE;
+    }
+
+    public abstract void refreshPage();
+
     public abstract void clearPlot();
 
     public abstract void addData(Record data);
+
     public abstract void addDataAndRefresh(Record data);
 }

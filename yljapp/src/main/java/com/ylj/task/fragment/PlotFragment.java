@@ -46,16 +46,16 @@ public class PlotFragment extends AbstractTestFragment {
 
     @Override
     public void showWaitPage() {
-
+        super.showWaitPage();
     }
 
     @Override
     public void showTestPage() {
-
+        super.showTestPage();
     }
 
     @Override
-    public void redrawPlot() {
+    public void refreshPage() {
 
     }
 

@@ -255,7 +255,19 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
     }
 
     @Override
-    public void refresh(double data) {
+    public void onAdjustStart() {
+
+    }
+
+    @Override
+    public void onAdjustStop() {
+        if(mAdjustCtrl != null){
+            mAdjustCtrl.deleteAdjustCtrlListener(this);
+        }
+    }
+
+    @Override
+    public void onAdjustRefresh(double data) {
         if (quakeDatas.size() >= ADJUST_LENGTH) {
             if(mAdjustCtrl != null){
                 mAdjustCtrl.stopAdjust();
@@ -272,18 +284,6 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLi
         plotView.getEdit()
                 .addPoint(pointF)
                 .commit();
-    }
-
-    @Override
-    public void onAdjustStart() {
-
-    }
-
-    @Override
-    public void onAdjustStop() {
-        if(mAdjustCtrl != null){
-            mAdjustCtrl.deleteAdjustCtrlListener(this);
-        }
     }
 
     public interface OnAdjustFinishListener {

@@ -23,7 +23,7 @@ public class TraceFragment extends AbstractTestFragment {
     }
 
     @Override
-    public void redrawPlot() {
+    public void refreshPage() {
 
     }
 

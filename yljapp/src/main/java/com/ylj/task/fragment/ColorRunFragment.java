@@ -24,7 +24,7 @@ public class ColorRunFragment extends AbstractTestFragment {
     }
 
     @Override
-    public void redrawPlot() {
+    public void refreshPage() {
 
     }
 
