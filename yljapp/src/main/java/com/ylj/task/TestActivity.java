@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -40,7 +39,7 @@ import java.util.List;
 
 @ContentView(R.layout.activity_test)
 public class TestActivity extends BaseActivity implements TraceFragment.OnTraceDataLoadListener,
-        ColorRunFragment.OnColorDataLoadListener, ITestCtrl.OnCtrlLister,IConnectCtrl.OnConnectListener{
+        ColorRunFragment.OnColorDataLoadListener, ITestCtrl.OnTestCtrlListener,IConnectCtrl.OnConnectListener{
 
     public static final String EXTRA_MODE = "EXTRA_MODE";
     public static final String EXTRA_TASK = "EXTRA_TASK";
@@ -264,7 +263,7 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
     }
 
     @Override
-    public void onConnectError(int error) {
+    public void onConnectFail(int error) {
 
     }
 

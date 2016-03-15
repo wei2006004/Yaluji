@@ -1,22 +1,20 @@
-package com.ylj.daemon;
+package com.ylj.daemon.client;
 
 import android.bluetooth.BluetoothDevice;
 
 /**
- * Created by Administrator on 2016/3/14 0014.
+ * Created by Administrator on 2016/3/15 0015.
  */
-public interface ICleint {
-
+public interface IClient {
     void connectToBluetooth(BluetoothDevice device);
     void connectToWifi(String ip, int port);
 
     void disconnect();
     void reconnect();
 
-    void requestDeviceInfo();
+    boolean isConnect();
 
-    void startAdjust();
-    void stopAdjust();
+    void requestDeviceInfo();
 
     void startTest();
     void stopTest();

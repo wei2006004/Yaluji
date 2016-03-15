@@ -20,12 +20,12 @@ public class AdjustCtrlImpl implements IAdjustCtrl {
     }
 
     @Override
-    public void addAdjustCtrlListener(OnCtrlLister listener) {
+    public void addAdjustCtrlListener(OnAdjustCtrlLister listener) {
 
     }
 
     @Override
-    public void deleteAdjustCtrlListener(OnCtrlLister listener) {
+    public void deleteAdjustCtrlListener(OnAdjustCtrlLister listener) {
 
     }
 }

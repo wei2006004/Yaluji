@@ -1,32 +1,60 @@
 package com.ylj.common;
 
 import android.app.Activity;
-import android.os.Bundle;
+import android.app.Service;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.IBinder;
+
+import com.ylj.daemon.BaseService;
+import com.ylj.daemon.client.IClient;
 
 /**
  * Created by Administrator on 2016/3/14 0014.
  */
 public abstract class Controler {
-    public Controler(Activity activity,Class<?> cls){
+
+    protected Activity mActivity;
+    private IBinder mIBinder;
+    protected IClient mCleint;
+
+    private ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
+    public Controler() {
 
     }
 
-    protected abstract void onReceive(Bundle data);
-
-    protected boolean isBound(){
-        return false;
+    public void init(Activity activity, Class<? extends BaseService> cls) {
+        mActivity = activity;
+        Intent intent = new Intent(activity, cls);
+        activity.bindService(intent, mServiceConnection, Service.BIND_AUTO_CREATE);
     }
 
-    protected void onServiceConnected(IBinder binder){
+    protected boolean isBind() {
+        return mIBinder.isBinderAlive();
+    }
+
+    protected void onServiceConnected(IBinder binder) {
+        mIBinder = binder;
+        mCleint = (IClient) binder;
+    }
+
+    protected void onServiceDisconnected() {
 
     }
 
-    protected void onServiceDisconnected(){
-
-    }
-
-    public void release(){
-
+    public void release() {
+        mActivity.unbindService(mServiceConnection);
     }
 }

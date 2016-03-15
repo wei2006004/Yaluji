@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Random;
 
 @ContentView(R.layout.fragment_adjust)
-public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnCtrlLister {
+public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjustCtrlLister {
 
     public final static int MAX_QUAKE = 15;
     public final static int MIN_QUAKE = -5;

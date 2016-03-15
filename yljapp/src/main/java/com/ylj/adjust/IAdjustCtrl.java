@@ -7,10 +7,10 @@ public interface IAdjustCtrl {
     void startAdjust();
     void stopAdjust();
 
-    void addAdjustCtrlListener(OnCtrlLister listener);
-    void deleteAdjustCtrlListener(OnCtrlLister listener);
+    void addAdjustCtrlListener(OnAdjustCtrlLister listener);
+    void deleteAdjustCtrlListener(OnAdjustCtrlLister listener);
 
-    interface OnCtrlLister {
+    interface OnAdjustCtrlLister {
         void onAdjustStart();
         void onAdjustStop();
         void onAdjustRefresh(double data);

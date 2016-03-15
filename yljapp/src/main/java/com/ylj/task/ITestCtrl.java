@@ -10,10 +10,10 @@ public interface ITestCtrl {
     void startTest();
     void stopTest();
 
-    void addTestCtrlListener(OnCtrlLister listener);
-    void deleteTestCtrlListener(OnCtrlLister listener);
+    void addTestCtrlListener(OnTestCtrlListener listener);
+    void deleteTestCtrlListener(OnTestCtrlListener listener);
 
-    interface OnCtrlLister {
+    interface OnTestCtrlListener {
         void onTestStart();
         void onTestStop();
         void onTestRefresh(DeviceData data);

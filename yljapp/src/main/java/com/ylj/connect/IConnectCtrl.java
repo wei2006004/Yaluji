@@ -13,18 +13,21 @@ public interface IConnectCtrl {
     public final static int ERROR_CONNECT_LOST = 1;
     public final static int ERROR_SERVER_ERROR = 2;
 
-    void connectToBluetooth(BluetoothDevice device,OnConnectListener listener);
+    void connectToBluetooth(BluetoothDevice device);
 
-    void connectToWifi(String ip, int port,OnConnectListener listener);
+    void connectToWifi(String ip, int port);
 
     void disconnect();
     void reconnect();
+
+    boolean isConnect();
 
     void addConnectListener(OnConnectListener listener);
     void deleteConnectListener(OnConnectListener listener);
 
     interface OnConnectListener {
         void onConnected(DeviceInfo info);
-        void onConnectError(int error);
+        void onConnectFail(int error);
+        void onConnectLost();
     }
 }
