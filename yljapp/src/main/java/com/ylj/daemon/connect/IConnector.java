@@ -8,7 +8,7 @@ public interface IConnector {
     void connect();
     void disconnect();
 
-    void isConnect();
+    boolean isConnect();
 
     void sendMessage(String msg);
 

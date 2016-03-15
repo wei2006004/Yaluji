@@ -1,6 +1,9 @@
-package com.ylj.daemon.connect;
+package com.ylj.daemon.config;
 
-public final class ComConst {
+/**
+ * Created by Administrator on 2016/3/15 0015.
+ */
+public class ConnectState {
 
     public static final int STATE_NONE = 0;       // we're doing nothing
     public static final int STATE_LISTEN = 1;     // now listening for incoming connections
@@ -8,4 +11,5 @@ public final class ComConst {
     public static final int STATE_CONNECTED = 3;  // now connected to a remote device
     public static final int STATE_CONNECT_FAIL = 4;
     public static final int STATE_CONNECT_LOST = 5;
+
 }

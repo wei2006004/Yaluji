@@ -3,6 +3,10 @@ package com.ylj.daemon.connect;
 import android.os.Handler;
 import android.util.Log;
 
+import com.ylj.daemon.config.ConnectState;
+
+import org.xutils.x;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,27 +29,20 @@ public class TcpService {
 	}
 	
 	public static final boolean iS_DEVICE=true;
-	public static int port=12345;	
-	public static String ip="192.168.0.99";
-	public static String computerIp="192.168.1.109";
 	
-    // Constants that indicate the current connection state
-    public static final int STATE_NONE = 0;       // we're doing nothing
-    public static final int STATE_LISTEN = 1;     // now listening for incoming connections
-    public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
-    public static final int STATE_CONNECTED = 3;  // now connected to a remote device
-    public static final int STATE_CONNECT_FAIL = 4;
-    public static final int STATE_CONNECT_LOST = 5;
-	
-    private int state=STATE_NONE;
-    private Handler handler=null;
+    private int state= ConnectState.STATE_NONE;
     
     private AcceptThread acceptThread=null;
     private ConnectThread connectThread=null;
+
+	IConnector.OnStateChangeListener mOnStateChangeListener;
+
+	public void setOnStateChangeListener(IConnector.OnStateChangeListener listener) {
+		mOnStateChangeListener = listener;
+	}
     
-	public TcpService(Handler handler)
+	public TcpService()
 	{
-		this.handler=handler;
 	}
 	
 	public synchronized void start()
@@ -56,16 +53,24 @@ public class TcpService {
 		}
 		acceptThread.start();
 	}
+
+	public static int port=12345;
+	public static String ip="192.168.0.99";
+	public static String computerIp="192.168.1.109";
+	
+	private String mIp = "192.168.0.99";
+	private int mPort = 12345;
+	
+	public void setAddress(String ip,int port){
+		mIp=ip;
+		mPort=port;
+	}
 	
 	public synchronized void connect()
 	{
 		if(D)debug("start");
 		if(connectThread==null){
-			if(iS_DEVICE){
-				connectThread=new  ConnectThread(ip,port);
-			}else {
-				connectThread=new ConnectThread(computerIp, port);
-			}		
+			connectThread=new  ConnectThread(mIp,mPort);
 		}
 		connectThread.start();
 	}
@@ -74,7 +79,7 @@ public class TcpService {
 	{
 //		AcceptThread r;
 //		synchronized (this) {
-//			if(state!=STATE_CONNECTED)return;
+//			if(state!=ConnectState.STATE_CONNECTED)return;
 //			r=acceptThread;
 //		}
 		if(acceptThread!=null)
@@ -88,10 +93,17 @@ public class TcpService {
 		return state;
 	}
 	
-	private void setState(int state){
+	private void setState(final int state){
 		this.state=state;
-		debug("setState:"+state);
-		handler.sendEmptyMessage(state);
+		
+		if(mOnStateChangeListener == null)
+			return;
+		x.task().autoPost(new Runnable() {
+			@Override
+			public void run() {
+				mOnStateChangeListener.onStateChange(state);
+			}
+		});
 	}
 	
 	public void stop()
@@ -128,10 +140,10 @@ public class TcpService {
 			try{
 				mSocket=new Socket(host,port);
 				if(D)debug("connect");
-				setState(STATE_CONNECTING);
+				setState(ConnectState.STATE_CONNECTING);
 			}catch(IOException e){
 				if(D)debug("connect to server fail!");
-				setState(STATE_CONNECT_FAIL);				
+				setState(ConnectState.STATE_CONNECT_FAIL);				
 				return;
 			}
 			
@@ -144,10 +156,10 @@ public class TcpService {
                 tmpOut = mSocket.getOutputStream();
             } catch (IOException e) {
             	if(D)debug("connect to server fail!");
-				setState(STATE_CONNECT_FAIL);				
+				setState(ConnectState.STATE_CONNECT_FAIL);				
 				return;
             }
-            setState(STATE_CONNECTED);
+            setState(ConnectState.STATE_CONNECTED);
             mmInStream = tmpIn;
             mmOutStream = tmpOut;
             
@@ -166,7 +178,7 @@ public class TcpService {
                     }
                 } catch (IOException e) {
                 	debug("connect is lost");
-    				setState(STATE_CONNECT_LOST);
+    				setState(ConnectState.STATE_CONNECT_LOST);
                     break;
                 }
             }
@@ -217,10 +229,10 @@ public class TcpService {
 			try {				
 				serverSocket=new ServerSocket(port);
 				if(D)debug("server start!");	
-				setState(STATE_LISTEN);
+				setState(ConnectState.STATE_LISTEN);
 			} catch (IOException e) {
 				if(D)debug("start server socket fail!");
-				setState(STATE_CONNECT_FAIL);
+				setState(ConnectState.STATE_CONNECT_FAIL);
 			}
 		}
 		
@@ -228,29 +240,29 @@ public class TcpService {
 		public void run()
 		{
 			mSocket=null;
-			while (state != STATE_CONNECTED) {
+			while (state != ConnectState.STATE_CONNECTED) {
 				try {
 					mSocket = serverSocket.accept();
 					if (D)
 						debug("connect:" + mSocket.getInetAddress() + ":"
 								+ mSocket.getPort());
-					setState(STATE_CONNECTING);
+					setState(ConnectState.STATE_CONNECTING);
 				} catch (IOException e) {
 					if (D)
 						error("seversocket accept fail!");
-					setState(STATE_CONNECT_FAIL);
+					setState(ConnectState.STATE_CONNECT_FAIL);
 					break;
 				}
 				if(mSocket!=null){
 					synchronized (TcpService.this) {
 						switch (state) {
-						case STATE_LISTEN:
-						case STATE_CONNECTING:							
+						case ConnectState.STATE_LISTEN:
+						case ConnectState.STATE_CONNECTING:							
 							String msg;
 							try {
 								reader=new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
 								writer=new PrintWriter(mSocket.getOutputStream(),true);
-								setState(STATE_CONNECTED);
+								setState(ConnectState.STATE_CONNECTED);
 								while((msg=reader.readLine())!=null){
 									if(listener!=null)
 										listener.read(msg);
@@ -258,11 +270,11 @@ public class TcpService {
 								}
 							} catch (IOException e) {
 								debug("connect is lost");
-								setState(STATE_CONNECT_LOST);
+								setState(ConnectState.STATE_CONNECT_LOST);
 							}
 							break;
-						case STATE_CONNECTED:
-						case STATE_NONE:
+						case ConnectState.STATE_CONNECTED:
+						case ConnectState.STATE_NONE:
 							try {
 								mSocket.close();
 							} catch (Exception e) {

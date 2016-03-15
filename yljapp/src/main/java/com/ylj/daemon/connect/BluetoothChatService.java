@@ -19,9 +19,11 @@ package com.ylj.daemon.connect;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.Context;
-import android.os.Handler;
 import android.util.Log;
+
+import com.ylj.daemon.config.ConnectState;
+
+import org.xutils.x;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +50,6 @@ public class BluetoothChatService {
     private BluetoothDevice connectDevice;
     // Member fields
     private final BluetoothAdapter mAdapter;
-    private final Handler mHandler;
 
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
@@ -59,36 +60,30 @@ public class BluetoothChatService {
     // Key names received from the BluetoothChatService Handler
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
-    
-    // Constants that indicate the current connection state
-//    public static final int STATE_NONE = 0;       // we're doing nothing
-//    public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
-//    public static final int STATE_CONNECTED = 3;  // now connected to a remote device
-//    public static final int STATE_CONNECT_FAIL = 4;
-//    public static final int STATE_CONNECT_LOST = 5;
 
-    /**
-     * Constructor. Prepares a new BluetoothChat session.
-     * @param context  The UI Activity Context
-     * @param handler  A Handler to send messages back to the UI Activity
-     */
-    public BluetoothChatService(Context context, Handler handler) {
-        mAdapter = BluetoothAdapter.getDefaultAdapter();
-        mState = ComConst.STATE_NONE;
-        mHandler = handler;
+    IConnector.OnStateChangeListener mOnStateChangeListener;
+
+    public void setOnStateChangeListener(IConnector.OnStateChangeListener listener) {
+        mOnStateChangeListener = listener;
     }
 
-    /**
-     * Set the current state of the chat connection
-     * @param state  An integer defining the current connection state
-     */
-    private synchronized void setState(int state) {
+    public BluetoothChatService() {
+        mAdapter = BluetoothAdapter.getDefaultAdapter();
+        mState = ConnectState.STATE_NONE;
+    }
+
+    private synchronized void setState(final int state) {
         if (D) Log.d(TAG, "setState() " + mState + " -> " + state);
         mState = state;
 
-        // Give the new state to the Handler so the UI Activity can update
-        mHandler.sendEmptyMessage(state);
-        //mHandler.obtainMessage(MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
+        if(mOnStateChangeListener == null)
+            return;
+        x.task().autoPost(new Runnable() {
+            @Override
+            public void run() {
+                mOnStateChangeListener.onStateChange(state);
+            }
+        });
     }
 
     /**
@@ -106,7 +101,7 @@ public class BluetoothChatService {
         if (D) Log.d(TAG, "connect to: " + device);
 
         // Cancel any thread attempting to make a connection
-        if (mState == ComConst.STATE_CONNECTING) {
+        if (mState == ConnectState.STATE_CONNECTING) {
             if (mConnectThread != null) {mConnectThread.cancel(); mConnectThread = null;}
         }
 
@@ -116,7 +111,7 @@ public class BluetoothChatService {
         // Start the thread to connect with the given device
         mConnectThread = new ConnectThread(device, secure);
         mConnectThread.start();
-        setState(ComConst.STATE_CONNECTING);
+        setState(ConnectState.STATE_CONNECTING);
     }
 
     /**
@@ -140,7 +135,7 @@ public class BluetoothChatService {
 
         connectDevice=device;
 
-        setState(ComConst.STATE_CONNECTED);
+        setState(ConnectState.STATE_CONNECTED);
     }
     
     public BluetoothDevice getConnectDevice()
@@ -161,7 +156,7 @@ public class BluetoothChatService {
             mConnectedThread = null;
         }
 
-        setState(ComConst.STATE_NONE);
+        setState(ConnectState.STATE_NONE);
     }
     
     public interface IOListener
@@ -187,7 +182,7 @@ public class BluetoothChatService {
         ConnectedThread r;
         // Synchronize a copy of the ConnectedThread
         synchronized (this) {
-            if (mState !=ComConst. STATE_CONNECTED) return;
+            if (mState !=ConnectState. STATE_CONNECTED) return;
             r = mConnectedThread;
         }
         // Perform the write unsynchronized
@@ -198,14 +193,14 @@ public class BluetoothChatService {
      * Indicate that the connection attempt failed and notify the UI Activity.
      */
     private void connectionFailed() {
-        setState(ComConst.STATE_CONNECT_FAIL);
+        setState(ConnectState.STATE_CONNECT_FAIL);
     }
 
     /**
      * Indicate that the connection was lost and notify the UI Activity.
      */
     private void connectionLost() {
-        setState(ComConst.STATE_CONNECT_LOST);
+        setState(ConnectState.STATE_CONNECT_LOST);
     }
 
     /**
