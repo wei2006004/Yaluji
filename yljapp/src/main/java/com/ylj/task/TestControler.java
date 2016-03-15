@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class TestControler extends ConnectControler implements ITestCtrl {
 
-    public final static String EXTRA_CTRL_FLAG = "EXTRA_TEST_CTRL_FLAG";
+    public final static String EXTRA_ACTION_FLAG = "EXTRA_ACTION_FLAG";
     public final static String EXTRA_TEST_DATA = "EXTRA_TEST_INFO";
 
     public final static int CTRL_FLAG_STOP = 0;
@@ -40,7 +40,7 @@ public class TestControler extends ConnectControler implements ITestCtrl {
             String action = intent.getAction();
 
             if (action.equals(ACTION_TEST_CTRL)) {
-                int flag = intent.getIntExtra(EXTRA_CTRL_FLAG, CTRL_FLAG_STOP);
+                int flag = intent.getIntExtra(EXTRA_ACTION_FLAG, CTRL_FLAG_STOP);
                 if (flag == CTRL_FLAG_STOP) {
                     for (OnTestCtrlListener listener : mTestListeners) {
                         listener.onTestStop();

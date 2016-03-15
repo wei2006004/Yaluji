@@ -1,5 +1,7 @@
 package com.ylj.daemon.connect;
 
+import com.ylj.daemon.msghandler.IMessageHandler;
+
 import org.xutils.x;
 
 /**
@@ -14,14 +16,17 @@ public abstract class BaseConnector implements IConnector {
     public static final char START_FLAG = 0x02;
     public static final char END_FLAG = 0x04;
 
+    @Override
     public void sendDeviceMessage() {
         sendMessage(MESSAGE_DEVICE);
     }
 
+    @Override
     public void sendStartMessage() {
         sendMessage(MESSAGE_START);
     }
 
+    @Override
     public void sendStopMessage() {
         sendMessage(MESSAGE_STOP);
     }

@@ -10,8 +10,8 @@ import android.os.IBinder;
 
 import com.ylj.common.Controler;
 import com.ylj.connect.bean.DeviceInfo;
-import com.ylj.connect.config.ConnectError;
 import com.ylj.daemon.YljService;
+import com.ylj.daemon.config.ConnectState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,29 +21,30 @@ import java.util.List;
  */
 public class ConnectControler extends Controler implements IConnectCtrl {
 
-    public final static String EXTRA_ERROR = "extra_error";
-    public final static String EXTRA_DEVICE_INFO = "extra_device_info";
+    public final static String EXTRA_ACTION_FLAG = "EXTRA_ACTION_FLAG";
+    public final static String EXTRA_DEVICE_INFO = "EXTRA_DEVICE_INFO";
 
-    public final static String ACTION_CONNECT_ERROR = "action_connect_error";
-    public final static String ACTION_CONNECTED = "action_connected";
-    public final static String ACTION_DISCONNECTED = "action_disconnected";
+    public final static String ACTION_CONNECT_STATE_CHANGE = "ACTION_CONNECT_STATE_CHANGE";
+    public final static String ACTION_DEVICE_INFO = "ACTION_DEVICE_INFO";
+    public final static String ACTION_DISCONNECTED = "ACTION_DISCONNECTED";
 
     private BroadcastReceiver mConnectReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(ACTION_CONNECT_ERROR)) {
-                int error = intent.getIntExtra(EXTRA_ERROR, ConnectError.ERROR_NOT_KNOW);
-                if (error == ConnectError.ERROR_CONNECT_LOST) {
+            if (action.equals(ACTION_CONNECT_STATE_CHANGE)) {
+                int state = intent.getIntExtra(EXTRA_ACTION_FLAG, ConnectState.STATE_NONE);
+                if (state == ConnectState.STATE_CONNECT_LOST) {
                     for (OnConnectListener listener : mConnectListeners) {
                         listener.onConnectLost();
                     }
-                } else {
+                }
+                if(state == ConnectState.STATE_CONNECT_FAIL){
                     for (OnConnectListener listener : mConnectListeners) {
-                        listener.onConnectFail(error);
+                        listener.onConnectFail(0);
                     }
                 }
-            } else if (action.equals(ACTION_CONNECTED)) {
+            } else if (action.equals(ACTION_DEVICE_INFO)) {
                 DeviceInfo info = intent.getParcelableExtra(EXTRA_DEVICE_INFO);
                 for (OnConnectListener listener : mConnectListeners) {
                     listener.onConnected(info);
@@ -66,9 +67,9 @@ public class ConnectControler extends Controler implements IConnectCtrl {
     protected void onServiceConnected(IBinder binder) {
         super.onServiceConnected(binder);
 
-        IntentFilter filter = new IntentFilter(ACTION_CONNECT_ERROR);
+        IntentFilter filter = new IntentFilter(ACTION_CONNECT_STATE_CHANGE);
         mActivity.registerReceiver(mConnectReceiver, filter);
-        filter = new IntentFilter(ACTION_CONNECTED);
+        filter = new IntentFilter(ACTION_DEVICE_INFO);
         mActivity.registerReceiver(mConnectReceiver, filter);
         filter = new IntentFilter(ACTION_DISCONNECTED);
         mActivity.registerReceiver(mConnectReceiver, filter);

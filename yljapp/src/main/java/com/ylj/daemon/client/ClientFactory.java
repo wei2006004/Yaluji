@@ -1,8 +1,6 @@
-package com.ylj.daemon;
+package com.ylj.daemon.client;
 
 import android.content.Context;
-
-import com.ylj.daemon.client.BaseClient;
 
 /**
  * Created by Administrator on 2016/3/15 0015.

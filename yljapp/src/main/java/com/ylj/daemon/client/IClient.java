@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothDevice;
 public interface IClient {
     void connectToBluetooth(BluetoothDevice device);
     void connectToWifi(String ip, int port);
+    void connectToDebug();
 
     void disconnect();
     void reconnect();

@@ -1,8 +1,11 @@
 package com.ylj.connect.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class DeviceInfo
+public class DeviceInfo implements Parcelable
 {
 	private String deviceId="001";
 	private String version="V1.0";
@@ -14,7 +17,30 @@ public class DeviceInfo
 	private boolean tempState;
 	private boolean quakeState;
 
-	
+	public DeviceInfo(){}
+
+	protected DeviceInfo(Parcel in) {
+		deviceId = in.readString();
+		version = in.readString();
+		softVersion = in.readString();
+		huoerState = in.readByte() != 0;
+		dirState = in.readByte() != 0;
+		tempState = in.readByte() != 0;
+		quakeState = in.readByte() != 0;
+	}
+
+	public static final Creator<DeviceInfo> CREATOR = new Creator<DeviceInfo>() {
+		@Override
+		public DeviceInfo createFromParcel(Parcel in) {
+			return new DeviceInfo(in);
+		}
+
+		@Override
+		public DeviceInfo[] newArray(int size) {
+			return new DeviceInfo[size];
+		}
+	};
+
 	public boolean isHuoerState()
 	{
 		return huoerState;
@@ -92,5 +118,21 @@ public class DeviceInfo
 	public void setProductDate(Date productDate)
 	{
 		this.productDate = productDate;
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(deviceId);
+		dest.writeString(version);
+		dest.writeString(softVersion);
+		dest.writeByte((byte) (huoerState ? 1 : 0));
+		dest.writeByte((byte) (dirState ? 1 : 0));
+		dest.writeByte((byte) (tempState ? 1 : 0));
+		dest.writeByte((byte) (quakeState ? 1 : 0));
 	}
 }

@@ -1,4 +1,4 @@
-package com.ylj.daemon.connect;
+package com.ylj.daemon.msghandler;
 
 import com.ylj.connect.bean.DeviceInfo;
 import com.ylj.daemon.config.XmlTag;
@@ -35,13 +35,5 @@ public class MessageHandlerImpl implements IMessageHandler {
             mListener.onHandleWrongMessage(msg);
         }
 
-    }
-
-    interface OnHandleListener {
-        void onHandleDeviceInfo(DeviceInfo info);
-
-        void onHandleDeviceData(DeviceData data);
-
-        void onHandleWrongMessage(String msg);
     }
 }

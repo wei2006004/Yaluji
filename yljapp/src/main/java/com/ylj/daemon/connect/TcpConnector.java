@@ -9,7 +9,7 @@ public class TcpConnector extends BaseConnector {
 
     private TcpService mService;
 
-    TcpConnector(){
+    public TcpConnector(){
         mService = new TcpService();
         mService.setIOLister(new TcpService.IOListener() {
             @Override
