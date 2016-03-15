@@ -27,6 +27,7 @@ public interface IConnectCtrl {
 
     interface OnConnectListener {
         void onConnected(DeviceInfo info);
+        void onDisconnected();
         void onConnectFail(int error);
         void onConnectLost();
     }

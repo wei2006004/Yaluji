@@ -21,6 +21,8 @@ public class DeviceData implements Parcelable
 	
 	protected int state=STATE_STOP;
 
+	public DeviceData(){}
+
 	protected DeviceData(Parcel in) {
 		pulse = in.readInt();
 		speed = in.readFloat();

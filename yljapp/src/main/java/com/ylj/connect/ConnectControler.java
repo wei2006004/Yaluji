@@ -26,6 +26,7 @@ public class ConnectControler extends Controler implements IConnectCtrl {
 
     public final static String ACTION_CONNECT_ERROR = "action_connect_error";
     public final static String ACTION_CONNECTED = "action_connected";
+    public final static String ACTION_DISCONNECTED = "action_disconnected";
 
     private BroadcastReceiver mConnectReceiver = new BroadcastReceiver() {
         @Override
@@ -47,6 +48,10 @@ public class ConnectControler extends Controler implements IConnectCtrl {
                 for (OnConnectListener listener : mConnectListeners) {
                     listener.onConnected(info);
                 }
+            } else if (action.equals(ACTION_DISCONNECTED)) {
+                for (OnConnectListener listener : mConnectListeners) {
+                    listener.onDisconnected();
+                }
             }
         }
     };
@@ -64,6 +69,8 @@ public class ConnectControler extends Controler implements IConnectCtrl {
         IntentFilter filter = new IntentFilter(ACTION_CONNECT_ERROR);
         mActivity.registerReceiver(mConnectReceiver, filter);
         filter = new IntentFilter(ACTION_CONNECTED);
+        mActivity.registerReceiver(mConnectReceiver, filter);
+        filter = new IntentFilter(ACTION_DISCONNECTED);
         mActivity.registerReceiver(mConnectReceiver, filter);
     }
 
@@ -109,8 +116,8 @@ public class ConnectControler extends Controler implements IConnectCtrl {
         return mCleint.isConnect();
     }
 
-    public void requestDeviceInfo(){
-        if(isConnect()){
+    public void requestDeviceInfo() {
+        if (isConnect()) {
             mCleint.requestDeviceInfo();
         }
     }

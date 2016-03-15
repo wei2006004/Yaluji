@@ -5,20 +5,31 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import com.ylj.daemon.client.BaseClient;
-import com.ylj.daemon.client.ClientFactory;
 
 /**
  * Created by Administrator on 2016/3/15 0015.
  */
 public class BaseService extends Service {
 
-    protected BaseClient mClient = ClientFactory.createClient(ClientFactory.CLIENT_TYPE_YLJ);
+    protected BaseClient mClient;
 
     public BaseService() {
     }
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+        mClient = ClientFactory.createClient(this, ClientFactory.CLIENT_TYPE_YLJ);
+    }
+
+    @Override
     public IBinder onBind(Intent intent) {
         return mClient;
+    }
+
+    protected void sendBroadcastAction(String action) {
+        Intent intent = new Intent();
+        intent.setAction(action);
+        sendBroadcast(intent);
     }
 }
