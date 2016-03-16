@@ -84,10 +84,14 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
     @ViewInject(R.id.btn_auto)
     Button mAutoButton;
 
+    @ViewInject(R.id.btn_run)
+    Button mRunButton;
+
     @Event(R.id.btn_auto)
     private void onAutoClick(View view) {
         Random random = new Random();
         int level=random.nextInt(13);
+        quakeDatas.clear();
         for (int i = 0; i < ADJUST_LENGTH; i++) {
             quakeDatas.add(random.nextDouble()  + level);
         }
@@ -144,6 +148,7 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
         if(mAdjustCtrl != null){
             mAdjustCtrl.stopAdjust();
             setStatus("pause");
+            mRunButton.setText("run");
         }
     }
 
@@ -151,7 +156,9 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
         if(mAdjustCtrl != null){
             mAdjustCtrl.addAdjustCtrlListener(this);
             mAdjustCtrl.startAdjust();
+
             setStatus("running");
+            mRunButton.setText("pause");
         }
     }
 
@@ -277,6 +284,8 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
                 mListener.onAdjustFinish();
             }
             setStatus("finished");
+            mRunButton.setText("run");
+            mRunButton.setEnabled(false);
             return;
         }
         quakeDatas.add(data);

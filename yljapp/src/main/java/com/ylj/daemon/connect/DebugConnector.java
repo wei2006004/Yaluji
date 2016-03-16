@@ -71,6 +71,7 @@ public class DebugConnector extends BaseConnector {
         super.sendStartMessage();
         mIsRun = true;
         mDebugSource.start();
+        mTimer = new Timer();
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -79,6 +80,7 @@ public class DebugConnector extends BaseConnector {
                     onMessageArrive(data);
                 } else {
                     mTimer.cancel();
+                    mTimer = null;
                 }
             }
         }, 500, 500);
@@ -88,8 +90,8 @@ public class DebugConnector extends BaseConnector {
 
     private String createDeviceDataMsg() {
         String text = "<DeviceData>" +                      //实时采集数据报文标签
-                "<quake>{0}</quake>" +                     //振动加速度数据
-                "<temp>{1}</temp>" +                       //温度数据
+                "<quake>{0,number,#}</quake>" +                     //振动加速度数据
+                "<temp>{1,number,#}</temp>" +                       //温度数据
                 "<pulse>{2}</pulse>" +                       //位移脉冲数据
                 "<speed>{3}</speed>" +                      //速度脉冲数据
                 "<state>head</state>" +                     //前进、停止和后退状态
@@ -97,9 +99,11 @@ public class DebugConnector extends BaseConnector {
                 "<compassRoll>0</compassRoll>" +           //电子罗盘Roll方向
                 "<compassHeading>{4}</compassHeading>" +     //电子罗盘Heading方向
                 "</DeviceData>";
+        mDebugSource.refresh();
         text = MessageFormat.format(text,
                 mDebugSource.getQuake(),
                 mDebugSource.getTemp(),
+                mDebugSource.getPulse(),
                 mDebugSource.getSpeed(),
                 mDebugSource.getCompassHeading());
         return "" + START_FLAG + text + END_FLAG;
