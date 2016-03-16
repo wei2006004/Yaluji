@@ -50,10 +50,10 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
 
         BtConnector connector = new BtConnector();
         connector.setBluetoothDevice(device);
-        connector.setOnStateChangeListener(this);
-        connector.setMessageHandler(mMessageHandler);
-        connector.connect();
         mConnector = connector;
+        mConnector.setOnStateChangeListener(this);
+        mConnector.setMessageHandler(mMessageHandler);
+        mConnector.connect();
     }
 
     @Override
@@ -62,10 +62,10 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
 
         TcpConnector connector = new TcpConnector();
         connector.setAddress(ip, port);
-        connector.setOnStateChangeListener(this);
-        connector.setMessageHandler(mMessageHandler);
-        connector.connect();
         mConnector = connector;
+        mConnector.setOnStateChangeListener(this);
+        mConnector.setMessageHandler(mMessageHandler);
+        mConnector.connect();
     }
 
     @Override
@@ -73,10 +73,10 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
         disconnect();
 
         DebugConnector connector = new DebugConnector();
-        connector.setOnStateChangeListener(this);
-        connector.setMessageHandler(mMessageHandler);
-        connector.connect();
         mConnector = connector;
+        mConnector.setOnStateChangeListener(this);
+        mConnector.setMessageHandler(mMessageHandler);
+        mConnector.connect();
     }
 
     @Override
@@ -90,7 +90,6 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     @Override
     public void reconnect() {
         if (mConnector != null) {
-            mConnector.disconnect();
             mConnector.connect();
         }
     }
@@ -127,20 +126,26 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     public void onStateChange(int state) {
         mState = state;
         sendBroadcast(ACTION_CONNECT_STATE_CHANGE, state);
+
+        if(state == ConnectState.STATE_CONNECTED){
+            mConnector.sendDeviceMessage();
+        }
     }
 
     @Override
     public void onHandleDeviceInfo(DeviceInfo info) {
+        Log.d("yljclient", "info:" + info.getDeviceId());
         sendBroadcast(ACTION_DEVICE_INFO, EXTRA_DEVICE_INFO, info);
     }
 
     @Override
     public void onHandleDeviceData(DeviceData data) {
+        Log.d("yljclient", "data:" + data.toString());
         sendBroadcast(ACTION_TEST_DATA, EXTRA_TEST_DATA, data);
     }
 
     @Override
     public void onHandleWrongMessage(String msg) {
-        Log.e("onHandleWrongMessage", "message:" + msg);
+        Log.e("yljclient", "message:" + msg);
     }
 }

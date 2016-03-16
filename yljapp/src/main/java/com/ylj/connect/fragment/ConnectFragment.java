@@ -51,9 +51,9 @@ public class ConnectFragment extends BaseFragment {
         @Override
         public Fragment getItem(int position) {
             if(position==0){
-                return new BtConnectFragment();
+                return new WifiConnectFragment();
             }
-            return new WifiConnectFragment();
+            return new BtConnectFragment();
         }
 
         @Override
@@ -66,9 +66,9 @@ public class ConnectFragment extends BaseFragment {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "BLUETOOTH";
-                case 1:
                     return "WLAN";
+                case 1:
+                    return "BLUETOOTH";
             }
             return null;
         }

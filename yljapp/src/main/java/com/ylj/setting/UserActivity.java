@@ -14,6 +14,7 @@ import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Admin;
 import com.ylj.common.bean.Staff;
 import com.ylj.common.config.AppStatus;
+import com.ylj.connect.bean.DeviceInfo;
 import com.ylj.db.LoginLet;
 import com.ylj.main.LoginActivity;
 import com.ylj.staff.AdminModifyActivity;
@@ -45,7 +46,7 @@ public class UserActivity extends BaseActivity {
     Admin mAdmin;
 
     boolean mIsConnect = false;
-    String mCurrentDevice;
+    DeviceInfo mCurrentDevice;
     boolean mIsDeviceNormal;
     int mConnectMode = CONNECT_MODE_NONE;
 
@@ -182,7 +183,7 @@ public class UserActivity extends BaseActivity {
 
         if (mIsConnect) {
             mConnectStatusText.setText("connected");
-            mConnectDeviceText.setText(mCurrentDevice);
+            mConnectDeviceText.setText(mCurrentDevice.getDeviceId());
             if (mConnectMode == CONNECT_MODE_BLUETOOTH) {
                 mConnectModeText.setText("bluetooth");
             } else {

@@ -97,6 +97,13 @@ public class ConnectControler extends Controler implements IConnectCtrl {
     }
 
     @Override
+    public void connectToDebug() {
+        if (mCleint == null)
+            return;
+        mCleint.connectToDebug();
+    }
+
+    @Override
     public void disconnect() {
         if (mCleint == null)
             return;

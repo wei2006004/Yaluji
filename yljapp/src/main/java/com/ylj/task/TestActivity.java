@@ -168,7 +168,7 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
     }
 
     private void initControler() {
-        mTestControler = TestControler.newInstance(this, YljService.class);
+        mTestControler = TestControler.newInstance(this);
         mTestControler.addConnectListener(this);
     }
 
@@ -263,7 +263,17 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
     }
 
     @Override
+    public void onDisconnected() {
+
+    }
+
+    @Override
     public void onConnectFail(int error) {
+
+    }
+
+    @Override
+    public void onConnectLost() {
 
     }
 

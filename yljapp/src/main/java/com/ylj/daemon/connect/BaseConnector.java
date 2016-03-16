@@ -71,7 +71,7 @@ public abstract class BaseConnector implements IConnector {
         return false;
     }
 
-    protected IMessageHandler mMessageHandler;
+    private IMessageHandler mMessageHandler;
 
     @Override
     public void setMessageHandler(IMessageHandler handler) {

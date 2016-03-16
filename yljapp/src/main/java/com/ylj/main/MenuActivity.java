@@ -84,6 +84,11 @@ public class MenuActivity extends BaseActivity {
 
     @Event(R.id.rl_task)
     private void onTaskLayoutClick(View view){
+        AppStatus appStatus=AppStatus.instance();
+        if(!appStatus.isConnect()){
+            showToast("device is not connected");
+            return;
+        }
         x.task().run(new Runnable() {
             @Override
             public void run() {

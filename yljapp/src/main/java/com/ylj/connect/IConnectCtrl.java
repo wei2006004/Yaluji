@@ -17,6 +17,8 @@ public interface IConnectCtrl {
 
     void connectToWifi(String ip, int port);
 
+    void connectToDebug();
+
     void disconnect();
     void reconnect();
 

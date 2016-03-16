@@ -3,10 +3,13 @@ package com.ylj.connect.fragment;
 import android.app.Activity;
 import android.net.Uri;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.ylj.R;
 import com.ylj.common.BaseFragment;
+import com.ylj.common.config.Config;
+import com.ylj.common.config.ConfigLet;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -18,15 +21,22 @@ public class WifiConnectFragment extends BaseFragment {
     @ViewInject(R.id.tv_wifi_status)
     private TextView mStatusText;
 
+    @ViewInject(R.id.bt_open_wifi)
+    private Button mOpenButton;
+
     private OnWifiConnectListener mListener;
 
     public WifiConnectFragment() {
-        // Required empty public constructor
     }
 
     @Event(R.id.bt_open_wifi)
     private void onOpenWifiButtonClick(View view){
-        mStatusText.setText("wifi connect");
+        if(ConfigLet.isDebug()){
+            mStatusText.setText("wifi connect");
+            mOpenButton.setEnabled(false);
+        }else {
+
+        }
     }
 
     @Event(R.id.bt_connect)
