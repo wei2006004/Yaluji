@@ -13,7 +13,9 @@ import com.ylj.adjust.IAdjustCtrl;
 import com.ylj.adjust.bean.AdjustResult;
 import com.ylj.common.BaseFragment;
 import com.ylj.common.config.ConfigLet;
+import com.ylj.common.utils.DataConvertor;
 import com.ylj.common.widget.PlotView;
+import com.ylj.task.bean.DeviceData;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -114,6 +116,8 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
             mListener.onAdjustFinish();
         }
         setStatus("finished");
+        mRunButton.setEnabled(false);
+        mRunButton.setText("run");
     }
 
     @Event(R.id.btn_run)
@@ -198,8 +202,8 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
                 return null;
             }
             int position = Integer.parseInt(posString);
-            if (position < 0 || position > ADJUST_LENGTH) {
-                showToast("position must between 0 and 100");
+            if (position < 1 || position > ADJUST_LENGTH) {
+                showToast("position must between 1 and 100");
                 return null;
             }
         }
@@ -274,7 +278,8 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
     }
 
     @Override
-    public void onAdjustRefresh(double data) {
+    public void onAdjustRefresh(DeviceData data) {
+        double quake = DataConvertor.covertQuakeFromAD(data.getQuake());
         if (quakeDatas.size() >= ADJUST_LENGTH) {
             if(mAdjustCtrl != null){
                 mAdjustCtrl.stopAdjust();
@@ -288,8 +293,8 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
             mRunButton.setEnabled(false);
             return;
         }
-        quakeDatas.add(data);
-        PointF pointF = new PointF(quakeDatas.size() - 1, (float) data);
+        quakeDatas.add(quake);
+        PointF pointF = new PointF(quakeDatas.size() - 1, (float) quake);
         plotView.getEdit()
                 .addPoint(pointF)
                 .commit();

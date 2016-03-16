@@ -112,6 +112,7 @@ public class AdminModifyActivity extends BaseActivity {
                 break;
             case MODE_NEW_ADMIN:
                 turnToSetPasswd();
+                finish();
             default:
                 break;
         }

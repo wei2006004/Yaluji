@@ -100,13 +100,8 @@ public class PasswdModifyActivity extends BaseActivity {
             setResultAndFinish();
         }
         if (mMode == MODE_NEW_PASSWD) {
-            backToStaffManagerActivity();
+            finish();
         }
-    }
-
-    private void backToStaffManagerActivity() {
-        Intent intent = new Intent(this, StaffManagerActivity.class);
-        startActivity(intent);
     }
 
     private void setResultAndFinish() {

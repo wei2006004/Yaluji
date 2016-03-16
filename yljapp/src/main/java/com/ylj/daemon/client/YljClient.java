@@ -107,7 +107,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     }
 
     @Override
-    public void startTest() {
+    public void startAdjust() {
         if (isConnect()) {
             mConnector.sendStartMessage();
             sendBroadcast(ACTION_TEST_CTRL, CTRL_FLAG_START);
@@ -115,11 +115,21 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     }
 
     @Override
-    public void stopTest() {
+    public void stopAdjust() {
         if (isConnect()) {
             mConnector.sendStopMessage();
             sendBroadcast(ACTION_TEST_CTRL, CTRL_FLAG_STOP);
         }
+    }
+
+    @Override
+    public void startTest() {
+
+    }
+
+    @Override
+    public void stopTest() {
+
     }
 
     @Override

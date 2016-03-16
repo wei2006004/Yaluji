@@ -7,6 +7,11 @@ import com.ylj.setting.def.SettingDefault;
  */
 public class ConfigLet {
 
+    public static boolean isFirstLaunch(){
+        Config config=Config.appInstance();
+        return config.getBoolConfig(Global.PREF_TAG_FIRST_LAUNCH, SettingDefault.DEFAULT_TAG_FIRST_LAUNCH);
+    }
+
     public static boolean isDebug(){
         Config config=Config.appInstance();
         return config.getBoolConfig(Global.PREF_TAG_DEBGU, SettingDefault.DEFAULT_TAG_DEBGU);

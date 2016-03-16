@@ -1,6 +1,7 @@
 package com.ylj.connect.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.ylj.R;
 import com.ylj.common.BaseFragment;
+import com.ylj.connect.SensorActivity;
 import com.ylj.connect.bean.DeviceInfo;
 
 import org.xutils.view.annotation.ContentView;
@@ -53,6 +55,12 @@ public class DeviceInfoFragment extends BaseFragment {
     }
 
     public DeviceInfoFragment() {
+    }
+
+    @Event(R.id.bt_sensor)
+    private void onSensorButtonClick(View view){
+        Intent intent = new Intent(getActivity(), SensorActivity.class);
+        startActivity(intent);
     }
 
     @Event(R.id.bt_resent)

@@ -17,6 +17,9 @@ public interface IClient {
 
     void requestDeviceInfo();
 
+    void startAdjust();
+    void stopAdjust();
+
     void startTest();
     void stopTest();
 }

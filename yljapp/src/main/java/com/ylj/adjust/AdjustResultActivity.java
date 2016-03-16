@@ -23,6 +23,7 @@ import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Task;
 import com.ylj.common.widget.PlotView;
 import com.ylj.db.DbLet;
+import com.ylj.task.TaskActivity;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -91,6 +92,8 @@ public class AdjustResultActivity extends BaseActivity {
         mTask.setIsAdjust(true);
         DbLet.saveOrUpdateTask(mTask);
         showToast("task save");
+
+        TaskActivity.startNewActivity(this,mTask);
         finish();
     }
 

@@ -1,4 +1,4 @@
-package com.ylj.task.utils;
+package com.ylj.common.utils;
 
 import com.ylj.task.bean.DeviceData;
 import com.ylj.task.bean.Record;
@@ -13,6 +13,10 @@ public class DataConvertor {
 
     private static double TEMP_SCALE = (25.0 * 5000) / (65536.0 * 24 * 16);
     private static double QUAKE_SCALE = 1.0 / 4096;
+
+    public static double covertQuakeFromAD(int value){
+        return value * QUAKE_SCALE + QUAKE_OFFSET;
+    }
 
     public static Record covertDeviceData2Record(double lastPosx, double lastPosy, double step, DeviceData deviceData) {
         int state = deviceData.getState();

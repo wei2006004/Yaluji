@@ -146,6 +146,16 @@
             android:enabled="true"
             android:exported="false" >
         </service>
+
+        <activity
+            android:name=".connect.SensorActivity"
+            android:label="@string/title_activity_sensor"
+            android:parentActivityName=".connect.ConnectActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ylj.connect.ConnectActivity" />
+        </activity>
     </application>
 
 </manifest>

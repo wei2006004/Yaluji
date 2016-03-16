@@ -1,5 +1,7 @@
 package com.ylj.adjust;
 
+import com.ylj.task.bean.DeviceData;
+
 /**
  * Created by Administrator on 2016/3/3 0003.
  */
@@ -13,6 +15,6 @@ public interface IAdjustCtrl {
     interface OnAdjustCtrlLister {
         void onAdjustStart();
         void onAdjustStop();
-        void onAdjustRefresh(double data);
+        void onAdjustRefresh(DeviceData data);
     }
 }

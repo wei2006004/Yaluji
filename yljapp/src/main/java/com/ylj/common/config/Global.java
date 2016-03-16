@@ -8,6 +8,7 @@ public class Global {
     public static final String SYSTEM_DB_NAME="yljapp.db";
 
     public static final String PREF_TAG_DEBGU = "PREF_TAG_DEBGU";
+    public static final String PREF_TAG_FIRST_LAUNCH = "PREF_TAG_FIRST_LAUNCH";
 
     public static final String PREF_TAG_FTP_IP = "PREF_TAG_FTP_IP";
     public static final String PREF_TAG_FTP_PORT = "PREF_TAG_FTP_PORT";

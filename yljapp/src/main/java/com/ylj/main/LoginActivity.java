@@ -8,8 +8,12 @@ import android.os.Bundle;
 
 import com.ylj.R;
 import com.ylj.common.BaseActivity;
+import com.ylj.common.config.Config;
+import com.ylj.common.config.ConfigLet;
+import com.ylj.common.config.Global;
 import com.ylj.main.fragment.AdminLoginFragment;
 import com.ylj.main.fragment.CommonLoginFragment;
+import com.ylj.staff.AdminModifyActivity;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -30,6 +34,15 @@ public class LoginActivity extends BaseActivity implements CommonLoginFragment.O
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(ConfigLet.isFirstLaunch()){
+            AdminModifyActivity.startAsNewAdminActivity(this);
+            Config.appInstance().setBoolConfig(Global.PREF_TAG_FIRST_LAUNCH, false);
+        }
     }
 
     @Override
