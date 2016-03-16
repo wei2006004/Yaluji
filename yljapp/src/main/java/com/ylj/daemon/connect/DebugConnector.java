@@ -6,6 +6,7 @@ import com.ylj.daemon.config.ConnectState;
 
 import org.xutils.x;
 
+import java.text.MessageFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -69,6 +70,7 @@ public class DebugConnector extends BaseConnector {
     public void sendStartMessage() {
         super.sendStartMessage();
         mIsRun = true;
+        mDebugSource.start();
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -82,17 +84,24 @@ public class DebugConnector extends BaseConnector {
         }, 500, 500);
     }
 
+    DebugSource mDebugSource = new DebugSource();
+
     private String createDeviceDataMsg() {
         String text = "<DeviceData>" +                      //实时采集数据报文标签
-                "<quake>12.3</quake>" +                     //振动加速度数据
-                "<temp>80.4</temp>" +                       //温度数据
-                "<pulse>39</pulse>" +                       //位移脉冲数据
-                "<speed>2.1</speed>" +                      //速度脉冲数据
+                "<quake>{0}</quake>" +                     //振动加速度数据
+                "<temp>{1}</temp>" +                       //温度数据
+                "<pulse>{2}</pulse>" +                       //位移脉冲数据
+                "<speed>{3}</speed>" +                      //速度脉冲数据
                 "<state>head</state>" +                     //前进、停止和后退状态
-                "<compassPitch>36</compassPitch>" +         //电子罗盘Pitch方向
-                "<compassRoll>34</compassRoll>" +           //电子罗盘Roll方向
-                "<compassHeading>23</compassHeading>" +     //电子罗盘Heading方向
+                "<compassPitch>0</compassPitch>" +         //电子罗盘Pitch方向
+                "<compassRoll>0</compassRoll>" +           //电子罗盘Roll方向
+                "<compassHeading>{4}</compassHeading>" +     //电子罗盘Heading方向
                 "</DeviceData>";
+        text = MessageFormat.format(text,
+                mDebugSource.getQuake(),
+                mDebugSource.getTemp(),
+                mDebugSource.getSpeed(),
+                mDebugSource.getCompassHeading());
         return "" + START_FLAG + text + END_FLAG;
     }
 
@@ -100,6 +109,7 @@ public class DebugConnector extends BaseConnector {
     public void sendStopMessage() {
         super.sendStopMessage();
         mIsRun = false;
+        mDebugSource.stop();
     }
 
     @Override

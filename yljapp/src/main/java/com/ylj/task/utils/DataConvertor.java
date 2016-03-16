@@ -14,14 +14,14 @@ public class DataConvertor {
     private static double TEMP_SCALE = (25.0 * 5000) / (65536.0 * 24 * 16);
     private static double QUAKE_SCALE = 1.0 / 4096;
 
-    public static Record covertDeviceData2Record(double lastPosx, double lastPosy, double step, DeviceData mDataSource) {
-        int state = mDataSource.getState();
-        double distance = step * mDataSource.getPulse();
-        double temp = mDataSource.getTemp() * TEMP_SCALE + TEMP_OFFSET;
-        double quake = mDataSource.getQuake() * QUAKE_SCALE + QUAKE_OFFSET;
-        double direction = mDataSource.getCompassHeading() / 100.0;
+    public static Record covertDeviceData2Record(double lastPosx, double lastPosy, double step, DeviceData deviceData) {
+        int state = deviceData.getState();
+        double distance = step * deviceData.getPulse();
+        double temp = deviceData.getTemp() * TEMP_SCALE + TEMP_OFFSET;
+        double quake = deviceData.getQuake() * QUAKE_SCALE + QUAKE_OFFSET;
+        double direction = deviceData.getCompassHeading() / 100.0;
 
-        double speed = step * mDataSource.getSpeed();
+        double speed = step * deviceData.getSpeed();
         double xspeed = speed * Math.cos(Math.toRadians(direction));
         double yspeed = speed * Math.sin(Math.toRadians(direction));
 

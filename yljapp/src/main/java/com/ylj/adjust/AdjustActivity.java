@@ -20,6 +20,9 @@ import com.ylj.adjust.bean.AdjustResult;
 import com.ylj.adjust.fragment.AdjustFragment;
 import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Task;
+import com.ylj.common.config.AppStatus;
+import com.ylj.connect.ConnectControler;
+import com.ylj.connect.bean.DeviceInfo;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -29,7 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ContentView(R.layout.activity_adjust)
-public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdjustFinishListener {
+public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdjustFinishListener,
+        ConnectControler.OnConnectListener {
 
     public static final int ADJUST_TIME = 3;
 
@@ -51,6 +55,8 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
     int mMode = MODE_LIGHT_ADJUST;
 
     Task mTask;
+
+    AdjustControler mAdjustControler;
 
     SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -125,8 +131,20 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
         setFabVisible(false);
     }
 
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        mAdjustControler.deleteConnectListener(this);
+        mAdjustControler.release();
+    }
+
     private void initData() {
-        mFragments.add(new AdjustFragment());
+        mAdjustControler = AdjustControler.newInstance(this);
+        mAdjustControler.addConnectListener(this);
+
+        AdjustFragment fragment = new AdjustFragment();
+        fragment.setAdjustCtrl(mAdjustControler);
+        mFragments.add(fragment);
     }
 
     private void setFabVisible(boolean isVisible) {
@@ -211,6 +229,37 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
                 break;
         }
         setFabVisible(true);
+    }
+
+    @Override
+    public void onConnected(DeviceInfo info) {
+        showToast("connected");
+        setAppConnectStatus(true);
+        AppStatus.instance().setCurrentDevice(info);
+    }
+
+
+    @Override
+    public void onDisconnected() {
+        showToast("disconnected");
+        setAppConnectStatus(false);
+    }
+
+    @Override
+    public void onConnectFail(int error) {
+        showToast("connect fail");
+        setAppConnectStatus(false);
+    }
+
+    @Override
+    public void onConnectLost() {
+        showToast("connect lost");
+        setAppConnectStatus(false);
+    }
+
+    private void setAppConnectStatus(boolean isConnect){
+        AppStatus appstatus = AppStatus.instance();
+        appstatus.setIsConnect(isConnect);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
