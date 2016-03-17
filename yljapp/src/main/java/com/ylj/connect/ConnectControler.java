@@ -12,6 +12,7 @@ import com.ylj.common.Controler;
 import com.ylj.connect.bean.DeviceInfo;
 import com.ylj.daemon.YljService;
 import com.ylj.daemon.config.ConnectState;
+import com.ylj.daemon.config.ServiceAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,19 +22,12 @@ import java.util.List;
  */
 public class ConnectControler extends Controler implements IConnectCtrl {
 
-    public final static String EXTRA_ACTION_FLAG = "EXTRA_ACTION_FLAG";
-    public final static String EXTRA_DEVICE_INFO = "EXTRA_DEVICE_INFO";
-
-    public final static String ACTION_CONNECT_STATE_CHANGE = "ACTION_CONNECT_STATE_CHANGE";
-    public final static String ACTION_DEVICE_INFO = "ACTION_DEVICE_INFO";
-    public final static String ACTION_DISCONNECTED = "ACTION_DISCONNECTED";
-
     private BroadcastReceiver mConnectReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(ACTION_CONNECT_STATE_CHANGE)) {
-                int state = intent.getIntExtra(EXTRA_ACTION_FLAG, ConnectState.STATE_NONE);
+            if (action.equals(ServiceAction.ACTION_CONNECT_STATE_CHANGE)) {
+                int state = intent.getIntExtra(ServiceAction.EXTRA_ACTION_FLAG, ConnectState.STATE_NONE);
                 if (state == ConnectState.STATE_CONNECT_LOST) {
                     for (OnConnectListener listener : mConnectListeners) {
                         listener.onConnectLost();
@@ -44,12 +38,12 @@ public class ConnectControler extends Controler implements IConnectCtrl {
                         listener.onConnectFail(0);
                     }
                 }
-            } else if (action.equals(ACTION_DEVICE_INFO)) {
-                DeviceInfo info = intent.getParcelableExtra(EXTRA_DEVICE_INFO);
+            } else if (action.equals(ServiceAction.ACTION_DEVICE_INFO)) {
+                DeviceInfo info = intent.getParcelableExtra(ServiceAction.EXTRA_DEVICE_INFO);
                 for (OnConnectListener listener : mConnectListeners) {
                     listener.onConnected(info);
                 }
-            } else if (action.equals(ACTION_DISCONNECTED)) {
+            } else if (action.equals(ServiceAction.ACTION_DISCONNECTED)) {
                 for (OnConnectListener listener : mConnectListeners) {
                     listener.onDisconnected();
                 }
@@ -67,11 +61,11 @@ public class ConnectControler extends Controler implements IConnectCtrl {
     protected void onServiceConnected(IBinder binder) {
         super.onServiceConnected(binder);
 
-        IntentFilter filter = new IntentFilter(ACTION_CONNECT_STATE_CHANGE);
+        IntentFilter filter = new IntentFilter(ServiceAction.ACTION_CONNECT_STATE_CHANGE);
         mActivity.registerReceiver(mConnectReceiver, filter);
-        filter = new IntentFilter(ACTION_DEVICE_INFO);
+        filter = new IntentFilter(ServiceAction.ACTION_DEVICE_INFO);
         mActivity.registerReceiver(mConnectReceiver, filter);
-        filter = new IntentFilter(ACTION_DISCONNECTED);
+        filter = new IntentFilter(ServiceAction.ACTION_DISCONNECTED);
         mActivity.registerReceiver(mConnectReceiver, filter);
     }
 

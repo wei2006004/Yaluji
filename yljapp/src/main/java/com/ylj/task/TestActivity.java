@@ -105,7 +105,7 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
 
     @Event(R.id.fab_stop)
     private void onStopClick(View view) {
-        mTestControler.stopTest();
+        mTestControler.pauseTest();
         mStopButton.setEnabled(false);
     }
 

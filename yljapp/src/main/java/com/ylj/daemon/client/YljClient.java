@@ -4,8 +4,11 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
 
+import com.ylj.common.bean.Task;
+import com.ylj.common.bean.Test;
 import com.ylj.connect.bean.DeviceInfo;
 import com.ylj.daemon.config.ConnectState;
+import com.ylj.daemon.config.ServiceAction;
 import com.ylj.daemon.connect.BtConnector;
 import com.ylj.daemon.connect.DebugConnector;
 import com.ylj.daemon.connect.IConnector;
@@ -20,20 +23,7 @@ import com.ylj.daemon.bean.DeviceData;
  */
 public class YljClient extends BaseClient implements IConnector.OnStateChangeListener,
         IMessageHandler.OnHandleListener {
-
-    public final static String ACTION_CONNECT_STATE_CHANGE = "ACTION_CONNECT_STATE_CHANGE";
-    public final static String ACTION_DISCONNECTED = "ACTION_DISCONNECTED";
-    public final static String ACTION_DEVICE_INFO = "ACTION_DEVICE_INFO";
-    public final static String ACTION_TEST_DATA = "ACTION_TEST_DATA";
-    public final static String ACTION_TEST_CTRL = "ACTION_TEST_CTRL";
-
-    public final static String EXTRA_TEST_DATA = "EXTRA_TEST_INFO";
-    public final static String EXTRA_DEVICE_INFO = "EXTRA_DEVICE_INFO";
-
-    public final static int CTRL_FLAG_STOP = 0;
-    public final static int CTRL_FLAG_START = 1;
-
-
+    
     private int mState = ConnectState.STATE_NONE;
 
     IConnector mConnector;
@@ -83,7 +73,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     public void disconnect() {
         if (mConnector != null) {
             mConnector.disconnect();
-            sendBroadcast(ACTION_DISCONNECTED);
+            sendBroadcast(ServiceAction.ACTION_DISCONNECTED);
         }
     }
 
@@ -110,7 +100,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     public void startAdjust() {
         if (isConnect()) {
             mConnector.sendStartMessage();
-            sendBroadcast(ACTION_TEST_CTRL, CTRL_FLAG_START);
+            sendBroadcast(ServiceAction.ACTION_SAMPLE_CTRL_STATE_CHANGE, ServiceAction.CTRL_FLAG_START);
         }
     }
 
@@ -118,8 +108,18 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     public void stopAdjust() {
         if (isConnect()) {
             mConnector.sendStopMessage();
-            sendBroadcast(ACTION_TEST_CTRL, CTRL_FLAG_STOP);
+            sendBroadcast(ServiceAction.ACTION_SAMPLE_CTRL_STATE_CHANGE, ServiceAction.CTRL_FLAG_STOP);
         }
+    }
+
+    @Override
+    public void loadTask(Task task) {
+
+    }
+
+    @Override
+    public void finishTest(Test test) {
+
     }
 
     @Override
@@ -128,14 +128,14 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     }
 
     @Override
-    public void stopTest() {
+    public void puaseTest() {
 
     }
 
     @Override
     public void onStateChange(int state) {
         mState = state;
-        sendBroadcast(ACTION_CONNECT_STATE_CHANGE, state);
+        sendBroadcast(ServiceAction.ACTION_CONNECT_STATE_CHANGE, state);
 
         if(state == ConnectState.STATE_CONNECTED){
             mConnector.sendDeviceMessage();
@@ -145,13 +145,13 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     @Override
     public void onHandleDeviceInfo(DeviceInfo info) {
         Log.d("yljclient", "info:" + info.getDeviceId());
-        sendBroadcast(ACTION_DEVICE_INFO, EXTRA_DEVICE_INFO, info);
+        sendBroadcast(ServiceAction.ACTION_DEVICE_INFO, ServiceAction.EXTRA_DEVICE_INFO, info);
     }
 
     @Override
     public void onHandleDeviceData(DeviceData data) {
         Log.d("yljclient", "data:" + data.toString());
-        sendBroadcast(ACTION_TEST_DATA, EXTRA_TEST_DATA, data);
+        sendBroadcast(ServiceAction.ACTION_ADJUST_DATA, ServiceAction.EXTRA_ADJUST_DATA, data);
     }
 
     @Override

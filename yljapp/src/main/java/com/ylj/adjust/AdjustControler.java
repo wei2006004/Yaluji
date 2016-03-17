@@ -10,6 +10,7 @@ import android.os.IBinder;
 import com.ylj.connect.ConnectControler;
 import com.ylj.daemon.YljService;
 import com.ylj.daemon.bean.DeviceData;
+import com.ylj.daemon.config.ServiceAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +20,7 @@ import java.util.List;
  */
 public class AdjustControler extends ConnectControler implements IAdjustCtrl {
 
-    public final static String EXTRA_ACTION_FLAG = "EXTRA_ACTION_FLAG";
-    public final static String EXTRA_TEST_DATA = "EXTRA_TEST_INFO";
-
-    public final static int CTRL_FLAG_STOP = 0;
-    public final static int CTRL_FLAG_START = 1;
-
-    public final static String ACTION_TEST_CTRL = "ACTION_TEST_CTRL";
-    public final static String ACTION_TEST_DATA = "ACTION_TEST_DATA";
+    
 
     public static AdjustControler newInstance(Activity activity) {
         AdjustControler controler = new AdjustControler();
@@ -39,19 +33,19 @@ public class AdjustControler extends ConnectControler implements IAdjustCtrl {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
-            if (action.equals(ACTION_TEST_CTRL)) {
-                int flag = intent.getIntExtra(EXTRA_ACTION_FLAG, CTRL_FLAG_STOP);
-                if (flag == CTRL_FLAG_STOP) {
+            if (action.equals(ServiceAction.ACTION_SAMPLE_CTRL_STATE_CHANGE)) {
+                int flag = intent.getIntExtra(ServiceAction.EXTRA_ACTION_FLAG, ServiceAction.CTRL_FLAG_STOP);
+                if (flag == ServiceAction.CTRL_FLAG_STOP) {
                     for (OnAdjustCtrlLister listener : mAdjustListeners) {
                         listener.onAdjustStop();
                     }
-                } else if (flag == CTRL_FLAG_START) {
+                } else if (flag == ServiceAction.CTRL_FLAG_START) {
                     for (OnAdjustCtrlLister listener : mAdjustListeners) {
                         listener.onAdjustStart();
                     }
                 }
-            } else if (action.equals(ACTION_TEST_DATA)) {
-                DeviceData data = intent.getParcelableExtra(EXTRA_TEST_DATA);
+            } else if (action.equals(ServiceAction.ACTION_ADJUST_DATA)) {
+                DeviceData data = intent.getParcelableExtra(ServiceAction.EXTRA_ADJUST_DATA);
                 for (OnAdjustCtrlLister listener : mAdjustListeners) {
                     listener.onAdjustRefresh(data);
                 }
@@ -62,9 +56,9 @@ public class AdjustControler extends ConnectControler implements IAdjustCtrl {
     @Override
     protected void onServiceConnected(IBinder binder) {
         super.onServiceConnected(binder);
-        IntentFilter filter = new IntentFilter(ACTION_TEST_CTRL);
+        IntentFilter filter = new IntentFilter(ServiceAction.ACTION_SAMPLE_CTRL_STATE_CHANGE);
         mActivity.registerReceiver(mAdjustReceiver, filter);
-        filter = new IntentFilter(ACTION_TEST_DATA);
+        filter = new IntentFilter(ServiceAction.ACTION_ADJUST_DATA);
         mActivity.registerReceiver(mAdjustReceiver, filter);
     }
 

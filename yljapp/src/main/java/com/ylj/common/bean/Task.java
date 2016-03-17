@@ -33,6 +33,7 @@ public class Task implements Parcelable, IMapable {
     public static final String TAG_IS_FINISH = "is_finish";
     public static final String TAG_IS_CREATE_RESULT = "is_create_result";
     public static final String TAG_RESULT_ID = "result_id";
+    public static final String TAG_RECORD_FILE = "record_file";
 
     @Column(name = "id", isId = true)
     private int id;
@@ -82,9 +83,66 @@ public class Task implements Parcelable, IMapable {
     @Column(name = "result_id")
     private int resultId;
 
+    @Column(name = "record_file")
+    private String recordFile;
+
+    public Task(){}
+
+    protected Task(Parcel in) {
+        id = in.readInt();
+        taskName = in.readString();
+        roadName = in.readString();
+        origin = in.readInt();
+        roadWidth = in.readDouble();
+        roadLength = in.readDouble();
+        rollerWidth = in.readDouble();
+        rollerDiameter = in.readDouble();
+        huoerNum = in.readInt();
+        VCV = in.readDouble();
+        isAdjust = in.readByte() != 0;
+        isFinish = in.readByte() != 0;
+        isTest = in.readByte() != 0;
+        isCreateResult = in.readByte() != 0;
+        resultId = in.readInt();
+        recordFile = in.readString();
+    }
+
+    public static final Creator<Task> CREATOR = new Creator<Task>() {
+        @Override
+        public Task createFromParcel(Parcel in) {
+            return new Task(in);
+        }
+
+        @Override
+        public Task[] newArray(int size) {
+            return new Task[size];
+        }
+    };
+
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeInt(id);
+        dest.writeString(taskName);
+        dest.writeString(roadName);
+        dest.writeInt(origin);
+        dest.writeDouble(roadWidth);
+        dest.writeDouble(roadLength);
+        dest.writeDouble(rollerWidth);
+        dest.writeDouble(rollerDiameter);
+        dest.writeInt(huoerNum);
+        dest.writeDouble(VCV);
+        dest.writeByte((byte) (isAdjust ? 1 : 0));
+        dest.writeByte((byte) (isFinish ? 1 : 0));
+        dest.writeByte((byte) (isTest ? 1 : 0));
+        dest.writeByte((byte) (isCreateResult ? 1 : 0));
+        dest.writeInt(resultId);
+        dest.writeString(recordFile);
     }
 
     @Override
@@ -105,6 +163,7 @@ public class Task implements Parcelable, IMapable {
         map.put(TAG_IS_FINISH, isFinish);
         map.put(TAG_IS_CREATE_RESULT, isCreateResult);
         map.put(TAG_RESULT_ID, resultId);
+        map.put(TAG_RECORD_FILE, recordFile);
         return map;
     }
 
@@ -125,55 +184,11 @@ public class Task implements Parcelable, IMapable {
         task.isFinish = Boolean.parseBoolean(map.get(TAG_IS_FINISH).toString());
         task.isCreateResult = Boolean.parseBoolean(map.get(TAG_IS_CREATE_RESULT).toString());
         task.resultId = Integer.parseInt(map.get(TAG_RESULT_ID).toString());
+        task.recordFile = map.get(TAG_RECORD_FILE).toString();
         return task;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(taskName);
-        dest.writeString(roadName);
-        dest.writeInt(origin);
-        dest.writeDouble(roadWidth);
-        dest.writeDouble(roadLength);
-        dest.writeDouble(rollerWidth);
-        dest.writeDouble(rollerDiameter);
-        dest.writeInt(huoerNum);
-        dest.writeDouble(VCV);
-        dest.writeBooleanArray(new boolean[]{isAdjust, isTest, isFinish, isCreateResult});
-        dest.writeInt(resultId);
-    }
 
-    public static final Parcelable.Creator<Task> CREATOR = new Creator<Task>() {
-
-        @Override
-        public Task createFromParcel(Parcel source) {
-            Task task = new Task();
-            task.id = source.readInt();
-            task.taskName = source.readString();
-            task.roadName = source.readString();
-            task.origin = source.readInt();
-            task.roadWidth = source.readDouble();
-            task.roadLength = source.readDouble();
-            task.rollerWidth = source.readDouble();
-            task.rollerDiameter = source.readDouble();
-            task.huoerNum = source.readInt();
-            task.VCV = source.readDouble();
-            boolean flags[] = new boolean[4];
-            source.readBooleanArray(flags);
-            task.isAdjust = flags[0];
-            task.isTest = flags[1];
-            task.isFinish = flags[2];
-            task.isCreateResult = flags[3];
-            task.resultId = source.readInt();
-            return task;
-        }
-
-        @Override
-        public Task[] newArray(int size) {
-            return new Task[size];
-        }
-    };
 
     public int getId() {
         return id;
@@ -293,5 +308,13 @@ public class Task implements Parcelable, IMapable {
 
     public void setIsTest(boolean isTest) {
         this.isTest = isTest;
+    }
+
+    public String getRecordFile() {
+        return recordFile;
+    }
+
+    public void setRecordFile(String recordFile) {
+        this.recordFile = recordFile;
     }
 }
