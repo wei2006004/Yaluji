@@ -9,7 +9,7 @@ import android.os.IBinder;
 
 import com.ylj.connect.ConnectControler;
 import com.ylj.daemon.YljService;
-import com.ylj.task.bean.DeviceData;
+import com.ylj.daemon.bean.DeviceData;
 
 import java.util.ArrayList;
 import java.util.List;

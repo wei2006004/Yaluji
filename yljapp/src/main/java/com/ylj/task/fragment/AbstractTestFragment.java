@@ -1,7 +1,7 @@
 package com.ylj.task.fragment;
 
 import com.ylj.common.BaseFragment;
-import com.ylj.task.bean.Record;
+import com.ylj.daemon.bean.Record;
 
 /**
  * Created by Administrator on 2016/3/13 0013.

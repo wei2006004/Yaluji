@@ -1,4 +1,4 @@
-package com.ylj.task.bean;
+package com.ylj.daemon.bean;
 
 /**
  * Created by Administrator on 2016/3/14 0014.

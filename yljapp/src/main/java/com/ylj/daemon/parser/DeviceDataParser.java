@@ -1,7 +1,7 @@
 package com.ylj.daemon.parser;
 
 import com.ylj.daemon.config.XmlTag;
-import com.ylj.task.bean.DeviceData;
+import com.ylj.daemon.bean.DeviceData;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

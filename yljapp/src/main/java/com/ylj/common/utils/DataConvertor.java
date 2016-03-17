@@ -1,7 +1,7 @@
 package com.ylj.common.utils;
 
-import com.ylj.task.bean.DeviceData;
-import com.ylj.task.bean.Record;
+import com.ylj.daemon.bean.DeviceData;
+import com.ylj.daemon.bean.Record;
 
 /**
  * Created by Administrator on 2016/3/14 0014.

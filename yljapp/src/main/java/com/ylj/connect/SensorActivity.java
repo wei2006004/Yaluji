@@ -1,9 +1,6 @@
 package com.ylj.connect;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +11,7 @@ import com.ylj.adjust.AdjustControler;
 import com.ylj.common.BaseActivity;
 import com.ylj.common.config.AppStatus;
 import com.ylj.connect.bean.DeviceInfo;
-import com.ylj.task.bean.DeviceData;
+import com.ylj.daemon.bean.DeviceData;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;

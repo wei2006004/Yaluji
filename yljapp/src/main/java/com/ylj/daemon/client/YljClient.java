@@ -12,7 +12,7 @@ import com.ylj.daemon.connect.IConnector;
 import com.ylj.daemon.connect.TcpConnector;
 import com.ylj.daemon.msghandler.IMessageHandler;
 import com.ylj.daemon.msghandler.MessageHandlerImpl;
-import com.ylj.task.bean.DeviceData;
+import com.ylj.daemon.bean.DeviceData;
 
 
 /**

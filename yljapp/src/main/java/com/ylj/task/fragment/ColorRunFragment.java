@@ -3,7 +3,7 @@ package com.ylj.task.fragment;
 import android.app.Activity;
 
 import com.ylj.R;
-import com.ylj.task.bean.Record;
+import com.ylj.daemon.bean.Record;
 
 import org.xutils.view.annotation.ContentView;
 

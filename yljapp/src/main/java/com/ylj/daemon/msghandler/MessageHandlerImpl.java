@@ -4,7 +4,7 @@ import com.ylj.connect.bean.DeviceInfo;
 import com.ylj.daemon.config.XmlTag;
 import com.ylj.daemon.parser.DeviceDataParser;
 import com.ylj.daemon.parser.DeviceInfoParser;
-import com.ylj.task.bean.DeviceData;
+import com.ylj.daemon.bean.DeviceData;
 
 /**
  * Created by Administrator on 2016/3/15 0015.

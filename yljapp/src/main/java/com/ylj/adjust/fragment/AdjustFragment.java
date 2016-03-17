@@ -15,7 +15,7 @@ import com.ylj.common.BaseFragment;
 import com.ylj.common.config.ConfigLet;
 import com.ylj.common.utils.DataConvertor;
 import com.ylj.common.widget.PlotView;
-import com.ylj.task.bean.DeviceData;
+import com.ylj.daemon.bean.DeviceData;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;

@@ -1,7 +1,7 @@
 package com.ylj.daemon.msghandler;
 
 import com.ylj.connect.bean.DeviceInfo;
-import com.ylj.task.bean.DeviceData;
+import com.ylj.daemon.bean.DeviceData;
 
 /**
  * Created by Administrator on 2016/3/15 0015.

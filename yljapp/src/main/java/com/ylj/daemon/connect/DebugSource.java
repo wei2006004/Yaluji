@@ -1,6 +1,6 @@
 package com.ylj.daemon.connect;
 
-import com.ylj.task.bean.DeviceData;
+import com.ylj.daemon.bean.DeviceData;
 
 import java.util.Random;
 

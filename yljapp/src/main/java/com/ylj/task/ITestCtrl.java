@@ -1,6 +1,6 @@
 package com.ylj.task;
 
-import com.ylj.task.bean.DeviceData;
+import com.ylj.daemon.bean.DeviceData;
 
 /**
  * Created by Administrator on 2016/3/14 0014.
