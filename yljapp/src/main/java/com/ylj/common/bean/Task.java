@@ -84,9 +84,10 @@ public class Task implements Parcelable, IMapable {
     private int resultId;
 
     @Column(name = "record_file")
-    private String recordFile;
+    private String recordFile = "";
 
-    public Task(){}
+    public Task() {
+    }
 
     protected Task(Parcel in) {
         id = in.readInt();
@@ -188,7 +189,9 @@ public class Task implements Parcelable, IMapable {
         return task;
     }
 
-
+    public double getStep() {
+        return 3.1415 * rollerDiameter / huoerNum;
+    }
 
     public int getId() {
         return id;

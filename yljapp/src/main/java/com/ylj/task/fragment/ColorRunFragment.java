@@ -39,7 +39,7 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
 
     List<ColorData> mColorDatas = new ArrayList<>();
 
-    @ViewInject(R.id.traceView)
+    @ViewInject(R.id.colorView)
     ColorView mColorView;
 
     @ViewInject(R.id.layout_wait)
@@ -62,6 +62,12 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
         super.onCreate(savedInstanceState);
 
         initArguments();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         initLayout();
         initColorView();
         refreshInfoView();

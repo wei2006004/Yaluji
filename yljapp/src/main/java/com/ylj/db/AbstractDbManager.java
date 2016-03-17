@@ -10,6 +10,10 @@ public abstract class AbstractDbManager{
     private DbManager.DaoConfig daoConfig;
     protected DbManager db;
 
+    protected DbManager getDb(){
+        return db;
+    }
+
     public AbstractDbManager(String dbName) {
         daoConfig = new DbManager.DaoConfig()
                 .setDbName(dbName)

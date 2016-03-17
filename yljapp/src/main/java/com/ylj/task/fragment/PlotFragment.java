@@ -71,8 +71,13 @@ public class PlotFragment extends AbstractTestFragment implements ITestCtrl.OnTe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         initArguments();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         initLayout();
         initPlotView();
         getTestCtrl().addOnTestDataRefreshListener(this);

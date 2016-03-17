@@ -138,14 +138,14 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
 
     @Override
     public void finishTask() {
-        if(mTaskStateManager!=null){
+        if (mTaskStateManager != null) {
             mTaskStateManager.finishTask();
         }
     }
 
     @Override
     public void finishTest(Test test) {
-        if(mTaskStateManager!=null){
+        if (mTaskStateManager != null) {
             mTaskStateManager.finishTest(test);
         }
     }
@@ -189,7 +189,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
             Log.d("yljclient", "data:" + data.toString());
             sendBroadcast(ServiceAction.ACTION_ADJUST_DATA, ServiceAction.EXTRA_ADJUST_DATA, data);
         }
-        if (mMode == MODE_TEST && mTaskStateManager!=null) {
+        if (mMode == MODE_TEST && mTaskStateManager != null) {
             mTaskStateManager.addTestData(data);
         }
     }
@@ -205,7 +205,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     }
 
     @Override
-    public void onLoadTaskFinish(ArrayList<TraceData> traceDatas,ArrayList<ColorData> colorDatas,TaskResult result) {
+    public void onLoadTaskFinish(ArrayList<TraceData> traceDatas, ArrayList<ColorData> colorDatas, TaskResult result) {
         Intent intent = new Intent();
         intent.setAction(ServiceAction.ACTION_LOAD_TASK_FINISH);
         intent.putExtra(ServiceAction.EXTRA_TASK_RESULT, result);
@@ -216,7 +216,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
 
     @Override
     public void onTaskResultCreated(TaskResult result) {
-        sendBroadcast(ServiceAction.ACTION_TASK_RESULT_CREATED,ServiceAction.EXTRA_TASK_RESULT,result);
+        sendBroadcast(ServiceAction.ACTION_TASK_RESULT_CREATED, ServiceAction.EXTRA_TASK_RESULT, result);
     }
 
     @Override
@@ -225,6 +225,6 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
 
     @Override
     public void onDrawDataRefresh(DrawData data) {
-        sendBroadcast(ServiceAction.ACTION_DRAW_DATA,ServiceAction.EXTRA_DRAW_DATA,data);
+        sendBroadcast(ServiceAction.ACTION_DRAW_DATA, ServiceAction.EXTRA_DRAW_DATA, data);
     }
 }

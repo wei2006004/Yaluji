@@ -122,6 +122,16 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         initViewPager();
         initTabs();
         setLayoutVisiable();
+        loadDatas();
+    }
+
+    private void loadDatas() {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                getTestCtrl().loadTask(mTask);
+            }
+        });
     }
 
     private void setLayoutVisiable() {

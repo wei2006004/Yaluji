@@ -49,8 +49,12 @@ public class TraceFragment extends AbstractTestFragment implements ITestCtrl.OnD
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         initArguments();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initLayout();
         initTraceView();
         getTestCtrl().setOnTraceDrawListener(this);

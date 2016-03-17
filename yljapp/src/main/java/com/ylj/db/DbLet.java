@@ -3,6 +3,7 @@ package com.ylj.db;
 import com.ylj.common.bean.Admin;
 import com.ylj.common.bean.Staff;
 import com.ylj.common.bean.Task;
+import com.ylj.common.bean.Test;
 import com.ylj.common.utils.TaskDbFileUitl;
 import com.ylj.db.account.AccountManager;
 import com.ylj.db.task.RecordManager;
@@ -79,5 +80,9 @@ public class DbLet {
     public static RecordManager getRecordManager(Task task) {
         String fileName = TaskDbFileUitl.getTaskDbFileName(task);
         return new RecordManager(fileName);
+    }
+
+    public static List<Test> getAllTestByTask(Task task){
+        return null;
     }
 }
