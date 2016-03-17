@@ -1,7 +1,12 @@
 package com.ylj.task.fragment;
 
+import android.app.Activity;
+
 import com.ylj.common.BaseFragment;
+import com.ylj.common.bean.Task;
 import com.ylj.daemon.bean.Record;
+import com.ylj.task.AbstractTestActivity;
+import com.ylj.task.ITestCtrl;
 
 /**
  * Created by Administrator on 2016/3/13 0013.
@@ -30,10 +35,42 @@ public abstract class AbstractTestFragment extends BaseFragment {
     }
 
     public abstract void refreshPage();
+    public abstract void clearPage();
 
-    public abstract void clearPlot();
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnDataLoadListener) activity;
+            AbstractTestActivity testActivity = (AbstractTestActivity)activity;
+            mTestCtrl = testActivity.getTestCtrl();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnDataLoadListener/AbstractTestActivity");
+        }
+    }
 
-    public abstract void addData(Record data);
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+        mTestCtrl = null;
+    }
 
-    public abstract void addDataAndRefresh(Record data);
+    private ITestCtrl mTestCtrl;
+
+    protected ITestCtrl getTestCtrl(){
+        return mTestCtrl;
+    }
+
+    private OnDataLoadListener mListener;
+
+    protected OnDataLoadListener getOnDataLoadListener(){
+        return mListener;
+    }
+
+    public interface OnDataLoadListener {
+        void onDataLoadFinish(int flag);
+    }
+
 }

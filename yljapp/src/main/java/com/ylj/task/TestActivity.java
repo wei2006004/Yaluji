@@ -24,6 +24,7 @@ import com.ylj.common.config.AppStatus;
 import com.ylj.connect.IConnectCtrl;
 import com.ylj.connect.bean.DeviceInfo;
 import com.ylj.daemon.bean.DeviceData;
+import com.ylj.daemon.bean.TaskResult;
 import com.ylj.task.fragment.AbstractTestFragment;
 import com.ylj.task.fragment.ColorRunFragment;
 import com.ylj.task.fragment.PlotFragment;
@@ -37,14 +38,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ContentView(R.layout.activity_test)
-public class TestActivity extends BaseActivity implements TraceFragment.OnTraceDataLoadListener,
-        ColorRunFragment.OnColorDataLoadListener, ITestCtrl.OnTestCtrlListener,IConnectCtrl.OnConnectListener{
+public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTestCtrlListener,
+        IConnectCtrl.OnConnectListener ,AbstractTestFragment.OnDataLoadListener{
 
     public static final String EXTRA_MODE = "EXTRA_MODE";
     public static final String EXTRA_TASK = "EXTRA_TASK";
 
     public static final int MODE_SHOW_RESULT = 0;
     public static final int MODE_TASK_TEST = 1;
+
+    public static final int FRAGMENT_FLAG_TRACE = 0;
+    public static final int FRAGMENT_FLAG_COLOR = 1;
 
     public static final int FRAGMENT_INDEX_TRACE = 0;
     public static final int FRAGMENT_INDEX_COLOR = 1;
@@ -83,8 +87,6 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
     boolean mIsTraceLoadFinish = false;
     boolean mIsColorLoadFinish = false;
 
-    TestControler mTestControler;
-
     @ViewInject(R.id.container)
     ViewPager mViewPager;
 
@@ -99,13 +101,13 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
 
     @Event(R.id.fab_run)
     private void onRunClick(View view) {
-        mTestControler.startTest();
+        getTestCtrl().startTest();
         mRunButton.setEnabled(false);
     }
 
     @Event(R.id.fab_stop)
     private void onStopClick(View view) {
-        mTestControler.pauseTest();
+        getTestCtrl().pauseTest();
         mStopButton.setEnabled(false);
     }
 
@@ -140,23 +142,45 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
             public void onPageSelected(final int position) {
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mCurrentFragmentIndex = position;
-                        getTestFragment(position).refreshPage();
-                    }
-                });
+                onFragmentSelected(position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
+            }
+        });
+    }
 
+    private void onFragmentSelected(final int position) {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                mCurrentFragmentIndex = position;
+                switch (mCurrentFragmentIndex) {
+                    case FRAGMENT_INDEX_QUAKE:
+                    case FRAGMENT_INDEX_TEMP:
+                        if (getCurrentFragment().isWaitPage()) {
+                            getCurrentFragment().showTestPage();
+                        }
+                        getTestFragment(position).refreshPage();
+                        break;
+                    case FRAGMENT_INDEX_TRACE:
+                        if (mIsTraceLoadFinish) {
+                            getTraceFragment().showTestPage();
+                            getTraceFragment().refreshPage();
+                        }
+                        break;
+                    case FRAGMENT_INDEX_COLOR:
+                        if (mIsColorLoadFinish) {
+                            getColorFragment().showTestPage();
+                            getColorFragment().refreshPage();
+                        }
+                        break;
+                }
             }
         });
     }
@@ -167,14 +191,14 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
     }
 
     private void initControler() {
-        mTestControler = TestControler.newInstance(this);
-        mTestControler.addConnectListener(this);
+        getConnectCtrl().addConnectListener(this);
+        getTestCtrl().addTestCtrlListener(this);
     }
 
     private void initFragments() {
         mFragments.clear();
-        mFragments.add(new TraceFragment());
-        mFragments.add(new ColorRunFragment());
+        mFragments.add(TraceFragment.newInstance(mTask));
+        mFragments.add(ColorRunFragment.newInstance(mTask, mMode));
         if (mMode == MODE_TASK_TEST) {
             mFragments.add(PlotFragment.newQuakePlotFragment());
             mFragments.add(PlotFragment.newTempPlotFragment());
@@ -205,9 +229,8 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        mTestControler.deleteTestCtrlListener(TestActivity.this);
-                        mTestControler.deleteConnectListener(TestActivity.this);
-                        mTestControler.release();
+                        getTestCtrl().deleteTestCtrlListener(TestActivity.this);
+                        getConnectCtrl().deleteConnectListener(TestActivity.this);
                         TestActivity.this.finish();
                     }
                 }, new DialogInterface.OnClickListener() {
@@ -227,22 +250,6 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
         mTask = intent.getParcelableExtra(EXTRA_TASK);
     }
 
-    @Override
-    public void onColorDataLoadFinish() {
-        mIsColorLoadFinish= true;
-        if(mCurrentFragmentIndex == FRAGMENT_INDEX_COLOR){
-            getColorFragment().showTestPage();
-        }
-    }
-
-    @Override
-    public void onTraceDataLoadFinish() {
-        mIsTraceLoadFinish= true;
-        if(mCurrentFragmentIndex == FRAGMENT_INDEX_TRACE){
-            getTraceFragment().showTestPage();
-        }
-    }
-
     private AbstractTestFragment getColorFragment(){
         return mFragments.get(FRAGMENT_INDEX_COLOR);
     }
@@ -251,46 +258,85 @@ public class TestActivity extends BaseActivity implements TraceFragment.OnTraceD
         return mFragments.get(FRAGMENT_INDEX_TRACE);
     }
 
+    private AbstractTestFragment getCurrentFragment(){
+        return mFragments.get(mCurrentFragmentIndex);
+    }
+
     private AbstractTestFragment getTestFragment(int index){
         return mFragments.get(index);
     }
 
     @Override
     public void onConnected(DeviceInfo info) {
+        showToast("connected");
+        setAppConnectStatus(true);
         AppStatus.instance().setCurrentDevice(info);
-        showToast("device has connected");
     }
 
     @Override
     public void onDisconnected() {
-
+        showToast("disconnected");
+        setAppConnectStatus(false);
     }
 
     @Override
     public void onConnectFail(int error) {
-
+        showToast("connect fail");
+        setAppConnectStatus(false);
     }
 
     @Override
     public void onConnectLost() {
+        showToast("connect lost");
+        setAppConnectStatus(false);
+    }
 
+    private void setAppConnectStatus(boolean isConnect){
+        AppStatus appstatus = AppStatus.instance();
+        appstatus.setIsConnect(isConnect);
     }
 
     @Override
     public void onTestStart() {
         showToast("test start");
-        mTestControler.addTestCtrlListener(this);
     }
 
     @Override
-    public void onTestStop() {
-        showToast("test pause");
-        mTestControler.deleteTestCtrlListener(this);
+    public void onTestPasue() {
+
     }
 
     @Override
-    public void onTestRefresh(DeviceData data) {
+    public void onTestFinish() {
 
+    }
+
+    @Override
+    public void onLoadTaskStart() {
+
+    }
+
+    @Override
+    public void onLoadTaskFinish() {
+
+    }
+
+    @Override
+    public void onTaskResultCreated(TaskResult result) {
+
+    }
+
+    @Override
+    public void onDataLoadFinish(int flag) {
+        if(flag == FRAGMENT_FLAG_TRACE){
+            mIsTraceLoadFinish= true;
+        }else if(flag == FRAGMENT_FLAG_COLOR){
+            mIsColorLoadFinish= true;
+        }
+        if(mCurrentFragmentIndex == flag){
+            getCurrentFragment().showTestPage();
+            getCurrentFragment().refreshPage();
+        }
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

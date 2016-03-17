@@ -35,24 +35,24 @@ public class TracePlantView extends View
 	private int xPane;
 	private int yPane;
 	
-	private float xRoad=100;
-	private float yRoad=50;
+	private double xRoad=100;
+	private double yRoad=50;
 	
-	private float plantWidth=2;
-	private float plantHeight=5;
+	private double plantWidth=2;
+	private double plantHeight=5;
 
 	public static class PlantData
 	{
 		PointF point;
-		float dir;
+		double dir;
 		int color;
 		
-		public PlantData(PointF pointF,float dir,int color)
+		public PlantData(PointF pointF,double dir,int color)
 		{
 			set(pointF, dir, color);
 		}
 		
-		public void set(PointF pointF,float dir,int color)
+		public void set(PointF pointF,double dir,int color)
 		{
 			this.point=pointF;
 			this.dir=dir;
@@ -74,14 +74,14 @@ public class TracePlantView extends View
 	
 	public class DrawEdit
 	{
-		public DrawEdit setPlant(float width,float height)
+		public DrawEdit setPlant(double width,double height)
 		{
 			plantWidth=width;
 			plantHeight=height;
 			return DrawEdit.this;
 		}
 		
-		public DrawEdit setField(float x,float y)
+		public DrawEdit setField(double x,double y)
 		{
 			xRoad=x;
 			yRoad=y;
@@ -94,12 +94,19 @@ public class TracePlantView extends View
 			return DrawEdit.this;
 		}
 		
-		public DrawEdit addPlant(PointF pointF,float dir)
+		public DrawEdit addPlant(PointF pointF,double dir)
 		{
 			return addPlant(pointF, dir, Color.GREEN);
 		}
+
+		public DrawEdit addPlant(double x,double y,double dir,int color)
+		{
+			PlantData data=new PlantData(new PointF((float)x,(float)y),dir,color);
+			plantDatas.add(data);
+			return DrawEdit.this;
+		}
 		
-		public DrawEdit addPlant(PointF pointF,float dir,int color)
+		public DrawEdit addPlant(PointF pointF,double dir,int color)
 		{	
 			PlantData data=new PlantData(pointF,dir,color);
 			plantDatas.add(data);
@@ -124,12 +131,12 @@ public class TracePlantView extends View
 		}
 	}
 	
-	public PlantData createPlantData(PointF pointF,float dir)
+	public PlantData createPlantData(PointF pointF,double dir)
 	{
 		return new PlantData(pointF, dir, Color.GREEN);
 	}
 	
-	public PlantData createPlantData(PointF pointF,float dir,int color)
+	public PlantData createPlantData(PointF pointF,double dir,int color)
 	{
 		return new PlantData(pointF, dir, color);
 	}
@@ -274,7 +281,7 @@ public class TracePlantView extends View
 	}
 	
 	private static Path arrowPath=new Path();
-	private void paintArrow(int originX,int originY,float rotate,Canvas canvas)
+	private void paintArrow(int originX,int originY,double rotate,Canvas canvas)
 	{
 		if(arrowPath.isEmpty()){
 			arrowPath.moveTo(0, 0);
@@ -283,18 +290,18 @@ public class TracePlantView extends View
 			arrowPath.close();
 		}
 		canvas.translate(originX, originY);
-		canvas.rotate(rotate);
+		canvas.rotate((float)rotate);
 		canvas.drawPath(arrowPath, arrowPaint);
-		canvas.rotate(-rotate);
+		canvas.rotate((float)-rotate);
 		canvas.translate(-originX, -originY);		
 	}
 	
-	private void paintText(String text,int originX,int originY,float rotate,Canvas canvas)
+	private void paintText(String text,int originX,int originY,double rotate,Canvas canvas)
 	{
 		canvas.translate(originX, originY);
-		canvas.rotate(rotate);
+		canvas.rotate((float)rotate);
 		canvas.drawText(text, 0,0, textPaint);
-		canvas.rotate(-rotate);
+		canvas.rotate((float)-rotate);
 		canvas.translate(-originX, -originY);
 	}
 
@@ -309,14 +316,14 @@ public class TracePlantView extends View
 	
 	private Rect plantRect=new Rect();
 	
-	private void paintPlant(Point point,float dir,int color,Canvas canvas)
+	private void paintPlant(Point point,double dir,int color,Canvas canvas)
 	{
 		canvas.translate(point.x, point.y);
-		canvas.rotate(dir-90);
+		canvas.rotate((float)dir-90);
 		plantPaint.setColor(color);
 		canvas.drawRect(plantRect, plantPaint);
 		canvas.drawRect(plantRect, plantLinePaint);
-		canvas.rotate(90-dir);
+		canvas.rotate(90-(float)dir);
 		canvas.translate(-point.x, -point.y);
 	}
 
