@@ -24,7 +24,7 @@ public interface IClient {
     void stopAdjust();
 
     void loadTask(Task task);
-    void finishTask(Task task);
+    void finishTask();
 
     void startTest();
     void puaseTest();

@@ -19,7 +19,7 @@ public interface ITestCtrl {
     void finishTest(Test test);
 
     void loadTask(Task task);
-    void finishTask(Task task);
+    void finishTask();
 
     void addTestCtrlListener(OnTestCtrlListener listener);
     void deleteTestCtrlListener(OnTestCtrlListener listener);

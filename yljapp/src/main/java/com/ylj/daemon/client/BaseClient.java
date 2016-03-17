@@ -14,10 +14,14 @@ public abstract class BaseClient extends Binder implements IClient {
 
     public final static String EXTRA_ACTION_FLAG = "EXTRA_ACTION_FLAG";
 
-    protected Context mContext;
+    private Context mContext;
 
     public BaseClient(Context context) {
         mContext = context;
+    }
+
+    protected Context getContext(){
+        return mContext;
     }
 
     protected void sendBroadcast(String action) {

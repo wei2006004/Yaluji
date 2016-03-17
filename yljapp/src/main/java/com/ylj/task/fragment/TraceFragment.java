@@ -87,7 +87,7 @@ public class TraceFragment extends AbstractTestFragment implements ITestCtrl.OnD
     @Override
     public void showWaitPage() {
         super.showWaitPage();
-        if(!isAdded())
+        if (!isAdded())
             return;
         mWaitLayout.setVisibility(View.VISIBLE);
         mTestLayout.setVisibility(View.GONE);
@@ -96,7 +96,7 @@ public class TraceFragment extends AbstractTestFragment implements ITestCtrl.OnD
     @Override
     public void showTestPage() {
         super.showTestPage();
-        if(!isAdded())
+        if (!isAdded())
             return;
         mWaitLayout.setVisibility(View.GONE);
         mTestLayout.setVisibility(View.VISIBLE);
@@ -104,9 +104,9 @@ public class TraceFragment extends AbstractTestFragment implements ITestCtrl.OnD
 
     @Override
     public void refreshPage() {
-        if(!isAdded())
+        if (!isAdded())
             return;
-        TracePlantView.DrawEdit edit=mTraceView.getEdit();
+        TracePlantView.DrawEdit edit = mTraceView.getEdit();
         edit.clear();
         for (TraceData data : mTraceDatas) {
             edit.addPlant(data.getPostionX(),
@@ -119,7 +119,7 @@ public class TraceFragment extends AbstractTestFragment implements ITestCtrl.OnD
 
     @Override
     public void clearPage() {
-        if(!isAdded())
+        if (!isAdded())
             return;
         mTraceDatas.clear();
         initTraceView();
@@ -131,8 +131,10 @@ public class TraceFragment extends AbstractTestFragment implements ITestCtrl.OnD
 
     @Override
     public void onLoadDataFinish(List<TraceData> datas, TaskResult result) {
-        mTraceDatas.addAll(datas);
-        refreshPage();
+        if (datas != null) {
+            mTraceDatas.addAll(datas);
+            refreshPage();
+        }
         if (getOnDataLoadListener() != null) {
             getOnDataLoadListener().onDataLoadFinish(FRAGMENT_FLAG_TRACE);
         }
@@ -141,7 +143,7 @@ public class TraceFragment extends AbstractTestFragment implements ITestCtrl.OnD
     @Override
     public void onAddData(TraceData data) {
         mTraceDatas.add(data);
-        if(!isAdded())
+        if (!isAdded())
             return;
         mTraceView.getEdit().
                 addPlant(data.getPostionX(),

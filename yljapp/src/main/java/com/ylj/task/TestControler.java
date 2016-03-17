@@ -104,10 +104,10 @@ public class TestControler extends ConnectControler implements ITestCtrl {
         for (OnTestCtrlListener listener : mTestCtrlListeners) {
             listener.onLoadTaskFinish();
         }
-        if (traceDatas != null && mOnTraceDrawListener != null) {
+        if (mOnTraceDrawListener != null) {
             mOnTraceDrawListener.onLoadDataFinish(traceDatas, taskResult);
         }
-        if (colorDatas != null && mOnColorDrawListener != null) {
+        if (mOnColorDrawListener != null) {
             mOnColorDrawListener.onLoadDataFinish(colorDatas, taskResult);
         }
     }
@@ -175,9 +175,9 @@ public class TestControler extends ConnectControler implements ITestCtrl {
     }
 
     @Override
-    public void finishTask(Task task) {
+    public void finishTask() {
         if (mCleint != null) {
-            mCleint.finishTask(task);
+            mCleint.finishTask();
         }
     }
 

@@ -78,6 +78,12 @@ public class PlotFragment extends AbstractTestFragment implements ITestCtrl.OnTe
         getTestCtrl().addOnTestDataRefreshListener(this);
     }
 
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        getTestCtrl().deleteOnTestDataRefreshListener(this);
+    }
+
     private void initPlotView() {
         PlotView.DrawEdit edit = mPlotView.getEdit();
         edit.clear();
