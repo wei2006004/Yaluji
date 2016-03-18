@@ -5,25 +5,25 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_menu">MenuActivity</string>
-    <string name="title_activity_connect">ConnectActivity</string>
-    <string name="title_activity_new_task">NewTaskActivity</string>
-    <string name="title_activity_setting">SettingActivity</string>
-    <string name="title_activity_staff_modify">StaffModifyActivity</string>
-    <string name="title_activity_staff_manager">StaffManagerActivity</string>
-    <string name="title_activity_admin_modify">AdminModifyActivity</string>
-    <string name="title_activity_passwd_modify">PasswdModifyActivity</string>
-    <string name="title_activity_user">UserActivity</string>
-    <string name="title_activity_task_modify">TaskModifyActivity</string>
-    <string name="title_activity_task_manager">TaskManagerActivity</string>
-    <string name="title_activity_adjust">AdjustActivity</string>
-    <string name="title_activity_adjust_result">AdjustResultActivity</string>
-    <string name="title_activity_task">TaskActivity</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_menu">主菜单</string>
+    <string name="title_activity_connect">设备连接</string>
+    <string name="title_activity_new_task">新建任务</string>
+    <string name="title_activity_setting">系统设置</string>
+    <string name="title_activity_staff_modify">账号信息</string>
+    <string name="title_activity_staff_manager">账号管理</string>
+    <string name="title_activity_admin_modify">管理员信息</string>
+    <string name="title_activity_passwd_modify">密码修改</string>
+    <string name="title_activity_user">账号信息</string>
+    <string name="title_activity_task_modify">任务信息</string>
+    <string name="title_activity_task_manager">数据管理</string>
+    <string name="title_activity_adjust">相关性校验</string>
+    <string name="title_activity_adjust_result">相关性校验结果</string>
+    <string name="title_activity_task">任务界面</string>
+    <string name="title_activity_test">测试界面</string>
+    <string name="title_activity_sensor">AD采集</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_sensor">SensorActivity</string>
 
     <!-- 登录界面 -->
     <string name="login_login">登录</string>
@@ -89,6 +89,16 @@
     <string name="connect_device_list">设备列表</string>
     <string name="connect_"></string>
 
+    <!-- Sensor界面 -->
+    <string name="sensor_quake">加速度：</string>
+    <string name="sensor_temp">温度：</string>
+    <string name="sensor_pulse">脉冲：</string>
+    <string name="sensor_heading">heading：</string>
+    <string name="sensor_pitch">pitch：</string>
+    <string name="sensor_roll">roll:</string>
+    <string name="sensor_start">开始</string>
+    <string name="sensor_stop">停止</string>
+
     <!-- Task界面/Task Modify/Task Manager -->
     <string name="task_name">任务名：</string>
     <string name="task_road">公路名：</string>
@@ -119,12 +129,57 @@
     <string name="task_ge">个</string>
     <string name="task_save">保存</string>
     <string name="task_save_and_enter_adjust">保存并进入校验</string>
+    <string name="task_no_finished_task">未完成任务</string>
+    <string name="task_finished_task">完成任务</string>
+    <string name="task_task_list">任务列表</string>
     <string name="task_"></string>
 
+    <!-- Staff界面/Staff/Admin Modify/Staff Manager -->
+    <string name="staff_name">姓名</string>
+    <string name="staff_company">公司</string>
+    <string name="staff_admin_list">管理员列表</string>
+    <string name="staff_staff_list">账号列表</string>
+    <string name="staff_edit_passwd">修改密码</string>
+    <string name="staff_logout">注销</string>
+    <string name="staff_account">账号名</string>
+    <string name="staff_name_m">姓名：</string>
+    <string name="staff_company_m">公司：</string>
+    <string name="staff_group">部门</string>
+    <string name="staff_old_passwd">旧密码</string>
+    <string name="staff_new_passwd">密码</string>
+    <string name="staff_passwd_again">再输一遍</string>
+    <string name="staff_save">保存</string>
+    <string name="staff_title_info">账号信息</string>
+    <string name="staff_title_modify">账号信息修改</string>
+    <string name="staff_title_new">新建账号</string>
+    <string name="staff_title_new_passwd">密码设置</string>
+    <string name="staff_title_passwd_modify">修改密码</string>
+    <string name="staff_"></string>
 
+    <!-- Adjust界面 -->
+    <string name="adjust_light">轻度碾压</string>
+    <string name="adjust_middle">中度碾压</string>
+    <string name="adjust_heavy">重度碾压</string>
+    <string name="adjust_auto">自动填充</string>
+    <string name="adjust_run">运行</string>
+    <string name="adjust_pause">暂停</string>
+    <string name="adjust_status">状态：</string>
+    <string name="adjust_position">位置</string>
+    <string name="adjust_compact">压实度</string>
+    <string name="adjust_"></string>
 
-
-
-
+    <!-- Test界面 -->
+    <string name="test_trace">轨迹图</string>
+    <string name="test_color">色块图</string>
+    <string name="test_quake">振动曲线</string>
+    <string name="test_temp">温度曲线</string>
+    <string name="test_pos_x">坐标X：</string>
+    <string name="test_pos_y">坐标Y：</string>
+    <string name="test_speed">速度：</string>
+    <string name="test_color_row">当前行：</string>
+    <string name="test_color_column">当前列：</string>
+    <string name="test_color_times">碾压次数：</string>
+    <string name="test_status">状态：</string>
+    <string name="test_"></string>
 
 </resources>

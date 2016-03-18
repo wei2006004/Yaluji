@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="postion_x" />
+                android:text="@string/test_pos_x" />
 
             <TextView
                 android:id="@+id/tv_pos_x"
@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="postion_y" />
+                android:text="@string/test_pos_y" />
 
             <TextView
                 android:id="@+id/tv_pos_y"
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="speed" />
+                android:text="@string/test_speed" />
 
             <TextView
                 android:id="@+id/tv_speed"

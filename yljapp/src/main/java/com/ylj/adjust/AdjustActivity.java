@@ -282,11 +282,11 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "LIGHT ADJUST";
+                    return getString(R.string.adjust_light);
                 case 1:
-                    return "MIDDLE ADJUST";
+                    return getString(R.string.adjust_middle);
                 case 2:
-                    return "HEAVY ADJUST";
+                    return getString(R.string.adjust_middle);
             }
             return null;
         }

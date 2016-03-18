@@ -199,13 +199,13 @@ public class StaffModifyActivity extends BaseActivity {
     private void initToolbar() {
         switch (mMode) {
             case MODE_SHOW_INFO:
-                mToolbar.setTitle("staff info");
+                mToolbar.setTitle(R.string.staff_title_info);
                 break;
             case MODE_MODIFY_STAFF:
-                mToolbar.setTitle("modify staff");
+                mToolbar.setTitle(R.string.staff_title_modify);
                 break;
             case MODE_NEW_STAFF:
-                mToolbar.setTitle("new staff");
+                mToolbar.setTitle(R.string.staff_title_new);
             default:
                 break;
         }

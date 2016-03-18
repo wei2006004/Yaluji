@@ -127,10 +127,10 @@ public class PasswdModifyActivity extends BaseActivity {
     private void initToolbar() {
         switch (mMode) {
             case MODE_MODIFY_PASSWD:
-                mToolbar.setTitle("modify passwd");
+                mToolbar.setTitle(R.string.staff_title_passwd_modify);
                 break;
             case MODE_NEW_PASSWD:
-                mToolbar.setTitle("new passwd");
+                mToolbar.setTitle(R.string.staff_title_new_passwd);
             default:
                 break;
         }

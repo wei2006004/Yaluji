@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="quake"/>
+                android:text="@string/sensor_quake"/>
             <EditText
                 android:id="@+id/et_quake"
                 android:editable="false"
@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="temp"/>
+                android:text="@string/sensor_temp"/>
             <EditText
                 android:id="@+id/et_temp"
                 android:editable="false"
@@ -56,7 +56,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="pulse"/>
+                android:text="@string/sensor_pulse"/>
             <EditText
                 android:id="@+id/et_pulse"
                 android:editable="false"
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="heading"/>
+                android:text="@string/sensor_heading"/>
             <EditText
                 android:id="@+id/et_heading"
                 android:editable="false"
@@ -88,7 +88,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="pitch"/>
+                android:text="@string/sensor_pitch"/>
             <EditText
                 android:id="@+id/et_pitch"
                 android:editable="false"
@@ -104,7 +104,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="roll"/>
+                android:text="@string/sensor_roll"/>
             <EditText
                 android:id="@+id/et_roll"
                 android:editable="false"
@@ -123,13 +123,13 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="start"/>
+                android:text="@string/sensor_start"/>
             <Button
                 android:id="@+id/btn_stop"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="stop"/>
+                android:text="@string/sensor_stop"/>
         </LinearLayout>
 
     </LinearLayout>

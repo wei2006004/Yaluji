@@ -35,7 +35,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="status:"/>
+                        android:text="@string/adjust_status"/>
                     <TextView
                         android:id="@+id/tv_status"
                         android:layout_width="wrap_content"
@@ -48,13 +48,13 @@
                             android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="run"/>
+                            android:text="@string/adjust_run"/>
                         <Button
                             android:id="@+id/btn_auto"
                             android:layout_toLeftOf="@id/btn_run"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="auto"
+                            android:text="@string/adjust_auto"
                             android:visibility="gone"/>
                     </RelativeLayout>
 
@@ -76,11 +76,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="position"/>
+                            android:text="@string/adjust_position"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="compaction"/>
+                            android:text="@string/adjust_compact"/>
                     </LinearLayout>
                     <TableLayout
                         android:layout_width="wrap_content"

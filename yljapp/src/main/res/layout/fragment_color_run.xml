@@ -42,7 +42,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="postion_y" />
+                    android:text="@string/test_color_row" />
             </LinearLayout>
 
             <LinearLayout
@@ -53,7 +53,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="postion_x" />
+                    android:text="@string/test_color_column" />
 
                 <TextView
                     android:id="@+id/tv_pos_y"
@@ -69,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="times" />
+                    android:text="@string/test_color_times" />
 
                 <TextView
                     android:id="@+id/tv_times"
@@ -85,7 +85,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="status" />
+                    android:text="@string/test_status" />
 
                 <TextView
                     android:id="@+id/tv_status"

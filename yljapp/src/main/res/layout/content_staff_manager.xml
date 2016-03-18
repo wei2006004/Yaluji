@@ -38,7 +38,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="name"/>
+                    android:text="@string/staff_name_m"/>
                 <TextView
                     android:id="@+id/tv_admin_name"
                     android:layout_alignParentRight="true"
@@ -54,7 +54,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="company"/>
+                    android:text="@string/staff_company_m"/>
                 <TextView
                     android:id="@+id/tv_admin_company"
                     android:layout_alignParentRight="true"
@@ -77,13 +77,13 @@
                 android:id="@+id/btn_edit_passwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="edit passwd"/>
+                android:text="@string/staff_edit_passwd"/>
             <Button
                 android:layout_alignParentRight="true"
                 android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="logout"/>
+                android:text="@string/staff_logout"/>
         </LinearLayout>
 
         <LinearLayout
@@ -99,7 +99,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="admin list:"/>
+                    android:text="@string/staff_admin_list"/>
                 <Button
                     android:layout_alignParentRight="true"
                     android:id="@+id/btn_add_admin"
@@ -119,7 +119,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="staff list:"/>
+                    android:text="@string/staff_staff_list"/>
                 <Button
                     android:layout_alignParentRight="true"
                     android:id="@+id/btn_add_staff"

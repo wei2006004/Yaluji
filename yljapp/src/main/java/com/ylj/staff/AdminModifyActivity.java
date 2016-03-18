@@ -208,13 +208,13 @@ public class AdminModifyActivity extends BaseActivity {
     private void initToolbar() {
         switch (mMode) {
             case MODE_SHOW_INFO:
-                mToolbar.setTitle("admin info");
+                mToolbar.setTitle(R.string.staff_title_info);
                 break;
             case MODE_MODIFY_ADMIN:
-                mToolbar.setTitle("modify admin");
+                mToolbar.setTitle(R.string.staff_title_modify);
                 break;
             case MODE_NEW_ADMIN:
-                mToolbar.setTitle("new admin");
+                mToolbar.setTitle(R.string.staff_title_new);
             default:
                 break;
         }

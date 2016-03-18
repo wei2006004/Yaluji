@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="account name" />
+                android:text="@string/staff_account" />
 
             <TextView
                 android:id="@+id/tv_account_name"
@@ -42,7 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="staff name"/>
+                android:text="@string/staff_name"/>
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="company"/>
+                android:text="@string/staff_company"/>
             <TextView
                 android:id="@+id/tv_company"
                 android:layout_width="match_parent"
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="group"/>
+                android:text="@string/staff_group"/>
             <TextView
                 android:id="@+id/tv_group"
                 android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="account name" />
+                android:text="@string/staff_account" />
 
             <EditText
                 android:id="@+id/et_account_name"
@@ -107,7 +107,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="staff name"/>
+                android:text="@string/staff_name"/>
             <EditText
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
@@ -121,7 +121,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="company"/>
+                android:text="@string/staff_company"/>
             <EditText
                 android:id="@+id/et_company"
                 android:layout_width="match_parent"
@@ -135,7 +135,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="group"/>
+                android:text="@string/staff_group"/>
             <EditText
                 android:id="@+id/et_group"
                 android:layout_width="match_parent"

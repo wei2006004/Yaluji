@@ -369,13 +369,13 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "TRACE";
+                    return getString(R.string.test_trace);
                 case 1:
-                    return "COLOR PLOT";
+                    return getString(R.string.test_color);
                 case 2:
-                    return "QUAKE";
+                    return getString(R.string.test_quake);
                 case 3:
-                    return "TEMP";
+                    return getString(R.string.test_temp);
             }
             return null;
         }

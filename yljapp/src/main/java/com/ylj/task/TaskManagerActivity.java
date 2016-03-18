@@ -70,9 +70,9 @@ public class TaskManagerActivity extends BaseActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Not Finished Task";
+                    return getString(R.string.task_no_finished_task);
                 case 1:
-                    return "Finished Task";
+                    return getString(R.string.task_finished_task);
             }
             return null;
         }

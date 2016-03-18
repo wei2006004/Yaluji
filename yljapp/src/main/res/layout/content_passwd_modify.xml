@@ -26,7 +26,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="old passwd"/>
+                android:text="@string/staff_old_passwd"/>
             <EditText
                 android:id="@+id/et_old_passwd"
                 android:layout_alignParentRight="true"
@@ -41,7 +41,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="new passwd"/>
+                android:text="@string/staff_new_passwd"/>
             <EditText
                 android:id="@+id/et_new_passwd"
                 android:layout_alignParentRight="true"
@@ -56,7 +56,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="again"/>
+                android:text="@string/staff_passwd_again"/>
             <EditText
                 android:id="@+id/et_passwd_again"
                 android:layout_alignParentRight="true"
@@ -74,7 +74,7 @@
                 android:id="@+id/btn_save_passwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="save"/>
+                android:text="@string/staff_save"/>
         </RelativeLayout>
     </LinearLayout>
 
