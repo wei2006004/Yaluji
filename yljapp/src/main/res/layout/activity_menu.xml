@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@drawable/side_nav_bar"
     tools:context="com.ylj.main.MenuActivity">
 
     <LinearLayout
@@ -22,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:src="@android:drawable/ic_dialog_email" />
+                android:src="@drawable/connect" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:src="@android:drawable/ic_dialog_email" />
+                android:src="@drawable/start_test" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:src="@android:drawable/ic_dialog_email" />
+                android:src="@drawable/manager" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:src="@android:drawable/ic_dialog_email" />
+                android:src="@drawable/staff" />
 
             <TextView
                 android:layout_width="wrap_content"

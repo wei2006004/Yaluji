@@ -1,63 +1,77 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.ylj.main.fragment.AdminLoginFragment">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_vertical"
+    tools:context="com.ylj.main.fragment.AdminLoginFragment">
 
     <RelativeLayout
-        android:paddingTop="70dp"
-        android:layout_gravity="center"
-        android:layout_width="400dp"
-        android:layout_height="350dp">
+        style="@style/LoginLayout">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/common_text_size"
+                android:text="@string/login_admin_login"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/common_text_size"
                     android:text="@string/login_user"/>
                 <EditText
                     android:id="@+id/et_user"
+                    style="@style/CommonEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/common_text_size"
                     android:text="@string/login_passwd"/>
                 <EditText
                     android:id="@+id/et_passwd"
+                    style="@style/CommonEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/bt_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/BlueButton"
                 android:text="@string/login_login"/>
 
             <TextView
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:textSize="20sp"
                 android:id="@+id/tv_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/tv_switch_common_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_common_login"
+                android:textColor="@color/backgound_color"
+                android:textSize="20sp"/>
         </LinearLayout>
-        <TextView
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:id="@+id/tv_switch_common_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_common_login"
-            android:textSize="24sp"/>
+
     </RelativeLayout>
 
 </FrameLayout>

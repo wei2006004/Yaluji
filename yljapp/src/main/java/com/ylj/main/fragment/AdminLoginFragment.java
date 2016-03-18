@@ -83,6 +83,7 @@ public class AdminLoginFragment extends BaseFragment {
     }
 
     private void showMessage(String text) {
+        mMsgText.setVisibility(View.VISIBLE);
         mMsgText.setText(text);
     }
 

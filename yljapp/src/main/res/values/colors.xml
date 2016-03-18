@@ -3,4 +3,23 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="backgound_color">#4c57d8</color>
+    <color name="btn_blue">#4c57d8</color>
+    <color name="btn_blue_pressed">#4cffff</color>
+
+
+
+
+
+
+    <!-- 主体背景色 灰-->
+    <color name="theme_backgound">#f6f6f7</color>
+    <!-- 下按时隐形-->
+    <color name="setting_item_press">#eeeef0</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- 分割线-->
+    <color name="list_div_color">#dfe4e5</color>
+    <!-- 灰色字体 #FF848383-->
 </resources>
