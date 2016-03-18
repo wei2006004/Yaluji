@@ -50,7 +50,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="task name" />
+                        android:text="@string/task_name" />
 
                     <TextView
                         android:id="@+id/tv_task_name"
@@ -66,7 +66,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="road name" />
+                        android:text="@string/task_road" />
 
                     <TextView
                         android:id="@+id/tv_road_name"
@@ -82,7 +82,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="status" />
+                        android:text="@string/task_status" />
 
                     <TextView
                         android:id="@+id/tv_status"
@@ -99,7 +99,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="road width" />
+                        android:text="@string/task_road_width" />
 
                     <TextView
                         android:id="@+id/tv_road_width"
@@ -108,7 +108,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="meter" />
+                        android:text="@string/task_meter" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -120,7 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="road length" />
+                        android:text="@string/task_road_length" />
 
                     <TextView
                         android:id="@+id/tv_road_length"
@@ -129,7 +129,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="meter" />
+                        android:text="@string/task_meter" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -164,7 +164,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="test list:" />
+                    android:text="@string/task_test_list" />
 
                 <ListView
                     android:id="@+id/lv_test"
@@ -181,7 +181,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="this task has not adjust"/>
+                    android:text="@string/task_not_adjust"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -191,7 +191,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="enter adjust" />
+                        android:text="@string/task_enter_adjust" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -211,7 +211,7 @@
                     android:id="@+id/btn_enter_test"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="enter test" />
+                    android:text="@string/task_enter_test" />
             </RelativeLayout>
 
         </LinearLayout>

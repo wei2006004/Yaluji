@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YljApp</string>
+    <string name="app_name">压路机信息采集系统</string>
 
     <string name="action_settings">Settings</string>
 
@@ -24,4 +24,107 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_sensor">SensorActivity</string>
+
+    <!-- 登录界面 -->
+    <string name="login_login">登录</string>
+    <string name="login_anonymous">匿名登录</string>
+    <string name="login_admin_login">管理员登录</string>
+    <string name="login_common_login">普通登录</string>
+    <string name="login_user">账号：</string>
+    <string name="login_passwd">密码：</string>
+
+    <!-- 主界面 -->
+    <string name="menu_connect">设备连接</string>
+    <string name="menu_new_task">进入测试</string>
+    <string name="menu_manager">数据管理</string>
+    <string name="menu_staff">账号管理</string>
+
+    <!-- 个人信息界面 -->
+    <string name="user_info">账号信息</string>
+    <string name="user_name">姓名：</string>
+    <string name="user_company">公司：</string>
+    <string name="user_admin">（管理员）</string>
+    <string name="user_connect_info">设备连接</string>
+    <string name="user_connect_status">连接状态：</string>
+    <string name="user_connect_mode">连接模式：</string>
+    <string name="user_device_name">设备名：</string>
+    <string name="user_device_status">设备状态：</string>
+    <string name="user_logout">注销</string>
+    <string name="user_"></string>
+
+    <!-- 设置界面 -->
+    <string name="setting_debug">调试模式</string>
+    <string name="setting_ftp">FTP设置</string>
+    <string name="setting_ftp_ip">IP地址</string>
+    <string name="setting_ftp_port">端口</string>
+    <string name="setting_ftp_user">用户</string>
+    <string name="setting_ftp_passwd">密码</string>
+    <string name="setting_wifi">WIFI连接设置</string>
+    <string name="setting_wifi_ip">IP地址</string>
+    <string name="setting_wifi_port">端口</string>
+    <string name="setting_"></string>
+
+    <!-- 设备连接界面 -->
+    <string name="connect_sensor">传感器状态</string>
+    <string name="connect_resent">重新获取信息</string>
+    <string name="connect_disconnect">断开连接</string>
+    <string name="connect_device_info">设备信息</string>
+    <string name="connect_device_name">设备名</string>
+    <string name="connect_version">硬件版本</string>
+    <string name="connect_soft_version">软件版本</string>
+    <string name="connect_device_status">设备状态</string>
+    <string name="connect_temp">温度传感器</string>
+    <string name="connect_quake">加速度传感器</string>
+    <string name="connect_direction">电子罗盘</string>
+    <string name="connect_huoer">霍尔传感器</string>
+    <string name="connect_status_normal">运行正常</string>
+    <string name="connect_status_error">运行异常</string>
+    <string name="connect_wifi">WIFI连接</string>
+    <string name="connect_bt">蓝牙连接</string>
+    <string name="connect_open_wifi">打开WIFI</string>
+    <string name="connect_connect">连接设备</string>
+    <string name="connect_wifi_not_open">WIFI尚未开启</string>
+    <string name="connect_wifi_opened">WIFI已打开</string>
+    <string name="connect_bt_state">打开蓝牙</string>
+    <string name="connect_device_list">设备列表</string>
+    <string name="connect_"></string>
+
+    <!-- Task界面/Task Modify/Task Manager -->
+    <string name="task_name">任务名：</string>
+    <string name="task_road">公路名：</string>
+    <string name="task_status">状态：</string>
+    <string name="task_road_width">公路宽：</string>
+    <string name="task_road_length">公路长：</string>
+    <string name="task_enter_test">进入测试</string>
+    <string name="task_test_list">测试列表</string>
+    <string name="task_meter">米</string>
+    <string name="task_info">基本信息</string>
+    <string name="task_info_name">任务名</string>
+    <string name="task_info_road_width">公路宽</string>
+    <string name="task_info_road_length">公路长</string>
+    <string name="task_info_road_info">公路信息</string>
+    <string name="task_info_road_name">公路名</string>
+    <string name="task_roller_info">转轮信息</string>
+    <string name="task_roller_width">轮宽</string>
+    <string name="task_roller_diameter">直径</string>
+    <string name="task_enter_adjust">进入相关性校验</string>
+    <string name="task_origin">车头方向</string>
+    <string name="task_anticlockwise">逆时针</string>
+    <string name="task_clockwise">顺时针</string>
+    <string name="task_not_adjust">任务未进行相关性校验</string>
+    <string name="task_setting">基本设置</string>
+    <string name="task_roller_setting">转轮设置</string>
+    <string name="task_road_setting">公路设置</string>
+    <string name="task_huoer">霍尔传感器</string>
+    <string name="task_ge">个</string>
+    <string name="task_save">保存</string>
+    <string name="task_save_and_enter_adjust">保存并进入校验</string>
+    <string name="task_"></string>
+
+
+
+
+
+
+
 </resources>

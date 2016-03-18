@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.ylj.common.bean.Task;
 import com.ylj.common.bean.Test;
@@ -38,6 +39,7 @@ public class TestControler extends ConnectControler implements ITestCtrl {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
+            Log.d("TestControler", "action:" + action);
             if (action.equals(ServiceAction.ACTION_SAMPLE_CTRL_STATE_CHANGE)) {
                 onActionCtrlStateChange(intent);
             } else if (action.equals(ServiceAction.ACTION_DRAW_DATA)) {

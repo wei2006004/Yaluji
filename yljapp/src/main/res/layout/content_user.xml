@@ -61,7 +61,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="user info" />
+                        android:text="@string/user_info" />
 
                     <Button
                         android:id="@+id/btn_user_edit"
@@ -80,7 +80,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="name" />
+                        android:text="@string/user_name" />
 
                     <TextView
                         android:id="@+id/tv_name"
@@ -91,7 +91,7 @@
                         android:id="@+id/tv_admin_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(adminstation)"
+                        android:text="@string/user_admin"
                         android:visibility="gone"/>
                 </LinearLayout>
 
@@ -103,7 +103,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="company" />
+                        android:text="@string/user_company" />
 
                     <TextView
                         android:id="@+id/tv_company"
@@ -123,7 +123,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="connect info" />
+                    android:text="@string/user_connect_info" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="connect status" />
+                        android:text="@string/user_connect_status" />
 
                     <TextView
                         android:id="@+id/tv_conncet_status"
@@ -157,7 +157,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="conncet mode" />
+                            android:text="@string/user_connect_mode" />
 
                         <TextView
                             android:id="@+id/tv_conncet_mode"
@@ -174,7 +174,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="device" />
+                            android:text="@string/user_device_name" />
 
                         <TextView
                             android:id="@+id/tv_conncet_device"
@@ -191,7 +191,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="device status" />
+                            android:text="@string/user_device_status" />
 
                         <TextView
                             android:id="@+id/tv_device_status"
@@ -205,7 +205,7 @@
                 android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="logout" />
+                android:text="@string/user_logout" />
         </LinearLayout>
     </ScrollView>
 

@@ -25,13 +25,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:text="login"/>
+                android:text="@string/login_login"/>
 
             <Button
                 android:id="@+id/bt_annoy_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="anonymous login"/>
+                android:text="@string/login_anonymous"/>
 
 
         </LinearLayout>
@@ -41,7 +41,7 @@
             android:id="@+id/tv_switch_admin_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="admin login &gt;"
+            android:text="@string/login_admin_login"
             android:textSize="24sp"/>
     </RelativeLayout>
 

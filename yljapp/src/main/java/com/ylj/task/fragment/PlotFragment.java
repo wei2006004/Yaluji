@@ -2,6 +2,7 @@ package com.ylj.task.fragment;
 
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -136,16 +137,25 @@ public class PlotFragment extends AbstractTestFragment implements ITestCtrl.OnTe
         mTestLayout.setVisibility(View.VISIBLE);
     }
 
+    boolean mIsRefreshPage = false;
+
     @Override
-    public void refreshPage() {
+    public synchronized void refreshPage() {
         if (!isAdded())
             return;
-        PlotView.DrawEdit edit = mPlotView.getEdit();
-        edit.clear();
-        for (PointF data : mDatas) {
-            edit.addPoint(data);
-        }
-        edit.commit();
+        mIsRefreshPage = true;
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                PlotView.DrawEdit edit = mPlotView.getEdit();
+                edit.clear();
+                for (PointF data : mDatas) {
+                    edit.addPoint(data);
+                }
+                edit.commit();
+                mIsRefreshPage = false;
+            }
+        });
     }
 
     @Override
@@ -157,7 +167,7 @@ public class PlotFragment extends AbstractTestFragment implements ITestCtrl.OnTe
     }
 
     @Override
-    public void onRefresh(Record data) {
+    public synchronized void onRefresh(Record data) {
         double value = (mMode == MODE_QUAKE_PLOT) ? data.getQuake() : data.getTemp();
         if (mDatas.size() >= REFRESH_NUM) {
             mDatas.clear();
@@ -166,6 +176,8 @@ public class PlotFragment extends AbstractTestFragment implements ITestCtrl.OnTe
         PointF pointF = new PointF(mDatas.size(), (float) value);
         mDatas.add(pointF);
         if (!isAdded())
+            return;
+        if(mIsRefreshPage)
             return;
         mPlotView.getEdit().addPoint(pointF).commit();
     }

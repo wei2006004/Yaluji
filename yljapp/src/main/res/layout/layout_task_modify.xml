@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="common info" />
+            android:text="@string/task_info" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="task name" />
+                    android:text="@string/task_info_name" />
 
                 <EditText
                     android:id="@+id/et_task_name"
@@ -45,7 +45,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="road name" />
+                    android:text="@string/task_info_road_name" />
 
                 <EditText
                     android:id="@+id/et_road_name"
@@ -62,7 +62,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="origin" />
+                    android:text="@string/task_origin" />
 
                 <TextView
                     android:id="@+id/tv_origin_edit"

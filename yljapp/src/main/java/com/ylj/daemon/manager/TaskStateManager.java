@@ -40,6 +40,8 @@ public class TaskStateManager implements ITaskStateManager {
 
     @Override
     public void loadTask(Task task) {
+        mOnTaskHandleListener.onLoadTaskStart();
+
         initData(task);
 
         if (!task.isTest()) {
@@ -113,11 +115,11 @@ public class TaskStateManager implements ITaskStateManager {
 
     private TraceData createTraceData() {
         mTraceStep--;
+        mTempSum += mRecord.getQuake();
         if (mTraceStep >= 0)
             return null;
 
         TraceData traceData = new TraceData();
-        mTempSum += mRecord.getQuake();
         traceData.setPostionX(mRecord.getPositionX());
         traceData.setPostionY(mRecord.getPositionY());
         traceData.setDirection(mRecord.getDirection());

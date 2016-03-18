@@ -18,7 +18,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="device info" />
+                android:text="@string/connect_device_info" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="device name" />
+                        android:text="@string/connect_device_name" />
 
                     <TextView
                         android:id="@+id/tv_name"
@@ -48,7 +48,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="version" />
+                        android:text="@string/connect_version" />
 
                     <TextView
                         android:id="@+id/tv_version"
@@ -63,7 +63,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="soft version"/>
+                        android:text="@string/connect_soft_version"/>
 
                     <TextView
                         android:id="@+id/tv_soft_version"
@@ -76,7 +76,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="device status" />
+                android:text="@string/connect_device_status" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="temp" />
+                        android:text="@string/connect_temp" />
 
                     <TextView
                         android:id="@+id/tv_temp"
@@ -106,7 +106,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="quake" />
+                        android:text="@string/connect_quake" />
 
                     <TextView
                         android:id="@+id/tv_quake"
@@ -121,7 +121,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="direction"/>
+                        android:text="@string/connect_direction"/>
 
                     <TextView
                         android:id="@+id/tv_direction"
@@ -137,7 +137,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="huoer"/>
+                        android:text="@string/connect_huoer"/>
 
                     <TextView
                         android:id="@+id/tv_huoer"
@@ -152,19 +152,19 @@
             android:id="@+id/bt_sensor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="sensor" />
+            android:text="@string/connect_sensor" />
 
         <Button
             android:id="@+id/bt_resent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="resent" />
+            android:text="@string/connect_resent" />
 
         <Button
             android:id="@+id/bt_disconnect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="disconnect" />
+            android:text="@string/connect_disconnect" />
     </LinearLayout>
 
 </FrameLayout>

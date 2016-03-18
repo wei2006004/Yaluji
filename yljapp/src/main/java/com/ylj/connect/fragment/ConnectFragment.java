@@ -29,7 +29,6 @@ public class ConnectFragment extends BaseFragment {
     SectionsPagerAdapter mSectionsPagerAdapter;
 
     public ConnectFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -58,7 +57,6 @@ public class ConnectFragment extends BaseFragment {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 2;
         }
 
@@ -66,9 +64,9 @@ public class ConnectFragment extends BaseFragment {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "WLAN";
+                    return getString(R.string.connect_wifi);
                 case 1:
-                    return "BLUETOOTH";
+                    return getString(R.string.connect_bt);
             }
             return null;
         }

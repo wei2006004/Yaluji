@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.ylj.common.Controler;
 import com.ylj.connect.bean.DeviceInfo;
@@ -26,6 +27,7 @@ public class ConnectControler extends Controler implements IConnectCtrl {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
+            Log.d("ConnectControler","action:"+action);
             if (action.equals(ServiceAction.ACTION_CONNECT_STATE_CHANGE)) {
                 int state = intent.getIntExtra(ServiceAction.EXTRA_ACTION_FLAG, ConnectState.STATE_NONE);
                 if (state == ConnectState.STATE_CONNECT_LOST) {

@@ -37,12 +37,12 @@
                     android:id="@+id/btn_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="save"/>
+                    android:text="@string/task_save"/>
                 <Button
                     android:id="@+id/btn_save_and_adjust"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="save and inter adjust"/>
+                    android:text="@string/task_save_and_enter_adjust"/>
             </LinearLayout>
 
             <LinearLayout
@@ -54,7 +54,7 @@
                     android:id="@+id/btn_enter_adjust"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="inter adjust"/>
+                    android:text="@string/task_enter_adjust"/>
             </LinearLayout>
 
         </LinearLayout>

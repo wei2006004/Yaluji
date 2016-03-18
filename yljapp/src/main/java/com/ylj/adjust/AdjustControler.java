@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.ylj.connect.ConnectControler;
 import com.ylj.daemon.YljService;
@@ -33,6 +34,7 @@ public class AdjustControler extends ConnectControler implements IAdjustCtrl {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
+            Log.d("AdjustControler", "action:" + action);
             if (action.equals(ServiceAction.ACTION_SAMPLE_CTRL_STATE_CHANGE)) {
                 int flag = intent.getIntExtra(ServiceAction.EXTRA_ACTION_FLAG, ServiceAction.CTRL_FLAG_STOP);
                 if (flag == ServiceAction.CTRL_FLAG_STOP) {

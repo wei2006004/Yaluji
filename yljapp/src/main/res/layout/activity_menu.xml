@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="device connect"
+                android:text="@string/menu_connect"
                 android:textSize="20sp" />
         </RelativeLayout>
 
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="new task"
+                android:text="@string/menu_new_task"
                 android:textSize="20sp" />
         </RelativeLayout>
 
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="data manager"
+                android:text="@string/menu_manager"
                 android:textSize="20sp" />
         </RelativeLayout>
 
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="unit manager"
+                android:text="@string/menu_staff"
                 android:textSize="20sp" />
         </RelativeLayout>
 

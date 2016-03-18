@@ -24,11 +24,29 @@ public class ColorData implements Parcelable{
     @Column(name = "color")
     int color;
 
+    @Column(name = "count")
+    int count;
+
+    @Column(name = "value")
+    double value;
+
+    public ColorData(){}
+
+    public ColorData(int row, int column, int color, int count ,double value) {
+        this.row = row;
+        this.column = column;
+        this.color = color;
+        this.count = count;
+        this.value = value;
+    }
+
     protected ColorData(Parcel in) {
         id = in.readInt();
         row = in.readInt();
         column = in.readInt();
         color = in.readInt();
+        count = in.readInt();
+        value = in.readDouble();
     }
 
     public static final Creator<ColorData> CREATOR = new Creator<ColorData>() {
@@ -75,6 +93,22 @@ public class ColorData implements Parcelable{
         this.color = color;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -86,5 +120,7 @@ public class ColorData implements Parcelable{
         dest.writeInt(row);
         dest.writeInt(column);
         dest.writeInt(color);
+        dest.writeInt(count);
+        dest.writeDouble(value);
     }
 }

@@ -17,7 +17,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="user:"/>
+                    android:text="@string/login_user"/>
                 <EditText
                     android:id="@+id/et_user"
                     android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="passwd:"/>
+                    android:text="@string/login_passwd"/>
                 <EditText
                     android:id="@+id/et_passwd"
                     android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:id="@+id/bt_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="login"/>
+                android:text="@string/login_login"/>
 
             <TextView
                 android:textSize="20sp"
@@ -56,7 +56,7 @@
             android:id="@+id/tv_switch_common_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="&lt; common login"
+            android:text="@string/login_common_login"
             android:textSize="24sp"/>
     </RelativeLayout>
 

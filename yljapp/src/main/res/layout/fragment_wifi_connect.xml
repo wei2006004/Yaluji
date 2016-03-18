@@ -17,18 +17,18 @@
                 android:id="@+id/tv_wifi_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="wifi is not connecd"
+                android:text="@string/connect_wifi_not_open"
                 android:textSize="30sp"/>
             <Button
                 android:id="@+id/bt_open_wifi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="open wifi"/>
+                android:text="@string/connect_open_wifi"/>
             <Button
                 android:id="@+id/bt_connect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="connect"/>
+                android:text="@string/connect_connect"/>
         </LinearLayout>
     </RelativeLayout>
 

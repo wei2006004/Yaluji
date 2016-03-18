@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="road info" />
+            android:text="@string/task_info_road_info" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="road width" />
+                    android:text="@string/task_info_road_width" />
 
                 <TextView
                     android:id="@+id/tv_road_width"
@@ -39,7 +39,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="meter" />
+                    android:text="@string/task_meter" />
             </LinearLayout>
 
             <LinearLayout
@@ -51,7 +51,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="road length" />
+                    android:text="@string/task_info_road_length" />
 
                 <TextView
                     android:id="@+id/tv_road_length"
@@ -60,14 +60,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="meter" />
+                    android:text="@string/task_meter" />
             </LinearLayout>
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="roller info" />
+            android:text="@string/task_roller_info" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="roller width" />
+                    android:text="@string/task_road_width" />
 
                 <TextView
                     android:id="@+id/tv_roller_width"
@@ -93,7 +93,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="meter" />
+                    android:text="@string/task_meter" />
             </LinearLayout>
 
             <LinearLayout
@@ -105,7 +105,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="roller diameter" />
+                    android:text="@string/task_roller_diameter" />
 
                 <TextView
                     android:id="@+id/tv_roller_diameter"
@@ -114,7 +114,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="meter" />
+                    android:text="@string/task_meter" />
             </LinearLayout>
 
             <LinearLayout
@@ -126,7 +126,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="huoer num" />
+                    android:text="@string/task_huoer" />
 
                 <TextView
                     android:id="@+id/tv_huoer_num"
@@ -135,7 +135,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ge" />
+                    android:text="@string/task_ge" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

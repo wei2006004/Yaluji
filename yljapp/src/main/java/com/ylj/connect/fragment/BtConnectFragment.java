@@ -31,8 +31,6 @@ import java.util.Map;
 @ContentView(R.layout.fragment_bt_connect)
 public class BtConnectFragment extends BaseFragment {
 
-    private static final int REQUEST_ENABLE_BT = 2;
-
     private static final String TAG_DEVCIE_NAME = "TAG_DEVCIE_NAME";
     private static final String TAG_DEVCIE_ADDRESS = "TAG_DEVCIE_ADDRESS";
 

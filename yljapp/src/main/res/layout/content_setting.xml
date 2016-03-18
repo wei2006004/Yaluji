@@ -22,7 +22,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="debug"/>
+                android:text="@string/setting_debug"/>
             <Switch
                 android:id="@+id/switch_debug"
                 android:layout_alignParentRight="true"
@@ -37,7 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ftp setting"/>
+                android:text="@string/setting_ftp"/>
             <RelativeLayout
                 android:id="@+id/layout_ftp_ip"
                 android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ip adress"/>
+                    android:text="@string/setting_ftp_ip"/>
                 <TextView
                     android:id="@+id/tv_ftp_ip"
                     android:layout_alignParentRight="true"
@@ -62,7 +62,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="port"/>
+                    android:text="@string/setting_ftp_port"/>
                 <TextView
                     android:id="@+id/tv_ftp_port"
                     android:layout_alignParentRight="true"
@@ -78,7 +78,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="user"/>
+                    android:text="@string/setting_ftp_user"/>
                 <TextView
                     android:id="@+id/tv_ftp_user"
                     android:layout_alignParentRight="true"
@@ -94,7 +94,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="passwd"/>
+                    android:text="@string/setting_ftp_passwd"/>
                 <TextView
                     android:id="@+id/tv_ftp_passwd"
                     android:layout_alignParentRight="true"
@@ -111,7 +111,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="wifi setting"/>
+                android:text="@string/setting_wifi"/>
             <RelativeLayout
                 android:id="@+id/layout_wifi_ip"
                 android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ip adress"/>
+                    android:text="@string/setting_wifi_ip"/>
                 <TextView
                     android:id="@+id/tv_wifi_ip"
                     android:layout_alignParentRight="true"
@@ -136,7 +136,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="port"/>
+                    android:text="@string/setting_wifi_port"/>
                 <TextView
                     android:id="@+id/tv_wifi_port"
                     android:layout_alignParentRight="true"
