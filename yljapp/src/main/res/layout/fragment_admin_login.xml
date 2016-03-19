@@ -43,6 +43,7 @@
                 <EditText
                     android:id="@+id/et_passwd"
                     style="@style/CommonEdit"
+                    android:password="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

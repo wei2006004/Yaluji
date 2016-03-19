@@ -193,7 +193,7 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlert("Info", "Do you want to leave adjust?", new DialogInterface.OnClickListener() {
+                showAlert("Info",  getString(R.string.alert_leave_adjust), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

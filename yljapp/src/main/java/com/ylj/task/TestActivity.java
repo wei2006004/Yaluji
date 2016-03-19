@@ -235,7 +235,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlert("Info", "Do you want to leave test?", new DialogInterface.OnClickListener() {
+                showAlert("Info",  getString(R.string.alert_leave_test), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

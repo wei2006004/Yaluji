@@ -111,7 +111,7 @@ public class MenuActivity extends BaseActivity {
 
     private void showNoFinishDialog() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        builder.setTitle("Task list");
+        builder.setTitle(R.string.alert_task_list);
         ListAdapter taskAdapter =createNoFinishTaskAdapter();
         builder.setSingleChoiceItems(taskAdapter, 0, new DialogInterface.OnClickListener() {
             @Override
@@ -120,7 +120,7 @@ public class MenuActivity extends BaseActivity {
                 dialog.dismiss();
             }
         });
-        builder.setPositiveButton("New Task", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.alert_new_task, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 TaskModifyActivity.startAsNewTaskActivity(MenuActivity.this);

@@ -236,7 +236,7 @@ public class AdjustResultActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlert("Info", "Do you want to leave this adjust result?", new DialogInterface.OnClickListener() {
+                showAlert("Info",  getString(R.string.alert_leave_adjust_result), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

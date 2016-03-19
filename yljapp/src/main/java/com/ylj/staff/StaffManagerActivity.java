@@ -182,7 +182,7 @@ public class StaffManagerActivity extends BaseActivity {
     }
 
     private void deleteStaff(final int position) {
-        showAlert("Warning", "Do you want to delete this staff?",
+        showAlert("Warning",  getString(R.string.alert_delete_staff),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -273,7 +273,7 @@ public class StaffManagerActivity extends BaseActivity {
     }
 
     private void deleteAdmin(final int position) {
-        showAlert("Warning", "Do you want to delete this admin?",
+        showAlert("Warning", getString(R.string.alert_delete_admin),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

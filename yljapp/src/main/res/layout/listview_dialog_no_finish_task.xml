@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_marginLeft="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -15,22 +16,26 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tv_task_name"
+                style="@style/CommonGrepTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                style="@style/CommonGrepTitle"
                 android:id="@+id/tv_no_adjust"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(not adjust)"/>
+                android:text="@string/alert_no_adjust"/>
             <TextView
+                style="@style/CommonGrepTitle"
                 android:id="@+id/tv_no_finish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(not finish)"/>
+                android:text="@string/alert_no_finish"/>
         </LinearLayout>
 
 
         <LinearLayout
+            android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

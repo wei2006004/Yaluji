@@ -140,12 +140,12 @@ public class TaskActivity extends BaseActivity {
         mRoadWidthText.setText(String.format("%.2f", mTask.getRoadWidth()));
         if (mIsAdjust) {
             if (mIsFinish) {
-                mStatusText.setText("finished");
+                mStatusText.setText(R.string.task_finish);
             } else {
-                mStatusText.setText("no finished");
+                mStatusText.setText(R.string.task_not_finish);
             }
         } else {
-            mStatusText.setText("no adjust");
+            mStatusText.setText(R.string.task_no_adjust);
         }
     }
 
