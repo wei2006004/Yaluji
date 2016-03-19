@@ -8,6 +8,8 @@
     <string name="title_activity_menu">主菜单</string>
     <string name="title_activity_connect">设备连接</string>
     <string name="title_activity_new_task">新建任务</string>
+    <string name="title_activity_task_info">任务信息</string>
+    <string name="title_activity_modify_task">修改任务设置</string>
     <string name="title_activity_setting">系统设置</string>
     <string name="title_activity_staff_modify">账号信息</string>
     <string name="title_activity_staff_manager">账号管理</string>
@@ -50,6 +52,12 @@
     <string name="user_device_name">设备名：</string>
     <string name="user_device_status">设备状态：</string>
     <string name="user_logout">注销</string>
+    <string name="user_connect">设备已连接</string>
+    <string name="user_not_connect">设备未连接</string>
+    <string name="user_normal">正常</string>
+    <string name="user_error">异常</string>
+    <string name="user_wifi">WIFI</string>
+    <string name="user_bt">蓝牙</string>
     <string name="user_"></string>
 
     <!-- 设置界面 -->
@@ -132,6 +140,7 @@
     <string name="task_no_finished_task">未完成任务</string>
     <string name="task_finished_task">完成任务</string>
     <string name="task_task_list">任务列表</string>
+    <string name="task_origin_setting">车头方向</string>
     <string name="task_"></string>
 
     <!-- Staff界面/Staff/Admin Modify/Staff Manager -->

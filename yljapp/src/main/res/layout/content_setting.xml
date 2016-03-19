@@ -7,6 +7,8 @@
     tools:showIn="@layout/activity_setting" tools:context="com.ylj.setting.SettingActivity">
 
     <ScrollView
+        android:background="@drawable/layout_white"
+        android:padding="30dp"
         android:layout_centerInParent="true"
         android:layout_width="450dp"
         android:layout_height="match_parent">
@@ -20,6 +22,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_alignParentLeft="true"
+                style="@style/CommonSummary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_debug"/>
@@ -37,18 +40,28 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/CommonTitle"
                 android:text="@string/setting_ftp"/>
+            <LinearLayout
+                android:paddingLeft="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
             <RelativeLayout
                 android:id="@+id/layout_ftp_ip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_alignParentLeft="true"
+                    style="@style/CommonSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_ftp_ip"/>
                 <TextView
                     android:id="@+id/tv_ftp_ip"
+                    style="@style/CommonSummary"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -59,11 +72,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    style="@style/CommonSummary"
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_ftp_port"/>
                 <TextView
+                    style="@style/CommonSummary"
                     android:id="@+id/tv_ftp_port"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
@@ -78,9 +93,11 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/CommonSummary"
                     android:text="@string/setting_ftp_user"/>
                 <TextView
                     android:id="@+id/tv_ftp_user"
+                    style="@style/CommonSummary"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,16 +109,19 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_alignParentLeft="true"
+                    style="@style/CommonSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_ftp_passwd"/>
                 <TextView
                     android:id="@+id/tv_ftp_passwd"
+                    style="@style/CommonSummary"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="123"/>
             </RelativeLayout>
+        </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/layout_wifi"
@@ -109,20 +129,30 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                style="@style/CommonTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_wifi"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
             <RelativeLayout
                 android:id="@+id/layout_wifi_ip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_alignParentLeft="true"
+                    style="@style/CommonSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_wifi_ip"/>
                 <TextView
                     android:id="@+id/tv_wifi_ip"
+                    style="@style/CommonSummary"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -134,16 +164,19 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_alignParentLeft="true"
+                    style="@style/CommonSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_wifi_port"/>
                 <TextView
                     android:id="@+id/tv_wifi_port"
+                    style="@style/CommonSummary"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="21"/>
             </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     </ScrollView>

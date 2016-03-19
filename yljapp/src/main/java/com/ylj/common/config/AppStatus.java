@@ -36,7 +36,7 @@ public class AppStatus {
 
     boolean isConnect = false;
     DeviceInfo currentDevice;
-    boolean isDeviceNormal;
+    boolean isDeviceNormal = true;
     int connectMode = CONNECT_MODE_NONE;
 
     Task currentTask = null;

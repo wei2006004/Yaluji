@@ -12,6 +12,7 @@
     </style>
 
     <style name="CenterLayout">
+        <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_width">@dimen/layout_width</item>
         <item name="android:layout_height">@dimen/layout_height</item>
         <item name="android:background">@drawable/layout_white</item>
@@ -25,11 +26,33 @@
     <style name="LoginLayout" parent="CenterLayout">
         <item name="android:layout_marginTop">100dp</item>
     </style>
+
+    <style name="CenterLayoutWithBar" parent="CenterLayout">
+        <item name="android:layout_marginTop">50dp</item>
+    </style>
     
     <style name="CommonEdit">
         <item name="android:textSize">20sp</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="CommonTitle">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/common_title_blue</item>
+        <item name="android:layout_marginTop">7dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="CommonSummary">
+        <item name="android:textSize">18dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <!--<style name="FabStyle">-->
+        <!--<item name="app:backgroundTint">@color/fab_color</item>-->
+        <!--<item name="app:rippleColor">@color/fab_color_clicked</item>-->
+    <!--</style>-->
 
 
 </resources>

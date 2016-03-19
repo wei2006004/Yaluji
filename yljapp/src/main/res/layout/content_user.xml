@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ylj.setting.UserActivity"
     tools:showIn="@layout/activity_user">
 
-    <ScrollView
+    <RelativeLayout
+        android:background="@drawable/layout_white"
         android:layout_width="400dp"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true">
+        android:paddingTop="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="600dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +33,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_centerInParent="true"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@drawable/user_image" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -55,23 +56,36 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:textSize="@dimen/text_title"
+                        android:textColor="@color/common_title_blue"
+                        android:layout_centerVertical="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/user_info" />
 
                     <Button
+                        android:background="@drawable/edit"
                         android:id="@+id/btn_user_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginRight="20dp"
                         android:layout_alignParentRight="true"
-                        android:text="edit" />
+                        />
                 </RelativeLayout>
 
                 <LinearLayout
+                    android:paddingLeft="20dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <LinearLayout
+
                     android:id="@+id/layout_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,15 +94,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_summary"
                         android:text="@string/user_name" />
 
                     <TextView
                         android:id="@+id/tv_name"
+                        android:textSize="@dimen/text_summary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/tv_admin_info"
+                        android:textSize="@dimen/text_summary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/user_admin"
@@ -102,16 +119,19 @@
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:textSize="@dimen/text_summary"
                         android:layout_height="wrap_content"
                         android:text="@string/user_company" />
 
                     <TextView
                         android:id="@+id/tv_company"
+                        android:textSize="@dimen/text_summary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="cm" />
                 </LinearLayout>
 
+            </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -121,21 +141,33 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textColor="@color/common_title_blue"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="@dimen/text_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/user_connect_info" />
 
                 <LinearLayout
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
+                        android:textSize="@dimen/text_summary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/user_connect_status" />
 
                     <TextView
+                        android:textSize="@dimen/text_summary"
                         android:id="@+id/tv_conncet_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -155,11 +187,13 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:textSize="@dimen/text_summary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/user_connect_mode" />
 
                         <TextView
+                            android:textSize="@dimen/text_summary"
                             android:id="@+id/tv_conncet_mode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -172,11 +206,13 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:textSize="@dimen/text_summary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/user_device_name" />
 
                         <TextView
+                            android:textSize="@dimen/text_summary"
                             android:id="@+id/tv_conncet_device"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -189,24 +225,29 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:textSize="@dimen/text_summary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/user_device_status" />
 
                         <TextView
+                            android:textSize="@dimen/text_summary"
                             android:id="@+id/tv_device_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                 </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
             <Button
                 android:id="@+id/btn_logout"
+                style="@style/BlueButton"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/user_logout" />
         </LinearLayout>
-    </ScrollView>
 
+    </RelativeLayout>
 </RelativeLayout>

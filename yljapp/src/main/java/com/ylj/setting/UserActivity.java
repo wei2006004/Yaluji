@@ -182,21 +182,21 @@ public class UserActivity extends BaseActivity {
         }
 
         if (mIsConnect) {
-            mConnectStatusText.setText("connected");
+            mConnectStatusText.setText(R.string.user_connect);
             mConnectDeviceText.setText(mCurrentDevice.getDeviceId());
             if (mConnectMode == CONNECT_MODE_BLUETOOTH) {
-                mConnectModeText.setText("bluetooth");
+                mConnectModeText.setText(R.string.user_bt);
             } else {
-                mConnectModeText.setText("WIFI");
+                mConnectModeText.setText(R.string.user_wifi);
             }
             if (mIsDeviceNormal) {
-                mDeviceStatusText.setText("nomal");
+                mDeviceStatusText.setText(R.string.user_normal);
             } else {
-                mDeviceStatusText.setText("error");
+                mDeviceStatusText.setText(R.string.user_error);
             }
 
         } else {
-            mConnectStatusText.setText("not connect");
+            mConnectStatusText.setText(R.string.user_not_connect);
         }
     }
 

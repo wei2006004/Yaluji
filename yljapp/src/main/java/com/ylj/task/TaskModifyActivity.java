@@ -151,8 +151,8 @@ public class TaskModifyActivity extends BaseActivity {
 
     @Event(R.id.layout_edit_origin)
     private void onOriginLayoutClick(View view){
-        showSingleChoiceDialog("origin setting",
-                new String[]{"CLOCKWISE", "ANTICLOCKWISE"},
+        showSingleChoiceDialog(getString(R.string.task_origin_setting),
+                new String[]{getString(R.string.task_clockwise), getString(R.string.task_anticlockwise)},
                 mTask.getOrigin(),
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -160,12 +160,12 @@ public class TaskModifyActivity extends BaseActivity {
                         mTask.setOrigin(which);
                         switch (which) {
                             case Task.ORIGIN_ANTICLOCKWISE:
-                                mOriginEditText.setText("ANTICLOCKWISE");
-                                mOriginText.setText("ANTICLOCKWISE");
+                                mOriginEditText.setText(R.string.task_anticlockwise);
+                                mOriginText.setText(R.string.task_anticlockwise);
                                 break;
                             case Task.ORIGIN_CLOCKWISE:
-                                mOriginEditText.setText("CLOCKWISE");
-                                mOriginText.setText("CLOCKWISE");
+                                mOriginEditText.setText(R.string.task_clockwise);
+                                mOriginText.setText(R.string.task_clockwise);
                                 break;
                         }
                         dialog.dismiss();
@@ -372,12 +372,12 @@ public class TaskModifyActivity extends BaseActivity {
         mRoadNameEdit.setText(mTask.getRoadName());
         switch (mTask.getOrigin()){
             case Task.ORIGIN_ANTICLOCKWISE:
-                mOriginEditText.setText("ANTICLOCKWISE");
-                mOriginText.setText("ANTICLOCKWISE");
+                mOriginEditText.setText(R.string.task_anticlockwise);
+                mOriginText.setText(R.string.task_anticlockwise);
                 break;
             case Task.ORIGIN_CLOCKWISE:
-                mOriginEditText.setText("CLOCKWISE");
-                mOriginText.setText("CLOCKWISE");
+                mOriginEditText.setText(R.string.task_clockwise);
+                mOriginText.setText(R.string.task_clockwise);
                 break;
         }
         mRoadWidthText.setText(String.valueOf(mTask.getRoadWidth()));
@@ -426,13 +426,13 @@ public class TaskModifyActivity extends BaseActivity {
     private void initToolbar() {
         switch (mMode) {
             case MODE_SHOW_INFO:
-                mToolbar.setTitle("task info");
+                mToolbar.setTitle(R.string.title_activity_task_info);
                 break;
             case MODE_MODIFY_TASK:
-                mToolbar.setTitle("modify task");
+                mToolbar.setTitle(R.string.title_activity_modify_task);
                 break;
             case MODE_NEW_TASK:
-                mToolbar.setTitle("new task");
+                mToolbar.setTitle(R.string.title_activity_new_task);
             default:
                 break;
         }

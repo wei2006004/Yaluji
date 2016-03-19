@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/CommonTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task_info_road_info" />
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="50dp">
+            android:paddingLeft="20dp">
 
             <LinearLayout
                 android:id="@+id/layout_road_width"
@@ -28,15 +29,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="@style/CommonSummary"
+                    android:layout_width="@dimen/common_summary_space"
                     android:layout_height="wrap_content"
                     android:text="@string/task_info_road_width" />
 
                 <TextView
+                    style="@style/CommonSummary"
                     android:id="@+id/tv_road_width"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    style="@style/CommonSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_meter" />
@@ -49,15 +53,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="@style/CommonSummary"
+                    android:layout_width="@dimen/common_summary_space"
                     android:layout_height="wrap_content"
                     android:text="@string/task_info_road_length" />
 
                 <TextView
+                    style="@style/CommonSummary"
                     android:id="@+id/tv_road_length"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    style="@style/CommonSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_meter" />
@@ -65,6 +72,7 @@
         </LinearLayout>
 
         <TextView
+            style="@style/CommonTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/task_roller_info" />
@@ -73,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="50dp">
+            android:paddingLeft="20dp">
 
             <LinearLayout
                 android:id="@+id/layout_roller_width"
@@ -82,15 +90,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="@style/CommonSummary"
+                    android:layout_width="@dimen/common_summary_space"
                     android:layout_height="wrap_content"
-                    android:text="@string/task_road_width" />
+                    android:text="@string/task_info_road_width" />
 
                 <TextView
+                    style="@style/CommonSummary"
                     android:id="@+id/tv_roller_width"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    style="@style/CommonSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_meter" />
@@ -103,15 +114,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="@style/CommonSummary"
+                    android:layout_width="@dimen/common_summary_space"
                     android:layout_height="wrap_content"
                     android:text="@string/task_roller_diameter" />
 
                 <TextView
+                    style="@style/CommonSummary"
                     android:id="@+id/tv_roller_diameter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    style="@style/CommonSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_meter" />
@@ -124,15 +138,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="@style/CommonSummary"
+                    android:layout_width="@dimen/common_summary_space"
                     android:layout_height="wrap_content"
                     android:text="@string/task_huoer" />
 
                 <TextView
+                    style="@style/CommonSummary"
                     android:id="@+id/tv_huoer_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    style="@style/CommonSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_ge" />

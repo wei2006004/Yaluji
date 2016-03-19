@@ -15,6 +15,7 @@
                 android:id="@+id/lv_user"
                 android:choiceMode="singleChoice"
                 android:layout_width="match_parent"
+                android:paddingBottom="10dp"
                 android:layout_height="200dp">
 
             </ListView>
