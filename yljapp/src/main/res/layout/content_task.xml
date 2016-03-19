@@ -185,6 +185,22 @@
                     android:layout_height="200dp" />
             </LinearLayout>
 
+            <RelativeLayout
+                android:id="@+id/layout_reslut"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    style="@style/BlueSmallButton"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:id="@+id/btn_enter_result"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/task_enter_result" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:id="@+id/layout_adjust"
                 android:layout_width="match_parent"
@@ -219,17 +235,16 @@
                 android:layout_height="wrap_content">
                 <Button
                     style="@style/BlueSmallButton"
-                    android:visibility="gone"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:layout_alignParentRight="true"
                     android:id="@+id/btn_finish_task"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="finish task" />
+                    android:text="@string/task_finish_task" />
                 <Button
                     style="@style/BlueSmallButton"
-                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="7dp"
                     android:layout_toLeftOf="@id/btn_finish_task"
                     android:id="@+id/btn_enter_test"
                     android:layout_width="wrap_content"

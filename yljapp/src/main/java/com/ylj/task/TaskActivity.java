@@ -19,6 +19,7 @@ import com.ylj.R;
 import com.ylj.adjust.AdjustActivity;
 import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Task;
+import com.ylj.common.config.StatusLet;
 import com.ylj.db.DbLet;
 
 import org.xutils.view.annotation.ContentView;
@@ -35,6 +36,7 @@ public class TaskActivity extends BaseActivity {
     Task mTask = new Task();
     boolean mIsAdjust = false;
     boolean mIsFinish = false;
+    boolean mIsTest= false;
 
     public static void startNewActivity(Context context, Task task) {
         Intent intent = new Intent(context, TaskActivity.class);
@@ -66,6 +68,9 @@ public class TaskActivity extends BaseActivity {
     @ViewInject(R.id.layout_task_edit)
     RelativeLayout mEditLayout;
 
+    @ViewInject(R.id.layout_reslut)
+    RelativeLayout mResultLayout;
+
     @ViewInject(R.id.layout_adjust)
     LinearLayout mAdjustLayout;
 
@@ -89,13 +94,26 @@ public class TaskActivity extends BaseActivity {
         }
     }
 
+    @Event(R.id.btn_enter_result)
+    private void onEnterResultButtonClick(View view) {
+        TestActivity.startAsShowResultActivity(this, mTask);
+    }
+
     @Event(R.id.btn_enter_adjust)
     private void onEnterAdjustButtonClick(View view) {
+        if(!StatusLet.isConnect()){
+            showToast("no connect");
+            return;
+        }
         AdjustActivity.startNewActivity(this, mTask);
     }
 
     @Event(R.id.btn_enter_test)
     private void onEnterTestButtonClick(View view) {
+        if(!StatusLet.isConnect()){
+            showToast("no connect");
+            return;
+        }
         TestActivity.startAsTaskTestActivity(this, mTask);
     }
 
@@ -161,10 +179,17 @@ public class TaskActivity extends BaseActivity {
         }
 
         if (mIsFinish) {
+            mAdjustLayout.setVisibility(View.GONE);
+            mResultLayout.setVisibility(View.VISIBLE);
             mEnterTestLayout.setVisibility(View.GONE);
             mEditLayout.setVisibility(View.GONE);
         }
-        mFinishButton.setEnabled(false);
+        if(mIsTest){
+            mFinishButton.setEnabled(true);
+        }else {
+            mFinishButton.setEnabled(false);
+        }
+
     }
 
     private void initToolbar() {
@@ -183,6 +208,7 @@ public class TaskActivity extends BaseActivity {
         mTask = intent.getParcelableExtra(EXTRA_TASK);
         mIsAdjust = mTask.isAdjust();
         mIsFinish = mTask.isFinish();
+        mIsTest = mTask.isTest();
     }
 
 }

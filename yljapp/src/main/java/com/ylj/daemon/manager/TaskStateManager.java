@@ -83,7 +83,11 @@ public class TaskStateManager implements ITaskStateManager {
     public void finishTask() {
         if (mTask == null)
             return;
-
+        for (int i = 0; i < mColorCalculator.getRow(); i++) {
+            for (int j = 0; j < mColorCalculator.getColumn(); j++) {
+                mRecordManager.saveColorData(mColorCalculator.getColorData(i, j));
+            }
+        }
     }
 
     @Override
@@ -97,7 +101,7 @@ public class TaskStateManager implements ITaskStateManager {
 
         TraceData traceData = createTraceData();
         drawData.setTraceData(traceData);
-        if(traceData!=null){
+        if (traceData != null) {
             mRecordManager.saveTraceData(traceData);
         }
 
@@ -141,6 +145,11 @@ public class TaskStateManager implements ITaskStateManager {
     public void finishTest(Test test) {
         if (mTask == null)
             return;
+        for (int i = 0; i < mColorCalculator.getRow(); i++) {
+            for (int j = 0; j < mColorCalculator.getColumn(); j++) {
+                mRecordManager.saveColorData(mColorCalculator.getColorData(i, j));
+            }
+        }
     }
 
     OnTaskHandleListener mOnTaskHandleListener;

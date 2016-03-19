@@ -25,6 +25,7 @@ import com.ylj.connect.IConnectCtrl;
 import com.ylj.connect.bean.DeviceInfo;
 import com.ylj.daemon.bean.DeviceData;
 import com.ylj.daemon.bean.TaskResult;
+import com.ylj.db.DbLet;
 import com.ylj.task.fragment.AbstractTestFragment;
 import com.ylj.task.fragment.ColorRunFragment;
 import com.ylj.task.fragment.PlotFragment;
@@ -65,6 +66,8 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     private int mMode = MODE_SHOW_RESULT;
     private Task mTask = new Task();
     private Test mTest = new Test();
+
+    boolean mIsTest = false;
 
     public static void startAsTaskTestActivity(Context context, Task task) {
         Intent intent = new Intent(context, TestActivity.class);
@@ -123,6 +126,16 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         initTabs();
         setLayoutVisiable();
         loadDatas();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(mIsTest){
+            mTask.setIsTest(true);
+            DbLet.saveOrUpdateTask(mTask);
+        }
+        getTestCtrl().finishTest(mTest);
     }
 
     private void loadDatas() {
@@ -309,6 +322,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     @Override
     public void onTestStart() {
         showToast("test start");
+        mIsTest = true;
     }
 
     @Override

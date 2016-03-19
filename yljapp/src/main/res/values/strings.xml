@@ -149,7 +149,8 @@
     <string name="task_finish">已完成</string>
     <string name="task_not_finish">未完成</string>
     <string name="task_no_adjust">未校验</string>
-    <string name="task_"></string>
+    <string name="task_finish_task">结束任务</string>
+    <string name="task_enter_result">查看结果</string>
 
     <!-- Staff界面/Staff/Admin Modify/Staff Manager -->
     <string name="staff_name">姓名</string>

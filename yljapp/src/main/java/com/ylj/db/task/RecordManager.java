@@ -34,7 +34,10 @@ public class RecordManager extends AbstractDbManager {
     public ArrayList<ColorData> getColorDataList() {
         ArrayList<ColorData> colorDatas = new ArrayList<>();
         try {
-            colorDatas.addAll(getDb().findAll(ColorData.class));
+            List<ColorData> datas = getDb().findAll(ColorData.class);
+            if (datas != null) {
+                colorDatas.addAll(datas);
+            }
         } catch (DbException e) {
             e.printStackTrace();
         }
@@ -52,10 +55,26 @@ public class RecordManager extends AbstractDbManager {
     }
 
     public void saveTraceData(TraceData traceData) {
-
+        try {
+            getDb().save(traceData);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void saveRecord(Record mRecord) {
+    public void saveRecord(Record record) {
+        try {
+            getDb().save(record);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void saveColorData(ColorData colorData) {
+        try {
+            getDb().save(colorData);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -39,6 +39,16 @@ public class ColorCalculatorImpl implements IColorCalculator {
     }
 
     @Override
+    public int getRow() {
+        return mRowNum;
+    }
+
+    @Override
+    public int getColumn() {
+        return mColumnNum;
+    }
+
+    @Override
     public ColorData addData(double posX, double posY, double value) {
         int row = 0, column = 0;
         column = (int) (posX / (mRoadLength / mColumnNum));
@@ -65,7 +75,7 @@ public class ColorCalculatorImpl implements IColorCalculator {
         return colorData;
     }
 
-    private ColorData getColorData(int row, int column) {
+    public ColorData getColorData(int row, int column) {
         if ((row < 0 || row >= mRowNum) || (column < 0 || column >= mColumnNum))
             return null;
         return mColorDatas[row][column];

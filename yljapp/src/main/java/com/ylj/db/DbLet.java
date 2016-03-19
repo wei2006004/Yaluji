@@ -85,4 +85,9 @@ public class DbLet {
     public static List<Test> getAllTestByTask(Task task){
         return null;
     }
+
+    public static List<Task> getFinishTaskList() {
+        TaskManager taskManager = ManagerFactory.getTaskManager();
+        return taskManager.getFinishTaskList();
+    }
 }

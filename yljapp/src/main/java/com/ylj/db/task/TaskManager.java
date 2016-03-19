@@ -44,4 +44,16 @@ public class TaskManager extends AbstractDbManager{
         }
         return list;
     }
+
+    public List<Task> getFinishTaskList() {
+        List<Task> list = null;
+        try {
+            list = db.selector(Task.class)
+                    .where(Task.TAG_IS_FINISH, Constant.SQL_OP_EQUAL,Constant.SQL_TRUE)
+                    .findAll();
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

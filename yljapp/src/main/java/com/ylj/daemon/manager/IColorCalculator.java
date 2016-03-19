@@ -12,6 +12,11 @@ public interface IColorCalculator {
     void setColorConvertor(IColorConvertor colorConvertor);
     void setGrid(int row,int column);
 
+    int getRow();
+    int getColumn();
+
+    ColorData getColorData(int row,int column);
+
     ColorData addData(double posX,double posY,double value);
 
     void addColorDatas(List<ColorData> dataList);
