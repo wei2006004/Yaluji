@@ -14,9 +14,11 @@
 
     <LinearLayout
         android:id="@+id/layout_info"
+        android:background="@drawable/layout_white"
         android:layout_width="400dp"
+        android:padding="30dp"
         android:layout_centerInParent="true"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:orientation="vertical"
         android:visibility="gone">
         <LinearLayout
@@ -24,13 +26,16 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/common_summary_space"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                style="@style/CommonTag"
+                android:textSize="@dimen/common_text_size"
                 android:text="@string/staff_account" />
 
             <TextView
                 android:id="@+id/tv_account_name"
+                android:textSize="@dimen/common_text_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true" />
@@ -40,11 +45,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTag"
+                android:layout_width="@dimen/common_summary_space"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/common_text_size"
                 android:text="@string/staff_name"/>
             <TextView
                 android:id="@+id/tv_name"
+                android:textSize="@dimen/common_text_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -53,11 +61,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTag"
+                android:layout_width="@dimen/common_summary_space"
+                android:textSize="@dimen/common_text_size"
                 android:layout_height="wrap_content"
                 android:text="@string/staff_company"/>
             <TextView
                 android:id="@+id/tv_company"
+                android:textSize="@dimen/common_text_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -66,11 +77,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTag"
+                android:layout_width="@dimen/common_summary_space"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/common_text_size"
                 android:text="@string/staff_group"/>
             <TextView
                 android:id="@+id/tv_group"
+                android:textSize="@dimen/common_text_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -78,9 +92,11 @@
 
     <LinearLayout
         android:id="@+id/layout_edit"
+        android:background="@drawable/layout_white"
         android:layout_width="400dp"
         android:layout_centerInParent="true"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
+        android:padding="30dp"
         android:orientation="vertical">
         <LinearLayout
             android:id="@+id/layout_account_name"
@@ -88,13 +104,14 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTagWithEdit"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="@string/staff_account" />
 
             <EditText
                 android:id="@+id/et_account_name"
+                style="@style/CenterEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true" />
@@ -105,11 +122,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTagWithEdit"
                 android:layout_height="wrap_content"
                 android:text="@string/staff_name"/>
             <EditText
                 android:id="@+id/et_name"
+                style="@style/CenterEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -119,11 +137,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTagWithEdit"
                 android:layout_height="wrap_content"
                 android:text="@string/staff_company"/>
             <EditText
                 android:id="@+id/et_company"
+                style="@style/CenterEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -133,11 +152,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTagWithEdit"
                 android:layout_height="wrap_content"
                 android:text="@string/staff_group"/>
             <EditText
                 android:id="@+id/et_group"
+                style="@style/CenterEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

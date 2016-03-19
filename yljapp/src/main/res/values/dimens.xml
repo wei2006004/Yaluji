@@ -20,6 +20,7 @@
     <dimen name="layout_padding_left">20dp</dimen>
 
     <dimen name="common_text_size">20sp</dimen>
+    <dimen name="common_small_text">18sp</dimen>
     <dimen name="text_title">18sp</dimen>
     <dimen name="text_summary">18sp</dimen>
 

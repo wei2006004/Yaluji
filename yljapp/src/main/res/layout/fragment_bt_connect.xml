@@ -11,6 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                style="@style/CommonTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/connect_bt_state" />
@@ -25,15 +26,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                style="@style/CommonTitle"
+                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/connect_device_list"/>
             <Button
                 android:id="@+id/btn_refresh"
+                android:background="@drawable/refresh"
                 android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="refresh"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
         </RelativeLayout>
 
         <ListView

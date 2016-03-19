@@ -5,22 +5,24 @@
     tools:context="com.ylj.connect.fragment.DeviceInfoFragment">
 
     <LinearLayout
-        android:layout_width="400dp"
+        android:layout_width="350dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="280dp"
             android:orientation="vertical">
 
             <TextView
+                style="@style/CommonTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/connect_device_info" />
 
             <LinearLayout
+                android:paddingLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -31,11 +33,13 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        style="@style/CommonSummary"
+                        android:layout_width="@dimen/common_summary_space"
                         android:layout_height="wrap_content"
                         android:text="@string/connect_device_name" />
 
                     <TextView
+                        style="@style/CommonSummary"
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -46,11 +50,13 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        style="@style/CommonSummary"
+                        android:layout_width="@dimen/common_summary_space"
                         android:layout_height="wrap_content"
                         android:text="@string/connect_version" />
 
                     <TextView
+                        style="@style/CommonSummary"
                         android:id="@+id/tv_version"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -61,11 +67,13 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        style="@style/CommonSummary"
+                        android:layout_width="@dimen/common_summary_space"
                         android:layout_height="wrap_content"
                         android:text="@string/connect_soft_version"/>
 
                     <TextView
+                        style="@style/CommonSummary"
                         android:id="@+id/tv_soft_version"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -74,11 +82,13 @@
             </LinearLayout>
 
             <TextView
+                style="@style/CommonTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/connect_device_status" />
 
             <LinearLayout
+                android:paddingLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -89,11 +99,13 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        style="@style/CommonSummary"
+                        android:layout_width="@dimen/common_summary_space"
                         android:layout_height="wrap_content"
                         android:text="@string/connect_temp" />
 
                     <TextView
+                        style="@style/CommonSummary"
                         android:id="@+id/tv_temp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -104,11 +116,13 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        style="@style/CommonSummary"
+                        android:layout_width="@dimen/common_summary_space"
                         android:layout_height="wrap_content"
                         android:text="@string/connect_quake" />
 
                     <TextView
+                        style="@style/CommonSummary"
                         android:id="@+id/tv_quake"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -119,11 +133,13 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        style="@style/CommonSummary"
+                        android:layout_width="@dimen/common_summary_space"
                         android:layout_height="wrap_content"
                         android:text="@string/connect_direction"/>
 
                     <TextView
+                        style="@style/CommonSummary"
                         android:id="@+id/tv_direction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -135,11 +151,13 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        style="@style/CommonSummary"
+                        android:layout_width="@dimen/common_summary_space"
                         android:layout_height="wrap_content"
                         android:text="@string/connect_huoer"/>
 
                     <TextView
+                        style="@style/CommonSummary"
                         android:id="@+id/tv_huoer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -150,18 +168,21 @@
 
         <Button
             android:id="@+id/bt_sensor"
+            style="@style/BlueButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/connect_sensor" />
 
         <Button
             android:id="@+id/bt_resent"
+            style="@style/BlueButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/connect_resent" />
 
         <Button
             android:id="@+id/bt_disconnect"
+            style="@style/BlueButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/connect_disconnect" />

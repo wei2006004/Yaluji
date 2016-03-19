@@ -11,6 +11,14 @@
         <item name="android:textSize">20dp</item>
     </style>
 
+    <style name="BlueSmallButton">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:background">@drawable/btn_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
     <style name="CenterLayout">
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_width">@dimen/layout_width</item>
@@ -36,6 +44,17 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="CenterEdit">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="CommonBigTitle">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/common_title_blue</item>
+        <item name="android:layout_marginTop">7dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
     <style name="CommonTitle">
         <item name="android:textSize">18dp</item>
         <item name="android:textColor">@color/common_title_blue</item>
@@ -47,6 +66,20 @@
         <item name="android:textSize">18dp</item>
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="CommonTag">
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_width">200dp</item>
+    </style>
+
+    <style name="CommonTagWithEdit">
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_width">100dp</item>
     </style>
 
     <!--<style name="FabStyle">-->

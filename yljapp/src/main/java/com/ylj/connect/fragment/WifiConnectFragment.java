@@ -32,7 +32,7 @@ public class WifiConnectFragment extends BaseFragment {
     @Event(R.id.bt_open_wifi)
     private void onOpenWifiButtonClick(View view){
         if(ConfigLet.isDebug()){
-            mStatusText.setText("wifi connect");
+            mStatusText.setText(R.string.connect_wifi_conencted);
             mOpenButton.setEnabled(false);
         }else {
 

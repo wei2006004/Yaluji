@@ -115,9 +115,9 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
         if (mListener != null) {
             mListener.onAdjustFinish();
         }
-        setStatus("finished");
+        setStatus(R.string.adjust_finish);
         mRunButton.setEnabled(false);
-        mRunButton.setText("run");
+        mRunButton.setText(R.string.adjust_run);
     }
 
     @Event(R.id.btn_run)
@@ -148,11 +148,15 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
         mStatusText.setText(text);
     }
 
+    private void setStatus(int text){
+        mStatusText.setText(text);
+    }
+
     private void doPause() {
         if(mAdjustCtrl != null){
             mAdjustCtrl.stopAdjust();
-            setStatus("pause");
-            mRunButton.setText("run");
+            setStatus(R.string.adjust_pause);
+            mRunButton.setText(R.string.adjust_run);
         }
     }
 
@@ -161,8 +165,8 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
             mAdjustCtrl.addAdjustCtrlListener(this);
             mAdjustCtrl.startAdjust();
 
-            setStatus("running");
-            mRunButton.setText("pause");
+            setStatus(R.string.adjust_run);
+            mRunButton.setText(R.string.adjust_pause);
         }
     }
 
@@ -189,7 +193,7 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
         } else {
             mAutoButton.setVisibility(View.GONE);
         }
-        setStatus("wait");
+        setStatus(R.string.adjust_wait);
     }
 
     public AdjustResult requestAdjustResult() {
@@ -288,8 +292,8 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
             if (mListener != null) {
                 mListener.onAdjustFinish();
             }
-            setStatus("finished");
-            mRunButton.setText("run");
+            setStatus(R.string.adjust_finish);
+            mRunButton.setText(R.string.adjust_run);
             mRunButton.setEnabled(false);
             return;
         }

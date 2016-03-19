@@ -11,21 +11,23 @@
 
     <LinearLayout
         android:id="@+id/layout_info"
+        android:background="@drawable/layout_white"
         android:layout_width="400dp"
         android:layout_centerInParent="true"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:layout_height="250dp"
+        android:padding="30dp"
+        android:orientation="vertical">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTag"
                 android:layout_height="wrap_content"
                 android:text="@string/staff_name"/>
             <TextView
                 android:id="@+id/tv_name"
+                style="@style/CommonTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -34,11 +36,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTag"
                 android:layout_height="wrap_content"
                 android:text="@string/staff_company"/>
             <TextView
                 android:id="@+id/tv_company"
+                style="@style/CommonTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -47,21 +50,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTag"
                 android:layout_height="wrap_content"
                 android:text="@string/staff_group"/>
             <TextView
                 android:id="@+id/tv_group"
+                style="@style/CommonTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/layout_edit"
+        android:background="@drawable/layout_white"
         android:layout_width="400dp"
         android:layout_centerInParent="true"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
+        android:padding="30dp"
         android:orientation="vertical">
         <LinearLayout
             android:id="@+id/layout_name"
@@ -69,11 +76,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTagWithEdit"
                 android:layout_height="wrap_content"
                 android:text="@string/staff_name"/>
             <EditText
                 android:id="@+id/et_name"
+                style="@style/CenterEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -83,11 +91,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTagWithEdit"
                 android:layout_height="wrap_content"
                 android:text="@string/staff_company"/>
             <EditText
                 android:id="@+id/et_company"
+                style="@style/CenterEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -97,11 +106,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/CommonTagWithEdit"
                 android:layout_height="wrap_content"
                 android:text="@string/staff_group"/>
             <EditText
                 android:id="@+id/et_group"
+                style="@style/CenterEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

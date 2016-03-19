@@ -104,9 +104,9 @@ public class DeviceInfoFragment extends BaseFragment {
 
     void setDeviceStatus(TextView view,boolean status){
         if(status){
-            view.setText("normal");
+            view.setText(R.string.connect_normal);
         }else {
-            view.setText("error");
+            view.setText(R.string.connect_error);
         }
     }
 

@@ -45,8 +45,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
                     android:layout_centerInParent="true"
-                    android:text="anonymous login" />
+                    android:textSize="@dimen/common_text_size"
+                    android:text="@string/user_anonymous" />
             </RelativeLayout>
 
             <LinearLayout

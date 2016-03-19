@@ -286,7 +286,7 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
                 case 1:
                     return getString(R.string.adjust_middle);
                 case 2:
-                    return getString(R.string.adjust_middle);
+                    return getString(R.string.adjust_heavy);
             }
             return null;
         }

@@ -58,6 +58,7 @@
     <string name="user_error">异常</string>
     <string name="user_wifi">WIFI</string>
     <string name="user_bt">蓝牙</string>
+    <string name="user_anonymous">匿名登录</string>
     <string name="user_"></string>
 
     <!-- 设置界面 -->
@@ -88,6 +89,7 @@
     <string name="connect_status_normal">运行正常</string>
     <string name="connect_status_error">运行异常</string>
     <string name="connect_wifi">WIFI连接</string>
+    <string name="connect_wifi_conencted">WIFI已连接</string>
     <string name="connect_bt">蓝牙连接</string>
     <string name="connect_open_wifi">打开WIFI</string>
     <string name="connect_connect">连接设备</string>
@@ -95,6 +97,8 @@
     <string name="connect_wifi_opened">WIFI已打开</string>
     <string name="connect_bt_state">打开蓝牙</string>
     <string name="connect_device_list">设备列表</string>
+    <string name="connect_normal">正常</string>
+    <string name="connect_error">异常</string>
     <string name="connect_"></string>
 
     <!-- Sensor界面 -->
@@ -171,6 +175,8 @@
     <string name="adjust_heavy">重度碾压</string>
     <string name="adjust_auto">自动填充</string>
     <string name="adjust_run">运行</string>
+    <string name="adjust_wait">就绪</string>
+    <string name="adjust_finish">结束</string>
     <string name="adjust_pause">暂停</string>
     <string name="adjust_status">状态：</string>
     <string name="adjust_position">位置</string>

@@ -29,28 +29,34 @@
 
                 <LinearLayout
                     android:layout_marginTop="30dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1">
                     <TextView
+                        style="@style/CommonBigTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/adjust_status"/>
                     <TextView
                         android:id="@+id/tv_status"
+                        style="@style/CommonBigTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <Button
+                            android:layout_marginLeft="10dp"
                             android:id="@+id/btn_run"
+                            style="@style/BlueSmallButton"
                             android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/adjust_run"/>
                         <Button
                             android:id="@+id/btn_auto"
+                            style="@style/BlueSmallButton"
                             android:layout_toLeftOf="@id/btn_run"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -65,7 +71,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
                 <LinearLayout
-                    android:layout_centerInParent="true"
+                    android:layout_marginTop="50dp"
+                    android:layout_centerHorizontal="true"
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -74,10 +81,13 @@
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:layout_width="wrap_content"
+                            style="@style/CommonBigTitle"
+                            android:paddingLeft="20dp"
+                            android:layout_width="90dp"
                             android:layout_height="wrap_content"
                             android:text="@string/adjust_position"/>
                         <TextView
+                            style="@style/CommonBigTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/adjust_compact"/>
