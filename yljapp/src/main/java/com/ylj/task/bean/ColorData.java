@@ -12,6 +12,12 @@ import org.xutils.db.annotation.Table;
 @Table(name = "color_data")
 public class ColorData implements Parcelable{
 
+    public static final int LEVEL_NONE = 0;
+    public static final int LEVEL_NOT_PASS = 1;
+    public static final int LEVEL_PASS = 2;
+    public static final int LEVEL_GOOD = 3;
+    public static final int LEVEL_EXCELLENT = 4;
+
     @Column(name = "id", isId = true)
     private int id;
 
@@ -30,9 +36,12 @@ public class ColorData implements Parcelable{
     @Column(name = "value")
     double value;
 
+    @Column(name = "level")
+    int level;
+
     public ColorData(){}
 
-    public ColorData(int row, int column, int color, int count ,double value) {
+    public ColorData(int row, int column, int color, int level,int count ,double value) {
         this.row = row;
         this.column = column;
         this.color = color;
@@ -45,6 +54,7 @@ public class ColorData implements Parcelable{
         row = in.readInt();
         column = in.readInt();
         color = in.readInt();
+        level = in.readInt();
         count = in.readInt();
         value = in.readDouble();
     }
@@ -109,6 +119,14 @@ public class ColorData implements Parcelable{
         this.value = value;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -120,6 +138,7 @@ public class ColorData implements Parcelable{
         dest.writeInt(row);
         dest.writeInt(column);
         dest.writeInt(color);
+        dest.writeInt(level);
         dest.writeInt(count);
         dest.writeDouble(value);
     }

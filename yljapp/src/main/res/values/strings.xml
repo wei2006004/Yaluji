@@ -208,7 +208,7 @@
     <string name="alert_leave_adjust_result">是否放弃相关性校验结果？</string>
     <string name="alert_delete_admin">是否删除该管理员账号？</string>
     <string name="alert_delete_staff">是否删除该账号？</string>
-    <string name="alert_leave_test">是否离开测试？</string>
+    <string name="alert_leave_test">是否结束本次测试？</string>
     <string name="alert_delete_task">是否删除该任务？</string>
     <string name="alert_task_list">任务列表</string>
     <string name="alert_new_task">新建任务</string>

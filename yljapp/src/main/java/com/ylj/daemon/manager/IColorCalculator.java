@@ -1,5 +1,6 @@
 package com.ylj.daemon.manager;
 
+import com.ylj.daemon.bean.TaskResult;
 import com.ylj.task.bean.ColorData;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface IColorCalculator {
     ColorData addData(double posX,double posY,double value);
 
     void addColorDatas(List<ColorData> dataList);
+
+    TaskResult resultCalculate();
 }

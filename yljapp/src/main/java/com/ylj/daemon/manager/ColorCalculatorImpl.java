@@ -2,6 +2,7 @@ package com.ylj.daemon.manager;
 
 import android.graphics.Color;
 
+import com.ylj.daemon.bean.TaskResult;
 import com.ylj.task.bean.ColorData;
 
 import java.util.List;
@@ -90,7 +91,7 @@ public class ColorCalculatorImpl implements IColorCalculator {
         ColorData colorData;
         for (int i = 0; i < mRowNum; i++) {
             for (int j = 0; j < mColumnNum; j++) {
-                colorData = new ColorData(i, j, Color.WHITE, 0, 0.0);
+                colorData = new ColorData(i, j, Color.WHITE, ColorData.LEVEL_NONE, 0, 0.0);
                 mColorDatas[i][j] = colorData;
             }
         }
@@ -104,6 +105,11 @@ public class ColorCalculatorImpl implements IColorCalculator {
         for (ColorData data : dataList) {
             addColorData(data);
         }
+    }
+
+    @Override
+    public TaskResult resultCalculate() {
+        return null;
     }
 
     private void addColorData(ColorData data) {

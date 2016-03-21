@@ -1,5 +1,6 @@
 package com.ylj.db.task;
 
+import com.ylj.common.bean.Test;
 import com.ylj.daemon.bean.Record;
 import com.ylj.daemon.bean.TaskResult;
 import com.ylj.db.AbstractDbManager;
@@ -70,9 +71,17 @@ public class RecordManager extends AbstractDbManager {
         }
     }
 
-    public void saveColorData(ColorData colorData) {
+    public void saveOrUpdateColorData(ColorData colorData) {
         try {
-            getDb().save(colorData);
+            getDb().saveOrUpdate(colorData);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveOrUpadteTest(Test test) {
+        try {
+            db.saveOrUpdate(test);
         } catch (DbException e) {
             e.printStackTrace();
         }

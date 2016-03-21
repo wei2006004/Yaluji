@@ -1,6 +1,7 @@
 package com.ylj.db.task;
 
 import com.ylj.common.bean.Task;
+import com.ylj.common.bean.Test;
 import com.ylj.db.AbstractDbManager;
 import com.ylj.db.config.Constant;
 
@@ -51,6 +52,24 @@ public class TaskManager extends AbstractDbManager{
             list = db.selector(Task.class)
                     .where(Task.TAG_IS_FINISH, Constant.SQL_OP_EQUAL,Constant.SQL_TRUE)
                     .findAll();
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public void saveOrUpadate(Test test) {
+        try {
+            db.saveOrUpdate(test);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Test> getAllTestByTask(Task task) {
+        List<Test> list = null;
+        try {
+            list = db.findAll(Test.class);
         } catch (DbException e) {
             e.printStackTrace();
         }

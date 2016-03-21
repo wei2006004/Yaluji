@@ -38,6 +38,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @ContentView(R.layout.activity_test)
@@ -103,6 +104,28 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
 
     @ViewInject(R.id.fab_stop)
     FloatingActionButton mStopButton;
+
+    @Event(R.id.fab_finish_task)
+    private void onFinishTask(View view){
+        if((!mTask.isTest())&&(!mIsTest)){
+            showAlert("Info","has not test");
+            return;
+        }
+        showAlert("Info", "Do you want to finish this Task?", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getTestCtrl().finishTask();
+                dialog.dismiss();
+                //// TODO: 2016/3/21 0021  出现进度弹框
+                showToast("please wait");
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+    }
 
     @Event(R.id.fab_run)
     private void onRunClick(View view) {
@@ -255,6 +278,8 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
             public void onClick(View v) {
                 if(mMode == MODE_SHOW_RESULT)
                     return;
+                if(!mIsTest)
+                    return;
                 showAlert("Info",  getString(R.string.alert_leave_test), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -334,6 +359,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     public void onTestStart() {
         showToast("test start");
         mIsTest = true;
+        mTest.setStartTime(new Date());
     }
 
     @Override

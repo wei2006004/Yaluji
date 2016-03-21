@@ -87,17 +87,22 @@ public class DbLet {
         return taskManager.getNotFinishTaskList();
     }
 
-    public static RecordManager getRecordManager(Task task) {
-        String fileName = TaskDbFileUitl.getTaskDbFileName(task);
-        return new RecordManager(fileName);
+    public static RecordManager getRecordManager(String dbname) {
+        return new RecordManager(dbname);
     }
 
     public static List<Test> getAllTestByTask(Task task){
-        return null;
+        TaskManager taskManager = ManagerFactory.getTaskManager();
+        return taskManager.getAllTestByTask(task);
     }
 
     public static List<Task> getFinishTaskList() {
         TaskManager taskManager = ManagerFactory.getTaskManager();
         return taskManager.getFinishTaskList();
+    }
+
+    public static void saveOrUpdateTest(Test test) {
+        TaskManager taskManager = ManagerFactory.getTaskManager();
+        taskManager.saveOrUpadate(test);
     }
 }

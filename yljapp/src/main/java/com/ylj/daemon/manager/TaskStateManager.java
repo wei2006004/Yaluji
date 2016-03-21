@@ -6,6 +6,7 @@ import com.ylj.common.bean.Task;
 import com.ylj.common.bean.Test;
 import com.ylj.common.utils.DataConvertor;
 import com.ylj.common.utils.RoadUtils;
+import com.ylj.common.utils.TaskDbFileUitl;
 import com.ylj.daemon.bean.DeviceData;
 import com.ylj.daemon.bean.Record;
 import com.ylj.daemon.bean.TaskResult;
@@ -18,6 +19,8 @@ import com.ylj.task.bean.TraceData;
 import org.xutils.x;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/17 0017.
@@ -29,10 +32,12 @@ public class TaskStateManager implements ITaskStateManager {
     RecordManager mRecordManager;
     IColorCalculator mColorCalculator;
     IColorConvertor mColorConvertor;
+    ILevelConvertor mLevelConvertor;
 
     Task mTask = new Task();
     Record mRecord = new Record();
 
+    boolean mHasAddData = false;
 
     public TaskStateManager() {
         mColorCalculator = new ColorCalculatorImpl();
@@ -58,10 +63,16 @@ public class TaskStateManager implements ITaskStateManager {
 
     private void initData(Task task) {
         mTask = task;
+        mHasAddData = false;
         mOnTaskHandleListener.onLoadTaskStart();
-        mRecordManager = DbLet.getRecordManager(task);
 
-        mColorConvertor = new ColorConvertorImpl(mTask.getVCV());
+        String fileName = TaskDbFileUitl.getTaskDbFileName(task);
+        mTask.setRecordFile(fileName);
+        DbLet.saveOrUpdateTask(mTask);
+        mRecordManager = DbLet.getRecordManager(fileName);
+
+        mLevelConvertor = new LevelConvertorImpl(mTask.getVCV());
+        mColorConvertor = new ColorConvertorImpl(mLevelConvertor);
 
         mColorCalculator.setRoad(mTask.getRoadWidth(), mTask.getRoadLength());
         Pair<Integer, Integer> pair = RoadUtils.getRoadGrid(mTask.getRoadWidth(), mTask.getRoadLength(), mTask.getRollerWidth());
@@ -74,6 +85,18 @@ public class TaskStateManager implements ITaskStateManager {
         ArrayList<ColorData> colorDatas = mRecordManager.getColorDataList();
         TaskResult taskResult = mRecordManager.getTaskResult();
 
+        mRecord.setDistance(0);
+        mRecord.setPositionY(0);
+        mRecord.setPositionY(0);
+        if(mTask.isTest()){
+            List<Test> testList = DbLet.getAllTestByTask(mTask);
+            if(testList != null){
+                Test test=testList.get(testList.size()-1);
+                mRecord.setDistance(test.getDistance());
+                mRecord.setPositionX(test.getLastPositionX());
+                mRecord.setPositionY(test.getLastPositionY());
+            }
+        }
         mOnTaskHandleListener.onLoadTaskFinish(traceDatas, colorDatas, taskResult);
 
         mColorCalculator.addColorDatas(colorDatas);
@@ -83,11 +106,25 @@ public class TaskStateManager implements ITaskStateManager {
     public void finishTask() {
         if (mTask == null)
             return;
-        for (int i = 0; i < mColorCalculator.getRow(); i++) {
-            for (int j = 0; j < mColorCalculator.getColumn(); j++) {
-                mRecordManager.saveColorData(mColorCalculator.getColorData(i, j));
+        x.task().run(new Runnable() {
+            @Override
+            public void run() {
+                TaskResult result= calculateResultAndSave();
+                mOnTaskHandleListener.onTaskResultCreated(result);
+            }
+        });
+    }
+
+    private TaskResult calculateResultAndSave() {
+        //// TODO: 2016/3/21 0021 计算结果并保存
+        if(mHasAddData){
+            for (int i = 0; i < mColorCalculator.getRow(); i++) {
+                for (int j = 0; j < mColorCalculator.getColumn(); j++) {
+                    mRecordManager.saveOrUpdateColorData(mColorCalculator.getColorData(i, j));
+                }
             }
         }
+        return null;
     }
 
     @Override
@@ -111,6 +148,7 @@ public class TaskStateManager implements ITaskStateManager {
                 mRecord.getQuake());
         drawData.setColorData(colorData);
 
+        mHasAddData = true;
         mOnTaskHandleListener.onDrawDataRefresh(drawData);
     }
 
@@ -142,12 +180,33 @@ public class TaskStateManager implements ITaskStateManager {
     }
 
     @Override
-    public void finishTest(Test test) {
+    public void finishTest(final Test test) {
         if (mTask == null)
             return;
+        if(!mHasAddData)
+            return;
+        x.task().run(new Runnable() {
+            @Override
+            public void run() {
+                finishTestAndSave(test);
+                mOnTaskHandleListener.onTestFinished();
+            }
+        });
+    }
+
+    private void finishTestAndSave(Test test) {
+        test.setEndTime(new Date());
+        test.countTotalTime();
+        test.setLastPositionX(mRecord.getPositionX());
+        test.setLastPositionY(mRecord.getPositionY());
+        test.setDistance(mRecord.getDistance());
+        DbLet.saveOrUpdateTest(test);
+
+        mRecordManager.saveOrUpadteTest(test);
+
         for (int i = 0; i < mColorCalculator.getRow(); i++) {
             for (int j = 0; j < mColorCalculator.getColumn(); j++) {
-                mRecordManager.saveColorData(mColorCalculator.getColorData(i, j));
+                mRecordManager.saveOrUpdateColorData(mColorCalculator.getColorData(i, j));
             }
         }
     }
