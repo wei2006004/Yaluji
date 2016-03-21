@@ -3,40 +3,51 @@ package com.ylj.task;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.ylj.R;
 import com.ylj.adjust.AdjustActivity;
 import com.ylj.common.BaseActivity;
+import com.ylj.common.bean.Admin;
+import com.ylj.common.bean.Staff;
 import com.ylj.common.bean.Task;
+import com.ylj.common.bean.Test;
 import com.ylj.common.config.StatusLet;
+import com.ylj.common.utils.BeanUtils;
 import com.ylj.db.DbLet;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @ContentView(R.layout.activity_task)
 public class TaskActivity extends BaseActivity {
 
     public static final String EXTRA_TASK = "EXTRA_TASK";
 
+    public static final String TAG_TEST_NAME = "TAG_TEST_NAME";
+    public static final String TAG_USER = "TAG_USER";
+
     public static final int ACTIVITY_REQUEST_TASK = 1;
 
     Task mTask = new Task();
     boolean mIsAdjust = false;
     boolean mIsFinish = false;
-    boolean mIsTest= false;
+    boolean mIsTest = false;
 
     public static void startNewActivity(Context context, Task task) {
         Intent intent = new Intent(context, TaskActivity.class);
@@ -62,9 +73,6 @@ public class TaskActivity extends BaseActivity {
     @ViewInject(R.id.lv_test)
     ListView mTestListView;
 
-    @ViewInject(R.id.btn_finish_task)
-    Button mFinishButton;
-
     @ViewInject(R.id.layout_task_edit)
     RelativeLayout mEditLayout;
 
@@ -76,6 +84,9 @@ public class TaskActivity extends BaseActivity {
 
     @ViewInject(R.id.layout_test)
     LinearLayout mTestLayout;
+
+    @ViewInject(R.id.layout_no_test)
+    LinearLayout mNoTestLayout;
 
     @ViewInject(R.id.layout_enter_test)
     RelativeLayout mEnterTestLayout;
@@ -97,31 +108,27 @@ public class TaskActivity extends BaseActivity {
     @Event(R.id.btn_enter_result)
     private void onEnterResultButtonClick(View view) {
         TestActivity.startAsShowResultActivity(this, mTask);
+        finish();
     }
 
     @Event(R.id.btn_enter_adjust)
     private void onEnterAdjustButtonClick(View view) {
-        if(!StatusLet.isConnect()){
+        if (!StatusLet.isConnect()) {
             showToast("no connect");
             return;
         }
         AdjustActivity.startNewActivity(this, mTask);
+        finish();
     }
 
     @Event(R.id.btn_enter_test)
     private void onEnterTestButtonClick(View view) {
-        if(!StatusLet.isConnect()){
+        if (!StatusLet.isConnect()) {
             showToast("no connect");
             return;
         }
         TestActivity.startAsTaskTestActivity(this, mTask);
-    }
-
-    @Event(R.id.btn_finish_task)
-    private void onFinishTaskButtonClick(View view) {
-        mTask.setIsFinish(true);
-        DbLet.saveOrUpdateTask(mTask);
-        TestActivity.startAsShowResultActivity(this, mTask);
+        finish();
     }
 
     @Override
@@ -145,10 +152,90 @@ public class TaskActivity extends BaseActivity {
         initLayout();
         initInfoView();
         initTestListView();
+        refreshTestData();
+    }
+
+    SimpleAdapter mTestAdapter;
+    List<Map<String, Object>> mTestMaps = new ArrayList<>();
+
+    private void refreshTestData() {
+        x.task().run(new Runnable() {
+            @Override
+            public void run() {
+                mTestMaps.clear();
+                List<Test> list = DbLet.getAllTestByTask(mTask);
+                Map<String, Object> map;
+                int n = 1;
+                for (Test test : list) {
+                    map = test.convertToMap();
+                    map.put(TAG_TEST_NAME, "Test" + n);
+                    map.put(TAG_USER, getUserNameByTest(test));
+                    mTestMaps.add(map);
+                    n++;
+                }
+                x.task().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTestAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+    }
+
+    private String getUserNameByTest(Test test) {
+        String name = "anonymous";
+        if (!test.isLogin()) {
+            return name;
+        }
+
+        if (test.isAdmin()) {
+            Admin admin = DbLet.getAdminById(test.getAdminId());
+            name = admin.getAdminName();
+        } else {
+            Staff staff = DbLet.getStaffById(test.getStaffId());
+            name = staff.getStaffName();
+        }
+        return name;
     }
 
     private void initTestListView() {
+        if (!mIsAdjust)
+            return;
+        if (!mIsTest)
+            return;
+        mTestAdapter = new SimpleAdapter(this, mTestMaps,
+                R.layout.listview_task_test_list,
+                new String[]{TAG_TEST_NAME,
+                        TAG_USER,
+                        Test.TAG_START_DATE,
+                        Test.TAG_START_TIME,
+                        Test.TAG_DISTANCE,
+                        Test.TAG_TOTAL_TIME},
+                new int[]{R.id.tv_test_name,
+                        R.id.tv_user,
+                        R.id.tv_start_date,
+                        R.id.tv_start_time,
+                        R.id.tv_distance,
+                        R.id.tv_total_time});
+        mTestListView.setAdapter(mTestAdapter);
+        mTestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                onTestItemClick(position);
+            }
+        });
+    }
 
+    private void onTestItemClick(int position) {
+        Test test = getTestByPosition(position);
+        TestInfoActivity.startNewActivity(this, test);
+    }
+
+    private Test getTestByPosition(int position) {
+        Map<String, Object> map = mTestMaps.get(position);
+        Test test = Test.createByMap(map);
+        return test;
     }
 
     private void initInfoView() {
@@ -168,28 +255,34 @@ public class TaskActivity extends BaseActivity {
     }
 
     private void initLayout() {
-        if (mIsAdjust) {
-            mAdjustLayout.setVisibility(View.GONE);
-            mEnterTestLayout.setVisibility(View.VISIBLE);
-            mTestLayout.setVisibility(View.VISIBLE);
-        } else {
+        if (!mIsAdjust) {
             mAdjustLayout.setVisibility(View.VISIBLE);
+            mNoTestLayout.setVisibility(View.GONE);
             mEnterTestLayout.setVisibility(View.GONE);
             mTestLayout.setVisibility(View.GONE);
+            mResultLayout.setVisibility(View.GONE);
+            return;
         }
 
-        if (mIsFinish) {
+        if (!mIsTest) {
             mAdjustLayout.setVisibility(View.GONE);
-            mResultLayout.setVisibility(View.VISIBLE);
-            mEnterTestLayout.setVisibility(View.GONE);
-            mEditLayout.setVisibility(View.GONE);
-        }
-        if(mIsTest){
-            mFinishButton.setEnabled(true);
-        }else {
-            mFinishButton.setEnabled(false);
+            mNoTestLayout.setVisibility(View.VISIBLE);
+            mEnterTestLayout.setVisibility(View.VISIBLE);
+            mTestLayout.setVisibility(View.GONE);
+            mResultLayout.setVisibility(View.GONE);
+            return;
         }
 
+        mNoTestLayout.setVisibility(View.GONE);
+        mAdjustLayout.setVisibility(View.GONE);
+        mTestLayout.setVisibility(View.VISIBLE);
+        if (mIsFinish) {
+            mEnterTestLayout.setVisibility(View.GONE);
+            mResultLayout.setVisibility(View.VISIBLE);
+        } else {
+            mEnterTestLayout.setVisibility(View.VISIBLE);
+            mResultLayout.setVisibility(View.GONE);
+        }
     }
 
     private void initToolbar() {

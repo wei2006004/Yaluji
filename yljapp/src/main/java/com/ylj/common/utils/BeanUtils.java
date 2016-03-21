@@ -4,6 +4,7 @@ import com.ylj.common.bean.Admin;
 import com.ylj.common.bean.IMapable;
 import com.ylj.common.bean.Staff;
 import com.ylj.common.bean.Task;
+import com.ylj.common.bean.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +41,16 @@ public class BeanUtils {
             return maps;
         for (Task task : list) {
             maps.add(task.convertToMap());
+        }
+        return maps;
+    }
+
+    public static List<Map<String, Object>> convertTests2Maps(List<Test> list) {
+        List<Map<String, Object>> maps = new ArrayList();
+        if (list == null)
+            return maps;
+        for (Test test : list) {
+            maps.add(test.convertToMap());
         }
         return maps;
     }

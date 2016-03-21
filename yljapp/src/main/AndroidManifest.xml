@@ -156,6 +156,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ylj.connect.ConnectActivity" />
         </activity>
+        <activity
+            android:name=".task.TestInfoActivity"
+            android:label="@string/title_activity_test_info"
+            android:parentActivityName=".task.TaskActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ylj.task.TaskActivity" />
+        </activity>
     </application>
 
 </manifest>

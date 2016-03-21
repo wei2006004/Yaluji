@@ -134,6 +134,7 @@
     <string name="task_anticlockwise">逆时针</string>
     <string name="task_clockwise">顺时针</string>
     <string name="task_not_adjust">任务未进行相关性校验</string>
+    <string name="task_no_test">任务尚未进行任何测试</string>
     <string name="task_setting">基本设置</string>
     <string name="task_roller_setting">转轮设置</string>
     <string name="task_road_setting">公路设置</string>
@@ -214,5 +215,6 @@
     <string name="alert_no_finish">（未完成）</string>
     <string name="alert_no_adjust">（未校验）</string>
     <string name="alert_"></string>
+    <string name="title_activity_test_info">TestInfoActivity</string>
 
 </resources>

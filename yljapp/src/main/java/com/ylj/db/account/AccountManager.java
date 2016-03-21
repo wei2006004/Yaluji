@@ -24,7 +24,7 @@ public class AccountManager extends AbstractDbManager {
         super(dbName);
     }
 
-    private Staff findStaffById(long staff_id) {
+    public Staff getStaffById(long staff_id) {
         Staff staff = null;
         try {
             staff = db.findById(Staff.class, staff_id);
@@ -32,6 +32,16 @@ public class AccountManager extends AbstractDbManager {
             e.printStackTrace();
         }
         return staff;
+    }
+
+    public Admin getAdminById(int adminId) {
+        Admin admin = null;
+        try {
+            admin = db.findById(Admin.class, adminId);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return admin;
     }
 
     public int verifyAdmin(String account_name, String passwd) {
@@ -134,7 +144,7 @@ public class AccountManager extends AbstractDbManager {
     }
 
     public boolean hasStaff(Staff staff) {
-        Staff newStaff = findStaffById(staff.getId());
+        Staff newStaff = getStaffById(staff.getId());
         if (newStaff == null) {
             return false;
         }
@@ -143,5 +153,6 @@ public class AccountManager extends AbstractDbManager {
         }
         return true;
     }
+
 
 }

@@ -36,6 +36,16 @@ public class DbLet {
         return accountManager.getAllStaffFromDb();
     }
 
+    public static Admin getAdminById(int adminId) {
+        AccountManager accountManager = ManagerFactory.getAccountManager();
+        return accountManager.getAdminById(adminId);
+    }
+
+    public static Staff getStaffById(int staffId) {
+        AccountManager accountManager = ManagerFactory.getAccountManager();
+        return accountManager.getStaffById(staffId);
+    }
+
     public static void deleteAdmin(Admin admin) {
         AccountManager accountManager = ManagerFactory.getAccountManager();
         accountManager.deleteAdmin(admin);
