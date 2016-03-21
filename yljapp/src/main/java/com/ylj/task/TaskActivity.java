@@ -108,7 +108,6 @@ public class TaskActivity extends BaseActivity {
     @Event(R.id.btn_enter_result)
     private void onEnterResultButtonClick(View view) {
         TestActivity.startAsShowResultActivity(this, mTask);
-        finish();
     }
 
     @Event(R.id.btn_enter_adjust)
@@ -166,6 +165,9 @@ public class TaskActivity extends BaseActivity {
                 List<Test> list = DbLet.getAllTestByTask(mTask);
                 Map<String, Object> map;
                 int n = 1;
+                if(list == null){
+                    return;
+                }
                 for (Test test : list) {
                     map = test.convertToMap();
                     map.put(TAG_TEST_NAME, "Test" + n);

@@ -111,7 +111,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="@dimen/fab_margin"
-                android:src="@android:drawable/ic_dialog_email" />
+                app:backgroundTint="@color/fab_color"
+                app:rippleColor="@color/fab_color_clicked"
+                android:src="@drawable/test_run" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_stop"
@@ -119,6 +121,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="@dimen/fab_margin"
+                app:backgroundTint="@color/fab_color"
+                app:rippleColor="@color/fab_color_clicked"
+                android:src="@drawable/test_stop" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_finish_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="@dimen/fab_margin"
+                app:backgroundTint="@color/fab_color"
+                app:rippleColor="@color/fab_color_clicked"
                 android:src="@android:drawable/ic_dialog_email" />
         </LinearLayout>
     </RelativeLayout>

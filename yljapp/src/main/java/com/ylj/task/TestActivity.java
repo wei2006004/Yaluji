@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
@@ -134,8 +136,8 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         if(mIsTest){
             mTask.setIsTest(true);
             DbLet.saveOrUpdateTask(mTask);
+            getTestCtrl().finishTest(mTest);
         }
-        getTestCtrl().finishTest(mTest);
     }
 
     private void loadDatas() {
@@ -239,7 +241,10 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     }
 
     private void initDrawerLayout() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View view = LayoutInflater.from(this).inflate(R.layout.nav_header_test, null);
+
+        navigationView.addHeaderView(view);
     }
 
     private void initToolbar() {
@@ -248,6 +253,8 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(mMode == MODE_SHOW_RESULT)
+                    return;
                 showAlert("Info",  getString(R.string.alert_leave_test), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -287,6 +294,10 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
 
     private AbstractTestFragment getTestFragment(int index){
         return mFragments.get(index);
+    }
+
+    private boolean isTestRun(){
+        return mStatus == TEST_STATUS_RUN;
     }
 
     @Override
