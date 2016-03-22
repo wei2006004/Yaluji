@@ -177,9 +177,9 @@ public class TestControler extends ConnectControler implements ITestCtrl {
     }
 
     @Override
-    public void finishTask() {
+    public void finishTask(Test test) {
         if (mCleint != null) {
-            mCleint.finishTask();
+            mCleint.finishTask(test);
         }
     }
 

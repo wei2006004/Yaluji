@@ -201,7 +201,7 @@
                     android:textSize="35sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/task_not_adjust"/>
+                    android:text="@string/task_no_test"/>
 
             </LinearLayout>
 

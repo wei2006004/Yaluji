@@ -137,9 +137,9 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     }
 
     @Override
-    public void finishTask() {
+    public void finishTask(Test test) {
         if (mTaskStateManager != null) {
-            mTaskStateManager.finishTask();
+            mTaskStateManager.finishTask(test);
         }
     }
 
@@ -156,6 +156,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
             return;
         mMode = MODE_TEST;
         mConnector.sendStartMessage();
+        mTaskStateManager.startTest();
         sendBroadcast(ServiceAction.ACTION_SAMPLE_CTRL_STATE_CHANGE, ServiceAction.CTRL_FLAG_START);
     }
 
@@ -163,6 +164,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     public void puaseTest() {
         if (isConnect()) {
             mConnector.sendStopMessage();
+            mTaskStateManager.pauseTest();
             sendBroadcast(ServiceAction.ACTION_SAMPLE_CTRL_STATE_CHANGE, ServiceAction.CTRL_FLAG_STOP);
         }
     }

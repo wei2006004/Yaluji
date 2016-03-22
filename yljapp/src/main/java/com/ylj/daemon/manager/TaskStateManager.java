@@ -78,6 +78,7 @@ public class TaskStateManager implements ITaskStateManager {
         Pair<Integer, Integer> pair = RoadUtils.getRoadGrid(mTask.getRoadWidth(), mTask.getRoadLength(), mTask.getRollerWidth());
         mColorCalculator.setGrid(pair.first, pair.second);
         mColorCalculator.setColorConvertor(mColorConvertor);
+        mColorCalculator.setLeverConvertor(mLevelConvertor);
     }
 
     private void loadTaskData() {
@@ -88,10 +89,10 @@ public class TaskStateManager implements ITaskStateManager {
         mRecord.setDistance(0);
         mRecord.setPositionY(0);
         mRecord.setPositionY(0);
-        if(mTask.isTest()){
+        if (mTask.isTest()) {
             List<Test> testList = DbLet.getAllTestByTask(mTask);
-            if(testList != null){
-                Test test=testList.get(testList.size()-1);
+            if (testList != null) {
+                Test test = testList.get(testList.size() - 1);
                 mRecord.setDistance(test.getDistance());
                 mRecord.setPositionX(test.getLastPositionX());
                 mRecord.setPositionY(test.getLastPositionY());
@@ -103,28 +104,47 @@ public class TaskStateManager implements ITaskStateManager {
     }
 
     @Override
-    public void finishTask() {
+    public void finishTask(final Test test) {
         if (mTask == null)
+            return;
+        if (test == null && !mTask.isTest())
             return;
         x.task().run(new Runnable() {
             @Override
             public void run() {
-                TaskResult result= calculateResultAndSave();
+                TaskResult result = calculateResultAndSave();
+                saveTask(true);
+                finishTestAndSave(test);
+                saveColorDatas();
+                mOnTaskHandleListener.onTestFinished();
                 mOnTaskHandleListener.onTaskResultCreated(result);
             }
         });
     }
 
-    private TaskResult calculateResultAndSave() {
-        //// TODO: 2016/3/21 0021 计算结果并保存
-        if(mHasAddData){
-            for (int i = 0; i < mColorCalculator.getRow(); i++) {
-                for (int j = 0; j < mColorCalculator.getColumn(); j++) {
-                    mRecordManager.saveOrUpdateColorData(mColorCalculator.getColorData(i, j));
-                }
-            }
+
+    @Override
+    public void startTest() {
+    }
+
+    @Override
+    public void pauseTest() {
+    }
+
+    private void saveTask(boolean isFinish) {
+        mTask.setIsTest(true);
+        if (isFinish) {
+            mTask.setIsFinish(true);
+            mRecordManager.saveOrUpdateTask(mTask);
         }
-        return null;
+        DbLet.saveOrUpdateTask(mTask);
+    }
+
+    private TaskResult calculateResultAndSave() {
+        TaskResult result = mColorCalculator.resultCalculate();
+        DbLet.saveTaskResult(result);
+        mRecordManager.saveTaskResult(result);
+        return result;
     }
 
     @Override
@@ -183,18 +203,30 @@ public class TaskStateManager implements ITaskStateManager {
     public void finishTest(final Test test) {
         if (mTask == null)
             return;
-        if(!mHasAddData)
+        if (!mHasAddData)
             return;
         x.task().run(new Runnable() {
             @Override
             public void run() {
+                saveTask(false);
                 finishTestAndSave(test);
+                saveColorDatas();
                 mOnTaskHandleListener.onTestFinished();
             }
         });
     }
 
+    private void saveColorDatas() {
+        for (int i = 0; i < mColorCalculator.getRow(); i++) {
+            for (int j = 0; j < mColorCalculator.getColumn(); j++) {
+                mRecordManager.saveOrUpdateColorData(mColorCalculator.getColorData(i, j));
+            }
+        }
+    }
+
     private void finishTestAndSave(Test test) {
+        if (test == null)
+            return;
         test.setEndTime(new Date());
         test.countTotalTime();
         test.setLastPositionX(mRecord.getPositionX());
@@ -203,13 +235,8 @@ public class TaskStateManager implements ITaskStateManager {
         DbLet.saveOrUpdateTest(test);
 
         mRecordManager.saveOrUpadteTest(test);
-
-        for (int i = 0; i < mColorCalculator.getRow(); i++) {
-            for (int j = 0; j < mColorCalculator.getColumn(); j++) {
-                mRecordManager.saveOrUpdateColorData(mColorCalculator.getColorData(i, j));
-            }
-        }
     }
+
 
     OnTaskHandleListener mOnTaskHandleListener;
 

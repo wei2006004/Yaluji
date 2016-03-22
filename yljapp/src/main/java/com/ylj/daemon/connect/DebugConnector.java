@@ -67,7 +67,7 @@ public class DebugConnector extends BaseConnector {
     Timer mTimer = new Timer();
 
     @Override
-    public void sendStartMessage() {
+    public synchronized void sendStartMessage() {
         super.sendStartMessage();
         mIsRun = true;
         mDebugSource.start();
@@ -110,7 +110,7 @@ public class DebugConnector extends BaseConnector {
     }
 
     @Override
-    public void sendStopMessage() {
+    public synchronized void sendStopMessage() {
         super.sendStopMessage();
         mIsRun = false;
         mDebugSource.stop();

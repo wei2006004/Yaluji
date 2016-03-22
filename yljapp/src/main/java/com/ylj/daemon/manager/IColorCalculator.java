@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface IColorCalculator {
     void setRoad(double roadWidth,double roadLength);
+    void setLeverConvertor(ILevelConvertor leverConvertor);
     void setColorConvertor(IColorConvertor colorConvertor);
     void setGrid(int row,int column);
 

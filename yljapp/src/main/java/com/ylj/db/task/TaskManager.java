@@ -2,6 +2,7 @@ package com.ylj.db.task;
 
 import com.ylj.common.bean.Task;
 import com.ylj.common.bean.Test;
+import com.ylj.daemon.bean.TaskResult;
 import com.ylj.db.AbstractDbManager;
 import com.ylj.db.config.Constant;
 
@@ -74,5 +75,13 @@ public class TaskManager extends AbstractDbManager{
             e.printStackTrace();
         }
         return list;
+    }
+
+    public void saveResult(TaskResult result) {
+        try {
+            db.saveOrUpdate(result);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -15,6 +15,9 @@ public class TaskResult implements Parcelable{
     @Column(name = "id", isId = true)
     private int id;
 
+    @Column(name = "task_id")
+    private int taskId;
+
     @Column(name = "notPassNum")
     private int notPassNum;
 
@@ -40,6 +43,7 @@ public class TaskResult implements Parcelable{
 
     protected TaskResult(Parcel in) {
         id = in.readInt();
+        taskId = in.readInt();
         notPassNum = in.readInt();
         passNum = in.readInt();
         goodNum = in.readInt();
@@ -125,6 +129,14 @@ public class TaskResult implements Parcelable{
         this.column = column;
     }
 
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -133,6 +145,7 @@ public class TaskResult implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
+        dest.writeInt(taskId);
         dest.writeInt(notPassNum);
         dest.writeInt(passNum);
         dest.writeInt(goodNum);

@@ -21,11 +21,17 @@ public class ColorCalculatorImpl implements IColorCalculator {
     private ColorData[][] mColorDatas;
 
     private IColorConvertor mColorConvertor;
+    private ILevelConvertor mLevelConvertor;
 
     @Override
     public void setRoad(double roadWidth, double roadLength) {
         mRoadWidth = roadWidth;
         mRoadLength = roadLength;
+    }
+
+    @Override
+    public void setLeverConvertor(ILevelConvertor leverConvertor) {
+        mLevelConvertor = leverConvertor;
     }
 
     @Override
@@ -67,10 +73,12 @@ public class ColorCalculatorImpl implements IColorCalculator {
             return null;
         double sum = colorData.getValue() * colorData.getCount() + value;
         double newValue = sum / (colorData.getCount() + 1);
+        int level = mLevelConvertor.convertToLever(newValue);
         int color = mColorConvertor.convertToColor(newValue);
 
         colorData.setValue(newValue);
         colorData.setColor(color);
+        colorData.setLevel(level);
         colorData.setCount(colorData.getCount() + 1);
 
         return colorData;
@@ -109,7 +117,42 @@ public class ColorCalculatorImpl implements IColorCalculator {
 
     @Override
     public TaskResult resultCalculate() {
-        return null;
+        TaskResult result = new TaskResult();
+        result.setColumn(mColumnNum);
+        result.setRow(mRowNum);
+        int noreach = 0;
+        int nopass = 0;
+        int pass = 0;
+        int good = 0;
+        int excellent = 0;
+        for (int i = 0; i < mRowNum; i++) {
+            for (int j = 0; j < mColumnNum; j++) {
+                int level = getColorData(i, j).getLevel();
+                switch (level) {
+                    case ColorData.LEVEL_NONE:
+                        noreach++;
+                        break;
+                    case ColorData.LEVEL_NOT_PASS:
+                        nopass++;
+                        break;
+                    case ColorData.LEVEL_PASS:
+                        pass++;
+                        break;
+                    case ColorData.LEVEL_GOOD:
+                        good++;
+                        break;
+                    case ColorData.LEVEL_EXCELLENT:
+                        excellent++;
+                        break;
+                }
+            }
+        }
+        result.setNoReachNum(noreach);
+        result.setNotPassNum(nopass);
+        result.setPassNum(pass);
+        result.setGoodNum(good);
+        result.setExcellentNum(excellent);
+        return result;
     }
 
     private void addColorData(ColorData data) {

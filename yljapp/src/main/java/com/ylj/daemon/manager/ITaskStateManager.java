@@ -17,7 +17,10 @@ import java.util.List;
 public interface ITaskStateManager {
 
     void loadTask(Task task);
-    void finishTask();
+    void finishTask(Test test);
+
+    void startTest();
+    void pauseTest();
 
     void addTestData(DeviceData data);
     void finishTest(Test test);

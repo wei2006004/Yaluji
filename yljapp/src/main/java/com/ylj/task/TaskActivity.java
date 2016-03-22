@@ -127,7 +127,6 @@ public class TaskActivity extends BaseActivity {
             return;
         }
         TestActivity.startAsTaskTestActivity(this, mTask);
-        finish();
     }
 
     @Override
@@ -158,6 +157,10 @@ public class TaskActivity extends BaseActivity {
     List<Map<String, Object>> mTestMaps = new ArrayList<>();
 
     private void refreshTestData() {
+        if (!mIsAdjust)
+            return;
+        if (!mIsTest)
+            return;
         x.task().run(new Runnable() {
             @Override
             public void run() {

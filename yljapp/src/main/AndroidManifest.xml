@@ -134,6 +134,7 @@
         <activity
             android:name=".task.TestActivity"
             android:label="@string/title_activity_test"
+            android:launchMode="singleTop"
             android:parentActivityName=".task.TaskActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data

@@ -14,20 +14,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.RelativeLayout;
 
 import com.ylj.R;
-import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Task;
 import com.ylj.common.bean.Test;
 import com.ylj.common.config.AppStatus;
 import com.ylj.connect.IConnectCtrl;
 import com.ylj.connect.bean.DeviceInfo;
-import com.ylj.daemon.bean.DeviceData;
 import com.ylj.daemon.bean.TaskResult;
-import com.ylj.db.DbLet;
 import com.ylj.task.fragment.AbstractTestFragment;
 import com.ylj.task.fragment.ColorRunFragment;
 import com.ylj.task.fragment.PlotFragment;
@@ -43,7 +39,7 @@ import java.util.List;
 
 @ContentView(R.layout.activity_test)
 public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTestCtrlListener,
-        IConnectCtrl.OnConnectListener ,AbstractTestFragment.OnDataLoadListener{
+        IConnectCtrl.OnConnectListener, AbstractTestFragment.OnDataLoadListener {
 
     public static final String EXTRA_MODE = "EXTRA_MODE";
     public static final String EXTRA_TASK = "EXTRA_TASK";
@@ -106,15 +102,15 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     FloatingActionButton mStopButton;
 
     @Event(R.id.fab_finish_task)
-    private void onFinishTask(View view){
-        if((!mTask.isTest())&&(!mIsTest)){
-            showAlert("Info","has not test");
+    private void onFinishTask(View view) {
+        if ((!mTask.isTest()) && (!mIsTest)) {
+            showAlert("Info", "has not test");
             return;
         }
         showAlert("Info", "Do you want to finish this Task?", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                getTestCtrl().finishTask();
+                getTestCtrl().finishTask(mTest);
                 dialog.dismiss();
                 //// TODO: 2016/3/21 0021  出现进度弹框
                 showToast("please wait");
@@ -129,12 +125,20 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
 
     @Event(R.id.fab_run)
     private void onRunClick(View view) {
+        if(mStatus == TEST_STATUS_RUN){
+            showToast("has start");
+            return;
+        }
         getTestCtrl().startTest();
         mRunButton.setEnabled(false);
     }
 
     @Event(R.id.fab_stop)
     private void onStopClick(View view) {
+        if(mStatus == TEST_STATUS_STOP){
+            showToast("still no start");
+            return;
+        }
         getTestCtrl().pauseTest();
         mStopButton.setEnabled(false);
     }
@@ -154,11 +158,10 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
-        if(mIsTest){
+        if (mIsTest) {
             mTask.setIsTest(true);
-            DbLet.saveOrUpdateTask(mTask);
             getTestCtrl().finishTest(mTest);
         }
     }
@@ -276,16 +279,25 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mMode == MODE_SHOW_RESULT)
+                if (mMode == MODE_SHOW_RESULT) {
+                    TestActivity.this.finish();
                     return;
-                if(!mIsTest)
+                }
+                if (!mIsTest) {
+                    TaskActivity.startNewActivity(TestActivity.this, mTask);
+                    TestActivity.this.finish();
                     return;
-                showAlert("Info",  getString(R.string.alert_leave_test), new DialogInterface.OnClickListener() {
+                }
+                showAlert("Info", getString(R.string.alert_leave_test), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         getTestCtrl().deleteTestCtrlListener(TestActivity.this);
                         getConnectCtrl().deleteConnectListener(TestActivity.this);
+                        if(mIsTest){
+                            mTask.setIsTest(true);
+                        }
+                        TaskActivity.startNewActivity(TestActivity.this, mTask);
                         TestActivity.this.finish();
                     }
                 }, new DialogInterface.OnClickListener() {
@@ -305,23 +317,23 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         mTask = intent.getParcelableExtra(EXTRA_TASK);
     }
 
-    private AbstractTestFragment getColorFragment(){
+    private AbstractTestFragment getColorFragment() {
         return mFragments.get(FRAGMENT_INDEX_COLOR);
     }
 
-    private AbstractTestFragment getTraceFragment(){
+    private AbstractTestFragment getTraceFragment() {
         return mFragments.get(FRAGMENT_INDEX_TRACE);
     }
 
-    private AbstractTestFragment getCurrentFragment(){
+    private AbstractTestFragment getCurrentFragment() {
         return mFragments.get(mCurrentFragmentIndex);
     }
 
-    private AbstractTestFragment getTestFragment(int index){
+    private AbstractTestFragment getTestFragment(int index) {
         return mFragments.get(index);
     }
 
-    private boolean isTestRun(){
+    private boolean isTestRun() {
         return mStatus == TEST_STATUS_RUN;
     }
 
@@ -350,7 +362,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         setAppConnectStatus(false);
     }
 
-    private void setAppConnectStatus(boolean isConnect){
+    private void setAppConnectStatus(boolean isConnect) {
         AppStatus appstatus = AppStatus.instance();
         appstatus.setIsConnect(isConnect);
     }
@@ -384,17 +396,20 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
 
     @Override
     public void onTaskResultCreated(TaskResult result) {
-
+        mTask.setIsTest(true);
+        mTask.setIsFinish(true);
+        TaskActivity.startNewActivity(this, mTask);
+        finish();
     }
 
     @Override
-    public void onDataLoadFinish(int flag) {
-        if(flag == FRAGMENT_FLAG_TRACE){
-            mIsTraceLoadFinish= true;
-        }else if(flag == FRAGMENT_FLAG_COLOR){
-            mIsColorLoadFinish= true;
+    public void onDataLoadFinish(final int flag) {
+        if (flag == FRAGMENT_FLAG_TRACE) {
+            mIsTraceLoadFinish = true;
+        } else if (flag == FRAGMENT_FLAG_COLOR) {
+            mIsColorLoadFinish = true;
         }
-        if(mCurrentFragmentIndex == flag){
+        if (mCurrentFragmentIndex == flag) {
             getCurrentFragment().showTestPage();
             getCurrentFragment().refreshPage();
         }

@@ -5,6 +5,7 @@ import com.ylj.common.bean.Staff;
 import com.ylj.common.bean.Task;
 import com.ylj.common.bean.Test;
 import com.ylj.common.utils.TaskDbFileUitl;
+import com.ylj.daemon.bean.TaskResult;
 import com.ylj.db.account.AccountManager;
 import com.ylj.db.task.RecordManager;
 import com.ylj.db.task.TaskManager;
@@ -104,5 +105,10 @@ public class DbLet {
     public static void saveOrUpdateTest(Test test) {
         TaskManager taskManager = ManagerFactory.getTaskManager();
         taskManager.saveOrUpadate(test);
+    }
+
+    public static void saveTaskResult(TaskResult result) {
+        TaskManager taskManager = ManagerFactory.getTaskManager();
+        taskManager.saveResult(result);
     }
 }

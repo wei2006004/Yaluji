@@ -1,5 +1,6 @@
 package com.ylj.db.task;
 
+import com.ylj.common.bean.Task;
 import com.ylj.common.bean.Test;
 import com.ylj.daemon.bean.Record;
 import com.ylj.daemon.bean.TaskResult;
@@ -82,6 +83,22 @@ public class RecordManager extends AbstractDbManager {
     public void saveOrUpadteTest(Test test) {
         try {
             db.saveOrUpdate(test);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveTaskResult(TaskResult result) {
+        try {
+            db.saveOrUpdate(result);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveOrUpdateTask(Task task) {
+        try {
+            db.saveOrUpdate(task);
         } catch (DbException e) {
             e.printStackTrace();
         }
