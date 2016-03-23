@@ -1,5 +1,6 @@
 package com.ylj.task.bean;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -10,7 +11,7 @@ import org.xutils.db.annotation.Table;
  * Created by Administrator on 2016/3/17 0017.
  */
 @Table(name = "color_data")
-public class ColorData implements Parcelable{
+public class ColorData implements Parcelable {
 
     public static final int LEVEL_NONE = 0;
     public static final int LEVEL_NOT_PASS = 1;
@@ -33,20 +34,33 @@ public class ColorData implements Parcelable{
     @Column(name = "count")
     int count;
 
+    @Column(name = "times")
+    int times;
+
     @Column(name = "value")
     double value;
 
     @Column(name = "level")
     int level;
 
-    public ColorData(){}
+    public ColorData() {
+        row = 0;
+        column = 0;
+        color = Color.WHITE;
+        count = 0;
+        times = 0;
+        level = LEVEL_NONE;
+        value = 0;
+    }
 
-    public ColorData(int row, int column, int color, int level,int count ,double value) {
+    public ColorData(int row, int column, int color, int level, int count, int times, double value) {
         this.row = row;
         this.column = column;
         this.color = color;
         this.count = count;
         this.value = value;
+        this.level = level;
+        this.times = times;
     }
 
     protected ColorData(Parcel in) {
@@ -56,6 +70,7 @@ public class ColorData implements Parcelable{
         color = in.readInt();
         level = in.readInt();
         count = in.readInt();
+        times = in.readInt();
         value = in.readDouble();
     }
 
@@ -127,6 +142,14 @@ public class ColorData implements Parcelable{
         this.level = level;
     }
 
+    public int getTimes() {
+        return times;
+    }
+
+    public void setTimes(int times) {
+        this.times = times;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -140,6 +163,7 @@ public class ColorData implements Parcelable{
         dest.writeInt(color);
         dest.writeInt(level);
         dest.writeInt(count);
+        dest.writeInt(times);
         dest.writeDouble(value);
     }
 }

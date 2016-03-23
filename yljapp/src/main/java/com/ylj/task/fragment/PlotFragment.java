@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ylj.R;
 import com.ylj.common.widget.PlotView;
@@ -40,6 +41,15 @@ public class PlotFragment extends AbstractTestFragment implements ITestCtrl.OnTe
     private int mMode = MODE_QUAKE_PLOT;
 
     List<PointF> mDatas = new ArrayList<>();
+
+    @ViewInject(R.id.tv_quake)
+    TextView mQuakeTag;
+
+    @ViewInject(R.id.tv_temp)
+    TextView mTempTag;
+
+    @ViewInject(R.id.tv_value)
+    TextView mValueTag;
 
     @ViewInject(R.id.plotview)
     PlotView mPlotView;
@@ -85,7 +95,7 @@ public class PlotFragment extends AbstractTestFragment implements ITestCtrl.OnTe
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         getTestCtrl().deleteOnTestDataRefreshListener(this);
     }
@@ -111,6 +121,13 @@ public class PlotFragment extends AbstractTestFragment implements ITestCtrl.OnTe
 
     private void initLayout() {
         showWaitPage();
+        if (mMode == MODE_QUAKE_PLOT) {
+            mQuakeTag.setVisibility(View.VISIBLE);
+            mTempTag.setVisibility(View.GONE);
+        } else {
+            mQuakeTag.setVisibility(View.GONE);
+            mTempTag.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initArguments() {
@@ -177,8 +194,14 @@ public class PlotFragment extends AbstractTestFragment implements ITestCtrl.OnTe
         mDatas.add(pointF);
         if (!isAdded())
             return;
-        if(mIsRefreshPage)
+        if (mIsRefreshPage)
             return;
         mPlotView.getEdit().addPoint(pointF).commit();
+
+        if(mMode == MODE_QUAKE_PLOT){
+            mValueTag.setText(String.format("%.2f",data.getQuake())+getString(R.string.test_quake_unit));
+        }else {
+            mValueTag.setText(String.format("%.1f",data.getTemp())+getString(R.string.test_temp_unit));
+        }
     }
 }

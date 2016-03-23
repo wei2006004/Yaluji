@@ -18,19 +18,23 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:padding="50dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/layout_user"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                style="@style/Test.StatusTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="user name:"/>
+                android:text="@string/test_user"/>
             <TextView
+                style="@style/Test.StatusValue"
                 android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -41,10 +45,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                style="@style/Test.StatusTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="task name:"/>
+                android:text="@string/test_task"/>
             <TextView
+                style="@style/Test.StatusValue"
                 android:id="@+id/tv_task_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -55,10 +61,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                style="@style/Test.StatusTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="road name:"/>
+                android:text="@string/test_road"/>
             <TextView
+                style="@style/Test.StatusValue"
                 android:id="@+id/tv_road_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -68,10 +76,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                style="@style/Test.StatusTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="road width:"/>
+                android:text="@string/task_road_width"/>
             <TextView
+                style="@style/Test.StatusValue"
                 android:id="@+id/tv_road_width"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -81,10 +91,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                style="@style/Test.StatusTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="road length:"/>
+                android:text="@string/test_road_length"/>
             <TextView
+                style="@style/Test.StatusValue"
                 android:id="@+id/tv_road_length"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

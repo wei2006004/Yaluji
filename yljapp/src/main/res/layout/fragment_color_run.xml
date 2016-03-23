@@ -25,9 +25,12 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:paddingLeft="30dp"
+            android:paddingTop="50dp"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,31 +38,49 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/Test.StatusTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test_color_row" />
+
+                <TextView
+                    style="@style/Test.StatusValue"
                     android:id="@+id/tv_pos_x"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    style="@style/Test.StatusValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/test_color_row" />
+                    android:text="@string/test_row"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/Test.StatusTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/test_color_column" />
 
                 <TextView
                     android:id="@+id/tv_pos_y"
+                    style="@style/Test.StatusValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/Test.StatusValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test_column"/>
+
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,14 +88,22 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/Test.StatusTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/test_color_times" />
 
                 <TextView
+                    style="@style/Test.StatusValue"
                     android:id="@+id/tv_times"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/Test.StatusValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test_times"/>
             </LinearLayout>
 
             <LinearLayout
@@ -83,14 +112,17 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/Test.StatusTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/test_status" />
 
                 <TextView
+                    style="@style/Test.StatusValue"
                     android:id="@+id/tv_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -98,7 +130,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="25dp">
+            android:padding="40dp">
 
             <com.ylj.common.widget.ColorView
                 android:id="@+id/colorView"

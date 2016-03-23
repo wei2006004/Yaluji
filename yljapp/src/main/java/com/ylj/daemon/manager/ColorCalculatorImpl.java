@@ -18,6 +18,9 @@ public class ColorCalculatorImpl implements IColorCalculator {
     private int mRowNum = 8;
     private int mColumnNum = 15;
 
+    private int mCurrentRow = 0;
+    private int mCurrentColumn = 0;
+
     private ColorData[][] mColorDatas;
 
     private IColorConvertor mColorConvertor;
@@ -81,6 +84,12 @@ public class ColorCalculatorImpl implements IColorCalculator {
         colorData.setLevel(level);
         colorData.setCount(colorData.getCount() + 1);
 
+        if (!(row == mCurrentRow && column == mCurrentColumn)) {
+            mCurrentRow = row;
+            mCurrentColumn = column;
+            colorData.setTimes(colorData.getTimes() + 1);
+        }
+
         return colorData;
     }
 
@@ -99,7 +108,7 @@ public class ColorCalculatorImpl implements IColorCalculator {
         ColorData colorData;
         for (int i = 0; i < mRowNum; i++) {
             for (int j = 0; j < mColumnNum; j++) {
-                colorData = new ColorData(i, j, Color.WHITE, ColorData.LEVEL_NONE, 0, 0.0);
+                colorData = new ColorData(i, j, Color.WHITE, ColorData.LEVEL_NONE, 0, 0, 0.0);
                 mColorDatas[i][j] = colorData;
             }
         }
@@ -112,6 +121,11 @@ public class ColorCalculatorImpl implements IColorCalculator {
         }
         for (ColorData data : dataList) {
             addColorData(data);
+        }
+        if (!dataList.isEmpty()) {
+            ColorData data = dataList.get(dataList.size() - 1);
+            mCurrentRow = data.getRow();
+            mCurrentColumn = data.getColumn();
         }
     }
 

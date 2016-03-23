@@ -227,6 +227,9 @@ public class TaskStateManager implements ITaskStateManager {
     private void finishTestAndSave(Test test) {
         if (test == null)
             return;
+        if (test.getStartTime() == null)
+            return;
+        test.setTaskId(mTask.getId());
         test.setEndTime(new Date());
         test.countTotalTime();
         test.setLastPositionX(mRecord.getPositionX());

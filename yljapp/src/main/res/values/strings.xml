@@ -201,6 +201,26 @@
     <string name="test_color_column">当前列：</string>
     <string name="test_color_times">碾压次数：</string>
     <string name="test_status">状态：</string>
+    <string name="test_meter">米</string>
+    <string name="test_speed_unit">米/秒</string>
+    <string name="test_temp_unit">°C</string>
+    <string name="test_quake_unit">g</string>
+    <string name="test_row">行</string>
+    <string name="test_column">列</string>
+    <string name="test_times">次</string>
+    <string name="test_not_pass">不合格</string>
+    <string name="test_pass">合格</string>
+    <string name="test_good">良好</string>
+    <string name="test_excellent">优秀</string>
+    <string name="test_none">未碾压</string>
+    <string name="test_quake_tag">加速度：</string>
+    <string name="test_temp_tag">温度：</string>
+    <string name="test_user">当前账号：</string>
+    <string name="test_task">任务名：</string>
+    <string name="test_road">公路名：</string>
+    <string name="test_road_width">公路宽：</string>
+    <string name="test_road_length">公路长：</string>
+    <string name="test_anonymous">匿名用户</string>
     <string name="test_"></string>
 
     <!-- alert/dialog -->

@@ -127,6 +127,7 @@ public class TaskActivity extends BaseActivity {
             return;
         }
         TestActivity.startAsTaskTestActivity(this, mTask);
+        finish();
     }
 
     @Override

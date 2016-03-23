@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ylj.R;
 import com.ylj.common.bean.Task;
@@ -64,7 +65,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
 
     private int mMode = MODE_SHOW_RESULT;
     private Task mTask = new Task();
-    private Test mTest = new Test();
+    private Test mTest;
 
     boolean mIsTest = false;
 
@@ -125,7 +126,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
 
     @Event(R.id.fab_run)
     private void onRunClick(View view) {
-        if(mStatus == TEST_STATUS_RUN){
+        if (mStatus == TEST_STATUS_RUN) {
             showToast("has start");
             return;
         }
@@ -135,7 +136,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
 
     @Event(R.id.fab_stop)
     private void onStopClick(View view) {
-        if(mStatus == TEST_STATUS_STOP){
+        if (mStatus == TEST_STATUS_STOP) {
             showToast("still no start");
             return;
         }
@@ -259,7 +260,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     private void initTest() {
         mTest = new Test();
         AppStatus appStatus = AppStatus.instance();
-        mTest.setTaskId(getTaskId());
+        mTest.setTaskId(mTask.getId());
         mTest.setIsLogin(appStatus.isLogin());
         mTest.setIsAdmin(appStatus.isAdmin());
         mTest.setStaffId(appStatus.getCurrentStaff().getId());
@@ -270,6 +271,24 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View view = LayoutInflater.from(this).inflate(R.layout.nav_header_test, null);
 
+        AppStatus appStatus = AppStatus.instance();
+        String user ="";
+        switch (appStatus.getLoginMode()){
+            case AppStatus.MODE_ADMIN_LOGIN:
+                user = appStatus.getCurrentAdmin().getAdminName();
+                break;
+            case AppStatus.MODE_STAFF_LOGIN:
+                user = appStatus.getCurrentStaff().getStaffName();
+                break;
+            case AppStatus.MODE_ANONYMOUS_LOGIN:
+                user = getString(R.string.test_anonymous);
+                break;
+        }
+        ((TextView) view.findViewById(R.id.tv_user_name)).setText(user);
+        ((TextView) view.findViewById(R.id.tv_task_name)).setText(mTask.getTaskName());
+        ((TextView) view.findViewById(R.id.tv_road_name)).setText(mTask.getRoadName());
+        ((TextView) view.findViewById(R.id.tv_road_width)).setText(String.format("%.1f",mTask.getRoadWidth()));
+        ((TextView) view.findViewById(R.id.tv_road_length)).setText(String.format("%.1f",mTask.getRoadLength()));
         navigationView.addHeaderView(view);
     }
 
@@ -292,9 +311,12 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        if (mStatus == TEST_STATUS_RUN) {
+                            getTestCtrl().pauseTest();
+                        }
                         getTestCtrl().deleteTestCtrlListener(TestActivity.this);
                         getConnectCtrl().deleteConnectListener(TestActivity.this);
-                        if(mIsTest){
+                        if (mIsTest) {
                             mTask.setIsTest(true);
                         }
                         TaskActivity.startNewActivity(TestActivity.this, mTask);
@@ -372,16 +394,17 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         showToast("test start");
         mIsTest = true;
         mTest.setStartTime(new Date());
+        mStatus = TEST_STATUS_RUN;
     }
 
     @Override
     public void onTestPasue() {
-
+        mStatus = TEST_STATUS_STOP;
     }
 
     @Override
     public void onTestFinish() {
-
+        mStatus = TEST_STATUS_STOP;
     }
 
     @Override

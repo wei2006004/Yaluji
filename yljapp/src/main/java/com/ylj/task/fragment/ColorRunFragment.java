@@ -1,11 +1,13 @@
 package com.ylj.task.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ylj.R;
 import com.ylj.common.bean.Task;
@@ -48,6 +50,18 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
     @ViewInject(R.id.layout_test)
     LinearLayout mTestLayout;
 
+    @ViewInject(R.id.tv_pos_x)
+    TextView mColumnView;
+
+    @ViewInject(R.id.tv_pos_y)
+    TextView mRowView;
+
+    @ViewInject(R.id.tv_times)
+    TextView mTimesView;
+
+    @ViewInject(R.id.tv_status)
+    TextView mStatusView;
+
     public static ColorRunFragment newInstance(Task task, int mode) {
         ColorRunFragment fragment = new ColorRunFragment();
         Bundle args = new Bundle();
@@ -70,12 +84,37 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
 
         initLayout();
         initColorView();
-        refreshInfoView();
+        initInfoView();
         getTestCtrl().setOnColorDrawListener(this);
     }
 
-    private void refreshInfoView() {
+    private void initInfoView() {
+        refreshInfoView(new ColorData());
+    }
 
+    private void refreshInfoView(ColorData data) {
+        if (data == null)
+            return;
+        mRowView.setText(String.valueOf(data.getRow()));
+        mColumnView.setText(String.valueOf(data.getColumn()));
+        mTimesView.setText(String.valueOf(data.getCount()));
+        switch (data.getLevel()) {
+            case ColorData.LEVEL_NONE:
+                mStatusView.setText(R.string.test_none);
+                break;
+            case ColorData.LEVEL_NOT_PASS:
+                mStatusView.setText(R.string.test_not_pass);
+                break;
+            case ColorData.LEVEL_PASS:
+                mStatusView.setText(R.string.test_pass);
+                break;
+            case ColorData.LEVEL_GOOD:
+                mStatusView.setText(R.string.test_good);
+                break;
+            case ColorData.LEVEL_EXCELLENT:
+                mStatusView.setText(R.string.test_excellent);
+                break;
+        }
     }
 
     private void initColorView() {
@@ -139,6 +178,9 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
                     data.getColor());
         }
         edit.commint();
+        if(!mColorDatas.isEmpty()){
+            refreshInfoView(mColorDatas.get(mColorDatas.size() - 1));
+        }
     }
 
     @Override
@@ -147,7 +189,7 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
             return;
         mColorDatas.clear();
         initColorView();
-        refreshInfoView();
+        initInfoView();
     }
 
     @Override
@@ -162,7 +204,9 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
             if (mMode == MODE_SHOW_RESULT) {
                 mResult = result;
             }
-            refreshInfoView();
+            if(!datas.isEmpty()){
+                refreshInfoView(datas.get(datas.size() - 1));
+            }
         }
         getOnDataLoadListener().onDataLoadFinish(FRAGMENT_FLAG_COLOR);
     }
@@ -175,5 +219,6 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
         mColorView.getEdit()
                 .setColor(data.getRow(), data.getColumn(), data.getColor())
                 .commint();
+        refreshInfoView(data);
     }
 }

@@ -70,7 +70,11 @@ public class TaskManager extends AbstractDbManager{
     public List<Test> getAllTestByTask(Task task) {
         List<Test> list = null;
         try {
-            list = db.findAll(Test.class);
+            list = db.selector(Test.class)
+                    .where(Test.TAG_TASK_ID,
+                            Constant.SQL_OP_EQUAL,
+                            task.getId())
+                    .findAll();
         } catch (DbException e) {
             e.printStackTrace();
         }
