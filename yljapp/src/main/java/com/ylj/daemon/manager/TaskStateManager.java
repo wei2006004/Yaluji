@@ -116,7 +116,9 @@ public class TaskStateManager implements ITaskStateManager {
                 saveTask(true);
                 finishTestAndSave(test);
                 saveColorDatas();
-                mOnTaskHandleListener.onTestFinished();
+                if(test != null) {
+                    mOnTaskHandleListener.onTestFinished();
+                }
                 mOnTaskHandleListener.onTaskResultCreated(result);
             }
         });

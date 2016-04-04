@@ -29,6 +29,9 @@ public class ServiceAction {
     //载入task数据结束 send：tracedatas,colordatas,taskresult
     public final static String ACTION_LOAD_TASK_FINISH = "ACTION_LOAD_TASK_FINISH";
 
+    //test结束 send：none
+    public final static String ACTION_TEST_FINISHED = "ACTION_TEST_FINISHED";
+
     //生成task结果完成 send：taskresult
     public final static String ACTION_TASK_RESULT_CREATED = "ACTION_TASK_RESULT_CREATED";
 

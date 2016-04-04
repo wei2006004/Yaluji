@@ -14,12 +14,14 @@ import com.ylj.common.BaseFragment;
 import com.ylj.common.bean.Task;
 import com.ylj.common.utils.BeanUtils;
 import com.ylj.db.DbLet;
+import com.ylj.db.task.RecordManager;
 import com.ylj.task.TaskActivity;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +71,19 @@ public class FinishTaskFragment extends BaseFragment {
         mTaskAdapter = new SimpleAdapter(x.app(), mTaskMaps,
                 R.layout.listview_task_manager_finish,
                 new String[]{Task.TAG_TASK_NAME, Task.TAG_ROAD_NAME},
-                new int[]{R.id.tv_task_name, R.id.tv_road_name});
+                new int[]{R.id.tv_task_name, R.id.tv_road_name}) {
+            public View getView(final int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                Button deleteBtn = (Button) view.findViewById(R.id.btn_detele);
+                deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteTask(position);
+                    }
+                });
+                return view;
+            }
+        };
         mTaskListView.setAdapter(mTaskAdapter);
         mTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,6 +91,40 @@ public class FinishTaskFragment extends BaseFragment {
                 onTaskItemClick(position);
             }
         });
+    }
+
+    private void deleteTask(final int position) {
+        showAlert("Warning", getString(R.string.alert_delete_task),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        x.task().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Task task = getTaskByPosition(position);
+                                deleteTask(task);
+                            }
+                        });
+                        dialog.dismiss();
+                    }
+                },
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+    }
+
+    private void deleteTask(Task task) {
+        DbLet.deleteTask(task);
+        String dir = getActivity().getApplicationContext().getFilesDir().getAbsolutePath()+"/databases/";
+        String file = dir + task.getRecordFile();
+        new File(file).delete();
+        new File(file + "-shm").delete();
+        new File(file + "-wal").delete();
+        refreshTaskData();
+        showToast("delete finish");
     }
 
     private void onTaskItemClick(int position) {

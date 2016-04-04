@@ -32,7 +32,7 @@
     </style>
 
     <style name="LoginLayout" parent="CenterLayout">
-        <item name="android:layout_marginTop">100dp</item>
+        <item name="android:layout_marginTop">70dp</item>
     </style>
 
     <style name="CenterLayoutWithBar" parent="CenterLayout">

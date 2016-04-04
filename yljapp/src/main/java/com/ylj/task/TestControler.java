@@ -48,11 +48,19 @@ public class TestControler extends ConnectControler implements ITestCtrl {
                 onActionStartLoadTask(intent);
             } else if (action.equals(ServiceAction.ACTION_LOAD_TASK_FINISH)) {
                 onActionLoadTaskFinish(intent);
-            } else if (action.equals(ServiceAction.ACTION_TASK_RESULT_CREATED)) {
+            } else if (action.equals(ServiceAction.ACTION_TEST_FINISHED)) {
+                onActionTestFinish(intent);
+            }else if (action.equals(ServiceAction.ACTION_TASK_RESULT_CREATED)) {
                 onActionTaskResultCreated(intent);
             }
         }
     };
+
+    private void onActionTestFinish(Intent intent) {
+        for (OnTestCtrlListener listener : mTestCtrlListeners) {
+            listener.onTestFinish();
+        }
+    }
 
     private void onActionCtrlStateChange(Intent intent) {
         int flag = intent.getIntExtra(ServiceAction.EXTRA_ACTION_FLAG, ServiceAction.CTRL_FLAG_STOP);
@@ -128,6 +136,7 @@ public class TestControler extends ConnectControler implements ITestCtrl {
         registerAction(ServiceAction.ACTION_SAMPLE_CTRL_STATE_CHANGE);
         registerAction(ServiceAction.ACTION_DRAW_DATA);
         registerAction(ServiceAction.ACTION_START_LOAD_TASK);
+        registerAction(ServiceAction.ACTION_TEST_FINISHED);
         registerAction(ServiceAction.ACTION_LOAD_TASK_FINISH);
         registerAction(ServiceAction.ACTION_TASK_RESULT_CREATED);
     }

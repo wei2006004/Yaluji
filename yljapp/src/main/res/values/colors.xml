@@ -13,6 +13,7 @@
 
     <color name="common_text_black">#303030</color>
     <color name="common_sub_text_grep">#666666</color>
+    <color name="common_sub_low_grep">#aaaaaa</color>
 
     <color name="common_title_blue">#4c57d8</color>
 

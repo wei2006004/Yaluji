@@ -223,6 +223,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
 
     @Override
     public void onTestFinished() {
+        sendBroadcast(ServiceAction.ACTION_TEST_FINISHED);
     }
 
     @Override

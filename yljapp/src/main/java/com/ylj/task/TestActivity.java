@@ -24,6 +24,7 @@ import com.ylj.common.bean.Test;
 import com.ylj.common.config.AppStatus;
 import com.ylj.connect.IConnectCtrl;
 import com.ylj.connect.bean.DeviceInfo;
+import com.ylj.daemon.bean.Record;
 import com.ylj.daemon.bean.TaskResult;
 import com.ylj.task.fragment.AbstractTestFragment;
 import com.ylj.task.fragment.ColorRunFragment;
@@ -33,6 +34,7 @@ import com.ylj.task.fragment.TraceFragment;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,7 +42,8 @@ import java.util.List;
 
 @ContentView(R.layout.activity_test)
 public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTestCtrlListener,
-        IConnectCtrl.OnConnectListener, AbstractTestFragment.OnDataLoadListener {
+        IConnectCtrl.OnConnectListener, AbstractTestFragment.OnDataLoadListener,
+        ITestCtrl.OnTestDataRefreshListener{
 
     public static final String EXTRA_MODE = "EXTRA_MODE";
     public static final String EXTRA_TASK = "EXTRA_TASK";
@@ -68,6 +71,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     private Test mTest;
 
     boolean mIsTest = false;
+    boolean mIsTestFinishAndLeave = false;
 
     public static void startAsTaskTestActivity(Context context, Task task) {
         Intent intent = new Intent(context, TestActivity.class);
@@ -93,6 +97,18 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     @ViewInject(R.id.container)
     ViewPager mViewPager;
 
+    @ViewInject(R.id.tv_status)
+    TextView mStatusText;
+
+    @ViewInject(R.id.tv_time)
+    TextView mTimeText;
+
+    @ViewInject(R.id.tv_temp)
+    TextView mTempText;
+
+    @ViewInject(R.id.tv_quake)
+    TextView mQuakeText;
+
     @ViewInject(R.id.layout_bottom)
     RelativeLayout mButtomLayout;
 
@@ -111,7 +127,11 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         showAlert("Info", "Do you want to finish this Task?", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                getTestCtrl().finishTask(mTest);
+                if(mIsTest){
+                    getTestCtrl().finishTask(mTest);
+                }else {
+                    getTestCtrl().finishTask(null);
+                }
                 dialog.dismiss();
                 //// TODO: 2016/3/21 0021  出现进度弹框
                 showToast("please wait");
@@ -156,15 +176,12 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         initTabs();
         setLayoutVisiable();
         loadDatas();
+        initStatusBar();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mIsTest) {
-            mTask.setIsTest(true);
-            getTestCtrl().finishTest(mTest);
-        }
+    private void initStatusBar() {
+        setStatusText(R.string.test_wait);
+        mTimeText.setText("0s");
     }
 
     private void loadDatas() {
@@ -245,6 +262,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     private void initControler() {
         getConnectCtrl().addConnectListener(this);
         getTestCtrl().addTestCtrlListener(this);
+        getTestCtrl().addOnTestDataRefreshListener(this);
     }
 
     private void initFragments() {
@@ -314,13 +332,12 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
                         if (mStatus == TEST_STATUS_RUN) {
                             getTestCtrl().pauseTest();
                         }
-                        getTestCtrl().deleteTestCtrlListener(TestActivity.this);
-                        getConnectCtrl().deleteConnectListener(TestActivity.this);
+
                         if (mIsTest) {
                             mTask.setIsTest(true);
+                            getTestCtrl().finishTest(mTest);
+                            mIsTestFinishAndLeave = true;
                         }
-                        TaskActivity.startNewActivity(TestActivity.this, mTask);
-                        TestActivity.this.finish();
                     }
                 }, new DialogInterface.OnClickListener() {
                     @Override
@@ -395,16 +412,27 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         mIsTest = true;
         mTest.setStartTime(new Date());
         mStatus = TEST_STATUS_RUN;
+        setStatusText(R.string.test_run);
+    }
+
+    private void setStatusText(int resId) {
+        mStatusText.setText(resId);
     }
 
     @Override
     public void onTestPasue() {
         mStatus = TEST_STATUS_STOP;
+        setStatusText(R.string.test_pause);
     }
 
     @Override
     public void onTestFinish() {
         mStatus = TEST_STATUS_STOP;
+
+        if(mIsTestFinishAndLeave){
+            TaskActivity.startNewActivity(TestActivity.this, mTask);
+            finish();
+        }
     }
 
     @Override
@@ -436,6 +464,12 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
             getCurrentFragment().showTestPage();
             getCurrentFragment().refreshPage();
         }
+    }
+
+    @Override
+    public void onRefresh(Record data) {
+        mTempText.setText(String.format("%.1f°C",data.getTemp()));
+        mQuakeText.setText(String.format("%.2fg",data.getQuake()));
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

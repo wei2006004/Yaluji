@@ -23,9 +23,9 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="80dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -70,7 +70,7 @@
             android:paddingLeft="70dp"
             android:paddingRight="70dp"
             android:paddingTop="10dp"
-            android:paddingBottom="40dp">
+            android:paddingBottom="55dp">
             <com.ylj.common.widget.TracePlantView
                 android:id="@+id/traceView"
                 android:layout_width="match_parent"

@@ -32,6 +32,8 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="7dp"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
@@ -42,13 +44,15 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/Test.StatusTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="status" />
+                    android:text="@string/test_status_state" />
 
                 <TextView
                     android:id="@+id/tv_status"
-                    android:layout_width="wrap_content"
+                    style="@style/Test.StatusValue"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
@@ -58,13 +62,15 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/Test.StatusTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="time" />
+                    android:text="@string/test_status_time" />
 
                 <TextView
                     android:id="@+id/tv_time"
-                    android:layout_width="wrap_content"
+                    style="@style/Test.StatusValue"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
@@ -73,13 +79,15 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/Test.StatusTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="quake" />
+                    android:text="@string/test_status_quake" />
 
                 <TextView
                     android:id="@+id/tv_quake"
-                    android:layout_width="wrap_content"
+                    style="@style/Test.StatusValue"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
@@ -88,13 +96,15 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/Test.StatusTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="temp" />
+                    android:text="@string/test_status_temp" />
 
                 <TextView
                     android:id="@+id/tv_temp"
-                    android:layout_width="wrap_content"
+                    style="@style/Test.StatusValue"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
@@ -110,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:layout_margin="@dimen/fab_margin"
+                android:layout_margin="0dp"
                 app:backgroundTint="@color/fab_color"
                 app:rippleColor="@color/fab_color_clicked"
                 android:src="@drawable/test_run" />
@@ -120,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:layout_margin="@dimen/fab_margin"
+                android:layout_margin="0dp"
                 app:backgroundTint="@color/fab_color"
                 app:rippleColor="@color/fab_color_clicked"
                 android:src="@drawable/test_stop" />
@@ -130,7 +140,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:layout_margin="@dimen/fab_margin"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="25dp"
                 app:backgroundTint="@color/fab_color"
                 app:rippleColor="@color/fab_color_clicked"
                 android:src="@android:drawable/ic_dialog_email" />

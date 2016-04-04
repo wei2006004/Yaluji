@@ -38,4 +38,11 @@
         </LinearLayout>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_detele"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentRight="true"
+        style="@style/DeleteButton"
+        android:focusable="false" />
 </RelativeLayout>

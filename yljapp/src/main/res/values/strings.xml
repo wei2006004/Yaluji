@@ -152,6 +152,10 @@
     <string name="task_no_adjust">未校验</string>
     <string name="task_finish_task">结束任务</string>
     <string name="task_enter_result">查看结果</string>
+    <string name="task_test_time">测试时间：</string>
+    <string name="task_total_time">时间：</string>
+    <string name="task_distance">路程</string>
+    <string name="task_anonymous">匿名用户</string>
 
     <!-- Staff界面/Staff/Admin Modify/Staff Manager -->
     <string name="staff_name">姓名</string>
@@ -208,10 +212,15 @@
     <string name="test_row">行</string>
     <string name="test_column">列</string>
     <string name="test_times">次</string>
+    <string name="test_color_num_unit">块</string>
     <string name="test_not_pass">不合格</string>
     <string name="test_pass">合格</string>
     <string name="test_good">良好</string>
     <string name="test_excellent">优秀</string>
+    <string name="test_not_pass_num">不合格（红）：</string>
+    <string name="test_pass_num">合格（黄）：</string>
+    <string name="test_good_num">良好（蓝）：</string>
+    <string name="test_excellent_num">优秀（绿）：</string>
     <string name="test_none">未碾压</string>
     <string name="test_quake_tag">加速度：</string>
     <string name="test_temp_tag">温度：</string>
@@ -221,6 +230,13 @@
     <string name="test_road_width">公路宽：</string>
     <string name="test_road_length">公路长：</string>
     <string name="test_anonymous">匿名用户</string>
+    <string name="test_status_state">状态：</string>
+    <string name="test_status_time">时间：</string>
+    <string name="test_status_temp">温度：</string>
+    <string name="test_status_quake">加速度：</string>
+    <string name="test_run">运行</string>
+    <string name="test_wait">就绪</string>
+    <string name="test_pause">暂停</string>
     <string name="test_"></string>
 
     <!-- alert/dialog -->

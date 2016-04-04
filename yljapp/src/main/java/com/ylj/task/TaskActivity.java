@@ -190,7 +190,7 @@ public class TaskActivity extends BaseActivity {
     }
 
     private String getUserNameByTest(Test test) {
-        String name = "anonymous";
+        String name = getString(R.string.task_anonymous);
         if (!test.isLogin()) {
             return name;
         }
@@ -228,7 +228,7 @@ public class TaskActivity extends BaseActivity {
         mTestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                onTestItemClick(position);
+                //onTestItemClick(position);
             }
         });
     }

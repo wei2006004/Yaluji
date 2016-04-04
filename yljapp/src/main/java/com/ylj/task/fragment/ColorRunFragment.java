@@ -1,7 +1,6 @@
 package com.ylj.task.fragment;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
@@ -50,6 +49,12 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
     @ViewInject(R.id.layout_test)
     LinearLayout mTestLayout;
 
+    @ViewInject(R.id.layout_test_info)
+    LinearLayout mTestInfoLayout;
+
+    @ViewInject(R.id.layout_result_info)
+    LinearLayout mResultInfoLayout;
+
     @ViewInject(R.id.tv_pos_x)
     TextView mColumnView;
 
@@ -61,6 +66,18 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
 
     @ViewInject(R.id.tv_status)
     TextView mStatusView;
+
+    @ViewInject(R.id.tv_no_pass)
+    TextView mNoPassView;
+
+    @ViewInject(R.id.tv_pass_num)
+    TextView mPassView;
+
+    @ViewInject(R.id.tv_good_num)
+    TextView mGoodView;
+
+    @ViewInject(R.id.tv_excellent_num)
+    TextView mExcellentView;
 
     public static ColorRunFragment newInstance(Task task, int mode) {
         ColorRunFragment fragment = new ColorRunFragment();
@@ -89,15 +106,28 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
     }
 
     private void initInfoView() {
-        refreshInfoView(new ColorData());
+        if (mMode == MODE_SHOW_RESULT) {
+            refreshResultInfoView(new TaskResult());
+        } else {
+            refreshTestInfoView(new ColorData());
+        }
     }
 
-    private void refreshInfoView(ColorData data) {
+    private void refreshResultInfoView(TaskResult result) {
+        if (result == null)
+            return;
+        mNoPassView.setText(String.valueOf(result.getNotPassNum()));
+        mPassView.setText(String.valueOf(result.getPassNum()));
+        mGoodView.setText(String.valueOf(result.getGoodNum()));
+        mExcellentView.setText(String.valueOf(result.getExcellentNum()));
+    }
+
+    private void refreshTestInfoView(ColorData data) {
         if (data == null)
             return;
-        mRowView.setText(String.valueOf(data.getRow()));
-        mColumnView.setText(String.valueOf(data.getColumn()));
-        mTimesView.setText(String.valueOf(data.getCount()));
+        mRowView.setText(String.valueOf(data.getRow() + 1));
+        mColumnView.setText(String.valueOf(data.getColumn() + 1));
+        mTimesView.setText(String.valueOf(data.getTimes()));
         switch (data.getLevel()) {
             case ColorData.LEVEL_NONE:
                 mStatusView.setText(R.string.test_none);
@@ -130,6 +160,14 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
 
     private void initLayout() {
         showWaitPage();
+
+        if (mMode == MODE_SHOW_RESULT) {
+            mResultInfoLayout.setVisibility(View.VISIBLE);
+            mTestInfoLayout.setVisibility(View.GONE);
+        } else {
+            mTestInfoLayout.setVisibility(View.VISIBLE);
+            mResultInfoLayout.setVisibility(View.GONE);
+        }
     }
 
     private void initArguments() {
@@ -178,8 +216,8 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
                     data.getColor());
         }
         edit.commint();
-        if(!mColorDatas.isEmpty()){
-            refreshInfoView(mColorDatas.get(mColorDatas.size() - 1));
+        if (!mColorDatas.isEmpty()) {
+            refreshTestInfoView(mColorDatas.get(mColorDatas.size() - 1));
         }
     }
 
@@ -203,9 +241,10 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
             refreshPage();
             if (mMode == MODE_SHOW_RESULT) {
                 mResult = result;
+                refreshResultInfoView(result);
             }
-            if(!datas.isEmpty()){
-                refreshInfoView(datas.get(datas.size() - 1));
+            if (!datas.isEmpty()) {
+                refreshTestInfoView(datas.get(datas.size() - 1));
             }
         }
         getOnDataLoadListener().onDataLoadFinish(FRAGMENT_FLAG_COLOR);
@@ -219,6 +258,6 @@ public class ColorRunFragment extends AbstractTestFragment implements ITestCtrl.
         mColorView.getEdit()
                 .setColor(data.getRow(), data.getColumn(), data.getColor())
                 .commint();
-        refreshInfoView(data);
+        refreshTestInfoView(data);
     }
 }

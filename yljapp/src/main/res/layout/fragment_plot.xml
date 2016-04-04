@@ -25,9 +25,9 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="80dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -59,7 +59,7 @@
             android:paddingTop="10dp"
             android:paddingLeft="70dp"
             android:paddingRight="70dp"
-            android:paddingBottom="50dp">
+            android:paddingBottom="70dp">
             <com.ylj.common.widget.PlotView
                 android:id="@+id/plotview"
                 android:layout_width="match_parent"
