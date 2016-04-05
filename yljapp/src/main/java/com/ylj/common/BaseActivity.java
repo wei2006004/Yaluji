@@ -2,6 +2,7 @@ package com.ylj.common;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -24,6 +25,24 @@ import org.xutils.x;
 public class BaseActivity extends AppCompatActivity implements IAlertable, IDialogEditable {
 
     private AlertDialog mAlertDialog;
+
+    private ProgressDialog mProgressDialog;
+
+    protected void showProgressDialog(String message){
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setTitle("Info");
+        mProgressDialog.setMessage(message);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.show();
+    }
+
+    protected void dismissProgressDialog(){
+        if(mProgressDialog == null)
+            return;
+        mProgressDialog.dismiss();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -218,6 +218,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_enter_result" />
+                <Button
+                    style="@style/BlueSmallButton"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/btn_upload"
+                    android:layout_toLeftOf="@id/btn_enter_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/task_upload" />
             </RelativeLayout>
 
             <RelativeLayout

@@ -152,6 +152,7 @@
     <string name="task_no_adjust">未校验</string>
     <string name="task_finish_task">结束任务</string>
     <string name="task_enter_result">查看结果</string>
+    <string name="task_upload">上传结果</string>
     <string name="task_test_time">测试时间：</string>
     <string name="task_total_time">时间：</string>
     <string name="task_distance">路程</string>

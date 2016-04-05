@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -94,6 +95,11 @@ public class TaskActivity extends BaseActivity {
     @Event(R.id.btn_task_edit)
     private void onTaskEditClick(View view) {
         TaskModifyActivity.startAsModifyTaskActivityForResult(this, mTask, ACTIVITY_REQUEST_TASK);
+    }
+
+    @Event(R.id.btn_upload)
+    private void onUploadClick(View view) {
+
     }
 
     @Event(R.id.rl_task_info)
@@ -285,9 +291,11 @@ public class TaskActivity extends BaseActivity {
         if (mIsFinish) {
             mEnterTestLayout.setVisibility(View.GONE);
             mResultLayout.setVisibility(View.VISIBLE);
+            mEditLayout.setVisibility(View.GONE);
         } else {
             mEnterTestLayout.setVisibility(View.VISIBLE);
             mResultLayout.setVisibility(View.GONE);
+            mEditLayout.setVisibility(View.VISIBLE);
         }
     }
 

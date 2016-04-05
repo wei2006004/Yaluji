@@ -409,7 +409,9 @@ public class TaskModifyActivity extends BaseActivity {
         mEditLayout.setVisibility(View.VISIBLE);
         mInfoLayout.setVisibility(View.GONE);
         mEnterAdjustLayout.setVisibility(View.GONE);
-        if(!mTask.isAdjust()){
+        if(mTask.isAdjust()){
+            mSaveAdjustLayout.setVisibility(View.GONE);
+        }else {
             mSaveAdjustLayout.setVisibility(View.VISIBLE);
         }
     }
@@ -418,7 +420,9 @@ public class TaskModifyActivity extends BaseActivity {
         mInfoLayout.setVisibility(View.VISIBLE);
         mEditLayout.setVisibility(View.GONE);
         mSaveAdjustLayout.setVisibility(View.GONE);
-        if(!mTask.isAdjust()){
+        if(mTask.isAdjust()){
+            mEnterAdjustLayout.setVisibility(View.GONE);
+        }else{
             mEnterAdjustLayout.setVisibility(View.VISIBLE);
         }
     }

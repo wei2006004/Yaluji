@@ -133,8 +133,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
                     getTestCtrl().finishTask(null);
                 }
                 dialog.dismiss();
-                //// TODO: 2016/3/21 0021  出现进度弹框
-                showToast("please wait");
+                showProgressDialog("saving task...");
             }
         }, new DialogInterface.OnClickListener() {
             @Override
@@ -337,6 +336,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
                             mTask.setIsTest(true);
                             getTestCtrl().finishTest(mTest);
                             mIsTestFinishAndLeave = true;
+                            showProgressDialog("saving test...");
                         }
                     }
                 }, new DialogInterface.OnClickListener() {
@@ -431,6 +431,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
 
         if(mIsTestFinishAndLeave){
             TaskActivity.startNewActivity(TestActivity.this, mTask);
+            dismissProgressDialog();
             finish();
         }
     }
@@ -450,6 +451,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         mTask.setIsTest(true);
         mTask.setIsFinish(true);
         TaskActivity.startNewActivity(this, mTask);
+        dismissProgressDialog();
         finish();
     }
 
