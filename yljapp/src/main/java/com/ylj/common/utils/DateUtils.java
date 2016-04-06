@@ -9,12 +9,12 @@ import java.util.Date;
  */
 public class DateUtils {
 
-    public static String timeToString(Date date){
+    public static String timeToString(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:MM:ss");
         return sdf.format(date);
     }
 
-    public static Date stringToTime(String date){
+    public static Date stringToTime(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:MM:ss");
         try {
             return sdf.parse(date);
@@ -24,12 +24,12 @@ public class DateUtils {
         return new Date();
     }
 
-    public static String sqlDateToString(java.sql.Date date){
+    public static String sqlDateToString(java.sql.Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
     }
 
-    public static java.sql.Date stringToSqlDate(String date){
+    public static java.sql.Date stringToSqlDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             return new java.sql.Date(sdf.parse(date).getTime());
@@ -37,5 +37,13 @@ public class DateUtils {
             e.printStackTrace();
         }
         return new java.sql.Date(new Date().getTime());
+    }
+
+    public static String timeDiffText(long time) {
+        long timeMao = time / 1000;
+        long hour = timeMao % (24 * 3600) / 3600;
+        long minute = timeMao % 3600 / 60;
+        long second = timeMao % 60 / 60;
+        return String.format("%d:%d:%d",hour,minute,second);
     }
 }

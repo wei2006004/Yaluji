@@ -30,6 +30,7 @@ public class Test implements Parcelable,IMapable {
     public static final String TAG_END_TIME = "end_time";
     public static final String TAG_END_DATE = "end_date";
     public static final String TAG_TOTAL_TIME = "total_time";
+    public static final String TAG_TOTAL_TIME_TEXT = "total_time_text";
     public static final String TAG_RECORD_FILE = "record_file";
     public static final String TAG_DISTANCE = "distance";
     public static final String TAG_LAST_POS_X = "lastPositionX";
@@ -66,7 +67,7 @@ public class Test implements Parcelable,IMapable {
     private java.sql.Date endDate;
 
     @Column(name = "total_time")
-    private Date totalTime;
+    private long totalTime;
 
     @Column(name = "record_file")
     private String recordFile;
@@ -96,7 +97,7 @@ public class Test implements Parcelable,IMapable {
         lastPositionY = in.readDouble();
         startTime = DateUtils.stringToTime(in.readString());
         endTime = DateUtils.stringToTime(in.readString());
-        totalTime = DateUtils.stringToTime(in.readString());
+        totalTime = in.readLong();
         startDate = DateUtils.stringToSqlDate(in.readString());
         endDate = DateUtils.stringToSqlDate(in.readString());
     }
@@ -126,7 +127,8 @@ public class Test implements Parcelable,IMapable {
         map.put(TAG_START_DATE, DateUtils.sqlDateToString(startDate));
         map.put(TAG_END_TIME, DateUtils.timeToString(endTime));
         map.put(TAG_END_DATE, DateUtils.sqlDateToString(endDate));
-        map.put(TAG_TOTAL_TIME, DateUtils.timeToString(totalTime));
+        map.put(TAG_TOTAL_TIME, totalTime);
+        map.put(TAG_TOTAL_TIME_TEXT, DateUtils.timeDiffText(totalTime));
         map.put(TAG_RECORD_FILE, recordFile);
         map.put(TAG_DISTANCE, distance);
         map.put(TAG_LAST_POS_X, lastPositionX);
@@ -144,7 +146,7 @@ public class Test implements Parcelable,IMapable {
         test.isAdmin = Boolean.parseBoolean(map.get(TAG_IS_ADMIN).toString());
         test.startTime = DateUtils.stringToTime(map.get(TAG_START_TIME).toString());
         test.endTime = DateUtils.stringToTime(map.get(TAG_END_TIME).toString());
-        test.totalTime = DateUtils.stringToTime(map.get(TAG_TOTAL_TIME).toString());
+        test.totalTime = Long.parseLong(map.get(TAG_TOTAL_TIME).toString());
         test.startDate = DateUtils.stringToSqlDate(map.get(TAG_START_DATE).toString());
         test.endDate = DateUtils.stringToSqlDate(map.get(TAG_END_DATE).toString());
         test.recordFile = map.get(TAG_RECORD_FILE).toString();
@@ -220,12 +222,12 @@ public class Test implements Parcelable,IMapable {
         this.endDate = endDate;
     }
 
-    public Date getTotalTime() {
+    public long getTotalTime() {
         return totalTime;
     }
 
     public void countTotalTime() {
-        this.totalTime = new Date(endTime.getTime() - startTime.getTime());
+        this.totalTime = endTime.getTime() - startTime.getTime();
     }
 
     public boolean isLogin() {
@@ -295,7 +297,7 @@ public class Test implements Parcelable,IMapable {
         dest.writeDouble(lastPositionY);
         dest.writeString(DateUtils.timeToString(startTime));
         dest.writeString(DateUtils.timeToString(endTime));
-        dest.writeString(DateUtils.timeToString(totalTime));
+        dest.writeLong(totalTime);
         dest.writeString(DateUtils.sqlDateToString(startDate));
         dest.writeString(DateUtils.sqlDateToString(endDate));
     }

@@ -223,7 +223,7 @@ public class TaskActivity extends BaseActivity {
                         Test.TAG_START_DATE,
                         Test.TAG_START_TIME,
                         Test.TAG_DISTANCE,
-                        Test.TAG_TOTAL_TIME},
+                        Test.TAG_TOTAL_TIME_TEXT},
                 new int[]{R.id.tv_test_name,
                         R.id.tv_user,
                         R.id.tv_start_date,
