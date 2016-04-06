@@ -127,6 +127,9 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         showAlert("Info", "Do you want to finish this Task?", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if (mStatus == TEST_STATUS_RUN) {
+                    getTestCtrl().pauseTest();
+                }
                 if(mIsTest){
                     getTestCtrl().finishTask(mTest);
                 }else {

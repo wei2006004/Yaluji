@@ -12,6 +12,8 @@ import org.xutils.db.annotation.Table;
 @Table(name = "task_result")
 public class TaskResult implements Parcelable{
 
+    public static final String TAG_TASK_ID = "task_id";
+
     @Column(name = "id", isId = true)
     private int id;
 

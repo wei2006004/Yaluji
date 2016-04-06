@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/3/6 0006.
  */
-public class TaskManager extends AbstractDbManager{
+public class TaskManager extends AbstractDbManager {
 
     public TaskManager(String dbName) {
         super(dbName);
@@ -39,7 +39,7 @@ public class TaskManager extends AbstractDbManager{
         List<Task> list = null;
         try {
             list = db.selector(Task.class)
-                    .where(Task.TAG_IS_FINISH, Constant.SQL_OP_EQUAL,Constant.SQL_FALSE)
+                    .where(Task.TAG_IS_FINISH, Constant.SQL_OP_EQUAL, Constant.SQL_FALSE)
                     .findAll();
         } catch (DbException e) {
             e.printStackTrace();
@@ -51,7 +51,7 @@ public class TaskManager extends AbstractDbManager{
         List<Task> list = null;
         try {
             list = db.selector(Task.class)
-                    .where(Task.TAG_IS_FINISH, Constant.SQL_OP_EQUAL,Constant.SQL_TRUE)
+                    .where(Task.TAG_IS_FINISH, Constant.SQL_OP_EQUAL, Constant.SQL_TRUE)
                     .findAll();
         } catch (DbException e) {
             e.printStackTrace();
@@ -87,5 +87,19 @@ public class TaskManager extends AbstractDbManager{
         } catch (DbException e) {
             e.printStackTrace();
         }
+    }
+
+    public TaskResult getTaskResult(Task task) {
+        TaskResult taskResult = null;
+        try {
+            taskResult = getDb().selector(TaskResult.class)
+                    .where(TaskResult.TAG_TASK_ID,
+                            Constant.SQL_OP_EQUAL,
+                            task.getId())
+                    .findFirst();
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return taskResult;
     }
 }

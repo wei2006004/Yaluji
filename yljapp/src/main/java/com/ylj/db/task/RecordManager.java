@@ -23,6 +23,10 @@ public class RecordManager extends AbstractDbManager {
         super(dbName);
     }
 
+    public RecordManager(String dir,String dbName) {
+        super(dir,dbName);
+    }
+
     public ArrayList<TraceData> getTraceDataList() {
         ArrayList<TraceData> traceDatas = new ArrayList<>();
         try {

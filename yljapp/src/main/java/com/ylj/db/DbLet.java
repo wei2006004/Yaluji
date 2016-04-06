@@ -92,6 +92,10 @@ public class DbLet {
         return new RecordManager(dbname);
     }
 
+    public static RecordManager getRecordManager(String dir,String dbname) {
+        return new RecordManager(dir,dbname);
+    }
+
     public static List<Test> getAllTestByTask(Task task){
         TaskManager taskManager = ManagerFactory.getTaskManager();
         return taskManager.getAllTestByTask(task);
@@ -110,5 +114,10 @@ public class DbLet {
     public static void saveTaskResult(TaskResult result) {
         TaskManager taskManager = ManagerFactory.getTaskManager();
         taskManager.saveResult(result);
+    }
+
+    public static TaskResult getTaskResult(Task task) {
+        TaskManager taskManager = ManagerFactory.getTaskManager();
+        return taskManager.getTaskResult(task);
     }
 }

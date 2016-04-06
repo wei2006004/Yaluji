@@ -4,6 +4,7 @@ import android.util.Pair;
 
 import com.ylj.common.bean.Task;
 import com.ylj.common.bean.Test;
+import com.ylj.common.config.Global;
 import com.ylj.common.utils.DataConvertor;
 import com.ylj.common.utils.RoadUtils;
 import com.ylj.common.utils.TaskDbFileUitl;
@@ -69,7 +70,7 @@ public class TaskStateManager implements ITaskStateManager {
         String fileName = TaskDbFileUitl.getTaskDbFileName(task);
         mTask.setRecordFile(fileName);
         DbLet.saveOrUpdateTask(mTask);
-        mRecordManager = DbLet.getRecordManager(fileName);
+        mRecordManager = DbLet.getRecordManager(Global.getRecordStorgeDir(),fileName);
 
         mLevelConvertor = new LevelConvertorImpl(mTask.getVCV());
         mColorConvertor = new ColorConvertorImpl(mLevelConvertor);
@@ -84,7 +85,7 @@ public class TaskStateManager implements ITaskStateManager {
     private void loadTaskData() {
         ArrayList<TraceData> traceDatas = mRecordManager.getTraceDataList();
         ArrayList<ColorData> colorDatas = mRecordManager.getColorDataList();
-        TaskResult taskResult = mRecordManager.getTaskResult();
+        TaskResult taskResult = DbLet.getTaskResult(mTask);
 
         mRecord.setDistance(0);
         mRecord.setPositionY(0);
@@ -144,6 +145,7 @@ public class TaskStateManager implements ITaskStateManager {
 
     private TaskResult calculateResultAndSave() {
         TaskResult result = mColorCalculator.resultCalculate();
+        result.setTaskId(mTask.getId());
         DbLet.saveTaskResult(result);
         mRecordManager.saveTaskResult(result);
         return result;
