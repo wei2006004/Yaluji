@@ -41,9 +41,9 @@ public class DateUtils {
 
     public static String timeDiffText(long time) {
         long timeMao = time / 1000;
-        long hour = timeMao % (24 * 3600) / 3600;
-        long minute = timeMao % 3600 / 60;
-        long second = timeMao % 60 / 60;
-        return String.format("%d:%d:%d",hour,minute,second);
+        long hour = timeMao / 3600;
+        long minute = timeMao / 60;
+        long second = timeMao % 60;
+        return String.format("%2d:%2d:%2d",hour,minute,second);
     }
 }

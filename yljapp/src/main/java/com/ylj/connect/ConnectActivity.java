@@ -24,12 +24,18 @@ import com.ylj.connect.fragment.WifiConnectFragment;
 import org.xutils.view.annotation.ContentView;
 
 @ContentView(R.layout.activity_connect)
-public class ConnectActivity extends BaseActivity implements BtConnectFragment.OnBluetoothConnectListener,
+public class ConnectActivity extends ConnectCtrlActivity implements BtConnectFragment.OnBluetoothConnectListener,
         WifiConnectFragment.OnWifiConnectListener,
-        DeviceInfoFragment.OnDeviceActionListener,
-        ConnectControler.OnConnectListener {
+        DeviceInfoFragment.OnDeviceActionListener{
 
     ConnectControler mConnectControler;
+
+    @Override
+    protected ConnectControler getConnectControler() {
+        if(mConnectControler == null)
+            mConnectControler = ConnectControler.newInstance(this);
+        return mConnectControler;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +49,6 @@ public class ConnectActivity extends BaseActivity implements BtConnectFragment.O
     @Override
     public void onDestroy(){
         super.onDestroy();
-        mConnectControler.deleteConnectListener(this);
         mConnectControler.release();
     }
 
@@ -58,8 +63,8 @@ public class ConnectActivity extends BaseActivity implements BtConnectFragment.O
     }
 
     private void initData() {
-        mConnectControler = ConnectControler.newInstance(this);
-        mConnectControler.addConnectListener(this);
+        if(mConnectControler == null)
+            mConnectControler = ConnectControler.newInstance(this);
     }
 
     private void initToolbar() {
@@ -110,36 +115,25 @@ public class ConnectActivity extends BaseActivity implements BtConnectFragment.O
 
     @Override
     public void onConnected(DeviceInfo info) {
-        showToast("connected");
+        super.onConnected(info);
         switchToDeviceInfoFragment(info);
-        setAppConnectStatus(true);
-        AppStatus.instance().setCurrentDevice(info);
     }
-
 
     @Override
     public void onDisconnected() {
-        showToast("disconnected");
+        super.onDisconnected();
         switchToConnectFragment();
-        setAppConnectStatus(false);
     }
 
     @Override
     public void onConnectFail(int error) {
-        showToast("connect fail");
+        super.onConnectFail(error);
         switchToConnectFragment();
-        setAppConnectStatus(false);
     }
 
     @Override
     public void onConnectLost() {
-        showToast("connect lost");
+        super.onConnectLost();
         switchToConnectFragment();
-        setAppConnectStatus(false);
-    }
-
-    private void setAppConnectStatus(boolean isConnect){
-        AppStatus appstatus = AppStatus.instance();
-        appstatus.setIsConnect(isConnect);
     }
 }

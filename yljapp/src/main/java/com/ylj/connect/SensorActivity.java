@@ -18,8 +18,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_sensor)
-public class SensorActivity extends BaseActivity implements AdjustControler.OnAdjustCtrlLister,
-        ConnectControler.OnConnectListener {
+public class SensorActivity extends ConnectCtrlActivity implements AdjustControler.OnAdjustCtrlLister{
 
     AdjustControler mAdjustControler;
 
@@ -60,6 +59,14 @@ public class SensorActivity extends BaseActivity implements AdjustControler.OnAd
     }
 
     @Override
+    protected ConnectControler getConnectControler() {
+        if(mAdjustControler == null){
+            mAdjustControler = AdjustControler.newInstance(this);
+        }
+        return mAdjustControler;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -75,13 +82,13 @@ public class SensorActivity extends BaseActivity implements AdjustControler.OnAd
             mAdjustControler.stopAdjust();
             mIsRun = false;
         }
-        mAdjustControler.deleteConnectListener(this);
         mAdjustControler.release();
     }
 
     private void initData() {
-        mAdjustControler = AdjustControler.newInstance(this);
-        mAdjustControler.addConnectListener(this);
+        if(mAdjustControler == null){
+            mAdjustControler = AdjustControler.newInstance(this);
+        }
         mAdjustControler.addAdjustCtrlListener(this);
     }
 
@@ -128,36 +135,5 @@ public class SensorActivity extends BaseActivity implements AdjustControler.OnAd
         mPitchEdit.setText(String.valueOf(data.getCompassPitch()));
         mRollEdit.setText(String.valueOf(data.getCompassRoll()));
         mTempEdit.setText(String.valueOf(data.getTemp()));
-    }
-
-    @Override
-    public void onConnected(DeviceInfo info) {
-        showToast("connected");
-        setAppConnectStatus(true);
-        AppStatus.instance().setCurrentDevice(info);
-    }
-
-
-    @Override
-    public void onDisconnected() {
-        showToast("disconnected");
-        setAppConnectStatus(false);
-    }
-
-    @Override
-    public void onConnectFail(int error) {
-        showToast("connect fail");
-        setAppConnectStatus(false);
-    }
-
-    @Override
-    public void onConnectLost() {
-        showToast("connect lost");
-        setAppConnectStatus(false);
-    }
-
-    private void setAppConnectStatus(boolean isConnect) {
-        AppStatus appstatus = AppStatus.instance();
-        appstatus.setIsConnect(isConnect);
     }
 }

@@ -22,6 +22,7 @@ import com.ylj.common.BaseActivity;
 import com.ylj.common.bean.Task;
 import com.ylj.common.config.AppStatus;
 import com.ylj.connect.ConnectControler;
+import com.ylj.connect.ConnectCtrlActivity;
 import com.ylj.connect.bean.DeviceInfo;
 
 import org.xutils.view.annotation.ContentView;
@@ -32,8 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ContentView(R.layout.activity_adjust)
-public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdjustFinishListener,
-        ConnectControler.OnConnectListener {
+public class AdjustActivity extends ConnectCtrlActivity implements AdjustFragment.OnAdjustFinishListener {
 
     public static final int ADJUST_TIME = 3;
 
@@ -120,6 +120,13 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
     }
 
     @Override
+    protected ConnectControler getConnectControler() {
+        if(mAdjustControler == null)
+            mAdjustControler = AdjustControler.newInstance(this);
+        return mAdjustControler;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -134,13 +141,12 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
     @Override
     public void onDestroy(){
         super.onDestroy();
-        mAdjustControler.deleteConnectListener(this);
         mAdjustControler.release();
     }
 
     private void initData() {
-        mAdjustControler = AdjustControler.newInstance(this);
-        mAdjustControler.addConnectListener(this);
+        if(mAdjustControler == null)
+            mAdjustControler = AdjustControler.newInstance(this);
 
         AdjustFragment fragment = new AdjustFragment();
         fragment.setAdjustCtrl(mAdjustControler);
@@ -193,7 +199,7 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlert("Info",  getString(R.string.alert_leave_adjust), new DialogInterface.OnClickListener() {
+                showAlert("Info", getString(R.string.alert_leave_adjust), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -229,37 +235,6 @@ public class AdjustActivity extends BaseActivity implements AdjustFragment.OnAdj
                 break;
         }
         setFabVisible(true);
-    }
-
-    @Override
-    public void onConnected(DeviceInfo info) {
-        showToast("connected");
-        setAppConnectStatus(true);
-        AppStatus.instance().setCurrentDevice(info);
-    }
-
-
-    @Override
-    public void onDisconnected() {
-        showToast("disconnected");
-        setAppConnectStatus(false);
-    }
-
-    @Override
-    public void onConnectFail(int error) {
-        showToast("connect fail");
-        setAppConnectStatus(false);
-    }
-
-    @Override
-    public void onConnectLost() {
-        showToast("connect lost");
-        setAppConnectStatus(false);
-    }
-
-    private void setAppConnectStatus(boolean isConnect){
-        AppStatus appstatus = AppStatus.instance();
-        appstatus.setIsConnect(isConnect);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
