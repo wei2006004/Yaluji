@@ -19,6 +19,14 @@ public abstract class Controler {
     private IBinder mIBinder;
     protected IClient mCleint;
 
+    protected IClient getCleint(){
+        return mCleint;
+    }
+
+    protected Activity getActivity(){
+        return mActivity;
+    }
+
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {

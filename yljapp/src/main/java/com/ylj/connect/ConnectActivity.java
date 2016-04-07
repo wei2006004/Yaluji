@@ -31,7 +31,7 @@ public class ConnectActivity extends ConnectCtrlActivity implements BtConnectFra
     ConnectControler mConnectControler;
 
     @Override
-    protected ConnectControler getConnectControler() {
+    protected IConnectCtrl getConnectCtrl() {
         if(mConnectControler == null)
             mConnectControler = ConnectControler.newInstance(this);
         return mConnectControler;

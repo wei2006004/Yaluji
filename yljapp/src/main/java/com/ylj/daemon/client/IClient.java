@@ -29,4 +29,9 @@ public interface IClient {
     void startTest();
     void puaseTest();
     void finishTest(Test test);
+
+    void ftpLogin(String address,int port,String user,String passwd);
+    void logout();
+    void upload(String filePath);
+    void cancelUpload();
 }

@@ -21,9 +21,13 @@ import com.ylj.common.bean.Admin;
 import com.ylj.common.bean.Staff;
 import com.ylj.common.bean.Task;
 import com.ylj.common.bean.Test;
+import com.ylj.common.config.ConfigLet;
+import com.ylj.common.config.Global;
 import com.ylj.common.config.StatusLet;
 import com.ylj.common.utils.BeanUtils;
+import com.ylj.common.utils.TaskDbFileUitl;
 import com.ylj.db.DbLet;
+import com.ylj.task.ftp.AbstractFtpActivity;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -36,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 @ContentView(R.layout.activity_task)
-public class TaskActivity extends BaseActivity {
+public class TaskActivity extends AbstractFtpActivity {
 
     public static final String EXTRA_TASK = "EXTRA_TASK";
 
@@ -99,7 +103,12 @@ public class TaskActivity extends BaseActivity {
 
     @Event(R.id.btn_upload)
     private void onUploadClick(View view) {
-
+        String address = ConfigLet.getFtpIp();
+        int port = ConfigLet.getFtpPort();
+        String user = ConfigLet.getFtpUser();
+        String passwd = ConfigLet.getFtpPasswd();
+        String file = Global.getRecordStorgeDir() + TaskDbFileUitl.getTaskDbFileName(mTask);
+        uploadFile(address, port, user, passwd, file);
     }
 
     @Event(R.id.rl_task_info)
@@ -175,7 +184,7 @@ public class TaskActivity extends BaseActivity {
                 List<Test> list = DbLet.getAllTestByTask(mTask);
                 Map<String, Object> map;
                 int n = 1;
-                if(list == null){
+                if (list == null) {
                     return;
                 }
                 for (Test test : list) {

@@ -23,6 +23,7 @@ import com.ylj.common.bean.Task;
 import com.ylj.common.config.AppStatus;
 import com.ylj.connect.ConnectControler;
 import com.ylj.connect.ConnectCtrlActivity;
+import com.ylj.connect.IConnectCtrl;
 import com.ylj.connect.bean.DeviceInfo;
 
 import org.xutils.view.annotation.ContentView;
@@ -120,7 +121,7 @@ public class AdjustActivity extends ConnectCtrlActivity implements AdjustFragmen
     }
 
     @Override
-    protected ConnectControler getConnectControler() {
+    protected IConnectCtrl getConnectCtrl() {
         if(mAdjustControler == null)
             mAdjustControler = AdjustControler.newInstance(this);
         return mAdjustControler;

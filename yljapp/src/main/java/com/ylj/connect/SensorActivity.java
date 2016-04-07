@@ -59,7 +59,7 @@ public class SensorActivity extends ConnectCtrlActivity implements AdjustControl
     }
 
     @Override
-    protected ConnectControler getConnectControler() {
+    protected IConnectCtrl getConnectCtrl() {
         if(mAdjustControler == null){
             mAdjustControler = AdjustControler.newInstance(this);
         }

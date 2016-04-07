@@ -42,7 +42,7 @@ import java.util.List;
 
 @ContentView(R.layout.activity_test)
 public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTestCtrlListener,
-        IConnectCtrl.OnConnectListener, AbstractTestFragment.OnDataLoadListener,
+        AbstractTestFragment.OnDataLoadListener,
         ITestCtrl.OnTestDataRefreshListener{
 
     public static final String EXTRA_MODE = "EXTRA_MODE";
@@ -130,9 +130,9 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
                 if (mStatus == TEST_STATUS_RUN) {
                     getTestCtrl().pauseTest();
                 }
-                if(mIsTest){
+                if (mIsTest) {
                     getTestCtrl().finishTask(mTest);
-                }else {
+                } else {
                     getTestCtrl().finishTask(null);
                 }
                 dialog.dismiss();
@@ -262,7 +262,6 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     }
 
     private void initControler() {
-        getConnectCtrl().addConnectListener(this);
         getTestCtrl().addTestCtrlListener(this);
         getTestCtrl().addOnTestDataRefreshListener(this);
     }
@@ -307,8 +306,8 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         ((TextView) view.findViewById(R.id.tv_user_name)).setText(user);
         ((TextView) view.findViewById(R.id.tv_task_name)).setText(mTask.getTaskName());
         ((TextView) view.findViewById(R.id.tv_road_name)).setText(mTask.getRoadName());
-        ((TextView) view.findViewById(R.id.tv_road_width)).setText(String.format("%.1f",mTask.getRoadWidth()));
-        ((TextView) view.findViewById(R.id.tv_road_length)).setText(String.format("%.1f",mTask.getRoadLength()));
+        ((TextView) view.findViewById(R.id.tv_road_width)).setText(String.format("%.1f", mTask.getRoadWidth()));
+        ((TextView) view.findViewById(R.id.tv_road_length)).setText(String.format("%.1f", mTask.getRoadLength()));
         navigationView.addHeaderView(view);
     }
 
@@ -375,40 +374,6 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
         return mFragments.get(index);
     }
 
-    private boolean isTestRun() {
-        return mStatus == TEST_STATUS_RUN;
-    }
-
-    @Override
-    public void onConnected(DeviceInfo info) {
-        showToast("connected");
-        setAppConnectStatus(true);
-        AppStatus.instance().setCurrentDevice(info);
-    }
-
-    @Override
-    public void onDisconnected() {
-        showToast("disconnected");
-        setAppConnectStatus(false);
-    }
-
-    @Override
-    public void onConnectFail(int error) {
-        showToast("connect fail");
-        setAppConnectStatus(false);
-    }
-
-    @Override
-    public void onConnectLost() {
-        showToast("connect lost");
-        setAppConnectStatus(false);
-    }
-
-    private void setAppConnectStatus(boolean isConnect) {
-        AppStatus appstatus = AppStatus.instance();
-        appstatus.setIsConnect(isConnect);
-    }
-
     @Override
     public void onTestStart() {
         showToast("test start");
@@ -446,7 +411,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
 
     @Override
     public void onLoadTaskFinish() {
-
+        //// TODO: 2016/4/7 0007 解决loading问题
     }
 
     @Override

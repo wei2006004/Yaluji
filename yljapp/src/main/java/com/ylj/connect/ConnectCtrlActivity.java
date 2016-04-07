@@ -9,23 +9,23 @@ import com.ylj.connect.bean.DeviceInfo;
 /**
  * Created by Administrator on 2016/4/6 0006.
  */
-public abstract class ConnectCtrlActivity extends BaseActivity implements ConnectControler.OnConnectListener {
+public abstract class ConnectCtrlActivity extends BaseActivity implements IConnectCtrl.OnConnectListener {
 
-    private ConnectControler mConnectControler;
+    private IConnectCtrl connectCtrl;
 
-    protected abstract ConnectControler getConnectControler();
+    protected abstract IConnectCtrl getConnectCtrl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mConnectControler = getConnectControler();
-        mConnectControler.addConnectListener(this);
+        connectCtrl = getConnectCtrl();
+        connectCtrl.addConnectListener(this);
     }
 
     @Override
     public void onDestroy(){
         super.onDestroy();
-        mConnectControler.deleteConnectListener(this);
+        connectCtrl.deleteConnectListener(this);
     }
 
     @Override

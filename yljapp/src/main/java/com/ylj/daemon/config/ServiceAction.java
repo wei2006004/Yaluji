@@ -35,7 +35,24 @@ public class ServiceAction {
     //生成task结果完成 send：taskresult
     public final static String ACTION_TASK_RESULT_CREATED = "ACTION_TASK_RESULT_CREATED";
 
+    //FTP登录状态改变 send:state
+    public final static String ACTION_FTP_STATE_CREATED = "ACTION_FTP_STATE_CREATED";
+
+    //FTP上传数据开始 send：none
+    public final static String ACTION_FTP_UPLOAD_START = "ACTION_FTP_UPLOAD_START";
+
+    //FTP上传数据结束 send：none
+    public final static String ACTION_FTP_UPLOAD_FINISH = "ACTION_FTP_UPLOAD_FINISH";
+
+    //FTP上传数据取消 send：none
+    public final static String ACTION_FTP_UPLOAD_CANCEL = "ACTION_FTP_UPLOAD_CANCEL";
+
+    //FTP上传数据进度 send：progress
+    public final static String ACTION_FTP_UPLOAD_PROGRESS = "ACTION_FTP_UPLOAD_PROGRESS";
+
     public final static String EXTRA_ACTION_FLAG = "EXTRA_ACTION_FLAG";
+
+    public final static String EXTRA_PROGRESS = "EXTRA_PROGRESS";
 
     public final static String EXTRA_ADJUST_DATA = "EXTRA_ADJUST_DATA";
     public final static String EXTRA_DEVICE_INFO = "EXTRA_DEVICE_INFO";
