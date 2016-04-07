@@ -11,7 +11,7 @@ import com.ylj.daemon.ftp.FtpState;
 /**
  * Created by Administrator on 2016/4/7 0007.
  */
-public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCtrl.OnFtpCtrlListener {
+public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCtrlListener {
 
     private FtpControler mFtpControler;
     private ProgressDialog mProgressDialog;
@@ -55,7 +55,7 @@ public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCt
         super.onCreate(savedInstanceState);
         if (mFtpControler == null)
             mFtpControler = FtpControler.newInstance(this);
-        mFtpControler.setOnFtpCtrlListener(this);
+        mFtpControler.setFtpCtrlListener(this);
     }
 
     @Override

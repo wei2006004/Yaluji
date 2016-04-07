@@ -10,16 +10,5 @@ public interface IFtpCtrl {
     void upload(String filePath);
     void cancel();
 
-    void setOnFtpCtrlListener(OnFtpCtrlListener listener);
-
-    interface OnFtpCtrlListener{
-        void onFtpLoginFail(int error);
-        void onFtpLoginSucess();
-        void onFtpConnectLost();
-
-        void onUploadStart();
-        void onUploadFinish();
-        void onUploadCancel();
-        void onUploadProgress(int progress);
-    }
+    void setFtpCtrlListener(IFtpCtrlListener listener);
 }

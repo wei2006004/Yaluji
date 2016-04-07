@@ -15,6 +15,10 @@ import com.ylj.daemon.connect.BtConnector;
 import com.ylj.daemon.connect.DebugConnector;
 import com.ylj.daemon.connect.IConnector;
 import com.ylj.daemon.connect.TcpConnector;
+import com.ylj.daemon.ftp.FtpManagerImpl;
+import com.ylj.daemon.ftp.FtpState;
+import com.ylj.task.ftp.IFtpCtrlListener;
+import com.ylj.daemon.ftp.IFtpManager;
 import com.ylj.daemon.manager.ITaskStateManager;
 import com.ylj.daemon.manager.TaskStateManager;
 import com.ylj.daemon.msghandler.IMessageHandler;
@@ -25,14 +29,13 @@ import com.ylj.task.bean.DrawData;
 import com.ylj.task.bean.TraceData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * Created by Administrator on 2016/3/15 0015.
  */
 public class YljClient extends BaseClient implements IConnector.OnStateChangeListener,
-        IMessageHandler.OnHandleListener, ITaskStateManager.OnTaskHandleListener {
+        IMessageHandler.OnHandleListener, ITaskStateManager.OnTaskHandleListener, IFtpManager.OnFtpStateChangeListener {
 
     public static final int MODE_ADJUST = 0;
     public static final int MODE_TEST = 1;
@@ -44,6 +47,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     IConnector mConnector;
     IMessageHandler mMessageHandler;
     ITaskStateManager mTaskStateManager;
+    IFtpManager mFtpManager;
 
     public YljClient(Context context) {
         super(context);
@@ -151,6 +155,31 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     }
 
     @Override
+    public void ftpLogin(String address, int port, String user, String passwd) {
+        mFtpManager = new FtpManagerImpl();
+        mFtpManager.setOnFtpStateChangeListener(this);
+        mFtpManager.login(address, port, user, passwd);
+    }
+
+    @Override
+    public void logout() {
+        if (mFtpManager != null)
+            mFtpManager.logout();
+    }
+
+    @Override
+    public void upload(String filePath) {
+        if (mFtpManager != null)
+            mFtpManager.upload(filePath);
+    }
+
+    @Override
+    public void cancelUpload() {
+        if (mFtpManager != null)
+            mFtpManager.cancel();
+    }
+
+    @Override
     public void startTest() {
         if (!isConnect())
             return;
@@ -170,7 +199,7 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     }
 
     @Override
-    public void onStateChange(int state) {
+    public void onConnectStateChange(int state) {
         mState = state;
         sendBroadcast(ServiceAction.ACTION_CONNECT_STATE_CHANGE, state);
 
@@ -229,5 +258,35 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
     @Override
     public void onDrawDataRefresh(DrawData data) {
         sendBroadcast(ServiceAction.ACTION_DRAW_DATA, ServiceAction.EXTRA_DRAW_DATA, data);
+    }
+
+    @Override
+    public void onFtpStateChange(int state) {
+        switch (state) {
+            case FtpState.STATE_LOGIN_FAIL:
+            case FtpState.STATE_LOGIN_SUCCESS:
+            case FtpState.STATE_LOGOUT:
+            case FtpState.STATE_SERVER_CONNECT_FAIL:
+            case FtpState.STATE_CONNECT_LOST:
+                sendBroadcast(ServiceAction.ACTION_FTP_STATE_CREATED, ServiceAction.EXTRA_ACTION_FLAG, state);
+                break;
+            case FtpState.STATE_UPLOAD_START:
+                sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_START);
+                break;
+            case FtpState.STATE_UPLOAD_FINISH:
+                sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_START);
+                break;
+            case FtpState.STATE_UPLOAD_CANCEL:
+                sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_START);
+                break;
+            case FtpState.STATE_UPLOAD_ERROR:
+                sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_ERROR);
+                break;
+        }
+    }
+
+    @Override
+    public void onUploadProgress(int progress) {
+        sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_PROGRESS, ServiceAction.EXTRA_PROGRESS, progress);
     }
 }

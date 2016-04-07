@@ -20,13 +20,13 @@ public class DebugConnector extends BaseConnector {
     @Override
     public void connect() {
         mState = ConnectState.STATE_CONNECTED;
-        mListener.onStateChange(mState);
+        mListener.onConnectStateChange(mState);
     }
 
     @Override
     public void disconnect() {
         mState = ConnectState.STATE_NONE;
-        mListener.onStateChange(mState);
+        mListener.onConnectStateChange(mState);
     }
 
     @Override

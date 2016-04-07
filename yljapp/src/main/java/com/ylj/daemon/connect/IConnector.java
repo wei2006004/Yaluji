@@ -22,6 +22,6 @@ public interface IConnector {
     void setOnStateChangeListener(OnStateChangeListener listener);
 
     interface OnStateChangeListener{
-        void onStateChange(int state);
+        void onConnectStateChange(int state);
     }
 }

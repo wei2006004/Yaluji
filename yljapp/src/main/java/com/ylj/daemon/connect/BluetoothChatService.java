@@ -81,7 +81,7 @@ public class BluetoothChatService {
         x.task().autoPost(new Runnable() {
             @Override
             public void run() {
-                mOnStateChangeListener.onStateChange(state);
+                mOnStateChangeListener.onConnectStateChange(state);
             }
         });
     }

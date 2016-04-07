@@ -1,6 +1,5 @@
 package com.ylj.daemon.connect;
 
-import android.os.Handler;
 import android.util.Log;
 
 import com.ylj.daemon.config.ConnectState;
@@ -101,7 +100,7 @@ public class TcpService {
 		x.task().autoPost(new Runnable() {
 			@Override
 			public void run() {
-				mOnStateChangeListener.onStateChange(state);
+				mOnStateChangeListener.onConnectStateChange(state);
 			}
 		});
 	}

@@ -25,22 +25,30 @@ public class FtpControler extends Controler implements IFtpCtrl {
             Log.d("FtpControler", "action:" + action);
             if (action.equals(ServiceAction.ACTION_FTP_STATE_CREATED)) {
                 int state = intent.getIntExtra(ServiceAction.EXTRA_ACTION_FLAG, FtpState.STATE_NONE);
-                if (state == FtpState.STATE_CONNECT_LOST) {
-                    onFtpCtrlListener.onFtpConnectLost();
-                }else if(state == FtpState.STATE_LOGIN_SUCCESS){
-                    onFtpCtrlListener.onFtpLoginSucess();
-                }else {
-                    onFtpCtrlListener.onFtpLoginFail(state);
+                switch (state) {
+                    case FtpState.STATE_NONE:
+                    case FtpState.STATE_LOGIN_FAIL:
+                    case FtpState.STATE_SERVER_CONNECT_FAIL:
+                        mFtpCtrlListener.onFtpLoginFail(state);
+                        break;
+                    case FtpState.STATE_LOGIN_SUCCESS:
+                        mFtpCtrlListener.onFtpLoginSucess();
+                        break;
+                    case FtpState.STATE_LOGOUT:
+                        break;
+                    case FtpState.STATE_CONNECT_LOST:
+                        mFtpCtrlListener.onFtpConnectLost();
+                        break;
                 }
             }else if (action.equals(ServiceAction.ACTION_FTP_UPLOAD_START)) {
-                onFtpCtrlListener.onUploadStart();
+                mFtpCtrlListener.onUploadStart();
             }else if (action.equals(ServiceAction.ACTION_FTP_UPLOAD_FINISH)) {
-                onFtpCtrlListener.onUploadFinish();
+                mFtpCtrlListener.onUploadFinish();
             }else if (action.equals(ServiceAction.ACTION_FTP_UPLOAD_CANCEL)) {
-                onFtpCtrlListener.onUploadCancel();
+                mFtpCtrlListener.onUploadCancel();
             }else if (action.equals(ServiceAction.ACTION_FTP_UPLOAD_PROGRESS)) {
                 int progress = intent.getIntExtra(ServiceAction.EXTRA_PROGRESS, 0);
-                onFtpCtrlListener.onUploadProgress(progress);
+                mFtpCtrlListener.onUploadProgress(progress);
             }
         }
     };
@@ -71,7 +79,7 @@ public class FtpControler extends Controler implements IFtpCtrl {
     public void release() {
         super.release();
         getActivity().unregisterReceiver(mFtpReceiver);
-        onFtpCtrlListener = null;
+        mFtpCtrlListener = null;
     }
 
     @Override
@@ -102,10 +110,10 @@ public class FtpControler extends Controler implements IFtpCtrl {
         }
     }
 
-    private OnFtpCtrlListener onFtpCtrlListener;
+    private IFtpCtrlListener mFtpCtrlListener;
 
     @Override
-    public void setOnFtpCtrlListener(OnFtpCtrlListener listener) {
-        onFtpCtrlListener = listener;
+    public void setFtpCtrlListener(IFtpCtrlListener listener) {
+        mFtpCtrlListener = listener;
     }
 }

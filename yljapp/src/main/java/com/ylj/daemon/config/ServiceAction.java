@@ -47,6 +47,9 @@ public class ServiceAction {
     //FTP上传数据取消 send：none
     public final static String ACTION_FTP_UPLOAD_CANCEL = "ACTION_FTP_UPLOAD_CANCEL";
 
+    //FTP上传数据出错 send：none
+    public final static String ACTION_FTP_UPLOAD_ERROR = "ACTION_FTP_UPLOAD_ERROR";
+
     //FTP上传数据进度 send：progress
     public final static String ACTION_FTP_UPLOAD_PROGRESS = "ACTION_FTP_UPLOAD_PROGRESS";
 
