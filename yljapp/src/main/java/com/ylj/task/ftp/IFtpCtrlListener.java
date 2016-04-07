@@ -12,5 +12,6 @@ public interface IFtpCtrlListener {
     void onUploadStart();
     void onUploadFinish();
     void onUploadCancel();
+    void onUploadFail();
     void onUploadProgress(int progress);
 }

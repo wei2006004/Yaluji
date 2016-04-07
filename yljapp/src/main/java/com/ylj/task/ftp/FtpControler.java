@@ -46,6 +46,8 @@ public class FtpControler extends Controler implements IFtpCtrl {
                 mFtpCtrlListener.onUploadFinish();
             }else if (action.equals(ServiceAction.ACTION_FTP_UPLOAD_CANCEL)) {
                 mFtpCtrlListener.onUploadCancel();
+            }else if (action.equals(ServiceAction.ACTION_FTP_UPLOAD_ERROR)) {
+                mFtpCtrlListener.onUploadFail();
             }else if (action.equals(ServiceAction.ACTION_FTP_UPLOAD_PROGRESS)) {
                 int progress = intent.getIntExtra(ServiceAction.EXTRA_PROGRESS, 0);
                 mFtpCtrlListener.onUploadProgress(progress);
@@ -70,6 +72,8 @@ public class FtpControler extends Controler implements IFtpCtrl {
         filter = new IntentFilter(ServiceAction.ACTION_FTP_UPLOAD_FINISH);
         getActivity().registerReceiver(mFtpReceiver, filter);
         filter = new IntentFilter(ServiceAction.ACTION_FTP_UPLOAD_CANCEL);
+        getActivity().registerReceiver(mFtpReceiver, filter);
+        filter = new IntentFilter(ServiceAction.ACTION_FTP_UPLOAD_ERROR);
         getActivity().registerReceiver(mFtpReceiver, filter);
         filter = new IntentFilter(ServiceAction.ACTION_FTP_UPLOAD_PROGRESS);
         getActivity().registerReceiver(mFtpReceiver, filter);

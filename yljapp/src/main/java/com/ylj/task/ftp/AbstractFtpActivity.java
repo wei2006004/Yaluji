@@ -81,7 +81,7 @@ public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCt
             public void run() {
                 mProgressDialog.dismiss();
             }
-        },500);
+        },1000);
         showToast("upload fail");
     }
 
@@ -99,7 +99,7 @@ public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCt
             public void run() {
                 mProgressDialog.dismiss();
             }
-        }, 500);
+        }, 1000);
         showToast("upload fail");
     }
 
@@ -119,6 +119,18 @@ public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCt
         setProgressDialogText("upload cancel");
         mProgressDialog.dismiss();
         mFtpControler.logout();
+    }
+
+    @Override
+    public void onUploadFail() {
+        setProgressDialogText("upload error");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mProgressDialog.dismiss();
+            }
+        }, 1000);
+        showToast("upload fail");
     }
 
     @Override

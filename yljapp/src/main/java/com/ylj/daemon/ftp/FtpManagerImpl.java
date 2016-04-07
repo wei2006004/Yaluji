@@ -2,11 +2,10 @@ package com.ylj.daemon.ftp;
 
 import org.xutils.x;
 
-import java.io.IOException;
+import java.io.File;
 
 import it.sauronsoftware.ftp4j.FTPClient;
-import it.sauronsoftware.ftp4j.FTPException;
-import it.sauronsoftware.ftp4j.FTPIllegalReplyException;
+import it.sauronsoftware.ftp4j.FTPDataTransferListener;
 
 /**
  * Created by Administrator on 2016/4/7 0007.
@@ -22,15 +21,22 @@ public class FtpManagerImpl implements IFtpManager {
             @Override
             public void run() {
                 try {
-                    mFtpClient.connect(address,port);
-                    mFtpClient.login(user,passwd);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (FTPIllegalReplyException e) {
-                    e.printStackTrace();
-                } catch (FTPException e) {
-                    e.printStackTrace();
+                    mFtpClient.connect(address, port);
+                } catch (Exception e) {
+                    if (mListener != null) {
+                        mListener.onFtpStateChange(FtpState.STATE_SERVER_CONNECT_FAIL);
+                    }
+                    return;
                 }
+                try {
+                    mFtpClient.login(user, passwd);
+                } catch (Exception e) {
+                    if (mListener != null) {
+                        mListener.onFtpStateChange(FtpState.STATE_LOGIN_FAIL);
+                    }
+                    return;
+                }
+                mListener.onFtpStateChange(FtpState.STATE_LOGIN_SUCCESS);
             }
         });
 
@@ -38,7 +44,7 @@ public class FtpManagerImpl implements IFtpManager {
 
     @Override
     public void logout() {
-        if(mFtpClient == null)
+        if (mFtpClient == null)
             return;
         x.task().run(new Runnable() {
             @Override
@@ -47,25 +53,68 @@ public class FtpManagerImpl implements IFtpManager {
                     mFtpClient.logout();
                     mFtpClient.disconnect(false);
                     mFtpClient = null;
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                } catch (FTPIllegalReplyException e) {
-                    e.printStackTrace();
-                } catch (FTPException e) {
-                    e.printStackTrace();
+                }
+                mListener.onFtpStateChange(FtpState.STATE_LOGOUT);
+            }
+        });
+    }
+
+    @Override
+    public void upload(final String filePath) {
+        if (mFtpClient == null)
+            return;
+        x.task().run(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mFtpClient.upload(new File(filePath), new FTPDataTransferListener() {
+                        @Override
+                        public void started() {
+                            if (mListener != null)
+                                mListener.onFtpStateChange(FtpState.STATE_UPLOAD_START);
+                        }
+
+                        @Override
+                        public void transferred(int i) {
+                            if (mListener != null)
+                                mListener.onUploadProgress(i);
+                        }
+
+                        @Override
+                        public void completed() {
+                            if (mListener != null)
+                                mListener.onFtpStateChange(FtpState.STATE_UPLOAD_FINISH);
+                        }
+
+                        @Override
+                        public void aborted() {
+                            if (mListener != null)
+                                mListener.onFtpStateChange(FtpState.STATE_UPLOAD_CANCEL);
+                        }
+
+                        @Override
+                        public void failed() {
+                            if (mListener != null)
+                                mListener.onFtpStateChange(FtpState.STATE_UPLOAD_ERROR);
+                        }
+                    });
+                } catch (Exception e) {
+                    if (mListener != null)
+                        mListener.onFtpStateChange(FtpState.STATE_UPLOAD_ERROR);
                 }
             }
         });
     }
 
     @Override
-    public void upload(String filePath) {
-
-    }
-
-    @Override
     public void cancel() {
-
+        try {
+            mFtpClient.abortCurrentDataTransfer(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     OnFtpStateChangeListener mListener;
