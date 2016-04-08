@@ -200,7 +200,7 @@ public class AdjustActivity extends ConnectCtrlActivity implements AdjustFragmen
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlert("Info", getString(R.string.alert_leave_adjust), new DialogInterface.OnClickListener() {
+                showAlert(getString(R.string.alert_info), getString(R.string.alert_leave_adjust), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -226,13 +226,13 @@ public class AdjustActivity extends ConnectCtrlActivity implements AdjustFragmen
     public void onAdjustFinish() {
         switch (mMode) {
             case MODE_LIGHT_ADJUST:
-                showToast("light adjust finish");
+                showToast(R.string.toast_light_adjust_finish);
                 break;
             case MODE_MIDDLE_ADJUST:
-                showToast("middle adjust finish");
+                showToast(R.string.toast_middle_adjust_finish);
                 break;
             case MODE_HEAVY_ADJUST:
-                showToast("heavy adjust finish");
+                showToast(R.string.toast_heavy_adjust_finish);
                 break;
         }
         setFabVisible(true);

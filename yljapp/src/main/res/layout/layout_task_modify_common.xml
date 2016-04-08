@@ -93,7 +93,7 @@
                     style="@style/CommonSummary"
                     android:layout_width="@dimen/common_summary_space"
                     android:layout_height="wrap_content"
-                    android:text="@string/task_info_road_width" />
+                    android:text="@string/task_roller_width" />
 
                 <TextView
                     style="@style/CommonSummary"

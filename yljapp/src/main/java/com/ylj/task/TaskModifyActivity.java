@@ -175,7 +175,7 @@ public class TaskModifyActivity extends BaseActivity {
 
     @Event(R.id.layout_road_width)
     private void onRoadWidthLayoutClick(View view){
-        showDoubleEditDialog("road width setting", mTask.getRoadWidth(),
+        showDoubleEditDialog(getString(R.string.task_dialog_road_width), mTask.getRoadWidth(),
                 new OnButtonClick<Double>() {
                     @Override
                     public void onConfirm(DialogInterface dialog, Double result) {
@@ -193,7 +193,7 @@ public class TaskModifyActivity extends BaseActivity {
 
     @Event(R.id.layout_road_length)
     private void onRoadLengthLayoutClick(View view){
-        showDoubleEditDialog("road length setting", mTask.getRoadLength(),
+        showDoubleEditDialog(getString(R.string.task_dialog_road_length), mTask.getRoadLength(),
                 new OnButtonClick<Double>() {
                     @Override
                     public void onConfirm(DialogInterface dialog, Double result) {
@@ -211,7 +211,7 @@ public class TaskModifyActivity extends BaseActivity {
 
     @Event(R.id.layout_roller_width)
     private void onRollerWidthLayoutClick(View view){
-        showDoubleEditDialog("roller width setting", mTask.getRollerWidth(),
+        showDoubleEditDialog(getString(R.string.task_dialog_roller_width), mTask.getRollerWidth(),
                 new OnButtonClick<Double>() {
                     @Override
                     public void onConfirm(DialogInterface dialog, Double result) {
@@ -229,7 +229,7 @@ public class TaskModifyActivity extends BaseActivity {
 
     @Event(R.id.layout_roller_diameter)
     private void onRollerDiameterLayoutClick(View view){
-        showDoubleEditDialog("roller diameter setting", mTask.getRollerDiameter(),
+        showDoubleEditDialog(getString(R.string.task_dialog_roller_d), mTask.getRollerDiameter(),
                 new OnButtonClick<Double>() {
                     @Override
                     public void onConfirm(DialogInterface dialog, Double result) {
@@ -247,7 +247,7 @@ public class TaskModifyActivity extends BaseActivity {
 
     @Event(R.id.layout_huoer_num)
     private void onHuoerNumLayoutClick(View view){
-        showIntEditDialog("huoer num setting", mTask.getHuoerNum(),
+        showIntEditDialog(getString(R.string.task_dialog_huoer_num), mTask.getHuoerNum(),
                 new OnButtonClick<Integer>() {
                     @Override
                     public void onConfirm(DialogInterface dialog, Integer result) {
@@ -315,7 +315,7 @@ public class TaskModifyActivity extends BaseActivity {
 
     private void saveTask() {
         DbLet.saveOrUpdateTask(mTask);
-        showToast("task saved");
+        showToast(R.string.toast_task_saved);
     }
 
     private void updateTaskByView() {

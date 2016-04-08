@@ -84,14 +84,14 @@ public class AdjustResultActivity extends BaseActivity {
     @Event(R.id.fab)
     private void onFabClick(View view) {
         if(mXEdit.getText().toString().equals("")){
-            showToast("please input x");
+            showToast(R.string.toast_input_x);
             return;
         }
         String vcvText=mVCVText.getText().toString();
         mTask.setVCV(Double.parseDouble(vcvText));
         mTask.setIsAdjust(true);
         DbLet.saveOrUpdateTask(mTask);
-        showToast("task save");
+        showToast(R.string.toast_task_saved);
 
         TaskActivity.startNewActivity(this,mTask);
         finish();
@@ -236,7 +236,7 @@ public class AdjustResultActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlert("Info",  getString(R.string.alert_leave_adjust_result), new DialogInterface.OnClickListener() {
+                showAlert(getString(R.string.alert_info),  getString(R.string.alert_leave_adjust_result), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

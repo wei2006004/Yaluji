@@ -94,7 +94,7 @@ public class FinishTaskFragment extends BaseFragment {
     }
 
     private void deleteTask(final int position) {
-        showAlert("Warning", getString(R.string.alert_delete_task),
+        showAlert(getString(R.string.alert_warning), getString(R.string.alert_delete_task),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -124,7 +124,7 @@ public class FinishTaskFragment extends BaseFragment {
         new File(file + "-shm").delete();
         new File(file + "-wal").delete();
         refreshTaskData();
-        showToast("delete finish");
+        showToast(R.string.toast_task_delete_finish);
     }
 
     private void onTaskItemClick(int position) {

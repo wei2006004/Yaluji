@@ -2,6 +2,7 @@ package com.ylj.connect;
 
 import android.os.Bundle;
 
+import com.ylj.R;
 import com.ylj.common.BaseActivity;
 import com.ylj.common.config.AppStatus;
 import com.ylj.connect.bean.DeviceInfo;
@@ -30,7 +31,7 @@ public abstract class ConnectCtrlActivity extends BaseActivity implements IConne
 
     @Override
     public void onConnected(DeviceInfo info) {
-        showToast("connected");
+        showToast(R.string.toast_connected);
         setAppConnectStatus(true);
         AppStatus.instance().setCurrentDevice(info);
     }
@@ -38,19 +39,19 @@ public abstract class ConnectCtrlActivity extends BaseActivity implements IConne
 
     @Override
     public void onDisconnected() {
-        showToast("disconnected");
+        showToast(R.string.toast_disconnect);
         setAppConnectStatus(false);
     }
 
     @Override
     public void onConnectFail(int error) {
-        showToast("connect fail");
+        showToast(R.string.toast_connect_fail);
         setAppConnectStatus(false);
     }
 
     @Override
     public void onConnectLost() {
-        showToast("connect lost");
+        showToast(R.string.toast_connect_lost);
         setAppConnectStatus(false);
     }
 

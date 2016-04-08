@@ -57,7 +57,7 @@ public class CommonLoginFragment extends BaseFragment {
         if(LoginLet.doStaffLogin(staff)){
             turnToMenuActivity();
         }else {
-            showToast("login fail");
+            showToast(R.string.toast_login_fail);
         }
     }
 

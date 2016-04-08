@@ -202,12 +202,12 @@ public class AdjustFragment extends BaseFragment implements IAdjustCtrl.OnAdjust
             String posString = mPosTextArray[i].getText().toString();
             String comString = mComTextArray[i].getText().toString();
             if (posString.equals("") || comString.equals("")) {
-                showToast("adjust data can not empty");
+                showToast(R.string.toast_adjust_data_empty);
                 return null;
             }
             int position = Integer.parseInt(posString);
             if (position < 1 || position > ADJUST_LENGTH) {
-                showToast("position must between 1 and 100");
+                showToast(R.string.toast_position_valid);
                 return null;
             }
         }

@@ -69,7 +69,9 @@ public class FtpManagerImpl implements IFtpManager {
             @Override
             public void run() {
                 try {
-                    mFtpClient.upload(new File(filePath), new FTPDataTransferListener() {
+                    File file = new File(filePath);
+                    final long size = file.length();
+                    mFtpClient.upload(file, new FTPDataTransferListener() {
                         @Override
                         public void started() {
                             if (mListener != null)
@@ -78,8 +80,9 @@ public class FtpManagerImpl implements IFtpManager {
 
                         @Override
                         public void transferred(int i) {
+                            int progress = (int)((double) i / size * 100);
                             if (mListener != null)
-                                mListener.onUploadProgress(i);
+                                mListener.onUploadProgress(progress);
                         }
 
                         @Override

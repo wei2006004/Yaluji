@@ -71,7 +71,13 @@
     <string name="setting_wifi">WIFI连接设置</string>
     <string name="setting_wifi_ip">IP地址</string>
     <string name="setting_wifi_port">端口</string>
-    <string name="setting_"></string>
+    <string name="setting_dialog_ftp_ip">FTP地址</string>
+    <string name="setting_dialog_ftp_port">FTP端口</string>
+    <string name="setting_dialog_ftp_user">FTP账号</string>
+    <string name="setting_dialog_ftp_passwd">FTP密码</string>
+    <string name="setting_dialog_wifi_ip">WIFI地址</string>
+    <string name="setting_dialog_wifi_port">WIFI端口</string>
+    <string name="setting_dialog_"></string>
 
     <!-- 设备连接界面 -->
     <string name="connect_sensor">传感器状态</string>
@@ -157,6 +163,12 @@
     <string name="task_total_time">时间：</string>
     <string name="task_distance">路程</string>
     <string name="task_anonymous">匿名用户</string>
+    <string name="task_dialog_road_width">公路宽</string>
+    <string name="task_dialog_road_length">公路长</string>
+    <string name="task_dialog_roller_width">滚轮宽</string>
+    <string name="task_dialog_roller_d">滚轮直径</string>
+    <string name="task_dialog_huoer_num">霍尔传感器个数</string>
+    <string name="task_test">测试</string>
 
     <!-- Staff界面/Staff/Admin Modify/Staff Manager -->
     <string name="staff_name">姓名</string>
@@ -251,7 +263,38 @@
     <string name="alert_new_task">新建任务</string>
     <string name="alert_no_finish">（未完成）</string>
     <string name="alert_no_adjust">（未校验）</string>
+    <string name="alert_confirm">确定</string>
+    <string name="alert_cancel">取消</string>
+    <string name="alert_info">提示</string>
+    <string name="alert_no_test">任务尚未进行测试</string>
+    <string name="alert_finish_task">是否结束当前任务并生成结果？</string>
+    <string name="alert_warning">警告</string>
     <string name="alert_"></string>
+
+    <!-- toast -->
+    <string name="toast_light_adjust_finish">轻度碾压结束</string>
+    <string name="toast_middle_adjust_finish">中度碾压结束</string>
+    <string name="toast_heavy_adjust_finish">重度碾压结束</string>
+    <string name="toast_input_x">请输入验收指标X</string>
+    <string name="toast_task_saved">任务已保存</string>
+    <string name="toast_adjust_data_empty">校验数据不能为空</string>
+    <string name="toast_position_valid">位置必须在0到100之间</string>
+    <string name="toast_connected">设备已连接</string>
+    <string name="toast_connect_fail">设备连接失败</string>
+    <string name="toast_connect_lost">设备连接丢失</string>
+    <string name="toast_disconnect">设备已断开</string>
+    <string name="toast_scan_device">开始扫描设备</string>
+    <string name="toast_scan_finish">扫描结束</string>
+    <string name="toast_no_connect">设备尚未连接</string>
+    <string name="toast_login_fail">登录失败</string>
+    <string name="toast_test_alreally_start">测试已经运行</string>
+    <string name="toast_still_no_start">测试尚未开始</string>
+    <string name="toast_task_delete_finish">任务删除成功</string>
+    <string name="toast_upload_fail">结果上传失败</string>
+    <string name="toast_upload_success">结果上传成功</string>
+    <string name="toast_start_test">测试开始</string>
+    <string name="toast_"></string>
+
     <string name="title_activity_test_info">TestInfoActivity</string>
 
 </resources>

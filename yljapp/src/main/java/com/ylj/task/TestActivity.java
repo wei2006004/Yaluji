@@ -121,10 +121,10 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     @Event(R.id.fab_finish_task)
     private void onFinishTask(View view) {
         if ((!mTask.isTest()) && (!mIsTest)) {
-            showAlert("Info", "has not test");
+            showAlert(getString(R.string.alert_info), getString(R.string.alert_no_test));
             return;
         }
-        showAlert("Info", "Do you want to finish this Task?", new DialogInterface.OnClickListener() {
+        showAlert(getString(R.string.alert_info), getString(R.string.alert_finish_task), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (mStatus == TEST_STATUS_RUN) {
@@ -149,7 +149,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     @Event(R.id.fab_run)
     private void onRunClick(View view) {
         if (mStatus == TEST_STATUS_RUN) {
-            showToast("has start");
+            showToast(R.string.toast_test_alreally_start);
             return;
         }
         getTestCtrl().startTest();
@@ -159,7 +159,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
     @Event(R.id.fab_stop)
     private void onStopClick(View view) {
         if (mStatus == TEST_STATUS_STOP) {
-            showToast("still no start");
+            showToast(R.string.toast_still_no_start);
             return;
         }
         getTestCtrl().pauseTest();
@@ -326,7 +326,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
                     TestActivity.this.finish();
                     return;
                 }
-                showAlert("Info", getString(R.string.alert_leave_test), new DialogInterface.OnClickListener() {
+                showAlert(getString(R.string.alert_info), getString(R.string.alert_leave_test), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -376,7 +376,7 @@ public class TestActivity extends AbstractTestActivity implements ITestCtrl.OnTe
 
     @Override
     public void onTestStart() {
-        showToast("test start");
+        showToast(R.string.toast_start_test);
         mIsTest = true;
         mTest.setStartTime(new Date());
         mStatus = TEST_STATUS_RUN;

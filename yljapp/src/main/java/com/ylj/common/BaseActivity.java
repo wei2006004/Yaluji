@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ylj.R;
+
 import org.xutils.x;
 
 /**
@@ -32,7 +34,7 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setTitle("Info");
+        mProgressDialog.setTitle(getString(R.string.alert_info));
         mProgressDialog.setMessage(message);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.show();
@@ -56,6 +58,11 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
     }
 
     @Override
+    public void showToast(int resId) {
+        Toast.makeText(this, resId, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void showLongToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
@@ -65,7 +72,7 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(Title);
         builder.setMessage(message);
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.alert_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -81,7 +88,7 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(Title);
         builder.setMessage(message);
-        builder.setPositiveButton("Confirm", okButtonListener);
+        builder.setPositiveButton(R.string.alert_confirm, okButtonListener);
         mAlertDialog = builder.create();
         mAlertDialog.show();
     }
@@ -93,8 +100,8 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(Title);
         builder.setMessage(message);
-        builder.setPositiveButton("Confirm", okButtonListener);
-        builder.setNegativeButton("Cancel", cancelButtonListener);
+        builder.setPositiveButton(R.string.alert_confirm, okButtonListener);
+        builder.setNegativeButton(R.string.alert_cancel, cancelButtonListener);
         mAlertDialog = builder.create();
         mAlertDialog.show();
     }
@@ -117,7 +124,7 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
             }
         });
         builder.setView(editText);
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.alert_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, int which) {
                 Double value = Double.parseDouble(editText.getText().toString());
@@ -125,7 +132,7 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
                 toggleSoftInput();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.alert_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onButtonClick.onCancel(dialog);
@@ -144,7 +151,7 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
         editText.setText(String.valueOf(defValue));
         editText.setKeyListener(new DigitsKeyListener());
         builder.setView(editText);
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.alert_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, int which) {
                 Integer value = Integer.parseInt(editText.getText().toString());
@@ -152,7 +159,7 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
                 toggleSoftInput();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.alert_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onButtonClick.onCancel(dialog);
@@ -178,7 +185,7 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
             editText.setKeyListener(inputKeyListener);
         }
         builder.setView(editText);
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.alert_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, int which) {
                 String value = editText.getText().toString();
@@ -186,7 +193,7 @@ public class BaseActivity extends AppCompatActivity implements IAlertable, IDial
                 toggleSoftInput();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.alert_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onButtonClick.onCancel(dialog);

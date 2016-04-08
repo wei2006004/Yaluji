@@ -60,7 +60,7 @@ public class SettingActivity extends BaseActivity {
     @Event(R.id.layout_ftp_ip)
     private void onFtpIpLayoutClick(View view) {
         String ip = mFtpIpText.getText().toString();
-        showStringEditDialog("ftp ip setting", ip, new OnButtonClick<String>() {
+        showStringEditDialog(getString(R.string.setting_dialog_ftp_ip), ip, new OnButtonClick<String>() {
 
             @Override
             public void onConfirm(DialogInterface dialog, String result) {
@@ -80,7 +80,7 @@ public class SettingActivity extends BaseActivity {
     @Event(R.id.layout_ftp_port)
     private void onFtpPortLayoutClick(View view) {
         int port = Integer.parseInt(mFtpPortText.getText().toString());
-        showIntEditDialog("ftp port setting", port, new OnButtonClick<Integer>() {
+        showIntEditDialog(getString(R.string.setting_dialog_ftp_port), port, new OnButtonClick<Integer>() {
             @Override
             public void onConfirm(DialogInterface dialog, Integer result) {
                 Config config = Config.appInstance();
@@ -99,7 +99,7 @@ public class SettingActivity extends BaseActivity {
     @Event(R.id.layout_ftp_user)
     private void onFtpUserLayoutClick(View view) {
         String user = mFtpUserText.getText().toString();
-        showStringEditDialog("ftp user setting", user, new OnButtonClick<String>() {
+        showStringEditDialog(getString(R.string.setting_dialog_ftp_user), user, new OnButtonClick<String>() {
 
             @Override
             public void onConfirm(DialogInterface dialog, String result) {
@@ -119,7 +119,7 @@ public class SettingActivity extends BaseActivity {
     @Event(R.id.layout_ftp_passwd)
     private void onFtpPasswdLayoutClick(View view) {
         String passwd = mFtpPasswdText.getText().toString();
-        showStringEditDialog("ftp user setting", passwd, new OnButtonClick<String>() {
+        showStringEditDialog(getString(R.string.setting_dialog_ftp_passwd), passwd, new OnButtonClick<String>() {
 
             @Override
             public void onConfirm(DialogInterface dialog, String result) {
@@ -139,7 +139,7 @@ public class SettingActivity extends BaseActivity {
     @Event(R.id.layout_wifi_ip)
     private void onWifiIpLayoutClick(View view) {
         String ip = mWifiIpText.getText().toString();
-        showStringEditDialog("wifi ip setting", ip, new OnButtonClick<String>() {
+        showStringEditDialog(getString(R.string.setting_dialog_wifi_ip), ip, new OnButtonClick<String>() {
 
             @Override
             public void onConfirm(DialogInterface dialog, String result) {
@@ -159,7 +159,7 @@ public class SettingActivity extends BaseActivity {
     @Event(R.id.layout_wifi_port)
     private void onWifiPortLayoutClick(View view) {
         int port = Integer.parseInt(mWifiPortText.getText().toString());
-        showIntEditDialog("ftp port setting", port, new OnButtonClick<Integer>() {
+        showIntEditDialog(getString(R.string.setting_dialog_wifi_port), port, new OnButtonClick<Integer>() {
             @Override
             public void onConfirm(DialogInterface dialog, Integer result) {
                 Config config = Config.appInstance();

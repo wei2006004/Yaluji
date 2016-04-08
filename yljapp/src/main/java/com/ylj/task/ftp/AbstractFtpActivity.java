@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.ylj.R;
 import com.ylj.common.BaseActivity;
 import com.ylj.daemon.ftp.FtpState;
 
@@ -33,7 +34,7 @@ public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCt
         mProgressDialog.setMax(100);
         mProgressDialog.setProgress(0);
         mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel", new DialogInterface.OnClickListener() {
+        mProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setProgressDialogText("cancel upload file...");
@@ -82,7 +83,7 @@ public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCt
                 mProgressDialog.dismiss();
             }
         },1000);
-        showToast("upload fail");
+        showToast(R.string.toast_upload_fail);
     }
 
     @Override
@@ -100,7 +101,7 @@ public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCt
                 mProgressDialog.dismiss();
             }
         }, 1000);
-        showToast("upload fail");
+        showToast(R.string.toast_upload_fail);
     }
 
     @Override
@@ -111,7 +112,13 @@ public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCt
     @Override
     public void onUploadFinish() {
         setProgressDialogText("upload sucess");
-        mProgressDialog.dismiss();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mProgressDialog.dismiss();
+            }
+        }, 500);
+        showToast(R.string.toast_upload_success);
     }
 
     @Override
@@ -130,7 +137,7 @@ public abstract class AbstractFtpActivity extends BaseActivity implements IFtpCt
                 mProgressDialog.dismiss();
             }
         }, 1000);
-        showToast("upload fail");
+        showToast(R.string.toast_upload_fail);
     }
 
     @Override

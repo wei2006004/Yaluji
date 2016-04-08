@@ -128,7 +128,7 @@ public class TaskActivity extends AbstractFtpActivity {
     @Event(R.id.btn_enter_adjust)
     private void onEnterAdjustButtonClick(View view) {
         if (!StatusLet.isConnect()) {
-            showToast("no connect");
+            showToast(R.string.toast_no_connect);
             return;
         }
         AdjustActivity.startNewActivity(this, mTask);
@@ -138,7 +138,7 @@ public class TaskActivity extends AbstractFtpActivity {
     @Event(R.id.btn_enter_test)
     private void onEnterTestButtonClick(View view) {
         if (!StatusLet.isConnect()) {
-            showToast("no connect");
+            showToast(R.string.toast_no_connect);
             return;
         }
         TestActivity.startAsTaskTestActivity(this, mTask);
@@ -189,7 +189,7 @@ public class TaskActivity extends AbstractFtpActivity {
                 }
                 for (Test test : list) {
                     map = test.convertToMap();
-                    map.put(TAG_TEST_NAME, "Test" + n);
+                    map.put(TAG_TEST_NAME, getString(R.string.task_test) + n);
                     map.put(TAG_USER, getUserNameByTest(test));
                     mTestMaps.add(map);
                     n++;

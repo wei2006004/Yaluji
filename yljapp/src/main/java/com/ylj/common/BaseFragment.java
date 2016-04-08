@@ -16,6 +16,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ylj.R;
+
 import org.xutils.x;
 
 /**
@@ -45,6 +47,11 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
     }
 
     @Override
+    public void showToast(int resId) {
+        Toast.makeText(getActivity(), resId, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void showLongToast(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
@@ -56,7 +63,7 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(Title);
         builder.setMessage(message);
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.alert_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -72,7 +79,7 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(Title);
         builder.setMessage(message);
-        builder.setPositiveButton("Confirm", okButtonListener);
+        builder.setPositiveButton(R.string.alert_confirm, okButtonListener);
         mAlertDialog = builder.create();
         mAlertDialog.show();
     }
@@ -84,8 +91,8 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(Title);
         builder.setMessage(message);
-        builder.setPositiveButton("Confirm", okButtonListener);
-        builder.setNegativeButton("Cancel", cancelButtonListener);
+        builder.setPositiveButton(R.string.alert_confirm, okButtonListener);
+        builder.setNegativeButton(R.string.alert_cancel, cancelButtonListener);
         mAlertDialog = builder.create();
         mAlertDialog.show();
     }
@@ -108,7 +115,7 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
             }
         });
         builder.setView(editText);
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.alert_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, int which) {
                 Double value = Double.parseDouble(editText.getText().toString());
@@ -116,7 +123,7 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
                 toggleSoftInput();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.alert_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onButtonClick.onCancel(dialog);
@@ -135,7 +142,7 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
         editText.setText(String.valueOf(defValue));
         editText.setKeyListener(new DigitsKeyListener());
         builder.setView(editText);
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.alert_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, int which) {
                 Integer value = Integer.parseInt(editText.getText().toString());
@@ -143,7 +150,7 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
                 toggleSoftInput();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.alert_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onButtonClick.onCancel(dialog);
@@ -169,7 +176,7 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
             editText.setKeyListener(inputKeyListener);
         }
         builder.setView(editText);
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.alert_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, int which) {
                 String value = editText.getText().toString();
@@ -177,7 +184,7 @@ public class BaseFragment extends Fragment implements IAlertable,IDialogEditable
                 toggleSoftInput();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.alert_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onButtonClick.onCancel(dialog);

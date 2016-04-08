@@ -70,7 +70,7 @@ public class BtConnectFragment extends BaseFragment {
                 mDeviceAdapter.notifyDataSetChanged();
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED
                     .equals(action)) {
-                showToast("scan finished");
+                showToast(R.string.toast_scan_finish);
             }
         }
     };
@@ -114,7 +114,7 @@ public class BtConnectFragment extends BaseFragment {
     }
 
     private void doDiscovery() {
-        showToast("start scan device");
+        showToast(R.string.toast_scan_device);
         if (mBluetoothAdapter.isDiscovering()) {
             mBluetoothAdapter.cancelDiscovery();
         }

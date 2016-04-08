@@ -8,6 +8,7 @@ import android.view.View;
  */
 public interface IAlertable {
     void showToast(String message);
+    void showToast(int resId);
 
     void showLongToast(String message);
 

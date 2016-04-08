@@ -274,10 +274,10 @@ public class YljClient extends BaseClient implements IConnector.OnStateChangeLis
                 sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_START);
                 break;
             case FtpState.STATE_UPLOAD_FINISH:
-                sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_START);
+                sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_FINISH);
                 break;
             case FtpState.STATE_UPLOAD_CANCEL:
-                sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_START);
+                sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_CANCEL);
                 break;
             case FtpState.STATE_UPLOAD_ERROR:
                 sendBroadcast(ServiceAction.ACTION_FTP_UPLOAD_ERROR);

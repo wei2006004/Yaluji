@@ -120,7 +120,7 @@ public class NotFinishTaskFragment extends BaseFragment {
     }
 
     private void deleteTask(final int position) {
-        showAlert("Warning",  getString(R.string.alert_delete_task),
+        showAlert(getString(R.string.alert_warning),  getString(R.string.alert_delete_task),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
